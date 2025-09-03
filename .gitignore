@@ -1,0 +1,102 @@
+# =============== #
+# Unity .gitignore #
+# =============== #
+
+# OS-specific junk
+.DS_Store
+Thumbs.db
+
+# ========== #
+# Unity Files #
+# ========== #
+
+# User-specific files
+*.user
+*.userprefs
+*.csproj
+*.pidb
+*.suo
+*.sln
+*.tmp
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.ide
+
+# Rider / VS / VSCode settings
+.vscode/
+.idea/
+*.DotSettings.user
+
+# Auto-generated Unity project files
+ExportedObj/
+*.booproj
+*.svd
+*.unityproj
+
+# Unity caches
+Library/
+Temp/
+Obj/
+Build/
+Builds/
+Logs/
+MemoryCaptures/
+SysInfo.txt
+
+# Asset meta data should be tracked, but not the cache
+# Unity generates meta files for assets automatically
+# DO NOT ignore *.meta
+
+# Crash logs
+sysinfo.txt
+
+# Builds
+*.apk
+*.aab
+*.unitypackage
+*.app
+*.exe
+*.xcodeproj/
+*.xcworkspace/
+*.ipa
+
+# ============= #
+# Other Caches   #
+# ============= #
+# Lightmap & GI
+LightmapSnapshot/
+LightingData.asset
+
+# Shader cache
+*.shadergraph.meta
+*.cginc.meta
+
+# ============= #
+# Collaborations #
+# ============= #
+
+# Plastic SCM (if used)
+.plastic/
+
+# Unity Collab (deprecated)
+UnityPackageManager/
+
+# =========== #
+# Misc/Custom #
+# =========== #
+
+# Ignore packed Addressables but keep config
+/[Aa]ssets/[Aa]ddressableAssetsData/*/*.bin*
+/[Aa]ssets/[Ss]treamingAssets/aa/
+
+# Ignore JetBrains Rider plugin
+/[Aa]ssets/Plugins/Editor/JetBrains*
+
+# Ignore crash report files
+*.dmp
+
+# Ignore local settings
+UserSettings/
