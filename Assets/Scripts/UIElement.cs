@@ -1,6 +1,7 @@
+using NUnit.Framework.Internal;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
@@ -11,7 +12,14 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     public InventoryUIManager inventoryUIManager;
 
     [HideInInspector] public bool isHovered;
+    private UnityEngine.UI.Image itemIcon;
 
+    private bool isDragging = false;
+
+    private void Awake()
+    {
+        itemIcon = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
@@ -28,8 +36,8 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (inventorySlot.GetItem() != null)
         {
-            var test = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-            transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().color = new Color(test.color.r, test.color.g, test.color.b, .05f);
+            isDragging = true;
+            itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, .05f);
             inventoryUIManager.draggableItemGO.SetActive(true);
             inventoryUIManager.draggableItemGO.GetComponent<UnityEngine.UI.Image>().sprite = inventorySlot.GetItem().icon;
         }
@@ -43,7 +51,8 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         if (inventorySlot.GetItem() != null)
         {
-            if (!isHovered)
+            
+            if (!isHovered && isDragging)
             {
                 if (inventoryUIManager.TryAddItemToSlot(inventorySlot.GetItem())) {
                     inventorySlot.ClearItem();
@@ -54,8 +63,15 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 print("Dropped on self, do nothing");
             }
         }
-        var test = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-        transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().color = new Color(test.color.r, test.color.g, test.color.b, 1f);
+
+        itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 1f);
+        inventoryUIManager.draggableItemGO.SetActive(false);
+        isDragging = false;
+    }
+    private void OnDisable()
+    {
+        isDragging = false;
+        itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 1f);
         inventoryUIManager.draggableItemGO.SetActive(false);
     }
 

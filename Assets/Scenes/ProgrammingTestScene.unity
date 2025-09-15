@@ -3245,7 +3245,7 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1460762114}
   - {fileID: 559591079}
@@ -3309,7 +3309,6 @@ MonoBehaviour:
   draggableItemGO: {fileID: 559591078}
   InventoryGrid: {fileID: 1460762113}
   inventoryController: {fileID: 0}
-  inventorySlots: []
 --- !u!114 &1979293699 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5447596979824069792, guid: 568ad6bbc2bab254983a3ad18b9f8700, type: 3}
@@ -3824,6 +3823,10 @@ PrefabInstance:
       propertyPath: 'inventorySlots.Array.data[23]'
       value: 
       objectReference: {fileID: 2027859610}
+    - target: {fileID: 7379825462120806696, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+      propertyPath: inventoryUIManager
+      value: 
+      objectReference: {fileID: 1927842583}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
