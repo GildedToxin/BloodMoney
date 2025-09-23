@@ -1,16 +1,7 @@
 using UnityEngine;
+using UnityEngine.Android;
 
-public class SaveSystem : MonoBehaviour
+public class SaveSystem //: MonoBehaviour
 {
-
-    void Start()
-    {
-        
-    }
-
-
-    void Update()
-    {
-        
-    }
+    
 }
