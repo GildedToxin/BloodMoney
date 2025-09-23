@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    public ObservableArray<Item> inventory = new ObservableArray<Item>(24);
+    public ObservableArray<Item> inventory = new ObservableArray<Item>(5);
+    public int selectedIndex = -1;
+    public Color defaultColor;
+    public Color selectedColor;
 
     private void Update()
     {
