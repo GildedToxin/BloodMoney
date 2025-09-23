@@ -5,9 +5,8 @@ using UnityEngine;
 public class InventoryController : MonoBehaviour
 {
     public ObservableArray<Item> inventory = new ObservableArray<Item>(5);
-    public int selectedIndex = -1;
-    public Color defaultColor;
-    public Color selectedColor;
+    public ObservableValue<int> selectedIndex = new ObservableValue<int>(-1);
+   
 
     private void Update()
     {
@@ -18,6 +17,8 @@ public class InventoryController : MonoBehaviour
                 print("Failed to add item to inventory!");
             }
         }
+        selectedIndex.Value = GetNumberKeyDown() != selectedIndex ? GetNumberKeyDown() : selectedIndex;
+
     }
     public bool TryAddItem(Item newItem)
     {
@@ -77,5 +78,15 @@ public class InventoryController : MonoBehaviour
         {
             return 2; // Not enough money
         }
+    }
+
+    private int GetNumberKeyDown()
+    {
+        for (int i = 0; i <= 9; i++)
+        {
+            if (Input.GetKey((KeyCode)((int)KeyCode.Alpha0 + i)))
+                return i;
+        }
+        return -1;
     }
 }

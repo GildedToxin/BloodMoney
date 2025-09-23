@@ -5,6 +5,8 @@ public class InventoryUIManager : MonoBehaviour
 {
     public GameObject draggableItemGO;
     public GameObject InventoryGrid;
+    public Color defaultColor;
+    public Color selectedColor;
     public InventoryController inventoryController;
 
     private void Awake()
@@ -49,6 +51,15 @@ public class InventoryUIManager : MonoBehaviour
             {
                 slot.ClearItem();
             }
+            if(i == inventoryController.selectedIndex -1)
+            {
+                print(i);   
+                slot.GetComponent<UnityEngine.UI.Image>().color = selectedColor;
+            }
+            else
+            {
+                slot.GetComponent<UnityEngine.UI.Image>().color = defaultColor;
+            }
         }
     }
     private void OnEnable()
@@ -56,6 +67,7 @@ public class InventoryUIManager : MonoBehaviour
         try
         {
             inventoryController.inventory.OnValueChanged  += (i, item) => RefreshInventory();
+            inventoryController.selectedIndex.OnValueChanged += (i) => RefreshInventory();
             RefreshInventory();
         }
         catch (System.Exception ex)
@@ -66,5 +78,6 @@ public class InventoryUIManager : MonoBehaviour
     private void OnDisable()
     {
         inventoryController.inventory.OnValueChanged -= (i, item) => RefreshInventory();
+        inventoryController.selectedIndex.OnValueChanged -= (i) => RefreshInventory();
     }
 }
