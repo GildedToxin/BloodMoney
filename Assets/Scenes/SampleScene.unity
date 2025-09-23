@@ -337,12 +337,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   moveSpeed: 3
+  sprintSpeed: 5
+  crouchSpeed: 0.75
   groundDrag: 1
   jumpForce: 12
   jumpCooldown: 0.25
   airMultiplier: 0.4
   jumpKey: 32
-  playerHight: 10
+  sprintKey: 304
+  crouchKey: 101
+  playerHight: 5
   Ground:
     serializedVersion: 2
     m_Bits: 8

@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
     [Header("Movement")]
     public float moveSpeed;
     public float sprintSpeed;
+    public float crouchSpeed;
 
     public float groundDrag;
 
@@ -14,7 +15,8 @@ public class PlayerController : MonoBehaviour
     public float airMultiplier;
     private bool canJump;
 
-    public bool sprinting;
+    private bool sprinting;
+    private bool crouching;
 
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
@@ -74,7 +76,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when player jumps
-        if(Input.GetKey(jumpKey) && canJump && grounded)
+        if(Input.GetKey(jumpKey) && canJump && grounded && !crouching)
         {
             canJump = false;
 
@@ -84,14 +86,29 @@ public class PlayerController : MonoBehaviour
         }
 
         // when player sprints
-        if (Input.GetKeyDown(sprintKey) && grounded)
+        if (Input.GetKeyDown(sprintKey) && grounded && ! crouching)
         {
             sprinting = true;
         }
-        if (Input.GetKeyUp(sprintKey) && grounded)
+        if (Input.GetKeyUp(sprintKey) && grounded && !crouching)
         {
             sprinting = false;
         }
+
+        //when player crouching
+        if (Input.GetKeyDown(crouchKey) && grounded)
+        {
+            if (!crouching)
+            {
+                crouching = true;
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, transform.localScale.z);
+            }
+            else if (crouching)
+            {
+                crouching = false;
+                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
+            }
+        }    
 
     }
 
@@ -101,14 +118,18 @@ public class PlayerController : MonoBehaviour
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground
-        if (grounded && !sprinting)
+        if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
         }
-        else if (grounded && sprinting)
+        else if (grounded && sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * sprintSpeed * 10f, ForceMode.Force);
 
+        }
+        else if (grounded && !sprinting && crouching)
+        {
+            rb.AddForce(movementDirection.normalized * crouchSpeed * 10f, ForceMode.Force);
         }
 
         // in air
@@ -123,14 +144,19 @@ public class PlayerController : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         // limit velocity as needed
-        if (flatVel.magnitude > moveSpeed && !sprinting)
+        if (flatVel.magnitude > moveSpeed && !sprinting && !crouching)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
-        else if (flatVel.magnitude > sprintSpeed && sprinting)
+        else if (flatVel.magnitude > sprintSpeed && sprinting && !crouching)
         {
             Vector3 limitedVel = flatVel.normalized * sprintSpeed;
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+        else if (flatVel.magnitude > sprintSpeed && !sprinting && crouching)
+        {
+            Vector3 limitedVel = flatVel.normalized * crouchSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
