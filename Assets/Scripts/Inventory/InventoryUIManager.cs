@@ -19,6 +19,7 @@ public class InventoryUIManager : MonoBehaviour
         {
             child.GetComponent<InventorySlot>().inventoryUIManager = this;
         }
+        RefreshInventory();
     }
 
     public bool DropItemAtNewSlot(Item item, InventorySlot oldSlot)
@@ -72,6 +73,8 @@ public class InventoryUIManager : MonoBehaviour
         }
         catch (System.Exception ex)
         {
+            // If this happened only once when opening the inv the first time, ignore it
+            // If this happens more often, we have a problem - ask kyle about it 
             Debug.LogError($"Error refreshing inventory: {ex.Message}");
         }
     }
