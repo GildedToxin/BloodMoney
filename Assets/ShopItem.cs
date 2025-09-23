@@ -5,17 +5,23 @@ using UnityEngine.UI;
 
 public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [Header("References")]
+    public Item item;
     public Image itemIcon;
     public GameObject itemName;
     public GameObject itemPrice;
 
-
+    [Header("State")]
     public bool isPurchased = false;
+
+    [Header("Colors")]
     public Color purchasedColor = Color.gray;
     public Color defaultColor;
     public Color hoverColor;
+
+
     public ShopManager shopManager;
-    public Item item;
+    
 
     public void Start()
     {
