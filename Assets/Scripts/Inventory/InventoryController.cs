@@ -56,4 +56,23 @@ public class InventoryController : MonoBehaviour
         }
         return inventory[index];
     }
+    public int BuyItem(Item item, int price, PlayerController player)
+    {
+        if (player.money >= price)
+        {
+            if (TryAddItem(item))
+            {
+                player.money -= price;
+                return 0; // Success
+            }
+            else
+            {
+                return 1; // Inventory full
+            }
+        }
+        else
+        {
+            return 2; // Not enough money
+        }
+    }
 }
