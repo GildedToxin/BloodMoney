@@ -336,7 +336,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a383d963c012e34099c5097299ea731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
-  moveSpeed: 2
+  moveSpeed: 3
+  groundDrag: 1
+  jumpForce: 12
+  jumpCooldown: 0.25
+  airMultiplier: 0.4
+  jumpKey: 32
+  playerHight: 10
+  Ground:
+    serializedVersion: 2
+    m_Bits: 8
   orientation: {fileID: 244888688}
 --- !u!1 &330585543
 GameObject:
@@ -1035,7 +1044,7 @@ GameObject:
   - component: {fileID: 1651051923}
   - component: {fileID: 1651051922}
   - component: {fileID: 1651051921}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Test_Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
