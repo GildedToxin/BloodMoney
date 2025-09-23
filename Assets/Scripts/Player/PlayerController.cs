@@ -1,9 +1,11 @@
+using NUnit.Framework.Constraints;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float moveSpeed;
+    public float sprintSpeed;
 
     public float groundDrag;
 
@@ -12,8 +14,12 @@ public class PlayerController : MonoBehaviour
     public float airMultiplier;
     private bool canJump;
 
+    public bool sprinting;
+
     [Header("Keybinds")]
-     public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode jumpKey = KeyCode.Space;
+    public KeyCode sprintKey = KeyCode.LeftShift;
+    public KeyCode crouchKey = KeyCode.E;
 
     [Header("Ground Check")]
     public float playerHight;
@@ -34,6 +40,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         canJump = true;
+        sprinting = false;
     }
 
     private void Update()
@@ -75,6 +82,17 @@ public class PlayerController : MonoBehaviour
 
             Invoke(nameof(ResetJump), jumpCooldown); // Calls reset jump with a delay of jumpCooldown so holding down the key keeps the player jumping
         }
+
+        // when player sprints
+        if (Input.GetKeyDown(sprintKey) && grounded)
+        {
+            sprinting = true;
+        }
+        if (Input.GetKeyUp(sprintKey) && grounded)
+        {
+            sprinting = false;
+        }
+
     }
 
     private void MovePlayer()
@@ -83,9 +101,14 @@ public class PlayerController : MonoBehaviour
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 
         // on ground
-        if (grounded)
+        if (grounded && !sprinting)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+        }
+        else if (grounded && sprinting)
+        {
+            rb.AddForce(movementDirection.normalized * sprintSpeed * 10f, ForceMode.Force);
+
         }
 
         // in air
@@ -100,9 +123,14 @@ public class PlayerController : MonoBehaviour
         Vector3 flatVel = new Vector3(rb.linearVelocity.x, 0f, rb.linearVelocity.z);
 
         // limit velocity as needed
-        if (flatVel.magnitude > moveSpeed)
+        if (flatVel.magnitude > moveSpeed && !sprinting)
         {
             Vector3 limitedVel = flatVel.normalized * moveSpeed;
+            rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
+        }
+        else if (flatVel.magnitude > sprintSpeed && sprinting)
+        {
+            Vector3 limitedVel = flatVel.normalized * sprintSpeed;
             rb.linearVelocity = new Vector3(limitedVel.x, rb.linearVelocity.y, limitedVel.z);
         }
     }
