@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
+    public int money = 100;
     public ObservableArray<Item> inventory = new ObservableArray<Item>(5);
     public ObservableValue<int> selectedIndex = new ObservableValue<int>(-1);
    
@@ -60,26 +61,6 @@ public class InventoryController : MonoBehaviour
         }
         return inventory[index];
     }
-    public int BuyItem(Item item, int price, PlayerController player)
-    {
-        if (player.money >= price)
-        {
-            if (TryAddItem(item))
-            {
-                player.money -= price;
-                return 0; // Success
-            }
-            else
-            {
-                return 1; // Inventory full
-            }
-        }
-        else
-        {
-            return 2; // Not enough money
-        }
-    }
-
     private int GetNumberKeyDown()
     {
         for (int i = 0; i <= 9; i++)
