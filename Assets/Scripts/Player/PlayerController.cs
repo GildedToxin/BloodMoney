@@ -37,6 +37,9 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+    //other variables
+    public Camera cam;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -47,6 +50,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        transform.rotation = cam.transform.rotation;
+
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
 
