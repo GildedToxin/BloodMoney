@@ -3,13 +3,14 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
-public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler, IBeginDragHandler
+public class InventoryDragAndDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler, IBeginDragHandler//, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
-    public InventorySlot inventorySlot;
     public Color hoverColor;
-    public Color defaultColor = new Color(0,0,0,1);
+    public Color defaultColor = new Color(0, 0, 0, 1);
     public InventoryUIManager inventoryUIManager;
+    public InventorySlot inventorySlot;
 
     [HideInInspector] public bool isHovered;
     private UnityEngine.UI.Image itemIcon;
@@ -20,12 +21,11 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     {
         itemIcon = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
     }
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         isHovered = true;
         GetComponent<UnityEngine.UI.Image>().color = hoverColor;
-        if (inventorySlot.GetItem() != null)
-            print(inventorySlot.GetItem());
     }
     public void OnPointerExit(PointerEventData eventData)
     {
@@ -34,33 +34,27 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (inventorySlot.GetItem() != null)
+        if (inventorySlot.item != null)
         {
             isDragging = true;
             itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, .05f);
             inventoryUIManager.draggableItemGO.SetActive(true);
-            inventoryUIManager.draggableItemGO.GetComponent<UnityEngine.UI.Image>().sprite = inventorySlot.GetItem().icon;
+            inventoryUIManager.draggableItemGO.GetComponent<UnityEngine.UI.Image>().sprite = inventorySlot.item.icon;
         }
     }
     public void OnDrag(PointerEventData eventData)
     {
-        if (inventorySlot.GetItem() != null)
+        if (inventorySlot.item != null)
             inventoryUIManager.draggableItemGO.transform.position = Input.mousePosition;
     }
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (inventorySlot.GetItem() != null)
+        if (inventorySlot.item != null)
         {
-            
-            if (!isHovered && isDragging)
+            if (isHovered) return;
+            if (isDragging && inventoryUIManager.DropItemAtNewSlot(inventorySlot.item, oldSlot: inventorySlot))
             {
-                if (inventoryUIManager.TryAddItemToSlot(inventorySlot.GetItem())) {
-                    inventorySlot.ClearItem();
-                }
-            }
-            else if (isHovered)
-            {
-                print("Dropped on self, do nothing");
+                inventorySlot.ClearItem();
             }
         }
 
@@ -71,6 +65,7 @@ public class UIElement : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
     private void OnDisable()
     {
         isDragging = false;
+        GetComponent<UnityEngine.UI.Image>().color = defaultColor;
         itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 1f);
         inventoryUIManager.draggableItemGO.SetActive(false);
     }
