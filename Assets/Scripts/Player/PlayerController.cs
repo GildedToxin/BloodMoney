@@ -37,11 +37,15 @@ public class PlayerController : MonoBehaviour
 
     Rigidbody rb;
 
+    public float playerTestFloat;
+    public InventoryUIManager inventoryUIManager;
+
     //other variables
     public Camera cam;
 
     private void Start()
     {
+        GameManager.Instance.Player = this;
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         canJump = true;
@@ -50,6 +54,12 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            inventoryUIManager.gameObject.SetActive(!inventoryUIManager.gameObject.activeSelf);
+        }
+
         transform.rotation = cam.transform.rotation;
 
         //grounded check
@@ -73,6 +83,17 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         MovePlayer();
+    }
+    public void Save(ref PlayerSaveData data)
+    {
+        // Save any player data here by setting variables in PlayerSaveData to current PlayerController Variables
+        data.testFloat = playerTestFloat;
+    }
+
+    public void Load(PlayerSaveData data)
+    {
+        // Set variables in the player from the stored player save data here
+        playerTestFloat = data.testFloat;
     }
 
     private void MyInput()
@@ -178,4 +199,11 @@ public class PlayerController : MonoBehaviour
     {
         canJump = true;
     }
+
+}
+[System.Serializable]
+public struct PlayerSaveData
+{
+    // Create additional variables here to store player data
+    public float testFloat;
 }
