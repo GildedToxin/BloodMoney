@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     public InventoryUIManager inventoryUIManager;
 
     //other variables
-    public Camera cam;
+    public GameObject cam;
     private float cameraXRotation;
     private float cameraZRotation;
 
@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         cameraXRotation = cam.transform.rotation.x;
         cameraZRotation = cam.transform.rotation.z;
 
-        transform.rotation = new Quaternion(cameraXRotation, 0, cameraZRotation, 0);
+        transform.rotation = new Quaternion(cameraXRotation, 0, cameraZRotation, 0); //problem code
 
         // Use to open the player inventory
         if (Input.GetKeyDown(InventoryKey))
