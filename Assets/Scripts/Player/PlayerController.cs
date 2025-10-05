@@ -43,6 +43,8 @@ public class PlayerController : MonoBehaviour
 
     //other variables
     public Camera cam;
+    private float cameraXRotation;
+    private float cameraZRotation;
 
     private void Start()
     {
@@ -55,7 +57,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        transform.rotation = cam.transform.rotation;
+        cameraXRotation = cam.transform.rotation.x;
+        cameraZRotation = cam.transform.rotation.z;
+
+        transform.rotation = new Quaternion(cameraXRotation, 0, cameraZRotation, 0);
 
         // Use to open the player inventory
         if (Input.GetKeyDown(InventoryKey))

@@ -17,7 +17,8 @@ public class Interact : MonoBehaviour {
         // Uses a Raycast to find an object and checks if its interactable, then runs its interaction code
         if (Input.GetKey(interactKey))
         {
-            Ray r = new Ray(interactionSource.position, interactionSource.forward);
+            Ray r = new Ray(interactionSource.position, transform.forward);
+            Debug.DrawRay(interactionSource.position, interactionSource.forward, Color.red);    
             if (Physics.Raycast(r, out RaycastHit hitInfo, interactionRange))
             {
                 if (hitInfo.collider.gameObject.TryGetComponent(out IInteractable interactObj))
