@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
         cameraXRotation = cam.transform.rotation.x;
         cameraZRotation = cam.transform.rotation.z;
 
-        transform.rotation = new Quaternion(cameraXRotation, 0, cameraZRotation, 0); //problem code
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
 
         // Use to open the player inventory
         if (Input.GetKeyDown(InventoryKey))
