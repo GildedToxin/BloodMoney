@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class CameraMovement : MonoBehaviour
 {
     public float sensitivityX;
     public float sensitivityY;

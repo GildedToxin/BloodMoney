@@ -22,7 +22,8 @@ public class PlayerController : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.E;
+    public KeyCode crouchKey = KeyCode.LeftShift;
+    public KeyCode InventoryKey = KeyCode.Q;
 
     [Header("Ground Check")]
     public float playerHight;
@@ -42,7 +43,9 @@ public class PlayerController : MonoBehaviour
     public InventoryUIManager inventoryUIManager;
 
     //other variables
-    public Camera cam;
+    public GameObject cam;
+    private float cameraXRotation;
+    private float cameraZRotation;
 
     private IPlayerLookTarget currentLookAt;
 
@@ -58,13 +61,16 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         RaycastLookDirection();
+        cameraXRotation = cam.transform.rotation.x;
+        cameraZRotation = cam.transform.rotation.z;
 
-        if (Input.GetKeyDown(KeyCode.E))
+        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
+
+        // Use to open the player inventory
+        if (Input.GetKeyDown(InventoryKey))
         {
             inventoryUIManager.gameObject.SetActive(!inventoryUIManager.gameObject.activeSelf);
         }
-
-        transform.rotation = cam.transform.rotation;
 
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
