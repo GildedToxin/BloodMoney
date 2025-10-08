@@ -7,12 +7,14 @@ public class HuntNPCController : MonoBehaviour
 {
     [SerializeField] private List<GameObject> waypoints;
     private NavMeshAgent agent;
-    [SerializeField] private BoxCollider visionTrigger;
+    [SerializeField] private HuntVisionDetection visionTrigger;
+    private Vector3 huntTarget;
 
     private Vector3 targetWaypoint;
     private Vector3 currentPos;
     private int waypointSelect = 0;
     private bool canMove = true;
+    private bool chasePlayer = false;
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -22,8 +24,27 @@ public class HuntNPCController : MonoBehaviour
     void Update()
     {
         currentPos = this.transform.position;
-        MoveToWaypoint();
-        
+
+        if (visionTrigger.foundTarget == true)  // Sets variable for huntTarget once the player is visible
+        {
+            try
+            {
+                huntTarget = visionTrigger.target.position;
+                chasePlayer = true;
+            }
+            catch
+            {
+                print("Unable to find player");
+                chasePlayer = false;
+            }
+        }
+
+
+        if (chasePlayer == true && huntTarget != null)  // Sets the nav agent target to visible player
+            agent.SetDestination(huntTarget);
+        else
+            MoveToWaypoint();
+
         SelectWaypoint();
     }
 
