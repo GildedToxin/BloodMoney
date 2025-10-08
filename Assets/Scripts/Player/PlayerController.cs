@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System.Linq;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -46,6 +47,8 @@ public class PlayerController : MonoBehaviour
     private float cameraXRotation;
     private float cameraZRotation;
 
+    private IPlayerLookTarget currentLookAt;
+
     private void Start()
     {
         GameManager.Instance.Player = this;
@@ -57,6 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        RaycastLookDirection();
         cameraXRotation = cam.transform.rotation.x;
         cameraZRotation = cam.transform.rotation.z;
 
@@ -206,7 +210,37 @@ public class PlayerController : MonoBehaviour
         canJump = true;
     }
 
+    public void RaycastLookDirection() // This is a bad name and should be changed to something better
+    {
+        Ray ray = new Ray(transform.position, transform.forward);
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10))
+        {
+            IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>();
+            if (lookable != null)
+            {
+                // If looking at a new object, turn off the last one and turn on the new one
+                if (currentLookAt != lookable) 
+                {
+                    currentLookAt?.OnLookExit();
+                    currentLookAt = lookable;
+                    currentLookAt.OnLookEnter();
+                }
+                return;
+            }
+        }
+
+        // If nothing is hit, turn off the last object looked at
+        if (currentLookAt != null)
+        {
+            currentLookAt.OnLookExit();
+            currentLookAt = null;
+        }
+
+
+    }
 }
+
 [System.Serializable]
 public struct PlayerSaveData
 {
