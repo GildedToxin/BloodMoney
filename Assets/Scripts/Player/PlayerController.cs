@@ -44,14 +44,14 @@ public class PlayerController : MonoBehaviour
 
     //other variables
     public GameObject cam;
-    private float cameraXRotation;
-    private float cameraZRotation;
+    Interact interact;
 
     private IPlayerLookTarget currentLookAt;
 
     private void Start()
     {
         GameManager.Instance.Player = this;
+        interact = gameObject.GetComponent<Interact>();
         rb = GetComponent<Rigidbody>();
         rb.freezeRotation = true;
         canJump = true;
@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when player jumps
-        if(Input.GetKey(jumpKey) && canJump && grounded && !crouching)
+        if(Input.GetKey(jumpKey) && canJump && grounded && !crouching && interact.noInteraction)
         {
             canJump = false;
 
@@ -122,17 +122,19 @@ public class PlayerController : MonoBehaviour
         }
 
         // when player sprints
-        if (Input.GetKeyDown(sprintKey) && grounded && ! crouching)
+        if (Input.GetKeyDown(sprintKey) && grounded && !crouching)
         {
             sprinting = true;
         }
+
+        //when player stands from crouch
         if (Input.GetKeyUp(sprintKey) && grounded && !crouching)
         {
             sprinting = false;
         }
 
         //when player crouching
-        if (Input.GetKeyDown(crouchKey) && grounded)
+        if (Input.GetKeyDown(crouchKey) && grounded && interact.noInteraction)
         {
             if (!crouching)
             {
