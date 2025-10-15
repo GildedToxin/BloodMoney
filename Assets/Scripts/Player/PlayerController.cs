@@ -1,6 +1,7 @@
 using NUnit.Framework.Constraints;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 
 public class PlayerController : MonoBehaviour
 {
@@ -87,6 +88,17 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.linearDamping = 0;
+        }
+
+
+        if (Input.GetKey(KeyCode.J)){
+            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
+            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
+
+            if (Physics.Raycast(ray, out RaycastHit hit, 10))
+            {
+                hit.collider.GetComponent<DecalProjector>().fadeFactor -= 0.01f;
+            }
         }
     }
 
