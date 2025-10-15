@@ -62,8 +62,9 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         RaycastLookDirection();
-        cameraXRotation = cam.transform.rotation.x;
-        cameraZRotation = cam.transform.rotation.z;
+        //these arent used, but ill leave them here for now
+        //cameraXRotation = cam.transform.rotation.x;
+        //cameraZRotation = cam.transform.rotation.z;
 
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
 
