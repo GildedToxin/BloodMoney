@@ -1,13 +1,15 @@
+using TMPro;
 using UnityEngine;
 using static UnityEditor.Progress;
 
-public class InventoryUIManager : MonoBehaviour
+public class HUDManager : MonoBehaviour
 {
     public GameObject draggableItemGO;
     public GameObject InventoryGrid;
     public Color defaultColor;
     public Color selectedColor;
     public InventoryController inventoryController;
+    public GameObject sellItem;
 
     private void Awake()
     {
@@ -62,6 +64,10 @@ public class InventoryUIManager : MonoBehaviour
                 slot.GetComponent<UnityEngine.UI.Image>().color = defaultColor;
             }
         }
+    }
+    public void UpdateSellAsk(string desiredItem)
+    {
+        sellItem.GetComponent<TextMeshProUGUI>().text = $"Press Q to sell {desiredItem}";
     }
     private void OnEnable()
     {

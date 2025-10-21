@@ -10,8 +10,8 @@ public enum OrganType
     Bone,
     Meat,
     Limb,
-    Fingers,
-    Eyes,
+    Finger,
+    Eye,
     Blood
 }
 
@@ -30,12 +30,11 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public float decalOffset = 0.01f;
     public GameObject bloodEffect;
 
+    public Item itemData;
     void Start()
     {
-        
+        itemData = Resources.Load<Item>($"items/{organType.ToString()}");
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.X))
@@ -97,7 +96,6 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     {
         if (rb == null) return;
 
-        // Reset velocity first (optional)
         rb.linearVelocity = Vector3.zero;
 
         // Apply force in the object's forward direction
@@ -106,8 +104,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public int GetOrganPrice()  
     {
-
-        return 1;
+        var mult = (currentHealth / 10);
+        return (itemData.price) +  10 *  mult;
     }
 
     public void RefreshOrgan()

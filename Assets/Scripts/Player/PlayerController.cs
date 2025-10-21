@@ -1,4 +1,5 @@
 using NUnit.Framework.Constraints;
+using System.Data.SqlTypes;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
@@ -42,13 +43,14 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     public float playerTestFloat;
-    public InventoryUIManager inventoryUIManager;
+    public HUDManager inventoryUIManager;
 
     //other variables
     public GameObject cam;
     Interact interact;
 
     private IPlayerLookTarget currentLookAt;
+    public int money;
 
     private void Start()
     {
@@ -62,6 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        print(money);
         RaycastLookDirection();
         //these arent used, but ill leave them here for now
         //cameraXRotation = cam.transform.rotation.x;
@@ -227,7 +230,7 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10))
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
             IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
                           ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();
@@ -251,6 +254,11 @@ public class PlayerController : MonoBehaviour
             currentLookAt.OnLookExit();
             currentLookAt = null;
         }
+    }
+
+    public void AddMoney(int amount)
+    {
+        money += amount;
     }
 }
 

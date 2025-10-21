@@ -75,6 +75,8 @@ public class VendorStand : MonoBehaviour
 
         Debug.Log($"Sold {organ.organType} to {customer.customerType}!");
 
+        FindAnyObjectByType<PlayerController>().AddMoney(organ.GetOrganPrice());
+
         organsToSell.Remove(organ);
         Destroy(organ.gameObject);
 

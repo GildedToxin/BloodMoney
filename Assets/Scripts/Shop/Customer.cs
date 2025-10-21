@@ -30,11 +30,15 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     // Update is called once per frame
     void Update()
     {
-        if(isLookedAt && canBuyItem && !isServed && Input.GetKeyDown(KeyCode.Q))
+        if (isLookedAt && canBuyItem && !isServed)
         {
-            isServed = true;
-            FindAnyObjectByType<VendorStand>().SellOrgan(desiredOrgan, this);
-        }
+            if (Input.GetKeyDown(KeyCode.Q)) {
+                isServed = true;
+                FindAnyObjectByType<VendorStand>().SellOrgan(desiredOrgan, this);
+            }
+
+           
+        } 
     }
 
     public void RandomCustomer()
@@ -47,11 +51,19 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     {
         customerRequest.enabled = true;
         isLookedAt = true;
+
+        if (canBuyItem && !isServed)
+        {
+            FindAnyObjectByType<HUDManager>().UpdateSellAsk(desiredOrgan.ToString());
+            FindAnyObjectByType<HUDManager>().sellItem.SetActive(true);
+        }
     }
     public void OnLookExit()
     {
-        customerRequest.enabled = false;
+        if(customerRequest != null)
+            customerRequest.enabled = false;
         isLookedAt = false;
+        FindAnyObjectByType<HUDManager>().sellItem.SetActive(false);
     }
 
 }
