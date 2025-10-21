@@ -4,6 +4,17 @@ using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
+public enum OrganType
+{
+    Brain,
+    Bone,
+    Meat,
+    Limb,
+    Fingers,
+    Eyes,
+    Blood
+}
+
 public class OrganManager : MonoBehaviour, IPlayerLookTarget
 {
     public int maxHealth = 100;
@@ -11,7 +22,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public int maxDamage = 50;
     public Canvas toolTip;
     public GameObject qualityText;
-
+    public OrganType organType;
 
 
     public GameObject decalPrefab;
@@ -91,5 +102,17 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
         // Apply force in the object's forward direction
         rb.AddForce(transform.forward * 50, ForceMode.VelocityChange);
+    }
+
+    public int GetOrganPrice()  
+    {
+
+        return 1;
+    }
+
+    public void RefreshOrgan()
+    {
+        Item myAsset = Resources.Load<Item>($"items/{organType.ToString()}");
+
     }
 }
