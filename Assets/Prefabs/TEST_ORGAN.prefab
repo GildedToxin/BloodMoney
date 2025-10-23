@@ -612,7 +612,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -673,6 +673,7 @@ MonoBehaviour:
   maxDamage: 50
   toolTip: {fileID: 4510021137364731129}
   qualityText: {fileID: 8461307306006954461}
+  organType: 0
   decalPrefab: {fileID: 6481123059227059512, guid: 4c08ae29a7e79244eaed6fea6a3046ff, type: 3}
   decalMaterials:
   - {fileID: 2100000, guid: 712ac4bf6651004409b027e95b435ee3, type: 2}
@@ -681,6 +682,7 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 02f561ba9d8cbc8419b7f5cb10b25179, type: 2}
   decalOffset: 0.01
   bloodEffect: {fileID: 2830657874432123496, guid: d9852bfddd0da4b46a2d4df5d6d1cf87, type: 3}
+  itemData: {fileID: 0}
 --- !u!54 &5540038706935199460
 Rigidbody:
   m_ObjectHideFlags: 0

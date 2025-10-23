@@ -31,6 +31,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public GameObject bloodEffect;
 
     public Item itemData;
+
+    public bool islookedAt = false;
     void Start()
     {
         itemData = Resources.Load<Item>($"items/{organType.ToString()}");
@@ -40,6 +42,10 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         if(Input.GetKeyDown(KeyCode.X))
         {
             LaunchForward(GetComponent<Rigidbody>());
+        }
+        if(islookedAt && Input.GetKeyDown(KeyCode.E))
+        {
+            FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
         }
     }
 
@@ -83,10 +89,12 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookEnter()
     {
+        islookedAt = true;
         toolTip.enabled = true;
     }
     public void OnLookExit()
     {
+        islookedAt = false;
         toolTip.enabled = false;
     }
 
