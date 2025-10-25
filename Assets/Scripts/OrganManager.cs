@@ -4,6 +4,17 @@ using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 using UnityEngine.VFX;
 
+public enum OrganType
+{
+    Brain,
+    Bone,
+    Meat,
+    Limb,
+    Finger,
+    Eye,
+    Blood
+}
+
 public class OrganManager : MonoBehaviour, IPlayerLookTarget
 {
     public int maxHealth = 100;
@@ -11,7 +22,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public int maxDamage = 50;
     public Canvas toolTip;
     public GameObject qualityText;
-
+    public OrganType organType;
 
 
     public GameObject decalPrefab;
@@ -19,17 +30,22 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public float decalOffset = 0.01f;
     public GameObject bloodEffect;
 
+    public Item itemData;
+
+    public bool islookedAt = false;
     void Start()
     {
-        
+        itemData = Resources.Load<Item>($"items/{organType.ToString()}");
     }
-
-    // Update is called once per frame
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.X))
         {
             LaunchForward(GetComponent<Rigidbody>());
+        }
+        if(islookedAt && Input.GetKeyDown(KeyCode.E))
+        {
+            FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
         }
     }
 
@@ -73,10 +89,12 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookEnter()
     {
+        islookedAt = true;
         toolTip.enabled = true;
     }
     public void OnLookExit()
     {
+        islookedAt = false;
         toolTip.enabled = false;
     }
 
@@ -86,10 +104,21 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     {
         if (rb == null) return;
 
-        // Reset velocity first (optional)
         rb.linearVelocity = Vector3.zero;
 
         // Apply force in the object's forward direction
         rb.AddForce(transform.forward * 50, ForceMode.VelocityChange);
+    }
+
+    public int GetOrganPrice()  
+    {
+        var mult = (currentHealth / 10);
+        return (itemData.price) +  10 *  mult;
+    }
+
+    public void RefreshOrgan()
+    {
+        Item myAsset = Resources.Load<Item>($"items/{organType.ToString()}");
+
     }
 }

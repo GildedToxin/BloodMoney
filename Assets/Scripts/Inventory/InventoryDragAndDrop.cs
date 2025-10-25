@@ -9,7 +9,7 @@ public class InventoryDragAndDrop : MonoBehaviour, IPointerEnterHandler, IPointe
 {
     public Color hoverColor;
     public Color defaultColor = new Color(0, 0, 0, 1);
-    public InventoryUIManager inventoryUIManager;
+    public HUDManager inventoryUIManager;
     public InventorySlot inventorySlot;
 
     [HideInInspector] public bool isHovered;
