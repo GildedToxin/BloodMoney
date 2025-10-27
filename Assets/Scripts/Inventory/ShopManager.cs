@@ -53,7 +53,7 @@ public class ShopManager : MonoBehaviour
         {
             if (inventoryController.TryAddItem(shopItem.item))
             {
-                inventoryController.money -= shopItem.item.price;
+                inventoryController.money.Value -= shopItem.item.price;
                 playerMoney.GetComponent<TextMeshProUGUI>().SetText(inventoryController.money.ToString());
                 return true;
             }

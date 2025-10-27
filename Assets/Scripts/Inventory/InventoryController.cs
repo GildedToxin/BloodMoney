@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class InventoryController : MonoBehaviour
 {
-    public int money = 100;
+    public ObservableValue<int> money = new ObservableValue<int>(100);
     public ObservableArray<Item> inventory = new ObservableArray<Item>(5);
     public ObservableValue<int> selectedIndex = new ObservableValue<int>(-1);
-   
 
     private void Update()
     {
@@ -69,5 +68,10 @@ public class InventoryController : MonoBehaviour
                 return i;
         }
         return -1;
+    }
+
+    public void AddMoney(int amount)
+    {
+        money.Value += amount;
     }
 }

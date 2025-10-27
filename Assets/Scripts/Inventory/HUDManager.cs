@@ -11,6 +11,11 @@ public class HUDManager : MonoBehaviour
     public InventoryController inventoryController;
     public GameObject sellItem;
 
+    public GameObject timerText;
+    public GameObject moneyText;
+    public GameObject dayText;
+    public GameObject bookPanel;
+
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
@@ -21,9 +26,17 @@ public class HUDManager : MonoBehaviour
         {
             child.GetComponent<InventorySlot>().inventoryUIManager = this;
         }
-        RefreshInventory();
+        RefreshUI();
     }
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            FindAnyObjectByType<InventoryController>().money.Value += 10;
+            bookPanel.SetActive(!bookPanel.activeSelf);
+        }
+    }
     public bool DropItemAtNewSlot(Item item, InventorySlot oldSlot)
     {
         int index = -1; 
@@ -40,8 +53,7 @@ public class HUDManager : MonoBehaviour
         }
         return false;
     }
-
-    public void RefreshInventory() {         
+    public void RefreshUI() {         
         for (int i = 0; i < inventoryController.inventory.Length; i++)
         {
             InventorySlot slot = transform.GetChild(0).GetChild(i).GetComponent<InventorySlot>();
@@ -64,6 +76,9 @@ public class HUDManager : MonoBehaviour
                 slot.GetComponent<UnityEngine.UI.Image>().color = defaultColor;
             }
         }
+        moneyText.GetComponent<TextMeshProUGUI>().text = $"${inventoryController.money.Value}";
+        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {FindAnyObjectByType<GameManager>().currentDay}/30";
+
     }
     public void UpdateSellAsk(string desiredItem)
     {
@@ -71,22 +86,14 @@ public class HUDManager : MonoBehaviour
     }
     private void OnEnable()
     {
-        try
-        {
-            inventoryController.inventory.OnValueChanged  += (i, item) => RefreshInventory();
-            inventoryController.selectedIndex.OnValueChanged += (i) => RefreshInventory();
-            RefreshInventory();
-        }
-        catch (System.Exception ex)
-        {
-            // If this happened only once when opening the inv the first time, ignore it
-            // If this happens more often, we have a problem - ask kyle about it 
-            Debug.LogError($"Error refreshing inventory: {ex.Message}");
-        }
+            inventoryController.inventory.OnValueChanged  += (i, item) => RefreshUI();
+            inventoryController.selectedIndex.OnValueChanged += (i) => RefreshUI();
+            inventoryController.money.OnValueChanged += (i) => RefreshUI();
     }
     private void OnDisable()
     {
-        inventoryController.inventory.OnValueChanged -= (i, item) => RefreshInventory();
-        inventoryController.selectedIndex.OnValueChanged -= (i) => RefreshInventory();
+        inventoryController.inventory.OnValueChanged -= (i, item) => RefreshUI();
+        inventoryController.selectedIndex.OnValueChanged -= (i) => RefreshUI();
+        inventoryController.money.OnValueChanged -= (i) => RefreshUI();
     }
 }
