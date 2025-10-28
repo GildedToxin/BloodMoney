@@ -52,10 +52,10 @@ public class InventoryDragAndDrop : MonoBehaviour, IPointerEnterHandler, IPointe
         if (inventorySlot.item != null)
         {
             if (isHovered) return;
-            if (isDragging && inventoryUIManager.DropItemAtNewSlot(inventorySlot.item, oldSlot: inventorySlot))
-            {
-                inventorySlot.ClearItem();
-            }
+         //   if (isDragging && inventoryUIManager.DropItemAtNewSlot(inventorySlot.item, oldSlot: inventorySlot))
+         //   {
+         //       inventorySlot.ClearItem();
+         //   }
         }
 
         itemIcon.color = new Color(itemIcon.color.r, itemIcon.color.g, itemIcon.color.b, 1f);

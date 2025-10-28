@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour
     //private UnityEngine.UI.Image startingIcon;
 
     public Item item;
+    public string itemName;
 
 
     private void Awake()
@@ -24,10 +25,16 @@ public class InventorySlot : MonoBehaviour
     public void InitalizeItem()
     {
         if (item != null)
-        itemIcon.GetComponent<UnityEngine.UI.Image>().sprite = item.icon;
+        {
+            itemIcon.GetComponent<UnityEngine.UI.Image>().sprite = item.icon;
+            itemName = item.name;
+        }
 
         else
+        {
             itemIcon.GetComponent<UnityEngine.UI.Image>().sprite = itemIcon.sprite;
+            print("item Name failed");
+        }
     }
     public void ClearItem()
     {

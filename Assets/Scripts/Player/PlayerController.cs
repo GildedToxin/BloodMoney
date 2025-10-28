@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
     public HUDManager inventoryUIManager;
 
     //other variables
-    public GameObject cam;
+    public Camera cam;
     Interact interact;
 
     private IPlayerLookTarget currentLookAt;
@@ -59,6 +59,7 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         canJump = true;
         sprinting = false;
+        cam = Camera.main;
     }
 
     private void Update()
