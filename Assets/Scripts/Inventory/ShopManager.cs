@@ -5,9 +5,14 @@ using UnityEngine;
 
 public class ShopManager : MonoBehaviour
 {
-    public GameObject shopContent;
+    public GameObject itemShopContent;
+    public GameObject toolShopContent;
     public InventoryController inventoryController;
     public GameObject playerMoney;
+
+
+    public GameObject itemShop;
+    public GameObject toolShop;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
@@ -15,7 +20,8 @@ public class ShopManager : MonoBehaviour
     void Start()
     {
 
-        RefreshShop();
+        RefreshShop(itemShopContent);
+        RefreshShop(toolShopContent);
     }
 
     // Update is called once per frame
@@ -23,14 +29,15 @@ public class ShopManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.L))
         {
-            RefreshShop();
+            RefreshShop(itemShopContent);
+            RefreshShop(toolShopContent);
         }
     }
 
-    public void RefreshShop()
+    public void RefreshShop(GameObject shop)
     {
         List<Transform> children = new List<Transform>();
-        foreach (Transform child in shopContent.transform)
+        foreach (Transform child in shop.transform)
             children.Add(child);
 
         children.Sort((a, b) =>
@@ -61,8 +68,21 @@ public class ShopManager : MonoBehaviour
         }
         return false;
     }
-    private void OnEnable()
+    public void OnTabClicked(GameObject tab)
     {
-        playerMoney.GetComponent<TextMeshProUGUI>().SetText(inventoryController.money.ToString());
+        if (tab == itemShop)
+        {
+            toolShop.SetActive(false);
+            itemShop.SetActive(true);
+        }
+        else
+        {
+            itemShop.SetActive(false);
+            toolShop.SetActive(true);
+        }
+    }
+    public void CloseShop()
+    {
+        gameObject.SetActive(false);
     }
 }

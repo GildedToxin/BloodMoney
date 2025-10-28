@@ -33,7 +33,8 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             isPurchased = true;
             GetComponent<Image>().color = purchasedColor;
-            shopManager.RefreshShop();
+            shopManager.RefreshShop(FindAnyObjectByType<ShopManager>().transform.GetChild(0).gameObject);
+            shopManager.RefreshShop(FindAnyObjectByType<ShopManager>().transform.GetChild(1).gameObject);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
