@@ -1,8 +1,10 @@
 using System;
+using UnityEngine;
 
+[Serializable]
 public class ObservableValue<T>
 {
-    private T _value;
+    [SerializeField] private T _value;
     public event Action<T> OnValueChanged;
 
     public T Value

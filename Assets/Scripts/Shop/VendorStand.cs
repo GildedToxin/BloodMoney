@@ -7,17 +7,17 @@ public class VendorStand : MonoBehaviour
 {
     public BoxCollider sellingPoint;
     public List<OrganManager> organsToSell;
-    public List<Customer> customers; 
+    public List<Customer> customers;
 
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -26,7 +26,7 @@ public class VendorStand : MonoBehaviour
             return;
         if (organsToSell.Contains(other.GetComponent<OrganManager>()))
             return;
-    
+
         organsToSell.Add(other.GetComponent<OrganManager>());
 
         CheckToSell(other.GetComponent<OrganManager>());
@@ -48,9 +48,12 @@ public class VendorStand : MonoBehaviour
 
     public void CheckToSell(OrganManager organ)
     {
-        foreach(Customer customer in customers)
-            if(organ.organType == customer.desiredOrgan)
+        foreach (Customer customer in customers)
+        {
+            if (organ.organType == customer.desiredOrgan)
                 customer.canBuyItem = true;
+            print(organ.organType.ToString() + " vs " + customer.desiredOrgan.ToString() + " = " + customer.canBuyItem.ToString());
+        }
 
     }
 
@@ -75,7 +78,7 @@ public class VendorStand : MonoBehaviour
 
         Debug.Log($"Sold {organ.organType} to {customer.customerType}!");
 
-        FindAnyObjectByType<PlayerController>().AddMoney(organ.GetOrganPrice());
+        FindAnyObjectByType<InventoryController>().AddMoney(organ.GetOrganPrice());
 
         organsToSell.Remove(organ);
         Destroy(organ.gameObject);

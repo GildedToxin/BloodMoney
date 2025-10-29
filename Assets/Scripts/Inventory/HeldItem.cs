@@ -15,7 +15,7 @@ public class HeldItem : MonoBehaviour
     {
         if(hasItem && currentItem != null)
         {
-            if(Input.GetKeyDown(KeyCode.E))
+            if(Input.GetKeyDown(KeyCode.R))
             {
                 DropItem(currentItem);
                 return;

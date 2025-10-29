@@ -26,6 +26,8 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     public void Start()
     {
         InitalizeShopItem();
+        if(shopManager == null)
+            shopManager = FindAnyObjectByType<ShopManager>();
     }
     public void OnBuyPressed()
     {
@@ -33,7 +35,9 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
         {
             isPurchased = true;
             GetComponent<Image>().color = purchasedColor;
-            shopManager.RefreshShop();
+            shopManager.RefreshShop(ShopManager.Instance.itemShopContent);
+            shopManager.RefreshShop(ShopManager.Instance.toolShopContent);
+            FindAnyObjectByType<InventoryController>().SubtractMoney(item.price);
         }
     }
     public void OnPointerEnter(PointerEventData eventData)
@@ -54,6 +58,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             itemIcon.sprite = item.icon;
             itemName.GetComponent<TextMeshProUGUI>().SetText(item.name);
             itemPrice.GetComponent<TextMeshProUGUI>().SetText(item.price.ToString());
+            print(item.price.ToString());
         }
         if (isPurchased)
             GetComponent<Image>().color = purchasedColor;

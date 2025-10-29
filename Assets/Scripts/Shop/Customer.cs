@@ -54,8 +54,8 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
 
         if (canBuyItem && !isServed)
         {
-            FindAnyObjectByType<HUDManager>().UpdateSellAsk(desiredOrgan.ToString());
-            FindAnyObjectByType<HUDManager>().sellItem.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press Q to Sell {desiredOrgan.ToString()}");
+            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
         }
     }
     public void OnLookExit()
@@ -63,7 +63,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         if(customerRequest != null)
             customerRequest.enabled = false;
         isLookedAt = false;
-        FindAnyObjectByType<HUDManager>().sellItem.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
     }
 
 }
