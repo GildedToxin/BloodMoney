@@ -241,7 +241,7 @@ public class PlayerController : MonoBehaviour
                     currentLookAt?.OnLookExit();
                     currentLookAt = lookable;
                     currentLookAt.OnLookEnter();
-                    print(lookable.ToString());
+                    //print(lookable.ToString());
                 }
                 return;
             }
