@@ -46,11 +46,10 @@ public class PlayerController : MonoBehaviour
     public HUDManager inventoryUIManager;
 
     //other variables
-    public GameObject cam;
+    public Camera cam;
     Interact interact;
 
     private IPlayerLookTarget currentLookAt;
-    public int money;
 
     private void Start()
     {
@@ -60,11 +59,11 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         canJump = true;
         sprinting = false;
+        cam = Camera.main;
     }
 
     private void Update()
     {
-        print(money);
         RaycastLookDirection();
         //these arent used, but ill leave them here for now
         //cameraXRotation = cam.transform.rotation.x;
@@ -242,7 +241,7 @@ public class PlayerController : MonoBehaviour
                     currentLookAt?.OnLookExit();
                     currentLookAt = lookable;
                     currentLookAt.OnLookEnter();
-                    print(lookable.ToString());
+                    //print(lookable.ToString());
                 }
                 return;
             }
@@ -254,11 +253,6 @@ public class PlayerController : MonoBehaviour
             currentLookAt.OnLookExit();
             currentLookAt = null;
         }
-    }
-
-    public void AddMoney(int amount)
-    {
-        money += amount;
     }
 }
 

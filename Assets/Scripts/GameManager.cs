@@ -22,6 +22,21 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public int currentDay;
+    private int maxDay = 30;
+
+
+    public int roomNumber = 0;
+
+    public static int[] roomNumbers = new int[]
+{
+        // Floor 2
+        201, 203, 205,
+        // Floor 3
+        301, 302, 304, 306, 307, 308, 310,
+        // Floor 4
+        401, 402, 404, 406, 407, 408, 410
+};
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
 
     private void Awake()
@@ -48,5 +63,16 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.Load();
         }
+    }
+    public void newRoom()
+    {
+        roomNumber = Random.Range(0, roomNumbers.Length);
+    }
+    public void ProgressDay()
+    {
+        currentDay += 1;
+        /*
+        Refresh shop keepers
+        */
     }
 }

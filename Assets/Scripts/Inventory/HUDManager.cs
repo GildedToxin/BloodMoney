@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEditor.Progress;
 
 public class HUDManager : MonoBehaviour
@@ -9,7 +10,14 @@ public class HUDManager : MonoBehaviour
     public Color defaultColor;
     public Color selectedColor;
     public InventoryController inventoryController;
-    public GameObject sellItem;
+    public GameObject CrossHairText;
+
+    public GameObject timerText;
+    public GameObject moneyText;
+    public GameObject dayText;
+    public GameObject bookPanel;
+    public Sprite blankIcon;
+
 
     private void Awake()
     {
@@ -21,72 +29,61 @@ public class HUDManager : MonoBehaviour
         {
             child.GetComponent<InventorySlot>().inventoryUIManager = this;
         }
-        RefreshInventory();
+        RefreshUI();
     }
 
-    public bool DropItemAtNewSlot(Item item, InventorySlot oldSlot)
+    private void Update()
     {
-        int index = -1; 
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            FindAnyObjectByType<InventoryController>().money.Value += 10;
+            bookPanel.SetActive(!bookPanel.activeSelf);
+        }
+    }
+
+  
+    public void RefreshUI() {
         foreach (Transform child in InventoryGrid.transform)
         {
-            index++;
-            InventorySlot slot = child.GetComponent<InventorySlot>();
-            if (slot.isHovered && slot.item == null)
+            foreach (var pair in inventoryController.items)
             {
-                inventoryController.TryAddItemAtIndex(item, index);
-                inventoryController.TryRemoveItemAtIndex(oldSlot.transform.GetSiblingIndex());
-                return true;
-            }
-        }
-        return false;
-    }
+                if (pair.Key == child.GetComponent<InventorySlot>().itemName)
+                {
+                    if (pair.Value) 
+                    { 
+                        child.transform.GetChild(0).GetComponent<Image>().sprite = child.GetComponent<InventorySlot>().item.icon;
+                        break;
+                    }
+                }
+                else {
+                    child.transform.GetChild(0).GetComponent<Image>().sprite = blankIcon; //gameObject.SetActive(false);
 
-    public void RefreshInventory() {         
-        for (int i = 0; i < inventoryController.inventory.Length; i++)
-        {
-            InventorySlot slot = transform.GetChild(0).GetChild(i).GetComponent<InventorySlot>();
-            Item item = inventoryController.GetItemAtIndex(i);
-            if (item != null)
-            {
-                slot.SetItem(item);
-            }
-            else
-            {
-                slot.ClearItem();
-            }
-            if(i == inventoryController.selectedIndex -1)
-            {
-                print(i);   
-                slot.GetComponent<UnityEngine.UI.Image>().color = selectedColor;
-            }
-            else
-            {
-                slot.GetComponent<UnityEngine.UI.Image>().color = defaultColor;
+                }
             }
         }
+        moneyText.GetComponent<TextMeshProUGUI>().text = $"${inventoryController.money.Value}";
+        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {FindAnyObjectByType<GameManager>().currentDay}/30";
+
     }
+ 
     public void UpdateSellAsk(string desiredItem)
     {
-        sellItem.GetComponent<TextMeshProUGUI>().text = $"Press Q to sell {desiredItem}";
+        CrossHairText.GetComponent<TextMeshProUGUI>().text = $"Press Q to sell {desiredItem}";
     }
     private void OnEnable()
     {
-        try
-        {
-            inventoryController.inventory.OnValueChanged  += (i, item) => RefreshInventory();
-            inventoryController.selectedIndex.OnValueChanged += (i) => RefreshInventory();
-            RefreshInventory();
-        }
-        catch (System.Exception ex)
-        {
-            // If this happened only once when opening the inv the first time, ignore it
-            // If this happens more often, we have a problem - ask kyle about it 
-            Debug.LogError($"Error refreshing inventory: {ex.Message}");
-        }
+            //inventoryController.inventory.OnValueChanged  += (i, item) => RefreshUI();
+            inventoryController.selectedIndex.OnValueChanged += (i) => RefreshUI();
+            inventoryController.money.OnValueChanged += (i) => RefreshUI();
     }
     private void OnDisable()
     {
-        inventoryController.inventory.OnValueChanged -= (i, item) => RefreshInventory();
-        inventoryController.selectedIndex.OnValueChanged -= (i) => RefreshInventory();
+        //inventoryController.inventory.OnValueChanged -= (i, item) => RefreshUI();
+        inventoryController.selectedIndex.OnValueChanged -= (i) => RefreshUI();
+        inventoryController.money.OnValueChanged -= (i) => RefreshUI();
+    }
+    public void UpdateCrossHairText(string newText)
+    {
+        CrossHairText.GetComponent<TextMeshProUGUI>().text = newText;
     }
 }
