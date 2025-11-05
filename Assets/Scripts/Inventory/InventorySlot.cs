@@ -10,12 +10,13 @@ public class InventorySlot : MonoBehaviour
 
     public Item item;
     public string itemName;
+    public bool isSelected;
 
 
     private void Awake()
     {
         //startingIcon = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
-        itemIcon = transform.GetChild(0).GetComponent<UnityEngine.UI.Image>();
+        itemIcon = transform.GetComponent<UnityEngine.UI.Image>();
         
     }
     void Start()

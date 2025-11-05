@@ -160,8 +160,6 @@ GameObject:
   - component: {fileID: 153797956869431695}
   - component: {fileID: 4055777116043404963}
   - component: {fileID: 700656557543491913}
-  - component: {fileID: 8250823056263066751}
-  - component: {fileID: 6970283010846235973}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -281,38 +279,6 @@ MonoBehaviour:
   selectedIndex:
     _value: -1
 --- !u!114 &700656557543491913
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2700824240856020937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94c3bcefa73cf944fa6509ce2fcd5f67, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interact
-  interactKey: 114
-  interactionSource: {fileID: 0}
-  interactionRange: 3
-  noInteraction: 1
---- !u!114 &8250823056263066751
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2700824240856020937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49059f2c996d65b4b897cd30d6a65ed9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::InventoryController
-  money:
-    _value: 100
-  selectedIndex:
-    _value: -1
---- !u!114 &6970283010846235973
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
