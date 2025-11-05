@@ -7,6 +7,7 @@ public class SettingsMenuScript : MonoBehaviour
     [SerializeField] Toggle FullScreen;
     [SerializeField] CanvasGroup settingsMenu;
     [SerializeField] CanvasGroup mainMenu;
+    [SerializeField] CanvasGroup Controlsmenu;
     public void WindowScreenSize (bool toggleValue)
     {
 
@@ -36,5 +37,15 @@ public class SettingsMenuScript : MonoBehaviour
         mainMenu.blocksRaycasts = true;
 
         Debug.Log("working");
+    }
+
+    public void ControlsMenu()
+    {
+        Controlsmenu.alpha = 1;
+        Controlsmenu.interactable = true;
+        Controlsmenu.blocksRaycasts = true;
+        settingsMenu.alpha = 0;
+        settingsMenu.interactable = false;
+        settingsMenu.blocksRaycasts = false;
     }
 }
