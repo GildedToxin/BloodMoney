@@ -18,7 +18,10 @@ public class HUDManager : MonoBehaviour
     public GameObject bookPanel;
     public Sprite blankIcon;
 
+    public GameObject bookClosed;
+    public GameObject bookOpen;
 
+    public GameObject roomNumber;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
@@ -36,8 +39,10 @@ public class HUDManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            FindAnyObjectByType<InventoryController>().money.Value += 10;
+            //FindAnyObjectByType<InventoryController>().money.Value += 10;
             bookPanel.SetActive(!bookPanel.activeSelf);
+            bookClosed.SetActive(!bookClosed.activeSelf);
+            bookOpen.SetActive(!bookOpen.activeSelf);
         }
     }
 
@@ -85,5 +90,9 @@ public class HUDManager : MonoBehaviour
     public void UpdateCrossHairText(string newText)
     {
         CrossHairText.GetComponent<TextMeshProUGUI>().text = newText;
+    }
+    public void UpdateRoomNumber(string roomNumber)
+    {
+        this.roomNumber.GetComponent<TextMeshProUGUI>().text = $"{roomNumber}";
     }
 }
