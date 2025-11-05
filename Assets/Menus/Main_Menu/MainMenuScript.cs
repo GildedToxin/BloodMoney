@@ -3,6 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuScript : MonoBehaviour
 {
+
+    [SerializeField] CanvasGroup settingsMenu;
+    [SerializeField] CanvasGroup mainMenu;
     public void NewGame()
     {
         SceneManager.LoadSceneAsync("Lobby");
@@ -18,9 +21,15 @@ public class MainMenuScript : MonoBehaviour
         Debug.Log("Stats");
     }
 
-    public void ControlsMenu()
+    public void SettingsMenu()
     {
-        Debug.Log("Controls");
+        settingsMenu.alpha = 1;
+        settingsMenu.interactable = true;
+        settingsMenu.blocksRaycasts = true;
+        mainMenu.alpha = 0;
+        mainMenu.interactable = false;
+        mainMenu.blocksRaycasts = false;
+
     }
 
     public void CreditsScene()
