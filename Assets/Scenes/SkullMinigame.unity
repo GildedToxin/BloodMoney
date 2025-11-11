@@ -988,7 +988,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de92cf83ed77c004c8011c185a6395e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MinigameFunctions
-  minHammerHits: 0
+  minHammerHits: 1
   maxHammerHits: 4
   CrackStages:
   - {fileID: 2142309465}
@@ -998,6 +998,8 @@ MonoBehaviour:
   - {fileID: 1633031484}
   winScreen: {fileID: 505877397}
   loseScreen: {fileID: 1048274423}
+  timerText: {fileID: 711488152}
+  remainingTime: 20
   winTimerDuration: 3
 --- !u!4 &549191059
 Transform:
