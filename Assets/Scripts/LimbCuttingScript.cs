@@ -13,7 +13,6 @@ public class LimbCuttingScript : MonoBehaviour
     void Start()
     {
         limbRotation = this.transform.rotation;
-        CreatePoints();
     }
 
     public Vector3[] GeneratePointsOnCircle(int numPoints, float circleRadius, Vector3 circleCenter)
@@ -41,6 +40,7 @@ public class LimbCuttingScript : MonoBehaviour
 
     public void CreatePoints()
     {
+        this.transform.rotation = limbRotation; // Resets the limb transform rotation/position
         Vector3[] points = GeneratePointsOnCircle(numberOfPoints, radius, centerPoint);
 
         foreach (Vector3 point in points)
@@ -59,16 +59,6 @@ public class LimbCuttingScript : MonoBehaviour
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
-        }
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K)) // for testing, resets the minigame
-        {
-            this.transform.rotation = limbRotation; // Resets the limb transform rotation/position
-            DestroyPoints();
-            CreatePoints();
         }
     }
 }

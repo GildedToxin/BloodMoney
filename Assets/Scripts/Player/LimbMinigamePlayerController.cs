@@ -11,6 +11,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
     private float scorePercentage = 0f;
     private float distanceMoved = 0f;
     private float startingNumberOfPoints = 0f;
+    private bool endMinigame = false;
 
     void Start()
     {
@@ -35,14 +36,37 @@ public class LimbMinigamePlayerController : MonoBehaviour
         }
         #endregion
 
-        if (distanceMoved >= 360f)  // Determines when the minigame is over
+        //For testing purposes: restarts the minigame
+        if (Input.GetKeyDown(KeyCode.R))
         {
-            calculateScore();
-            Debug.Log("Minigame Over! Score: " + scorePercentage + "%");
+            StartMinigame();
+        }
+
+        if (distanceMoved >= 360f && !endMinigame)  // Determines when the minigame is over
+        {
+            EndMinigame();
         }
     }
 
-    private void calculateScore()  // Calculates the player's score based on collected points
+    private void StartMinigame() // Restarts the minigame
+    {
+        endMinigame = false;  // Variable resets
+        distanceMoved = 0f;  
+        collectedPoints = 0f;
+        scorePercentage = 0f;
+        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
+        playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
+    }
+
+    private void EndMinigame()  // Ends the minigame
+    {
+        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();
+        CalculateScore();
+        Debug.Log("Minigame Over! Score: " + scorePercentage + "%");
+        endMinigame = true;
+    }
+
+    private void CalculateScore()  // Calculates the player's score based on collected points
     {
         scorePercentage = collectedPoints / startingNumberOfPoints * 100f;
     }
