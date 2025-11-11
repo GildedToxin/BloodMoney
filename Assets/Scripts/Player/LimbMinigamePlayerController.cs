@@ -19,6 +19,10 @@ public class LimbMinigamePlayerController : MonoBehaviour
     private int currentRound = 0; // Should go up to 4 (4 rounds 4 limbs)
     private Vector3 playerCursor;
 
+    // Timer variables
+    public float limbTimer = 0f;
+    private float limbTimerLimit = 30f; // Time limit for each round
+
     void Start()
     {
         startingNumberOfPoints = playerLimb.GetComponentInChildren<LimbCuttingScript>().numberOfPoints;
@@ -44,13 +48,13 @@ public class LimbMinigamePlayerController : MonoBehaviour
         }
         #endregion
 
-        //For testing purposes: restarts the minigame
+        //For testing purposes: starts the minigame
         if (Input.GetKeyDown(KeyCode.R))
         {
             StartMinigame();
         }
 
-        if (distanceMoved >= 360f)  // Determines when the minigame is over
+        if (distanceMoved >= 360f || limbTimer > limbTimerLimit)  // Determines when the minigame is over
         {
             EndMinigameRound();
             if (currentRound < 4)
@@ -58,16 +62,23 @@ public class LimbMinigamePlayerController : MonoBehaviour
                 StartMinigameRound();
             }
         }
-        
+
         if (currentRound > 4)  // Ends the entire minigame after all limbs are done
         {
             EndMinigame();
+        }
+        
+        // Timer
+        if (!endMinigame && currentRound > 0)
+        {
+            limbTimer += Time.deltaTime;
         }
     }
 
     private void StartMinigame() // Restarts the minigame
     {
         limbScores = new float[4];  // variable resets
+        limbTimer = 0f;
         endMinigame = false;
         currentRound = 1;
         distanceMoved = 0f;
@@ -80,6 +91,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
     
     private void StartMinigameRound()  // Starts a new minigame round
     {
+        limbTimer = 0f;
         currentRound += 1;
         distanceMoved = 0f;
         collectedPoints = 0f;
