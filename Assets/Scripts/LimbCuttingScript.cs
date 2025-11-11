@@ -3,22 +3,16 @@ using System.Collections.Generic;
 
 public class LimbCuttingScript : MonoBehaviour
 {
-    //private List<Vector3> referencePoints;
-    //private List<Vector3> playerPoints;
-    //public Transform p0, p1, p2, p3;
-    //private int segments = 50;
-    //public LineRenderer lineRenderer;
-
-    // 2nd attempt variables
     public int numberOfPoints = 20;
     public float radius = 1f;
     public Vector3 centerPoint;
     public GameObject pointPrefab;
     public float rotationDegrees;
-    //private float pointHeight = .2f; // Adjusts the height of the circle points
+    public Quaternion limbRotation;
 
     void Start()
     {
+        limbRotation = this.transform.rotation;
         CreatePoints();
     }
 
@@ -32,8 +26,8 @@ public class LimbCuttingScript : MonoBehaviour
             float angle = i * Mathf.PI * 2f / numPoints;
 
             // Calculate the x and z coordinates using sine and cosine
-            float y = Mathf.Cos(angle) * circleRadius;//(circleRadius * pointHeight);
-            float z = Mathf.Sin(angle) * circleRadius;//(circleRadius * pointHeight);
+            float y = Mathf.Cos(angle) * circleRadius;
+            float z = Mathf.Sin(angle) * circleRadius;
 
             // Create the point position relative to the center
             Vector3 pointPosition = new Vector3(0, y, z) + circleCenter;
@@ -44,7 +38,7 @@ public class LimbCuttingScript : MonoBehaviour
 
         return pointsArray;
     }
-    
+
     public void CreatePoints()
     {
         Vector3[] points = GeneratePointsOnCircle(numberOfPoints, radius, centerPoint);
@@ -59,8 +53,22 @@ public class LimbCuttingScript : MonoBehaviour
             }
         }
     }
+    
+    public void DestroyPoints()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+    }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K)) // for testing, resets the minigame
+        {
+            this.transform.rotation = limbRotation; // Resets the limb transform rotation/position
+            DestroyPoints();
+            CreatePoints();
+        }
     }
 }
