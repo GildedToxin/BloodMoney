@@ -1,7 +1,9 @@
 using NUnit.Framework.Constraints;
+using System.Data.SqlTypes;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.UIElements;
 
 public class PlayerController : MonoBehaviour
 {
@@ -23,8 +25,8 @@ public class PlayerController : MonoBehaviour
     [Header("Keybinds")]
     public KeyCode jumpKey = KeyCode.Space;
     public KeyCode sprintKey = KeyCode.LeftShift;
-    public KeyCode crouchKey = KeyCode.LeftShift;
-    public KeyCode InventoryKey = KeyCode.Q;
+    public KeyCode crouchKey = KeyCode.LeftControl;
+    public KeyCode InventoryKey = KeyCode.G;
 
     [Header("Ground Check")]
     public float playerHight;
@@ -41,10 +43,10 @@ public class PlayerController : MonoBehaviour
     Rigidbody rb;
 
     public float playerTestFloat;
-    public InventoryUIManager inventoryUIManager;
+    public HUDManager inventoryUIManager;
 
     //other variables
-    public GameObject cam;
+    public Camera cam;
     Interact interact;
 
     private IPlayerLookTarget currentLookAt;
@@ -57,6 +59,7 @@ public class PlayerController : MonoBehaviour
         rb.freezeRotation = true;
         canJump = true;
         sprinting = false;
+        cam = Camera.main;
     }
 
     private void Update()
@@ -68,11 +71,7 @@ public class PlayerController : MonoBehaviour
 
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
 
-        // Use to open the player inventory
-        if (Input.GetKeyDown(InventoryKey))
-        {
-            inventoryUIManager.gameObject.SetActive(!inventoryUIManager.gameObject.activeSelf);
-        }
+
 
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
@@ -227,11 +226,13 @@ public class PlayerController : MonoBehaviour
 
     public void RaycastLookDirection() // This is a bad name and should be changed to something better
     {
-        Ray ray = new Ray(transform.position, transform.forward);
+        Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
+        Debug.DrawRay(ray.origin, ray.direction * 50, Color.green);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10))
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
         {
-            IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>();
+            IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
+                          ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();
             if (lookable != null)
             {
                 // If looking at a new object, turn off the last one and turn on the new one
@@ -240,6 +241,7 @@ public class PlayerController : MonoBehaviour
                     currentLookAt?.OnLookExit();
                     currentLookAt = lookable;
                     currentLookAt.OnLookEnter();
+                    //print(lookable.ToString());
                 }
                 return;
             }
@@ -251,8 +253,6 @@ public class PlayerController : MonoBehaviour
             currentLookAt.OnLookExit();
             currentLookAt = null;
         }
-
-
     }
 }
 
