@@ -56,8 +56,14 @@ public class LimbCuttingScript : MonoBehaviour
     
     public void DestroyPoints()
     {
+        bool firstChild = true;
         foreach (Transform child in transform)
         {
+            if (firstChild)
+            {
+                firstChild = false;
+                continue; // Skip the first child (the limb itself)
+            }
             Destroy(child.gameObject);
         }
     }
