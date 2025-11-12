@@ -22,23 +22,23 @@ public class VendorStand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (!other.GetComponent<OrganManager>())
+        if (!other.GetComponentInParent<OrganManager>())
             return;
-        if (organsToSell.Contains(other.GetComponent<OrganManager>()))
+        if (organsToSell.Contains(other.GetComponentInParent<OrganManager>()))
             return;
 
-        organsToSell.Add(other.GetComponent<OrganManager>());
+        organsToSell.Add(other.GetComponentInParent<OrganManager>());
 
-        CheckToSell(other.GetComponent<OrganManager>());
+        CheckToSell(other.GetComponentInParent<OrganManager>());
     }
     private void OnTriggerExit(Collider other)
     {
-        if (!other.GetComponent<OrganManager>())
+        if (!other.GetComponentInParent<OrganManager>())
             return;
-        if (!organsToSell.Contains(other.GetComponent<OrganManager>()))
+        if (!organsToSell.Contains(other.GetComponentInParent<OrganManager>()))
             return;
 
-        organsToSell.Remove(other.GetComponent<OrganManager>());
+        organsToSell.Remove(other.GetComponentInParent<OrganManager>());
     }
 
     public void CreateCustomers()

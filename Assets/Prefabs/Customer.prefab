@@ -308,7 +308,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3542062604613193720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -455,6 +455,9 @@ MonoBehaviour:
   desiredOrgan: 0
   customerRequest: {fileID: 4844257797536319767}
   Price: {fileID: 3551005864928026976}
+  isServed: 0
+  isLookedAt: 0
+  canBuyItem: 0
 --- !u!54 &7954576870168388776
 Rigidbody:
   m_ObjectHideFlags: 0
