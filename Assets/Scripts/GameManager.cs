@@ -1,8 +1,10 @@
 ﻿using NUnit.Framework;
-using UnityEngine;
+using System;
 using System.Collections.Generic;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,6 +20,9 @@ public class GameManager : MonoBehaviour
     private float elapsedTime = 0f;
     private float startHour = 0f;  // 12 AM
     private float endHour = 8f;    // 8 AM
+
+    public bool isInHotelRoom;
+    public DeadBody Body;
     public static GameManager Instance
     {
         get
@@ -80,6 +85,15 @@ public class GameManager : MonoBehaviour
 
             FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
         }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            StartMiniGame(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
+        }
+        if( Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.UnloadSceneAsync("SceneName");
+        }
         if (Input.GetKeyDown(KeyCode.V))
         {
             SaveSystem.Save();
@@ -100,7 +114,7 @@ public class GameManager : MonoBehaviour
                 doors.Add(door);
         }
 
-        int randomIndex = Random.Range(0, doors.Count);
+        int randomIndex = UnityEngine.Random.Range(0, doors.Count);
         return doors[randomIndex];
     }
     public void ProgressDay()
@@ -134,5 +148,91 @@ public class GameManager : MonoBehaviour
             Debug.Log("Time's up! 8 AM reached.");
         }
 
+    }
+    public string GetOrganFromSlot(int slot)
+    {
+        
+        // I need to write a switch case that for the slots
+        Body = FindAnyObjectByType<DeadBody>();
+        switch (slot)
+        {
+            case 0:
+                Body.RemoveHighlight();
+                break;
+
+            case 1:
+                if (Body.IsLimbsHarvested)
+                    break;
+
+                return "Limbs";
+            case 2:
+                if (Body.IsBonesHarvested)
+                    break;
+
+                return "Bones";
+            case 3:
+                if (Body.IsBloodHarvested)
+                    break;
+
+                return "Blood";
+            case 4:
+                if (Body.IsBrainHarvested)
+                    break;
+
+                return "Brain";
+            case 5:
+                if (Body.IsFingersHarvested)
+                    break;
+
+                return "Fingers";
+            case 6:
+                if (Body.IsEyesHarvested)
+                    break;
+                return "Eyes";
+
+            default:
+                return "";
+        }
+        return "";
+    }
+
+    private Action<int> onSelectedIndexChanged;
+    private void OnEnable()
+    {
+        // Store the lambda in a field
+        onSelectedIndexChanged = (i) => Body.Highlight(GetOrganFromSlot(i - 1));
+        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
+    }
+
+    private void OnDisable()
+    {
+        // Remove the same delegate
+        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
+    }
+
+    public void StartMiniGame(string organ)
+    {
+        switch (organ)
+        {
+            case "Limbs":
+                SceneManager.LoadScene("LimbMiniGame", LoadSceneMode.Additive);
+                break;
+            case "Bones":
+
+                break;
+            case "Blood":
+
+                break;
+            case "Brain":
+
+                break;
+            case "Fingers":
+
+                break;
+            case "Eyes":
+
+                break;
+
+        }
     }
 }

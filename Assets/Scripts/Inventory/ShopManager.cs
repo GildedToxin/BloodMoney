@@ -92,7 +92,7 @@ public class ShopManager : MonoBehaviour
     }
     public void OnTabClicked(GameObject tab)
     {
-        print(tab.name);
+       // print(tab.name);
         if (tab == itemShop)
         {
             toolShop.SetActive(false);

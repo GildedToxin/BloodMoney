@@ -58,7 +58,7 @@ public class ShopItem : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
             itemIcon.sprite = item.icon;
             itemName.GetComponent<TextMeshProUGUI>().SetText(item.name);
             itemPrice.GetComponent<TextMeshProUGUI>().SetText(item.price.ToString());
-            print(item.price.ToString());
+           // print(item.price.ToString());
         }
         if (isPurchased)
             GetComponent<Image>().color = purchasedColor;
