@@ -130,7 +130,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         {
             collectedPoints += 1f;
             Destroy(other.gameObject);
-            Debug.Log("Collected Points: " + collectedPoints);
+            //Debug.Log("Collected Points: " + collectedPoints);
         }
     }
 }

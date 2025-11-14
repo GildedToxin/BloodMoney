@@ -15,7 +15,7 @@ public class InventoryController : MonoBehaviour
         { "Syringe", false },
         { "Hatchet", false },
         { "Jig Saw", false },
-        { "Wood Saw", false },
+        { "Wood Saw", true },
         { "Scooper", false },
         { "Mallet", false },
     };

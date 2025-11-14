@@ -23,6 +23,8 @@ public class GameManager : MonoBehaviour
 
     public bool isInHotelRoom;
     public DeadBody Body;
+
+    public string currentMiniGame;
     public static GameManager Instance
     {
         get
@@ -88,11 +90,16 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            StartMiniGame(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
+            currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
+            SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
+            Camera.main.gameObject.SetActive(false);
+            FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);   
         }
         if( Input.GetKeyDown(KeyCode.R))
         {
-            SceneManager.UnloadSceneAsync("SceneName");
+            SceneManager.UnloadSceneAsync(currentMiniGame);
+            Camera.main.gameObject.SetActive(true);
+            FindAnyObjectByType<HUDManager>().gameObject.SetActive(true);
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -151,14 +158,12 @@ public class GameManager : MonoBehaviour
     }
     public string GetOrganFromSlot(int slot)
     {
-        
-        // I need to write a switch case that for the slots
         Body = FindAnyObjectByType<DeadBody>();
         switch (slot)
         {
             case 0:
                 Body.RemoveHighlight();
-                break;
+                return "";
 
             case 1:
                 if (Body.IsLimbsHarvested)
@@ -210,29 +215,23 @@ public class GameManager : MonoBehaviour
         FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
     }
 
-    public void StartMiniGame(string organ)
+    public string OrganToScene(string organ)
     {
         switch (organ)
         {
             case "Limbs":
-                SceneManager.LoadScene("LimbMiniGame", LoadSceneMode.Additive);
-                break;
+                return "LimbMiniGame";
             case "Bones":
-
-                break;
+                return "";
             case "Blood":
-
-                break;
+                return "";
             case "Brain":
-
-                break;
+                return "";
             case "Fingers":
-
-                break;
+                return "";
             case "Eyes":
-
-                break;
-
+                return "";
         }
+        return "";
     }
 }

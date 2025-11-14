@@ -9,6 +9,7 @@ public class LimbCuttingScript : MonoBehaviour
     public GameObject pointPrefab;
     public float rotationDegrees;
     public Quaternion limbRotation;
+    public Camera cam;
 
     void Start()
     {
