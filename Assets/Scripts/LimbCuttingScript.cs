@@ -9,7 +9,7 @@ public class LimbCuttingScript : MonoBehaviour
     public GameObject pointPrefab;
     public float rotationDegrees;
     public Quaternion limbRotation;
-    public Camera cam;
+
 
     void Start()
     {
@@ -33,7 +33,7 @@ public class LimbCuttingScript : MonoBehaviour
             Vector3 pointPosition = new Vector3(0, y, z) + circleCenter;
 
             pointsArray[i] = pointPosition;
-            Debug.Log($"Point {i}: {pointsArray[i]}");
+            //Debug.Log($"Point {i}: {pointsArray[i]}");
         }
 
         return pointsArray;

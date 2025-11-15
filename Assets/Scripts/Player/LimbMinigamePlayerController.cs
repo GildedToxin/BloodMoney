@@ -1,10 +1,11 @@
+using System.Collections; // Required for coroutines
 using UnityEngine;
 
 public class LimbMinigamePlayerController : MonoBehaviour
 {
     [SerializeField]
     private GameObject playerLimb;
-    private float moveSpeed = 30f;
+    [SerializeField] private float moveSpeed = 30f;
 
     [SerializeField]
     private float collectedPoints = 0f;
@@ -22,12 +23,18 @@ public class LimbMinigamePlayerController : MonoBehaviour
     // Timer variables
     public float limbTimer = 0f;
     private float limbTimerLimit = 30f; // Time limit for each round
+    
+    
+    public Camera cam;
 
     void Start()
     {
         startingNumberOfPoints = playerLimb.GetComponentInChildren<LimbCuttingScript>().numberOfPoints;
         currentRound = 0;
         playerCursor = this.transform.position;
+
+        // Start the 3 second timer before starting the mini-game
+        StartCoroutine(StartMinigameWithDelay());
     }
 
     void Update()
@@ -48,12 +55,6 @@ public class LimbMinigamePlayerController : MonoBehaviour
         }
         #endregion
 
-        //For testing purposes: starts the minigame
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            StartMinigame();
-        }
-
         if (distanceMoved >= 360f || limbTimer > limbTimerLimit)  // Determines when the minigame is over
         {
             EndMinigameRound();
@@ -61,6 +62,20 @@ public class LimbMinigamePlayerController : MonoBehaviour
             {
                 StartMinigameRound();
             }
+            else
+            {
+                try
+                {
+                    FindAnyObjectByType<GameManager>().StopMiniGame("LimbMiniGame", cam);
+                    FindAnyObjectByType<GameManager>().Body.IsLimbsHarvested = true;
+                    FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("Error ending minigame: " + e.Message);
+
+                }
+            }    
         }
 
         if (currentRound > 4)  // Ends the entire minigame after all limbs are done
@@ -73,6 +88,19 @@ public class LimbMinigamePlayerController : MonoBehaviour
         {
             limbTimer += Time.deltaTime;
         }
+    }
+
+    private IEnumerator StartMinigameWithDelay()
+    {
+        Debug.Log("Starting in 3...");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Starting in 2...");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Starting in 1...");
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("Mini-game started!");
+        StartMinigame();
     }
 
     private void StartMinigame() // Restarts the minigame

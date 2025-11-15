@@ -25,6 +25,8 @@ public class GameManager : MonoBehaviour
     public DeadBody Body;
 
     public string currentMiniGame;
+    public Camera cam;
+    public HUDManager hudManager;
     public static GameManager Instance
     {
         get
@@ -59,6 +61,8 @@ public class GameManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        cam = Camera.main;
+        hudManager = FindAnyObjectByType<HUDManager>();
     }
 
     private void Update()
@@ -91,9 +95,20 @@ public class GameManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
-            SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
-            Camera.main.gameObject.SetActive(false);
-            FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);   
+            try
+            {
+                if (currentMiniGame == "")
+                { 
+                    return;
+                }
+                SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
+                Camera.main.gameObject.SetActive(false);
+                FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
+            }
+            catch (Exception e)
+            {
+                Debug.Log("No minigame for this organ yet.");
+            }
         }
         if( Input.GetKeyDown(KeyCode.R))
         {
@@ -233,5 +248,16 @@ public class GameManager : MonoBehaviour
                 return "";
         }
         return "";
+    }
+    public void StopMiniGame(string sceneName, Camera miniGameCam)
+    {
+        print("test");
+        SceneManager.UnloadSceneAsync(sceneName);
+        print("test");
+        cam.gameObject.SetActive(true);
+        print("test");
+        miniGameCam.gameObject.SetActive(false);
+        print("test");
+        hudManager.gameObject.SetActive(true);
     }
 }
