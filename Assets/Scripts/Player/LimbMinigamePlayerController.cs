@@ -26,6 +26,8 @@ public class LimbMinigamePlayerController : MonoBehaviour
     
     
     public Camera cam;
+    public LimbEndScreen limbEndScreen;
+    public bool isMinigameActive = false;
 
     void Start()
     {
@@ -39,46 +41,41 @@ public class LimbMinigamePlayerController : MonoBehaviour
 
     void Update()
     {
-        #region Player Input
-        if (Input.GetKey(KeyCode.LeftArrow) && !endMinigame)
+        if (isMinigameActive)
         {
-            this.transform.position += Vector3.left * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+            #region Player Input
+            if (Input.GetKey(KeyCode.LeftArrow) && !endMinigame)
+            {
+                this.transform.position += Vector3.left * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+            }
+            if (Input.GetKey(KeyCode.RightArrow) && !endMinigame)
+            {
+                this.transform.position += Vector3.right * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+            }
+            if (Input.GetKey(KeyCode.UpArrow) && !endMinigame)
+            {
+                playerLimb.transform.Rotate(Vector3.up, 1f * Time.deltaTime * moveSpeed);
+                distanceMoved += 1f * Time.deltaTime * moveSpeed;
+            }
+            #endregion
         }
-        if (Input.GetKey(KeyCode.RightArrow) && !endMinigame)
-        {
-            this.transform.position += Vector3.right * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
-        }
-        if (Input.GetKey(KeyCode.UpArrow) && !endMinigame)
-        {
-            playerLimb.transform.Rotate(Vector3.up, 1f * Time.deltaTime * moveSpeed);
-            distanceMoved += 1f * Time.deltaTime * moveSpeed;
-        }
-        #endregion
-
         if (distanceMoved >= 360f || limbTimer > limbTimerLimit)  // Determines when the minigame is over
         {
             EndMinigameRound();
-            if (currentRound < 4)
+            if (currentRound < 2)
             {
                 StartMinigameRound();
             }
             else
             {
-                try
-                {
-                    FindAnyObjectByType<GameManager>().StopMiniGame("LimbMiniGame", cam);
-                    FindAnyObjectByType<GameManager>().Body.IsLimbsHarvested = true;
-                    FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogError("Error ending minigame: " + e.Message);
-
-                }
+                limbEndScreen.gameObject.SetActive(true);
+                limbEndScreen.UpdateText(limbScores);
+                isMinigameActive = false;
+                //StopMiniGame();
             }    
         }
 
-        if (currentRound > 4)  // Ends the entire minigame after all limbs are done
+        if (currentRound > 2)  // Ends the entire minigame after all limbs are done
         {
             EndMinigame();
         }
@@ -115,6 +112,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         this.transform.position = playerCursor;  // Resets player position
         playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
         playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
+        isMinigameActive = true;
     }
     
     private void StartMinigameRound()  // Starts a new minigame round
@@ -159,6 +157,21 @@ public class LimbMinigamePlayerController : MonoBehaviour
             collectedPoints += 1f;
             Destroy(other.gameObject);
             //Debug.Log("Collected Points: " + collectedPoints);
+        }
+    }
+
+    public void StopMiniGame()
+    {
+        try
+        {
+            FindAnyObjectByType<GameManager>().StopMiniGame("LimbMiniGame", cam);
+            FindAnyObjectByType<GameManager>().Body.IsLimbsHarvested = true;
+            FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error ending minigame: " + e.Message);
+
         }
     }
 }

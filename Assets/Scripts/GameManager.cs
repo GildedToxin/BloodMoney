@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
     private float endHour = 8f;    // 8 AM
 
     public bool isInHotelRoom;
+    public bool isInMiniGame;
     public DeadBody Body;
 
     public string currentMiniGame;
@@ -94,21 +95,7 @@ public class GameManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.E))
         {
-            currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
-            try
-            {
-                if (currentMiniGame == "")
-                { 
-                    return;
-                }
-                SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
-                Camera.main.gameObject.SetActive(false);
-                FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
-            }
-            catch (Exception e)
-            {
-                Debug.Log("No minigame for this organ yet.");
-            }
+            StartMiniGame();
         }
         if( Input.GetKeyDown(KeyCode.R))
         {
@@ -249,15 +236,32 @@ public class GameManager : MonoBehaviour
         }
         return "";
     }
+    public void StartMiniGame()
+    {
+        currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
+        try
+        {
+            if (currentMiniGame == "")
+                return;
+            
+            SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
+            Camera.main.gameObject.SetActive(false);
+            FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
+            isInMiniGame = true;
+        }
+        catch (Exception e)
+        {
+            Debug.Log("No minigame for this organ yet.");
+        }
+    }
     public void StopMiniGame(string sceneName, Camera miniGameCam)
     {
-        print("test");
         SceneManager.UnloadSceneAsync(sceneName);
-        print("test");
         cam.gameObject.SetActive(true);
-        print("test");
         miniGameCam.gameObject.SetActive(false);
-        print("test");
         hudManager.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isInMiniGame = false;
     }
 }
