@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 
 public class UserInterfaceController : MonoBehaviour
 {
-    [SerializeField] private GameObject MainMenuCanvas;
     [SerializeField] private GameObject PauseMenuCanvas;
     [SerializeField] private GameObject SettingsMenuCanvas;
 
@@ -62,7 +61,6 @@ public class UserInterfaceController : MonoBehaviour
     public void OnPlayPressed()
     {
         SceneManager.LoadScene("ProgrammingTestScene");
-        MainMenuCanvas.SetActive(false);
         uiState = UIState.PAUSE;
     }
 
@@ -71,7 +69,6 @@ public class UserInterfaceController : MonoBehaviour
         switch (uiState)
         {
             case UIState.MENU:
-                MainMenuCanvas.SetActive(false);
                 SettingsMenuCanvas.SetActive(true);
                 break;
             case UIState.PAUSE:
@@ -92,7 +89,6 @@ public class UserInterfaceController : MonoBehaviour
         switch (uiState)
         {
             case UIState.MENU:
-                MainMenuCanvas.SetActive(true);
                 SettingsMenuCanvas.SetActive(false);
                 break;
             case UIState.PAUSE:
@@ -104,8 +100,7 @@ public class UserInterfaceController : MonoBehaviour
 
     public void OnQuitToMenuPressed()
     {
-        SceneManager.LoadScene("ProgrammingTestScene"); // Currently just loads programming test scene in future should change to menu scene
-        MainMenuCanvas.SetActive(true);
+        SceneManager.LoadSceneAsync("MainMenu");
         PauseMenuCanvas.SetActive(false);
         uiState = UIState.MENU;
     }

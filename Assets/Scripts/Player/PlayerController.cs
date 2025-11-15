@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using NUnit.Framework.Constraints;
 using System.Data.SqlTypes;
 using System.Linq;
@@ -64,6 +65,10 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.Instance.isInMiniGame) 
+        {             
+            return;
+        }
         RaycastLookDirection();
         //these arent used, but ill leave them here for now
         //cameraXRotation = cam.transform.rotation.x;

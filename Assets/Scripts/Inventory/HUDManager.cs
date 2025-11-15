@@ -61,12 +61,12 @@ public class HUDManager : MonoBehaviour
                 {
                     if (pair.Value) 
                     {
-                        child.transform.GetComponent<Image>().sprite = child.GetComponent<InventorySlot>().item.icon;
+                        child.transform.GetComponent<Image>().enabled = true;//sprite = child.GetComponent<InventorySlot>().item.icon;
                         break;
                     }
                 }
                 else {
-                    child.transform.GetComponent<Image>().sprite = blankIcon; //gameObject.SetActive(false);
+                    child.transform.GetComponent<Image>().enabled = false; //gameObject.SetActive(false);
 
                 }
             }

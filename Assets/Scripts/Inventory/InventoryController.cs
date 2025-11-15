@@ -15,7 +15,7 @@ public class InventoryController : MonoBehaviour
         { "Syringe", false },
         { "Hatchet", false },
         { "Jig Saw", false },
-        { "Wood Saw", false },
+        { "Wood Saw", true },
         { "Scooper", false },
         { "Mallet", false },
     };
@@ -23,9 +23,20 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        selectedIndex.Value = GetNumberKeyDown() != selectedIndex ? GetNumberKeyDown() : selectedIndex;
+        int newSelection = GetNumberKeyDown();
+
+        if (DoesPlayerHaveItemInSlot(newSelection - 1))
+        {
+            selectedIndex.Value = newSelection != selectedIndex ? newSelection : selectedIndex;
+        }
+
+        if (Input.GetKey(KeyCode.T))
+        {
+
+            print(selectedIndex.Value);
+        }
+
     }
-  
     private int GetNumberKeyDown()
     {
         for (int i = 0; i <= 9; i++)
@@ -34,6 +45,28 @@ public class InventoryController : MonoBehaviour
                 return i;
         }
         return -1;
+    }
+    private bool DoesPlayerHaveItemInSlot(int slot)
+    {
+        switch (slot)
+        {
+            case 0:
+                return DoesPlayerHaveItem("Mop");
+            case 1:
+                return DoesPlayerHaveItem("Wood Saw");
+            case 2:
+                return DoesPlayerHaveItem("Jig Saw");
+            case 3:
+                return DoesPlayerHaveItem("Syringe");
+            case 4:
+                return DoesPlayerHaveItem("Mallet");
+            case 5:
+                return DoesPlayerHaveItem("Axe");
+            case 6:
+                return DoesPlayerHaveItem("Scooper");
+            default:
+                return false;
+        }
     }
 
     public void AddMoney(int amount)
