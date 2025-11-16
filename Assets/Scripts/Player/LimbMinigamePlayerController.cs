@@ -6,11 +6,12 @@ public class LimbMinigamePlayerController : MonoBehaviour
     [SerializeField]
     private GameObject playerLimb;
     [SerializeField] private float moveSpeed = 30f;
+    [SerializeField] private float spinSpeed = 30f;
 
     [SerializeField]
     private float collectedPoints = 0f;
     private float scorePercentage = 0f;
-    private float distanceMoved = 0f;
+    [SerializeField]  private float distanceMoved = 0f;
     private float startingNumberOfPoints = 0f;
 
 
@@ -27,6 +28,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
     
     public Camera cam;
     public LimbEndScreen limbEndScreen;
+    public GameObject StartCanvas;
     public bool isMinigameActive = false;
 
     void Start()
@@ -36,43 +38,57 @@ public class LimbMinigamePlayerController : MonoBehaviour
         playerCursor = this.transform.position;
 
         // Start the 3 second timer before starting the mini-game
-        StartCoroutine(StartMinigameWithDelay());
+        StartMinigame();
     }
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            distanceMoved = 0f;
+            collectedPoints = 0f;
+            scorePercentage = 0f;
+            this.transform.position = playerCursor;  // Resets player position
+            playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
+            playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
+        }
+
         if (isMinigameActive)
         {
             #region Player Input
             if (Input.GetKey(KeyCode.LeftArrow) && !endMinigame)
             {
-                this.transform.position += Vector3.left * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+                float newX = transform.position.x - 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+                newX = Mathf.Clamp(newX, -1.1f, .3f);
+
+                transform.position = new Vector3(newX, transform.position.y, transform.position.z);
             }
             if (Input.GetKey(KeyCode.RightArrow) && !endMinigame)
             {
-                this.transform.position += Vector3.right * 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+                float newX = transform.position.x + 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
+                newX = Mathf.Clamp(newX, -1.1f, .3f);
+
+                transform.position = new Vector3(newX, transform.position.y, transform.position.z);
+
             }
-            if (Input.GetKey(KeyCode.UpArrow) && !endMinigame)
-            {
-                playerLimb.transform.Rotate(Vector3.up, 1f * Time.deltaTime * moveSpeed);
-                distanceMoved += 1f * Time.deltaTime * moveSpeed;
-            }
+                playerLimb.transform.Rotate(Vector3.up, 1f * Time.deltaTime * spinSpeed);
+                distanceMoved += 1f * Time.deltaTime * spinSpeed;
             #endregion
         }
-        if (distanceMoved >= 360f || limbTimer > limbTimerLimit)  // Determines when the minigame is over
+        if ((distanceMoved >= 360f || limbTimer > limbTimerLimit) && isMinigameActive)  // Determines when the minigame is over
         {
             EndMinigameRound();
             if (currentRound < 2)
             {
-                StartMinigameRound();
+                StartCoroutine(StartMinigameRoundWithDelay());
             }
             else
             {
                 limbEndScreen.gameObject.SetActive(true);
                 limbEndScreen.UpdateText(limbScores);
-                isMinigameActive = false;
                 //StopMiniGame();
-            }    
+            }
+            isMinigameActive = false;
         }
 
         if (currentRound > 2)  // Ends the entire minigame after all limbs are done
@@ -87,44 +103,48 @@ public class LimbMinigamePlayerController : MonoBehaviour
         }
     }
 
-    private IEnumerator StartMinigameWithDelay()
+    private IEnumerator StartMinigameRoundWithDelay()
     {
+
+        this.transform.position = playerCursor;  // Resets player position
+        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
+        playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
+
+
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         Debug.Log("Starting in 3...");
         yield return new WaitForSeconds(1f);
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         Debug.Log("Starting in 2...");
         yield return new WaitForSeconds(1f);
         Debug.Log("Starting in 1...");
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
         yield return new WaitForSeconds(1f);
 
+        StartMinigameRound();
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
         Debug.Log("Mini-game started!");
-        StartMinigame();
     }
 
     private void StartMinigame() // Restarts the minigame
     {
-        limbScores = new float[4];  // variable resets
-        limbTimer = 0f;
+        limbScores = new float[4];  
         endMinigame = false;
-        currentRound = 1;
-        distanceMoved = 0f;
-        collectedPoints = 0f;
-        scorePercentage = 0f;
-        this.transform.position = playerCursor;  // Resets player position
-        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
-        playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
-        isMinigameActive = true;
+        currentRound = 0;
+
+        StartCoroutine(StartMinigameRoundWithDelay());
     }
     
     private void StartMinigameRound()  // Starts a new minigame round
     {
-        limbTimer = 0f;
+        isMinigameActive = true;
         currentRound += 1;
+        limbTimer = 0f;
         distanceMoved = 0f;
         collectedPoints = 0f;
         scorePercentage = 0f;
-        this.transform.position = playerCursor;  // Resets player position
-        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
-        playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
     }
 
     private void EndMinigameRound()  // Ends the current minigame round
