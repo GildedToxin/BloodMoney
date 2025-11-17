@@ -30,6 +30,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject[] Fingers;
     public GameObject[] Eyes;
 
+
+    public GameObject BrainPrefab;
+    public Transform brainSpawnLocation;
+
     public void Highlight(string organ)
     {
         RemoveHighlight();
@@ -49,7 +53,36 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 break;
             case "Brain":
                 IsBrainHighlighted = true;
-                Brain.layer = LayerMask.NameToLayer("Highlight");
+                    Brain.layer = LayerMask.NameToLayer("Highlight");
+                break;
+            case "Fingers":
+                IsFingersHighlighted = true;
+                break;
+            case "Eyes":
+                IsEyesHighlighted = true;
+                break;
+
+        }
+    }
+    public void SpawnOrgan(string sceneOrgan)
+    {
+        switch (sceneOrgan)
+        {
+            case "Limbs":
+                IsLimbsHighlighted = true;
+                foreach (GameObject limb in Limbs)
+                {
+                    limb.layer = LayerMask.NameToLayer("Highlight");
+                }
+                break;
+            case "Bones":
+                IsBonesHighlighted = true;
+                break;
+            case "Blood":
+                IsBloodHighlighted = true;
+                break;
+            case "SkullMinigame":
+                Instantiate(BrainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
                 break;
             case "Fingers":
                 IsFingersHighlighted = true;

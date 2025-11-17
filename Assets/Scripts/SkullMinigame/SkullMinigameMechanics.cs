@@ -82,6 +82,10 @@ public class MinigameFunctions : MonoBehaviour
                 pointDeduction();
                 winScreen.SetActive(true);
                 minigameEnd = true;
+
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                isMinigameActive = false;
             }
 
         }
