@@ -17,6 +17,9 @@ public class MinigameFunctions : MonoBehaviour
     private bool minigameEnd = false;
     private bool timerStop = false;
 
+    public bool isMinigameActive = false;
+    public GameObject StartCanvas;
+
     public List<GameObject> CrackStages;
     public GameObject winScreen;
 
@@ -38,7 +41,8 @@ public class MinigameFunctions : MonoBehaviour
     public int timerPunishment = 3;
     [Tooltip("% of the timer left before deducting points")]
     public float timerThreshhold = 0.75f;
-    
+
+    public Camera cam;
 
     private void Awake()
     {
@@ -46,9 +50,15 @@ public class MinigameFunctions : MonoBehaviour
         qualityScore = 100;
         totalTime = remainingTime;
     }
-
+    private void Start()
+    {
+        StartCoroutine(StartMinigameRoundWithDelay());
+        timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+    }
     private void Update()
     {
+        if(!isMinigameActive)
+            return;
         if (Input.GetKeyDown(KeyCode.Space))
         {
             numberOfHits++;
@@ -85,6 +95,10 @@ public class MinigameFunctions : MonoBehaviour
                 minigameEnd = true;
                 pointDeduction();
                 winScreen.SetActive(true);
+
+                Cursor.lockState = CursorLockMode.Confined;
+                Cursor.visible = true;
+                isMinigameActive = false;
             }
         }
         else if (remainingTime <= 0 && CrackLevel != 3 && !minigameEnd)
@@ -93,6 +107,10 @@ public class MinigameFunctions : MonoBehaviour
             minigameEnd = true;
             pointDeduction();
             winScreen.SetActive(true);
+
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            isMinigameActive = false;
         }
 
         //timer countdown script
@@ -140,5 +158,42 @@ public class MinigameFunctions : MonoBehaviour
             qualityScore = 100;
             pointScoreText.text = ("Your Score is: " + qualityScore.ToString() + "% Quality!");
         }
+    }
+
+    public void StopMiniGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        try
+        {
+            FindAnyObjectByType<GameManager>().StopMiniGame("SkullMinigame", cam);
+            FindAnyObjectByType<GameManager>().Body.IsBrainHarvested = true;
+            FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error ending minigame: " + e.Message);
+
+        }
+    }
+
+    private IEnumerator StartMinigameRoundWithDelay()
+    {
+
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        Debug.Log("Starting in 3...");
+        yield return new WaitForSeconds(1f);
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        Debug.Log("Starting in 2...");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Starting in 1...");
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        isMinigameActive = true;
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        Debug.Log("Mini-game started!");
     }
 }
