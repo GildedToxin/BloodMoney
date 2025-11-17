@@ -1,5 +1,7 @@
 using JetBrains.Annotations;
+using NUnit.Framework;
 using UnityEngine;
+using System.Collections.Generic;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.SceneManagement;
 
@@ -31,8 +33,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject[] Eyes;
 
 
-    public GameObject BrainPrefab;
+    public GameObject brainPrefab;
     public Transform brainSpawnLocation;
+
+    public List<GameObject> limbPrefabs;
+    public List<Transform> limbSpawnLocations;
 
     public void Highlight(string organ)
     {
@@ -68,12 +73,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     {
         switch (sceneOrgan)
         {
-            case "Limbs":
-                IsLimbsHighlighted = true;
-                foreach (GameObject limb in Limbs)
-                {
-                    limb.layer = LayerMask.NameToLayer("Highlight");
-                }
+            case "LimbMiniGame":
+                Instantiate(limbPrefabs[0], limbSpawnLocations[0].position, limbSpawnLocations[0].rotation);
+                Instantiate(limbPrefabs[1], limbSpawnLocations[1].position, limbSpawnLocations[1].rotation);
                 break;
             case "Bones":
                 IsBonesHighlighted = true;
@@ -82,7 +84,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 IsBloodHighlighted = true;
                 break;
             case "SkullMinigame":
-                Instantiate(BrainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
+                Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
                 break;
             case "Fingers":
                 IsFingersHighlighted = true;
