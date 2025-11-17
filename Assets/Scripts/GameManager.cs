@@ -228,7 +228,7 @@ public class GameManager : MonoBehaviour
             case "Blood":
                 return "";
             case "Brain":
-                return "";
+                return "SkullMinigame";
             case "Fingers":
                 return "";
             case "Eyes":
