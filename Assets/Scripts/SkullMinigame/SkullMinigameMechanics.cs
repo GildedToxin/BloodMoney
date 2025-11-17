@@ -51,14 +51,8 @@ public class MinigameFunctions : MonoBehaviour
 
     [Header("Hammer Animations")]
     //Hammer animations
-    [Tooltip("Start point of the hammer swing animation")]
-    public float originalRotation;
-    [Tooltip("End point of the hammer swing animation")]
-    public float targetRotation;
-    private float rotationHolder;
-    [Tooltip("Length of the hammer swing animation")]
-    public float animationTime = 0.5f;
-    public bool hammerSwing = false;
+    public Animator HammerAni;
+    private bool isAnimated = false;
 
 
     private void Awake()
@@ -76,11 +70,22 @@ public class MinigameFunctions : MonoBehaviour
     {
         if(!isMinigameActive)
             return;
-        if (Input.GetKeyDown(KeyCode.Space) && !hammerSwing)
-        {
 
+        if (Input.GetKeyDown(KeyCode.Space) && !isAnimated)
+        {
+            HammerAni.SetBool("isSwinging", true);
+            isAnimated = true;
             numberOfHits++;
-            hammerSwing = true;
+
+            if (HammerAni.GetCurrentAnimatorStateInfo(0).IsName("HammerSwing"))
+            {
+                return;
+            }
+            else
+            {
+                HammerAni.SetBool("isSwinging", false);
+                isAnimated = false;
+            }
         }
 
         if (numberOfHits == neededHits)
@@ -142,16 +147,6 @@ public class MinigameFunctions : MonoBehaviour
             remainingTime -= Time.deltaTime;
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             timerText.text = string.Format("{00}", seconds);
-        }
-
-        //hammer code
-        if (hammerSwing)
-        {
-            //float angle = Mathf.SmoothDampAngle(hammer.transform.eulerAngles.x, targetRotation, ref rotationHolder, animationTime);
-
-            hammer.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
-
-            Invoke("HammerAnimationReset", 0.5f);
         }
     }
 
@@ -228,12 +223,5 @@ public class MinigameFunctions : MonoBehaviour
         isMinigameActive = true;
         StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
         Debug.Log("Mini-game started!");
-    }
-
-    void HammerAnimationReset()
-    {
-        //float oldAngle = Mathf.SmoothDampAngle(hammer.transform.eulerAngles.x, originalRotation, ref rotationHolder, animationTime);
-
-        hammer.transform.rotation = Quaternion.Euler(0, 0, originalRotation);
     }
 }
