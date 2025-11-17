@@ -7,6 +7,7 @@ using TMPro;
 public class MinigameFunctions : MonoBehaviour
 {
     // core minigame variables
+    [Header("Minigame Variables")]
     [Tooltip("This variable needs to be 1 value under the minimum number of swings wanted. Not 0")]
     public int minHammerHits = 1;
     [Tooltip("This variable needs to be 1 value over the maximum number of swings wanted")]
@@ -18,31 +19,47 @@ public class MinigameFunctions : MonoBehaviour
     private bool timerStop = false;
 
     public bool isMinigameActive = false;
-    public GameObject StartCanvas;
 
+    [Header("Assets")]
     public List<GameObject> CrackStages;
     public GameObject winScreen;
+    public Camera cam;
+    public GameObject StartCanvas;
+    public GameObject hammer;
 
+
+    [Header("Timer Values")]
     //timer variables
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;
-    public float totalTime = 0;
 
 
     //win/lose countdown code
     [Tooltip("The ammount of time a player needs to wait before they win on the final stage")]
     public float winLoseTimerDuration = 3f;
     private float timerCountdown = 0f;
-    [SerializeField] TextMeshProUGUI pointScoreText;
+    public float totalTime = 0;
 
+    [Header("Score Values")]
     // point system script
     public int qualityScore = 100;
     [Tooltip("Points removed per second after hitting the threshold")]
     public int timerPunishment = 3;
     [Tooltip("% of the timer left before deducting points")]
     public float timerThreshhold = 0.75f;
+    [SerializeField] TextMeshProUGUI pointScoreText;
 
-    public Camera cam;
+    [Header("Hammer Animations")]
+    //Hammer animations
+    [Tooltip("Start point of the hammer swing animation")]
+    public float originalRotation;
+    [Tooltip("End point of the hammer swing animation")]
+    public float targetRotation;
+    private float rotationHolder;
+    [Tooltip("Length of the hammer swing animation")]
+    public float animationTime = 0.5f;
+    public bool hammerSwing = false;
+
 
     private void Awake()
     {
@@ -59,9 +76,11 @@ public class MinigameFunctions : MonoBehaviour
     {
         if(!isMinigameActive)
             return;
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && !hammerSwing)
         {
+
             numberOfHits++;
+            hammerSwing = true;
         }
 
         if (numberOfHits == neededHits)
@@ -123,6 +142,16 @@ public class MinigameFunctions : MonoBehaviour
             remainingTime -= Time.deltaTime;
             int seconds = Mathf.FloorToInt(remainingTime % 60);
             timerText.text = string.Format("{00}", seconds);
+        }
+
+        //hammer code
+        if (hammerSwing)
+        {
+            //float angle = Mathf.SmoothDampAngle(hammer.transform.eulerAngles.x, targetRotation, ref rotationHolder, animationTime);
+
+            hammer.transform.rotation = Quaternion.Euler(0, 0, targetRotation);
+
+            Invoke("HammerAnimationReset", 0.5f);
         }
     }
 
@@ -199,5 +228,12 @@ public class MinigameFunctions : MonoBehaviour
         isMinigameActive = true;
         StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
         Debug.Log("Mini-game started!");
+    }
+
+    void HammerAnimationReset()
+    {
+        //float oldAngle = Mathf.SmoothDampAngle(hammer.transform.eulerAngles.x, originalRotation, ref rotationHolder, animationTime);
+
+        hammer.transform.rotation = Quaternion.Euler(0, 0, originalRotation);
     }
 }
