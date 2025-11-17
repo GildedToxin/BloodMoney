@@ -71,21 +71,11 @@ public class MinigameFunctions : MonoBehaviour
         if(!isMinigameActive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space) && !isAnimated)
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            HammerAni.SetBool("isSwinging", true);
-            isAnimated = true;
+            HammerAni.Play("Hammer_Swing", 0, 0.25f);
             numberOfHits++;
-
-            if (HammerAni.GetCurrentAnimatorStateInfo(0).IsName("HammerSwing"))
-            {
-                return;
-            }
-            else
-            {
-                HammerAni.SetBool("isSwinging", false);
-                isAnimated = false;
-            }
+            HammerAni.ResetTrigger("Hammer_Swing");
         }
 
         if (numberOfHits == neededHits)
