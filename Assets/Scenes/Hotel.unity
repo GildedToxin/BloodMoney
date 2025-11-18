@@ -2654,11 +2654,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
   m_PrefabInstance: {fileID: 558969584}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &563784343 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 6596644895386122748, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-  m_PrefabInstance: {fileID: 490654265734292766}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &567661982
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9431,11 +9426,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: bb211abb685d8344ea99efb9f78d2163, type: 3}
   m_PrefabInstance: {fileID: 1816808491}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &2005818931 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 674739524541919110, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-  m_PrefabInstance: {fileID: 490654265734292766}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2024108119
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10042,22 +10032,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 3492582247300575579, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: 'limbPrefabs.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2652185229093269709, guid: dadbabd235bdbca4ba0c02c20caf7065, type: 3}
-    - target: {fileID: 3492582247300575579, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: limbSpawnLocations.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 3492582247300575579, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: 'limbSpawnLocations.Array.data[0]'
-      value: 
-      objectReference: {fileID: 563784343}
-    - target: {fileID: 3492582247300575579, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: 'limbSpawnLocations.Array.data[1]'
-      value: 
-      objectReference: {fileID: 2005818931}
     - target: {fileID: 4167879122306208410, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
       propertyPath: m_Name
       value: DeadBody

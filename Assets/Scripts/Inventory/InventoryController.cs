@@ -61,7 +61,7 @@ public class InventoryController : MonoBehaviour
             case 4:
                 return DoesPlayerHaveItem("Mallet");
             case 5:
-                return DoesPlayerHaveItem("Axe");
+                return DoesPlayerHaveItem("Hatchet");
             case 6:
                 return DoesPlayerHaveItem("Scooper");
             default:

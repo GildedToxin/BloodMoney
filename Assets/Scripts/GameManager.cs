@@ -93,10 +93,6 @@ public class GameManager : MonoBehaviour
             FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
         }
 
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartMiniGame();
-        }
         if( Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.UnloadSceneAsync(currentMiniGame);

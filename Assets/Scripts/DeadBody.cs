@@ -39,6 +39,24 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public List<GameObject> limbPrefabs;
     public List<Transform> limbSpawnLocations;
 
+    public bool isLookedAt = false;
+
+    public void Update()
+    {
+        if (isLookedAt)
+        {
+            string organ = GameManager.Instance.GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1);
+            if(organ == "")
+                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+            else
+                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Harvest {organ}");
+            if (Input.GetKeyDown(KeyCode.E))
+                GameManager.Instance.StartMiniGame();
+
+        }
+    }
     public void Highlight(string organ)
     {
         RemoveHighlight();
@@ -115,11 +133,12 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookEnter()
     {
-        // Update mini game text if held item hasnt been used
-        
+        isLookedAt = true;
+        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
     }
     public void OnLookExit()
     {
-       
+        isLookedAt = false;
+        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
     }
 }
