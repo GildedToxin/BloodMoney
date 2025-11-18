@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public bool isInMiniGame;
     public DeadBody Body;
 
+    // Blood splatter management
+    private bool updateBloodSplatters = false;
+    private float totalBloodSplatters;
+    private float remainingBloodSplatters;
+    private float bloodSplatterScore;
+
     public string currentMiniGame;
     public Camera cam;
     public HUDManager hudManager;
@@ -108,6 +114,14 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.Load();
         }
+
+
+        // Handling additional blood splatter created during gameplay
+        if (updateBloodSplatters)
+        {
+            updateBloodSplatters = false;
+        }
+
     }
     public DoorController ChooseNewRoom()
     {
@@ -261,4 +275,17 @@ public class GameManager : MonoBehaviour
         isInMiniGame = false;
         Body.SpawnOrgan(sceneName);
     }
+
+
+    // Handling blood scoring and calculation
+    public void StartBloodCalculation()
+    {
+        
+    }
+
+    public void ScoreBloodSplatter()
+    {
+        
+    }
+
 }
