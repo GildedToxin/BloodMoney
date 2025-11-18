@@ -7,6 +7,7 @@ using TMPro;
 public class MinigameFunctions : MonoBehaviour
 {
     // core minigame variables
+    [Header("Minigame Variables")]
     [Tooltip("This variable needs to be 1 value under the minimum number of swings wanted. Not 0")]
     public int minHammerHits = 1;
     [Tooltip("This variable needs to be 1 value over the maximum number of swings wanted")]
@@ -18,31 +19,41 @@ public class MinigameFunctions : MonoBehaviour
     private bool timerStop = false;
 
     public bool isMinigameActive = false;
-    public GameObject StartCanvas;
 
+    [Header("Assets")]
     public List<GameObject> CrackStages;
     public GameObject winScreen;
+    public Camera cam;
+    public GameObject StartCanvas;
+    public GameObject hammer;
 
+
+    [Header("Timer Values")]
     //timer variables
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;
-    public float totalTime = 0;
 
 
     //win/lose countdown code
     [Tooltip("The ammount of time a player needs to wait before they win on the final stage")]
     public float winLoseTimerDuration = 3f;
     private float timerCountdown = 0f;
-    [SerializeField] TextMeshProUGUI pointScoreText;
+    public float totalTime = 0;
 
+    [Header("Score Values")]
     // point system script
     public int qualityScore = 100;
     [Tooltip("Points removed per second after hitting the threshold")]
     public int timerPunishment = 3;
     [Tooltip("% of the timer left before deducting points")]
     public float timerThreshhold = 0.75f;
+    [SerializeField] TextMeshProUGUI pointScoreText;
 
-    public Camera cam;
+    [Header("Hammer Animations")]
+    //Hammer animations
+    public Animator HammerAni;
+    private bool isAnimated = false;
+
 
     private void Awake()
     {
@@ -59,9 +70,12 @@ public class MinigameFunctions : MonoBehaviour
     {
         if(!isMinigameActive)
             return;
+
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            HammerAni.Play("Hammer_Swing", 0, 0.25f);
             numberOfHits++;
+            HammerAni.ResetTrigger("Hammer_Swing");
         }
 
         if (numberOfHits == neededHits)
