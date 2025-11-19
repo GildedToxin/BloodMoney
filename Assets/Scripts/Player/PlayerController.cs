@@ -109,7 +109,10 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        MovePlayer();
+
+        if (GameManager.Instance.isInMiniGame)  
+            return;
+            MovePlayer();
     }
     public void Save(ref PlayerSaveData data)
     {
