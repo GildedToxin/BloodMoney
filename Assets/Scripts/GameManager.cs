@@ -69,28 +69,8 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         UpdateClock();
-        if (CurrentDoor != null && CurrentDoor.GetComponentInChildren<Renderer>().isVisible)
-        {
-            print(true);
-        }
-        if (Input.GetKeyDown(KeyCode.X)) { 
-            if(CurrentRoom != null)
-            {
-                CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-                Destroy(CurrentRoom);
-            }
-            if (CurrentDoor != null)
-                CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Default");
-
-            CurrentDoor = ChooseNewRoom();
-
-            CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Highlight");
-
-            //CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            //CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-            //CurrentRoom = Instantiate(roomPrefab, CurrentDoor.pivot.transform.position, CurrentDoor.pivot.transform.rotation);
-
-            FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
+        if (Input.GetKeyDown(KeyCode.X)) {
+            GivePlayerKey();
         }
 
         if( Input.GetKeyDown(KeyCode.R))
@@ -108,6 +88,28 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.Load();
         }
+    }
+    public void GivePlayerKey()
+    {
+        if (CurrentRoom != null)
+        {
+            CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+            Destroy(CurrentRoom);
+        }
+        if (CurrentDoor != null)
+            CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Default");
+
+        CurrentDoor = ChooseNewRoom();
+
+        CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Highlight");
+
+        CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+        CurrentRoom = Instantiate(roomPrefab, CurrentDoor.pivot.transform.position, CurrentDoor.pivot.transform.rotation);
+        Body = CurrentRoom.GetComponent<RoomManager>().body;
+        Body.Highlight(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
+
+        FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
     }
     public DoorController ChooseNewRoom()
     {

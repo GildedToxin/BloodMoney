@@ -12,11 +12,11 @@ public class InventoryController : MonoBehaviour
     public Dictionary<string, bool> items = new Dictionary<string, bool>()
           {
         { "Mop", true },
-        { "Syringe", true },
-        { "Hatchet", true },
-        { "Jig Saw", true },
+        { "Syringe", false },
+        { "Hatchet", false },
+        { "Jig Saw", false },
         { "Wood Saw", true },
-        { "Scooper", true },
+        { "Scooper", false },
         { "Mallet", true },
     };
 

@@ -314,7 +314,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -596,6 +596,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5359076661536928202}
+  - component: {fileID: 7493487800411293194}
   m_Layer: 0
   m_Name: Room
   m_TagString: Untagged
@@ -624,6 +625,19 @@ Transform:
   - {fileID: 5925178460849222793}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7493487800411293194
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8060834080451723073}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a45f1f2d1962eb64eb5aff4c388d13b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomManager
+  body: {fileID: 3070651157124372945}
 --- !u!1001 &1937957387883636874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -632,21 +646,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5359076661536928202}
     m_Modifications:
+    - target: {fileID: 674739524541919110, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.468
+      objectReference: {fileID: 0}
     - target: {fileID: 4167879122306208410, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
       propertyPath: m_Name
       value: DeadBody
       objectReference: {fileID: 0}
-    - target: {fileID: 5251047164638092291, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.33333334
+    - target: {fileID: 4632743514665489544, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.832
       objectReference: {fileID: 0}
-    - target: {fileID: 5251047164638092291, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 5251047164638092291, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.33333334
+    - target: {fileID: 4632743514665489544, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.692
       objectReference: {fileID: 0}
     - target: {fileID: 5251047164638092291, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
       propertyPath: m_LocalPosition.x
@@ -688,11 +702,34 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 1.702
       objectReference: {fileID: 0}
+    - target: {fileID: 6596644895386122748, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.8530001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596644895386122748, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.4680001
+      objectReference: {fileID: 0}
+    - target: {fileID: 6596644895386122748, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.9509995
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+--- !u!114 &3070651157124372945 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3492582247300575579, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
+  m_PrefabInstance: {fileID: 1937957387883636874}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bc10c58e93858842a47f5c88d240feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DeadBody
 --- !u!4 &5925178460849222793 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5251047164638092291, guid: 41c77adf98282d74b86ac1d937212043, type: 3}
