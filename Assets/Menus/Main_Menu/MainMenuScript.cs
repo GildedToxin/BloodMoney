@@ -8,7 +8,7 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] CanvasGroup mainMenu;
     public void NewGame()
     {
-        SceneManager.LoadSceneAsync("Lobby");
+        SceneManager.LoadSceneAsync("Hotel");
     }
 
     public void ContinueGame()
