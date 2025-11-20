@@ -121,8 +121,6 @@ public class GameManager : MonoBehaviour
 
         CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Highlight");
 
-        CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(false);
         CurrentRoom = Instantiate(roomPrefab, CurrentDoor.pivot.transform.position, CurrentDoor.pivot.transform.rotation);
         Body = CurrentRoom.GetComponent<RoomManager>().body;
         Body.Highlight(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));

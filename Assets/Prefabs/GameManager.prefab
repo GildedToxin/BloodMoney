@@ -44,5 +44,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75a6b23c8603ce44bae4a173b9f1a6e5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  roomPrefab: {fileID: 8060834080451723073, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
+  CurrentRoom: {fileID: 0}
+  CurrentDoor: {fileID: 0}
+  clockText: {fileID: 0}
+  realDuration: 1200
+  isInHotelRoom: 0
+  isInMiniGame: 0
+  Body: {fileID: 0}
+  updateBloodSplatters: 0
+  totalBloodSplatters: 0
+  remainingBloodSplatters: 0
+  bloodSplatterScore: 0
+  currentMiniGame: 
+  cam: {fileID: 0}
+  hudManager: {fileID: 0}
   currentDay: 0
-  roomNumber: 0
