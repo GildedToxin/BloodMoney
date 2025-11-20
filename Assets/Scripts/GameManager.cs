@@ -25,6 +25,12 @@ public class GameManager : MonoBehaviour
     public bool isInMiniGame;
     public DeadBody Body;
 
+    // Blood splatter management
+    public bool updateBloodSplatters = false;
+    public float totalBloodSplatters;
+    public float remainingBloodSplatters;
+    public float bloodSplatterScore;
+
     public string currentMiniGame;
     public Camera cam;
     public HUDManager hudManager;
@@ -88,6 +94,18 @@ public class GameManager : MonoBehaviour
         {
             SaveSystem.Load();
         }
+
+
+        // input for testing blood splatter scoring
+        if (Input.GetKeyDown(KeyCode.N))
+        {
+            StartBloodCalculation();
+        }
+        if (Input.GetKeyDown(KeyCode.M))
+        {
+            ScoreBloodSplatter();
+        }
+
     }
     public void GivePlayerKey()
     {
@@ -263,4 +281,28 @@ public class GameManager : MonoBehaviour
         isInMiniGame = false;
         Body.SpawnOrgan(sceneName);
     }
+
+
+    // Handling blood scoring and calculation
+    public void StartBloodCalculation()
+    {
+        totalBloodSplatters = 0;
+        remainingBloodSplatters = 0;
+        updateBloodSplatters = true;
+        
+        // for each object with the tag "Blood" add to totalBloodSplatters and remainingBloodSplatters float
+        foreach (GameObject obj in GameObject.FindGameObjectsWithTag("Blood"))
+        {
+            totalBloodSplatters += 1;
+            remainingBloodSplatters += 1;
+        }
+    }
+
+    public void ScoreBloodSplatter()
+    {
+        updateBloodSplatters = false;
+        bloodSplatterScore = remainingBloodSplatters / totalBloodSplatters * 100f;
+        Debug.Log($"Blood Splatter Score: {bloodSplatterScore}%");
+    }
+
 }
