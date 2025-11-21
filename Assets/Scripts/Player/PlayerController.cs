@@ -9,6 +9,11 @@ using UnityEngine.UIElements;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
+
+    public Animator RightHand;
+    public Animator LeftHand;
+
+
     public float moveSpeed;
     public float sprintSpeed;
     public float crouchSpeed;
@@ -84,8 +89,14 @@ public class PlayerController : MonoBehaviour
         MyInput();
         SpeedControl();
 
+        //bool for sprinting animation!!
+        bool isSprinting = sprinting && grounded;
+        RightHand.SetBool("isSprinting", isSprinting);
+        LeftHand.SetBool("isSprinting", isSprinting);
+
+
         // player movement drag
-        if(grounded)
+        if (grounded)
         {
             // LinearDamping is the new term for Drag
             rb.linearDamping = groundDrag;
