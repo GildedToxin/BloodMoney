@@ -11,6 +11,8 @@ public class HeldItem : MonoBehaviour
     public bool hasItem = false;
     public float lerpSpeed = 5f;
 
+    public Animator RightHand;
+
     private void Update()
     {
         if(hasItem && currentItem != null)
@@ -25,6 +27,9 @@ public class HeldItem : MonoBehaviour
             rb.angularVelocity = Vector3.Lerp(rb.angularVelocity, Vector3.zero, Time.deltaTime * lerpSpeed);
             currentItem.transform.position = heldItemPosition.position;
         }
+
+        RightHand.SetBool("isGrabbing", hasItem);
+        Debug.Log("is this thing on???");
     }
     public void PickUpItem(GameObject item)
     {
@@ -33,6 +38,7 @@ public class HeldItem : MonoBehaviour
         currentItem.transform.position = heldItemPosition.position;
         currentItem.transform.SetParent(heldItemPosition);
         currentItem.GetComponent<Rigidbody>().useGravity = false;
+
     }
     public void DropItem(GameObject item)
     {

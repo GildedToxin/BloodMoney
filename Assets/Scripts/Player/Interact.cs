@@ -6,6 +6,8 @@ interface IInteractable{
 
 public class Interact : MonoBehaviour {
 
+    
+
     [Header("Keybinds")]
     public KeyCode interactKey = KeyCode.E;
 
@@ -13,6 +15,7 @@ public class Interact : MonoBehaviour {
     public Transform interactionSource;
     public float interactionRange;
     public bool noInteraction = true;
+
     void Update()
     {
         // Uses a Raycast to find an object and checks if its interactable, then runs its interaction code
