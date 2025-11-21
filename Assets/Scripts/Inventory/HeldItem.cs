@@ -12,6 +12,7 @@ public class HeldItem : MonoBehaviour
     public float lerpSpeed = 5f;
 
     public Animator RightHand;
+    public Animator LeftHand;
 
     private void Update()
     {
@@ -29,6 +30,7 @@ public class HeldItem : MonoBehaviour
         }
 
         RightHand.SetBool("isGrabbing", hasItem);
+        LeftHand.SetBool("isGrabbing", hasItem);
         Debug.Log("is this thing on???");
     }
     public void PickUpItem(GameObject item)
