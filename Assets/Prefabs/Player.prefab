@@ -230,6 +230,8 @@ MonoBehaviour:
   heldItemPosition: {fileID: 3995075253909699239}
   hasItem: 0
   lerpSpeed: 5
+  RightHand: {fileID: 0}
+  LeftHand: {fileID: 0}
 --- !u!114 &153797956869431695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -242,6 +244,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a383d963c012e34099c5097299ea731, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  RightHand: {fileID: 0}
+  LeftHand: {fileID: 0}
   moveSpeed: 10
   sprintSpeed: 15
   crouchSpeed: 5

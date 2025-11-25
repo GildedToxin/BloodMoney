@@ -91,8 +91,8 @@ public class PlayerController : MonoBehaviour
 
         //bool for sprinting animation!!
         bool isSprinting = sprinting && grounded;
-        RightHand.SetBool("isSprinting", isSprinting);
-        LeftHand.SetBool("isSprinting", isSprinting);
+       // RightHand.SetBool("isSprinting", isSprinting);
+        //LeftHand.SetBool("isSprinting", isSprinting);
 
 
         // player movement drag

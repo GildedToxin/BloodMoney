@@ -24,6 +24,8 @@ public class HUDManager : MonoBehaviour
     public GameObject roomNumber;
 
     public GameObject bloodSelection;
+
+    public GameObject quotaText;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
@@ -72,7 +74,11 @@ public class HUDManager : MonoBehaviour
             }
         }
         moneyText.GetComponent<TextMeshProUGUI>().text = $"${inventoryController.money.Value}";
-        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {FindAnyObjectByType<GameManager>().currentDay}/30";
+        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {GameManager.Instance.currentDay}/30";
+
+        quotaText.GetComponent<TextMeshProUGUI>().text = $"Quota: {GameManager.Instance.moneyMadeToday}/{GameManager.Instance.CalculateQuota()}";
+
+
     }
 
     public void RefreshUISelection(int selection)

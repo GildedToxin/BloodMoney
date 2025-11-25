@@ -121,8 +121,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5397936742860007882}
-  - component: {fileID: 7934047552757163162}
   - component: {fileID: 2341650576506053779}
+  - component: {fileID: 7445313835318241473}
   m_Layer: 0
   m_Name: Customer Stand
   m_TagString: Untagged
@@ -146,24 +146,6 @@ Transform:
   - {fileID: 5675654250839082076}
   m_Father: {fileID: 2615547797494585097}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7934047552757163162
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4747818144068592553}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5858c0cffc0620f4ea17eab637eea58f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::VendorStand
-  sellingPoint: {fileID: 2341650576506053779}
-  organsToSell: []
-  customers:
-  - {fileID: 1461867517674917346}
-  - {fileID: 978487060356453861}
-  - {fileID: 7367429759631729467}
 --- !u!65 &2341650576506053779
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -185,6 +167,24 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0.48, z: 0}
+--- !u!114 &7445313835318241473
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4747818144068592553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5858c0cffc0620f4ea17eab637eea58f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::VendorStand
+  sellingPoint: {fileID: 2341650576506053779}
+  organsToSell: []
+  customers:
+  - {fileID: 1461867517674917346}
+  - {fileID: 978487060356453861}
+  - {fileID: 7367429759631729467}
 --- !u!1 &5431851166332547951
 GameObject:
   m_ObjectHideFlags: 0
@@ -282,6 +282,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2615547797494585097}
     m_Modifications:
+    - target: {fileID: 5595032183354249778, guid: 8de7f2fec977f224e8180508522faa65, type: 3}
+      propertyPath: desiredOrgan
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5944820606994444719, guid: 8de7f2fec977f224e8180508522faa65, type: 3}
       propertyPath: m_Name
       value: Customer (2)
@@ -355,6 +359,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 2615547797494585097}
     m_Modifications:
+    - target: {fileID: 5595032183354249778, guid: 8de7f2fec977f224e8180508522faa65, type: 3}
+      propertyPath: desiredOrgan
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 5944820606994444719, guid: 8de7f2fec977f224e8180508522faa65, type: 3}
       propertyPath: m_Name
       value: Customer (1)

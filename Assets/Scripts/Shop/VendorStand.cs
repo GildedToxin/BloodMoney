@@ -61,6 +61,9 @@ public class VendorStand : MonoBehaviour
     public void UpdateVenders()
     {
         //CreateCustomers();
+        foreach (Customer customer in customers)
+            customer.canBuyItem = false;
+
         foreach(OrganManager organ in organsToSell)
             CheckToSell(organ);
     }
@@ -80,13 +83,28 @@ public class VendorStand : MonoBehaviour
 
         FindAnyObjectByType<InventoryController>().AddMoney(organ.GetOrganPrice());
 
+        if(organ.gameObject == FindAnyObjectByType<HeldItem>().currentItem)
+        {
+            FindAnyObjectByType<HeldItem>().DropItem(organ.gameObject);
+        }
         organsToSell.Remove(organ);
         Destroy(organ.gameObject);
 
         customers.Remove(customer);
-        Destroy(customer.gameObject);
+        customer.gameObject.SetActive(false);
+        //Destroy(customer.gameObject);
 
         UpdateVenders();
+    }
+
+    public void RefreshCustomers()
+    {
+        FindObjectsByType<Customer>( FindObjectsInactive.Include, FindObjectsSortMode.None).ToList().ForEach(c =>
+        {
+            c.gameObject.SetActive(true);
+            customers.Add(c);
+            c.isServed = false;
+        });
     }
 
 }

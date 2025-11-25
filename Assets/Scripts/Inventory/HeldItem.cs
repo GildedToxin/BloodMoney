@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using System.Collections.Generic;
 
 public class HeldItem : MonoBehaviour
@@ -18,7 +19,7 @@ public class HeldItem : MonoBehaviour
     {
         if(hasItem && currentItem != null)
         {
-            if(Input.GetKeyDown(KeyCode.R))
+            if(hasItem && Input.GetKeyDown(KeyCode.E))
             {
                 DropItem(currentItem);
                 return;
@@ -44,11 +45,17 @@ public class HeldItem : MonoBehaviour
     }
     public void DropItem(GameObject item)
     {
-        hasItem = false;
+        StartCoroutine(CooldownTimer());
         currentItem.transform.SetParent(null);
         var rb = currentItem.GetComponent<Rigidbody>();
         rb.useGravity = true;
         currentItem = null;
 
+    }
+    IEnumerator CooldownTimer()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        hasItem = false;
     }
 }

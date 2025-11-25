@@ -71,6 +71,7 @@ public class InventoryController : MonoBehaviour
 
     public void AddMoney(int amount)
     {
+        GameManager.Instance.moneyMadeToday += amount;
         money.Value += amount;
     }
     public void SubtractMoney(int amount)

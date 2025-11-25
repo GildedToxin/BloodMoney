@@ -15,7 +15,7 @@ public class GameManager : MonoBehaviour
 
 
     public GameObject clockText; 
-    public float realDuration = 1200f; // 20 minutes in seconds
+    public float realDuration = 300f; // 20 minutes in seconds
 
     private float elapsedTime = 0f;
     private float startHour = 0f;  // 12 AM
@@ -34,6 +34,8 @@ public class GameManager : MonoBehaviour
     public string currentMiniGame;
     public Camera cam;
     public HUDManager hudManager;
+
+    public bool doesPlayerHaveKey = false;
     public static GameManager Instance
     {
         get
@@ -53,8 +55,9 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public int currentDay;
+    public int currentDay = 0;
     private int maxDay = 30;
+    public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
 
     private void Awake()
@@ -71,19 +74,22 @@ public class GameManager : MonoBehaviour
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
     }
+    private void Start()
+    {
+        if(currentDay == 0)
+        {
 
+        }
+    }
     private void Update()
     {
+        if(moneyMadeToday >= CalculateQuota())
+        {
+            EndDay();
+        }
         UpdateClock();
         if (Input.GetKeyDown(KeyCode.X)) {
             GivePlayerKey();
-        }
-
-        if( Input.GetKeyDown(KeyCode.R))
-        {
-            SceneManager.UnloadSceneAsync(currentMiniGame);
-            Camera.main.gameObject.SetActive(true);
-            FindAnyObjectByType<HUDManager>().gameObject.SetActive(true);
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
@@ -114,6 +120,13 @@ public class GameManager : MonoBehaviour
             CurrentDoor.gameObject.transform.GetChild(0).gameObject.SetActive(true);
             Destroy(CurrentRoom);
         }
+        if(CurrentDoor != null)
+        {
+            CurrentDoor.gameObject.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+            CurrentDoor.gameObject.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+            CurrentDoor.gameObject.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+            CurrentDoor.isOpened = false;
+        }
         if (CurrentDoor != null)
             CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Default");
 
@@ -126,6 +139,7 @@ public class GameManager : MonoBehaviour
         Body.Highlight(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
 
         FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
+        FindAnyObjectByType<VendorStand>().RefreshCustomers();
     }
     public DoorController ChooseNewRoom()
     {
@@ -143,38 +157,46 @@ public class GameManager : MonoBehaviour
     public void ProgressDay()
     {
         currentDay += 1;
+        moneyMadeToday = 0;
         /*
         Refresh shop keepers
         */
     }
-
+    public void EndDay()
+    {
+        print("YOU WIN");
+    }
+    int lastMinute = -1;  
     public void UpdateClock()
     {
         elapsedTime += Time.deltaTime;
 
-        // Calculate normalized time (0 to 1)
         float t = Mathf.Clamp01(elapsedTime / realDuration);
 
-        // Convert to in-game hours
         float currentHour = Mathf.Lerp(startHour, endHour, t);
 
-        // Get hours and minutes
         int hour = Mathf.FloorToInt(currentHour);
         int minute = Mathf.FloorToInt((currentHour - hour) * 60f);
 
-        string suffix = "AM";
-        int displayHour = hour == 0 ? 12 : hour; // 0 → 12
-        clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+        // Only update at :00, :15, :30, :45
+        if ((minute % 15 == 0) && minute != lastMinute)
+        {
+            lastMinute = minute;
+            string suffix = "AM";
+            int displayHour = hour == 0 ? 12 : hour;
+            clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+        }
 
         if (t >= 1f)
         {
             Debug.Log("Time's up! 8 AM reached.");
         }
-
     }
     public string GetOrganFromSlot(int slot)
     {
-        Body = FindAnyObjectByType<DeadBody>();
+            Body = FindAnyObjectByType<DeadBody>();
+        if (Body == null)
+            return "";
         switch (slot)
         {
             case 0:
@@ -221,7 +243,14 @@ public class GameManager : MonoBehaviour
     private void OnEnable()
     {
         // Store the lambda in a field
-        onSelectedIndexChanged = (i) => Body.Highlight(GetOrganFromSlot(i - 1));
+        onSelectedIndexChanged = (i) =>
+        {
+            var highlight = GetOrganFromSlot(i - 1);
+            if (highlight != "")
+            {
+                Body.Highlight(highlight);
+            }
+        };
         FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
     }
 
@@ -303,4 +332,18 @@ public class GameManager : MonoBehaviour
         Debug.Log($"Blood Splatter Score: {bloodSplatterScore}%");
     }
 
+    public void FirstDayTutorial()
+    {
+        // show UI message for first day tutorial
+
+        FindAnyObjectByType<owner>().gameObject.layer = LayerMask.NameToLayer("Highlight");
+    }
+
+    public int CalculateQuota()
+    {
+        // For now this returns a fixed quota for the first day
+        // Later this can be expanded to have dynamic quotas based on day and difficulty
+
+        return 1000;
+    }
 }

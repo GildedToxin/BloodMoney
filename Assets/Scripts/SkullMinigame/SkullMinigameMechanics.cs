@@ -184,9 +184,10 @@ public class MinigameFunctions : MonoBehaviour
         Cursor.visible = false;
         try
         {
-            FindAnyObjectByType<GameManager>().StopMiniGame("SkullMinigame", cam);
-            FindAnyObjectByType<GameManager>().Body.IsBrainHarvested = true;
-            FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
+            GameManager.Instance.StopMiniGame("SkullMinigame", cam);
+            GameManager.Instance.Body.IsBrainHarvested = true;
+            GameManager.Instance.Body.RemoveHighlight();
+            print(GameManager.Instance.Body.transform.position);
         }
         catch (System.Exception e)
         {

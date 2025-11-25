@@ -10,7 +10,7 @@ public class DoorController : MonoBehaviour, IPlayerLookTarget
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E) && isLookedAt)
+        if (Input.GetKeyDown(KeyCode.E) && isLookedAt && GameManager.Instance.CurrentDoor != null && GameManager.Instance.CurrentDoor == this && !isOpened && GameManager.Instance.doesPlayerHaveKey)
         {
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
 
@@ -21,21 +21,26 @@ public class DoorController : MonoBehaviour, IPlayerLookTarget
             GameManager.Instance.CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Default");
 
             isOpened = true;
+            GameManager.Instance.doesPlayerHaveKey = false;
+            FindAnyObjectByType<HUDManager>().UpdateRoomNumber("");
+
         }
     }
 
     public void OnLookEnter()
     {
-        if (!isOpened)
+        if (GameManager.Instance.CurrentDoor != null && GameManager.Instance.CurrentDoor == this && !isOpened && GameManager.Instance.doesPlayerHaveKey)
         {
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-            if (GameManager.Instance.CurrentDoor == this)
-                FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to open the door");
-            else
-                FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Your key doesn't fit in this door");
+            if (!isOpened)
+            {
+                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+                if (GameManager.Instance.CurrentDoor == this)
+                    FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to open the door");
+                else
+                    FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Your key doesn't fit in this door");
+            }
+            isLookedAt = true;
         }
-            
-        isLookedAt = true;
     }
     public void OnLookExit()
     {
