@@ -1,6 +1,7 @@
+using NUnit;
 using UnityEditor;
 using UnityEngine;
-
+#if UNITY_EDITOR
 [CustomPropertyDrawer(typeof(ObservableValue<>))]
 public class ObservableValueDrawer : PropertyDrawer
 {
@@ -18,3 +19,4 @@ public class ObservableValueDrawer : PropertyDrawer
         }
     }
 }
+#endif 

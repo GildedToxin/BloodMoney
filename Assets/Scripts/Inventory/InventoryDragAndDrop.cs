@@ -3,8 +3,6 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using UnityEngine.UIElements;
-using static UnityEditor.Progress;
-
 public class InventoryDragAndDrop : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IDragHandler, IEndDragHandler, IBeginDragHandler//, IPointerClickHandler, IPointerDownHandler, IPointerUpHandler
 {
     public Color hoverColor;

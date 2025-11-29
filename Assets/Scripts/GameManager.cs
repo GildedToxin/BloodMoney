@@ -78,7 +78,7 @@ public class GameManager : MonoBehaviour
     {
         if(currentDay == 0)
         {
-
+            FirstDayTutorial();
         }
     }
     private void Update()
@@ -189,7 +189,7 @@ public class GameManager : MonoBehaviour
 
         if (t >= 1f)
         {
-            Debug.Log("Time's up! 8 AM reached.");
+            PlayerFailedDay();
         }
     }
     public string GetOrganFromSlot(int slot)
@@ -336,7 +336,8 @@ public class GameManager : MonoBehaviour
     {
         // show UI message for first day tutorial
 
-        FindAnyObjectByType<owner>().gameObject.layer = LayerMask.NameToLayer("Highlight");
+        FindAnyObjectByType<owner>().transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Highlight");
+        currentDay++;
     }
 
     public int CalculateQuota()
@@ -345,5 +346,14 @@ public class GameManager : MonoBehaviour
         // Later this can be expanded to have dynamic quotas based on day and difficulty
 
         return 1000;
+    }
+    public bool HasPlayerHitQuota()
+    {
+        return moneyMadeToday >= CalculateQuota();
+    }
+
+    public void PlayerFailedDay()
+    {
+        print("YOU LOSE");
     }
 }

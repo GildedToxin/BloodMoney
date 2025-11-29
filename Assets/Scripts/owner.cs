@@ -10,9 +10,10 @@ public class owner : MonoBehaviour, IPlayerLookTarget
     {
         if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E))
         {
+            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
             GameManager.Instance.GivePlayerKey();
             GameManager.Instance.doesPlayerHaveKey = true;
-            gameObject.layer = LayerMask.NameToLayer("Default");
+            transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Default");
         }
     }
     public void OnLookEnter()
