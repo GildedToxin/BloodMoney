@@ -164,7 +164,7 @@ public class GameManager : MonoBehaviour
     }
     public void EndDay()
     {
-        print("YOU WIN");
+
     }
     int lastMinute = -1;  
     public void UpdateClock()
@@ -354,6 +354,9 @@ public class GameManager : MonoBehaviour
 
     public void PlayerFailedDay()
     {
-        print("YOU LOSE");
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        FindAnyObjectByType<PlayerController>().enabled = false;
     }
 }

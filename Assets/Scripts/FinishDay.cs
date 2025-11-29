@@ -6,13 +6,11 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
 
     public void Update()
     {
-        if (isLookedAt && Input.GetKeyDown(KeyCode.E))
+        if (isLookedAt && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.HasPlayerHitQuota())
         {
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
-            if (GameManager.Instance.HasPlayerHitQuota())
-            {
-                EndVerticalSlice();
-            }
+            EndVerticalSlice();
+
         }
     }
 
@@ -34,6 +32,9 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
 
     public void EndVerticalSlice()
     {
-        //Load UI Stuff
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+        FindAnyObjectByType<PlayerController>().enabled = false;
     }
 }
