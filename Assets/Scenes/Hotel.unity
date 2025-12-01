@@ -3148,6 +3148,10 @@ PrefabInstance:
       value: 0.4
       objectReference: {fileID: 0}
     - target: {fileID: 153797956869431695, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+      propertyPath: stepSmoth
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 153797956869431695, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
       propertyPath: stepRayLower
       value: 
       objectReference: {fileID: 936117300}
@@ -6560,6 +6564,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Ground
       objectReference: {fileID: 0}
+    - target: {fileID: 6925420101895289900, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 936517e57ace2d448ac532c01fb1d43b, type: 2}
     - target: {fileID: 6989940095210306388, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
       propertyPath: m_TagString
       value: Ground
@@ -6723,7 +6731,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8024750575600344335}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 936517e57ace2d448ac532c01fb1d43b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -6745,7 +6753,7 @@ MeshCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8024750575600344336}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 936517e57ace2d448ac532c01fb1d43b, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
