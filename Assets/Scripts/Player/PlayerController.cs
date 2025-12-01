@@ -1,5 +1,6 @@
 using JetBrains.Annotations;
 using NUnit.Framework.Constraints;
+using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
 using UnityEngine;
@@ -55,7 +56,18 @@ public class PlayerController : MonoBehaviour
     public Camera cam;
     Interact interact;
 
+    [Header("Step-Up Stair Variables")]
+    [SerializeField] GameObject stepRayUpper;
+    [SerializeField] GameObject stepRayLower;
+    [SerializeField] float stepHight = 0.3f; //how high can they step up
+    [SerializeField] float stepSmoth = 0.1f; //smooth the transition between one step and another
+
     private IPlayerLookTarget currentLookAt;
+
+    private void Awake()
+    {
+        //stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHight, stepRayUpper.transform.position.z); // makes it so it sets upper raycast to max step hight
+    }
 
     private void Start()
     {
@@ -124,6 +136,8 @@ public class PlayerController : MonoBehaviour
         if (GameManager.Instance.isInMiniGame)  
             return;
             MovePlayer();
+
+        stepclimb();
     }
     public void Save(ref PlayerSaveData data)
     {
@@ -276,6 +290,39 @@ public class PlayerController : MonoBehaviour
         {
             currentLookAt.OnLookExit();
             currentLookAt = null;
+        }
+    }
+
+    private void stepclimb()
+    {
+        RaycastHit hitLower;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.2f))
+        {
+            RaycastHit hitUpper;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.3f))
+            {
+                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+            }
+        }
+
+        RaycastHit hitLower45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.2f))
+        {
+            RaycastHit hitUpper45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.3f))
+            {
+                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+            }
+        }
+
+        RaycastHit hitLowerMinus45;
+        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinus45, 0.2f))
+        {
+            RaycastHit hitUpperMinus45;
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.3f))
+            {
+                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+            }
         }
     }
 }
