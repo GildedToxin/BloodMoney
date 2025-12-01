@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     public float jumpForce;
     public float jumpCooldown;
     public float airMultiplier;
-    private bool canJump;
+    public bool canJump;
 
     private bool sprinting;
     private bool crouching;
@@ -143,13 +143,11 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxisRaw("Vertical");
 
         //when player jumps
-        if(Input.GetKey(jumpKey) && canJump && grounded && !crouching && interact.noInteraction)
+        if(Input.GetKey(jumpKey) && canJump)
         {
             canJump = false;
 
             Jump();
-
-            Invoke(nameof(ResetJump), jumpCooldown); // Calls reset jump with a delay of jumpCooldown so holding down the key keeps the player jumping
         }
 
         // when player sprints
@@ -238,6 +236,13 @@ public class PlayerController : MonoBehaviour
         rb.AddForce(transform.up * jumpForce, ForceMode.Impulse);
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Invoke(nameof(ResetJump), jumpCooldown); // Calls reset jump with a delay of jumpCooldown so holding down the key keeps the player jumping
+        }
+    }
     private void ResetJump()
     {
         canJump = true;

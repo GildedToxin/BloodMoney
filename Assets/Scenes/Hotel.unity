@@ -2264,7 +2264,7 @@ GameObject:
   - component: {fileID: 962457531}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2993,6 +2993,10 @@ PrefabInstance:
       propertyPath: RightHand
       value: 
       objectReference: {fileID: 843888193}
+    - target: {fileID: 153797956869431695, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+      propertyPath: Ground.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 261752684191090665, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 73.11
@@ -3587,7 +3591,7 @@ GameObject:
   - component: {fileID: 1300490444}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5517,6 +5521,10 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: e4121ca2b123c5d4e9510e645dd9fb36, type: 2}
+    - target: {fileID: 5609680370678896503, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 7277026960061301651, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -6119,6 +6127,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331583309325536967, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 614900614387129445, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 749350222930099079, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1053352375242196698, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 1056320738899828665, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 62.142483
@@ -6159,9 +6183,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1189735811139214686, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1616452437404078389, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1667845872677542028, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 1926030829786249409, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
     - target: {fileID: 2261803168534236954, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
       propertyPath: m_Name
       value: Hotel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2261803168534236954, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 5031071764449342410, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6122997071337966872, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6517711126885383428, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 6989940095210306388, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7592475829153097598, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7602337009882272459, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 7664040578913061871, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 8373722558133616090, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 8468025663110236702, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 8495815009258057282, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
+      objectReference: {fileID: 0}
+    - target: {fileID: 9154655638830990752, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
