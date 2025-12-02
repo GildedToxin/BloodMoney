@@ -5516,6 +5516,7 @@ GameObject:
   - component: {fileID: 1451514875}
   - component: {fileID: 1451514874}
   - component: {fileID: 1451514873}
+  - component: {fileID: 1451514876}
   m_Layer: 0
   m_Name: Cylinder (2)
   m_TagString: Untagged
@@ -5617,6 +5618,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1451514871}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1451514876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451514871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
+  buttonFloor: 3
+  elevatorScript: {fileID: 1610783021}
 --- !u!1 &1455316249 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1430806098679131605, guid: f37e3f4e6b675bb45a0111501e49233d, type: 3}
@@ -6108,11 +6123,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5119c24859dbc4f923bace257bfa2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EvelatorTeleporter
-  currentBox: {fileID: 83226111}
-  box1: {fileID: 511819066}
-  box2: {fileID: 0}
-  box3: {fileID: 0}
+  box1: {fileID: 83226111}
+  box2: {fileID: 511819066}
+  box3: {fileID: 1933497192}
+  box4: {fileID: 1757049799}
   collider: {fileID: 348218852}
+  button1: {fileID: 0}
+  button2: {fileID: 0}
+  button3: {fileID: 0}
+  button4: {fileID: 0}
+  currentFloor: 1
+  targetFloor: 0
   listOfObjects: []
 --- !u!54 &1610783022
 Rigidbody:
@@ -6710,6 +6731,11 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1752777158}
   m_Mesh: {fileID: 4902179693337737926, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
+--- !u!4 &1757049799 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2356550758038064892, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
+  m_PrefabInstance: {fileID: 82380527}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1778418518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7141,6 +7167,7 @@ GameObject:
   - component: {fileID: 1853778283}
   - component: {fileID: 1853778282}
   - component: {fileID: 1853778281}
+  - component: {fileID: 1853778284}
   m_Layer: 0
   m_Name: Cylinder (3)
   m_TagString: Untagged
@@ -7242,6 +7269,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1853778279}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1853778284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1853778279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
+  buttonFloor: 4
+  elevatorScript: {fileID: 1610783021}
 --- !u!1 &1856735206 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4137387664311107128, guid: ef2ae84914f567f41b26e7ba702f0059, type: 3}
@@ -7654,6 +7695,7 @@ GameObject:
   - component: {fileID: 1913142791}
   - component: {fileID: 1913142790}
   - component: {fileID: 1913142789}
+  - component: {fileID: 1913142792}
   m_Layer: 0
   m_Name: Cylinder (1)
   m_TagString: Untagged
@@ -7755,10 +7797,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1913142787}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1913142792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1913142787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
+  buttonFloor: 2
+  elevatorScript: {fileID: 1610783021}
 --- !u!4 &1925109963 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2144520110518956124, guid: 610fd37f397733545ad7f7e9bc7dda6a, type: 3}
   m_PrefabInstance: {fileID: 1979112227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1933497192 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -2356550758038064892, guid: 5c07326c4f6e6b54f8ec8926e9f045dd, type: 3}
+  m_PrefabInstance: {fileID: 1039743584}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1945779815
 PrefabInstance:
@@ -8612,6 +8673,7 @@ GameObject:
   - component: {fileID: 2108355244}
   - component: {fileID: 2108355243}
   - component: {fileID: 2108355242}
+  - component: {fileID: 2108355245}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -8713,6 +8775,20 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108355240}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &2108355245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108355240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  buttonFloor: 1
+  elevatorScript: {fileID: 1610783021}
 --- !u!1 &2108914407 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2949985526705225480, guid: ef2ae84914f567f41b26e7ba702f0059, type: 3}

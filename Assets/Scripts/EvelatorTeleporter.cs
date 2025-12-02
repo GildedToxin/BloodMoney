@@ -3,12 +3,20 @@ using System.Collections.Generic;
 
 public class EvelatorTeleporter : MonoBehaviour
 {
-    public Transform currentBox;
     public Transform box1;
     public Transform box2;
     public Transform box3;
+    public Transform box4;
     public Collider collider;
 
+    public ElevatorButtonScript button1;
+    public ElevatorButtonScript button2;
+    public ElevatorButtonScript button3;
+    public ElevatorButtonScript button4;
+
+    public int currentFloor;
+    //[HideInInspector]
+    public int targetFloor;
     public List<GameObject> listOfObjects = new List<GameObject>();
 
     //private bool inBox1 = true;
@@ -21,7 +29,7 @@ public class EvelatorTeleporter : MonoBehaviour
             {
                 try
                 {
-                    Teleport(currentBox, box1, obj);
+                    //Teleport(currentBox, box1, obj);
                 }
                 catch
                 {
