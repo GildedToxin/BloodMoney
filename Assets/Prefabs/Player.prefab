@@ -161,7 +161,7 @@ GameObject:
   - component: {fileID: 700656557543491913}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -253,6 +253,7 @@ MonoBehaviour:
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
+  canJump: 0
   jumpKey: 32
   sprintKey: 304
   crouchKey: 306
@@ -264,7 +265,12 @@ MonoBehaviour:
   orientation: {fileID: 1529264598274154182}
   playerTestFloat: 0
   inventoryUIManager: {fileID: 0}
+  cartScript: {fileID: 0}
   cam: {fileID: 0}
+  stepRayUpper: {fileID: 0}
+  stepRayLower: {fileID: 0}
+  stepHight: 0.3
+  stepSmoth: 0.1
 --- !u!114 &4055777116043404963
 MonoBehaviour:
   m_ObjectHideFlags: 0
