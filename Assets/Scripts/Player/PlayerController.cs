@@ -52,6 +52,8 @@ public class PlayerController : MonoBehaviour
     public float playerTestFloat;
     public HUDManager inventoryUIManager;
 
+    public CartScript cartScript;
+
     //other variables
     public Camera cam;
     Interact interact;
@@ -135,9 +137,11 @@ public class PlayerController : MonoBehaviour
 
         if (GameManager.Instance.isInMiniGame)  
             return;
-            MovePlayer();
 
-        stepclimb();
+        MovePlayer();
+
+        if (!cartScript.isMoving)
+            stepclimb();
     }
     public void Save(ref PlayerSaveData data)
     {

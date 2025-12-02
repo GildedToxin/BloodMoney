@@ -4,16 +4,14 @@ public class CartScript : MonoBehaviour, IInteractable
 {
     [Header("Cart Mechanics")]
     public bool isMoving = false;
-    public GameObject player;
+    public GameObject cartHolder;
     public Interact interact;
+    public PlayerController playerController;
+    public GameObject player;
 
     [Header("Keybinds")]
     public KeyCode letGoKey = KeyCode.T;
 
-    public void Awake()
-    {
-        //interact = GetComponent<Interact>();// find a way to automaticaly assign this
-    }
     public void Interact()
     {
         if (isMoving)
@@ -31,10 +29,14 @@ public class CartScript : MonoBehaviour, IInteractable
 
         if (isMoving)
         {
-            transform.position = player.transform.position;
-            transform.rotation = player.transform.rotation;
+            player.layer = LayerMask.NameToLayer("TransparentFX");
+            playerController.canJump = false;
+            transform.position = cartHolder.transform.position;
+            transform.rotation = cartHolder.transform.rotation;
             if (Input.GetKey(letGoKey) && isMoving)
             {
+                player.layer = LayerMask.NameToLayer("Default");
+                playerController.canJump = true;
                 isMoving = false;
                 transform.position = this.transform.position;
                 transform.rotation = this.transform.rotation;
