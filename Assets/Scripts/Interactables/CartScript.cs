@@ -31,15 +31,13 @@ public class CartScript : MonoBehaviour, IInteractable
         {
             player.layer = LayerMask.NameToLayer("TransparentFX");
             playerController.canJump = false;
-            transform.position = cartHolder.transform.position;
-            transform.rotation = cartHolder.transform.rotation;
+            transform.parent = cartHolder.transform;
             if (Input.GetKey(letGoKey) && isMoving)
             {
                 player.layer = LayerMask.NameToLayer("Default");
                 playerController.canJump = true;
                 isMoving = false;
-                transform.position = this.transform.position;
-                transform.rotation = this.transform.rotation;
+                transform.parent = null;
                 interact.noInteraction = true;
             }
         }
