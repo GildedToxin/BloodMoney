@@ -15,11 +15,13 @@ public class HeldItem : MonoBehaviour
     public Animator RightHand;
     public Animator LeftHand;
 
+    public bool canDropItem;
+
     private void Update()
     {
         if(hasItem && currentItem != null)
         {
-            if(hasItem && Input.GetKeyDown(KeyCode.E))
+            if(canDropItem && Input.GetKeyDown(KeyCode.E))
             {
                 DropItem(currentItem);
                 return;
@@ -36,6 +38,7 @@ public class HeldItem : MonoBehaviour
     }
     public void PickUpItem(GameObject item)
     {
+        StartCoroutine(DropCooldownTimer());
         hasItem = true;
         currentItem = item;
         currentItem.transform.position = heldItemPosition.position;
@@ -45,17 +48,24 @@ public class HeldItem : MonoBehaviour
     }
     public void DropItem(GameObject item)
     {
-        StartCoroutine(CooldownTimer());
+        StartCoroutine(PickUpCooldownTimer());
         currentItem.transform.SetParent(null);
         var rb = currentItem.GetComponent<Rigidbody>();
         rb.useGravity = true;
         currentItem = null;
+        canDropItem = false;
 
     }
-    IEnumerator CooldownTimer()
+    IEnumerator PickUpCooldownTimer()
     {
 
         yield return new WaitForSeconds(0.5f);
         hasItem = false;
+    }
+    IEnumerator DropCooldownTimer()
+    {
+
+        yield return new WaitForSeconds(0.5f);
+        canDropItem = true;
     }
 }
