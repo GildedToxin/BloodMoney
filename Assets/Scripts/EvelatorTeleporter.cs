@@ -3,49 +3,46 @@ using System.Collections.Generic;
 
 public class EvelatorTeleporter : MonoBehaviour
 {
-    public Transform box1;
-    public Transform box2;
-    public Transform box3;
-    public Transform box4;
-    public Collider collider;
-
-    public ElevatorButtonScript button1;
-    public ElevatorButtonScript button2;
-    public ElevatorButtonScript button3;
-    public ElevatorButtonScript button4;
+    public bool buttonPressed = false;
 
     public int currentFloor;
-    //[HideInInspector]
     public int targetFloor;
+    public List<GameObject> listOfElevatorPlatforms = new List<GameObject>();
     public List<GameObject> listOfObjects = new List<GameObject>();
-
-    //private bool inBox1 = true;
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.J))
+        if (buttonPressed == true && targetFloor != currentFloor)
         {
             foreach (GameObject obj in listOfObjects)
             {
                 try
                 {
-                    //Teleport(currentBox, box1, obj);
+                    Teleport(currentFloor, targetFloor, obj);
                 }
                 catch
                 {
-                    Debug.Log("Teleport to box1 failed");;
+                    Debug.Log("Teleport to box" + targetFloor + " failed");
                 }
-                
+
             }
-     
+            buttonPressed = false;
         }
+        else if (buttonPressed == true && targetFloor == currentFloor)
+            buttonPressed = false;
+
         Debug.Log(listOfObjects.Count);
     }
 
-    void Teleport(Transform fromBox, Transform toBox, GameObject obj)
+    void Teleport(int current, int target, GameObject obj)//Transform fromBox, Transform toBox, GameObject obj)
     {
+
+        Transform fromBox = listOfElevatorPlatforms[current - 1].transform;
+
         // Get the player's position relative to the current box
         Vector3 localPos = fromBox.InverseTransformPoint(obj.transform.position);
+
+        Transform toBox = listOfElevatorPlatforms[target - 1].transform;
 
         // Convert that local position to world space in the new box
         Vector3 newWorldPos = toBox.TransformPoint(localPos);

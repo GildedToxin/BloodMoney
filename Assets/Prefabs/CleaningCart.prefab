@@ -9,9 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8663007914330269781}
+  - component: {fileID: 787205502230714611}
   m_Layer: 0
   m_Name: CleaningCart
-  m_TagString: Untagged
+  m_TagString: Teleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,6 +33,27 @@ Transform:
   - {fileID: 903538568373390327}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &787205502230714611
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 274899995432290468}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &463764900439669590
 GameObject:
   m_ObjectHideFlags: 0
@@ -289,6 +311,7 @@ MonoBehaviour:
   cartHolder: {fileID: 0}
   interact: {fileID: 0}
   playerController: {fileID: 0}
+  player: {fileID: 0}
   letGoKey: 116
 --- !u!1 &6699446436638379506
 GameObject:

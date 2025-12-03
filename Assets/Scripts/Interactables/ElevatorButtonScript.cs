@@ -2,10 +2,8 @@ using UnityEngine;
 
 public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
 {
-    //public bool isPressed = false;
     public int buttonFloor;
     public EvelatorTeleporter elevatorScript;
-    //public Interact interactScript;
 
     private bool isLookedAt = false;
 
@@ -14,12 +12,12 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
         if (isLookedAt && Input.GetKeyDown(KeyCode.E))
         {
             Interact();
-            //interactScript.noInteraction = true;
         } 
     }
     public void Interact()
     {
         elevatorScript.targetFloor = buttonFloor;
+        elevatorScript.buttonPressed = true;
         Debug.Log("Button Pressed");
     }
 
