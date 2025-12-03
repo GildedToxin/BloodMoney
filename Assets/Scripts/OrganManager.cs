@@ -72,12 +72,12 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         avgPoint /= collision.contacts.Length;
 
 
-        GameObject decal = Instantiate(decalPrefab, avgPoint, Quaternion.LookRotation(-collision.contacts[0].normal));
+      //  GameObject decal = Instantiate(decalPrefab, avgPoint, Quaternion.LookRotation(-collision.contacts[0].normal));
 
 
-        decal.transform.SetParent(collision.transform);
-        decal.transform.Rotate(Vector3.forward, Random.Range(0f, 360f));
-        decal.GetComponent<DecalProjector>().material = chosenMaterial;
+      //  decal.transform.SetParent(collision.transform);
+       // decal.transform.Rotate(Vector3.forward, Random.Range(0f, 360f));
+       // decal.GetComponent<DecalProjector>().material = chosenMaterial;
 
         GameObject vfxInstance = Instantiate(bloodEffect, transform.position, Quaternion.LookRotation(-collision.contacts[0].normal));
         Destroy(vfxInstance.gameObject, 15);

@@ -5,7 +5,7 @@ public class CameraPlayerFolower : MonoBehaviour
 {
     public Transform cameraPosition;
 
-    private void Update()
+    private void LateUpdate()
     {
         transform.position = cameraPosition.position;
     }

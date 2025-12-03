@@ -31,7 +31,7 @@ public class CartScript : MonoBehaviour, IInteractable
         {
             player.layer = LayerMask.NameToLayer("TransparentFX");
             playerController.canJump = false;
-            transform.parent = cartHolder.transform;
+            transform.parent.parent = cartHolder.transform;
             if (Input.GetKey(letGoKey) && isMoving)
             {
                 player.layer = LayerMask.NameToLayer("Default");
