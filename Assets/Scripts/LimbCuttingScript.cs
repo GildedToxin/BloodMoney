@@ -19,6 +19,10 @@ public class LimbCuttingScript : MonoBehaviour
     public float waveFrequency;
     public float waveAmplitude;
 
+
+    public GameObject limbs;
+    public int currentLimb = -1;
+
     void Start()
     {
         limbRotation = this.transform.rotation;
@@ -68,6 +72,7 @@ public class LimbCuttingScript : MonoBehaviour
                 Debug.LogError("Generated Point: " + point);
             }
         }
+        NextLimb();
     }
     
     public void DestroyPoints()
@@ -82,5 +87,14 @@ public class LimbCuttingScript : MonoBehaviour
             }
             Destroy(child.gameObject);
         }
+    }
+    public void NextLimb()
+    {
+        foreach(Transform child in limbs.transform)
+        {
+            child.gameObject.SetActive(false);
+        }
+        currentLimb++;
+        limbs.transform.GetChild(currentLimb).gameObject.SetActive(true);
     }
 }
