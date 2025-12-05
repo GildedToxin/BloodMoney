@@ -26,6 +26,7 @@ public class MinigameFunctions : MonoBehaviour
     public Camera cam;
     public GameObject StartCanvas;
     public GameObject hammer;
+    public GameObject brain;
 
 
     [Header("Timer Values")]
@@ -106,6 +107,7 @@ public class MinigameFunctions : MonoBehaviour
         // lose conditions
         else if (CrackLevel == 4 && !minigameEnd)
         {
+            brain.SetActive(false);
             timerStop = true;
             timerCountdown += Time.deltaTime;
             if (timerCountdown >= winLoseTimerDuration)
