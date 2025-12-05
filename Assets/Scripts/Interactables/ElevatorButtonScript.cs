@@ -5,13 +5,15 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
     public int buttonFloor;
     public EvelatorTeleporter elevatorScript;
 
-    private bool isLookedAt = false;
+    public bool isLookedAt = false;
 
     private void Update()
     {
-        if (isLookedAt && Input.GetKeyDown(KeyCode.E))
+        if (isLookedAt && Input.GetKeyDown(KeyCode.E) && !EvelatorTeleporter.isMoving)
         {
+            EvelatorTeleporter.isMoving = true;
             Interact();
+            elevatorScript.StartCoroutine(elevatorScript.WaitOneSecond());
         } 
     }
     public void Interact()

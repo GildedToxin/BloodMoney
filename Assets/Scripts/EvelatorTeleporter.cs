@@ -1,9 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class EvelatorTeleporter : MonoBehaviour
 {
     public bool buttonPressed = false;
+
+    public static bool isMoving = false;
 
     public int currentFloor;
     public int targetFloor;
@@ -60,5 +63,11 @@ public class EvelatorTeleporter : MonoBehaviour
     void OnTriggerExit(Collider other)
     {
         listOfObjects.Remove(other.gameObject);
+    }
+
+    public IEnumerator WaitOneSecond()
+    {
+        yield return new WaitForSeconds(1);
+        isMoving = false;
     }
 }
