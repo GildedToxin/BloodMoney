@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
     [Header("Ground Check")]
     public float playerHight;
     public LayerMask Ground;
-    private bool grounded;
+    public bool grounded;
 
     public Transform orientation;
 
@@ -140,8 +140,8 @@ public class PlayerController : MonoBehaviour
 
         MovePlayer();
 
-        if (!cartScript.isMoving)
-            stepclimb();
+       // if (!cartScript.isMoving)
+         //   stepclimb();
     }
     public void Save(ref PlayerSaveData data)
     {

@@ -41,6 +41,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
     public bool isLookedAt = false;
 
+    public GameObject BodyBrain;
+    public GameObject[] BodyLimbs;
+
     public void Update()
     {
         if (isLookedAt)
@@ -68,6 +71,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 IsLimbsHighlighted = true;
                 foreach(GameObject limb in Limbs)
                 {
+                    limb.SetActive(true);
                     limb.layer= LayerMask.NameToLayer("Highlight");
                 }
                 break;
@@ -95,23 +99,28 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
         switch (sceneOrgan)
         {
             case "LimbMiniGame":
+                foreach(GameObject limb in BodyLimbs)
+                {
+                    Destroy(limb);
+                }
                 Instantiate(limbPrefabs[0], limbSpawnLocations[0].position, limbSpawnLocations[0].rotation);
                 Instantiate(limbPrefabs[1], limbSpawnLocations[1].position, limbSpawnLocations[1].rotation);
                 break;
             case "Bones":
-                IsBonesHighlighted = true;
+                //IsBonesHighlighted = true;
                 break;
             case "Blood":
-                IsBloodHighlighted = true;
+                //IsBloodHighlighted = true;
                 break;
             case "SkullMinigame":
                 Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
+                Destroy(BodyBrain);
                 break;
             case "Fingers":
-                IsFingersHighlighted = true;
+                //IsFingersHighlighted = true;
                 break;
             case "Eyes":
-                IsEyesHighlighted = true;
+                //IsEyesHighlighted = true;
                 break;
 
         }
@@ -128,6 +137,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
         foreach (GameObject limb in Limbs)
         {
             limb.layer = LayerMask.NameToLayer("Default");
+            limb.SetActive(false);
         }
 
 
