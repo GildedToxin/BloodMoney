@@ -27,6 +27,7 @@ public class MinigameFunctions : MonoBehaviour
     public GameObject StartCanvas;
     public GameObject hammer;
     public GameObject brain;
+    public GameObject blood;
 
 
     [Header("Timer Values")]
@@ -108,6 +109,7 @@ public class MinigameFunctions : MonoBehaviour
         else if (CrackLevel == 4 && !minigameEnd)
         {
             brain.SetActive(false);
+            blood.SetActive(true);
             timerStop = true;
             timerCountdown += Time.deltaTime;
             if (timerCountdown >= winLoseTimerDuration)
