@@ -289,6 +289,7 @@ public class GameManager : MonoBehaviour
             
             SceneManager.LoadScene(currentMiniGame, LoadSceneMode.Additive);
             Camera.main.gameObject.SetActive(false);
+            Player.GetComponent<PlayerController>().enabled = false;
             FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
             isInMiniGame = true;
         }
@@ -299,6 +300,7 @@ public class GameManager : MonoBehaviour
     }
     public void StopMiniGame(string sceneName, Camera miniGameCam)
     {
+        Player.GetComponent<PlayerController>().enabled = true;
         SceneManager.UnloadSceneAsync(sceneName);
         cam.gameObject.SetActive(true);
         miniGameCam.gameObject.SetActive(false);

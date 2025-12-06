@@ -105,6 +105,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 }
                 Instantiate(limbPrefabs[0], limbSpawnLocations[0].position, limbSpawnLocations[0].rotation);
                 Instantiate(limbPrefabs[1], limbSpawnLocations[1].position, limbSpawnLocations[1].rotation);
+                Instantiate(limbPrefabs[2], limbSpawnLocations[2].position, limbSpawnLocations[2].rotation);
+                Instantiate(limbPrefabs[3], limbSpawnLocations[3].position, limbSpawnLocations[3].rotation);
                 break;
             case "Bones":
                 //IsBonesHighlighted = true;

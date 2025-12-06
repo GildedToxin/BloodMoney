@@ -42,8 +42,8 @@ public class PlayerController : MonoBehaviour
 
     public Transform orientation;
 
-    private float horizontalInput;
-    private float verticalInput;
+    public float horizontalInput;
+    public float verticalInput;
 
     private Vector3 movementDirection;
 

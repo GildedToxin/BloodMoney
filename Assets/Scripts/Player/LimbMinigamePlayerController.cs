@@ -56,14 +56,14 @@ public class LimbMinigamePlayerController : MonoBehaviour
         if (isMinigameActive)
         {
             #region Player Input
-            if (Input.GetKey(KeyCode.LeftArrow) && !endMinigame)
+            if ((Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A)) && !endMinigame)
             {
                 float newX = transform.position.x - 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
                 newX = Mathf.Clamp(newX, -1.1f, .3f);
 
                 transform.position = new Vector3(newX, transform.position.y, transform.position.z);
             }
-            if (Input.GetKey(KeyCode.RightArrow) && !endMinigame)
+            if ((Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D)) && !endMinigame)
             {
                 float newX = transform.position.x + 0.1f * Time.deltaTime * (moveSpeed * 0.25f);
                 newX = Mathf.Clamp(newX, -1.1f, .3f);
@@ -78,7 +78,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         if ((distanceMoved >= 360f || limbTimer > limbTimerLimit) && isMinigameActive)  // Determines when the minigame is over
         {
             EndMinigameRound();
-            if (currentRound < 2)
+            if (currentRound < 4)
             {
                 StartCoroutine(StartMinigameRoundWithDelay());
             }
@@ -91,7 +91,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
             isMinigameActive = false;
         }
 
-        if (currentRound > 2)  // Ends the entire minigame after all limbs are done
+        if (currentRound > 4)  // Ends the entire minigame after all limbs are done
         {
             EndMinigame();
         }

@@ -24,7 +24,7 @@ public class LimbEndScreen : MonoBehaviour
         int count = 0;
         foreach(GameObject limb in limbs)
         {
-            limb.transform.GetChild(0).GetComponent<TextMeshProUGUI>().text = "Limb Score: \n" + Mathf.RoundToInt(scores[count]).ToString() + "%";
+            limb.GetComponent<TextMeshProUGUI>().text = Mathf.RoundToInt(scores[count]).ToString() + "%";
             count++;
         }
     }

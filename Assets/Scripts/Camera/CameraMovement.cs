@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
-    void Update()
+    void FixedUpdate()
     {
         if (isUIOpen)
             return;
