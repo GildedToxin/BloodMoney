@@ -168,17 +168,17 @@ public class MinigameFunctions : MonoBehaviour
         if (remainingTime < totalTime  * timerThreshhold)
         {
             qualityScore = qualityScore - ((Mathf.RoundToInt(totalTime) - Mathf.RoundToInt(remainingTime)) * timerPunishment);
-            pointScoreText.text = qualityScore.ToString();
+            pointScoreText.text = qualityScore.ToString()+"%";
         }
         else if (CrackLevel == 4)
         {
             qualityScore = 0;
-            pointScoreText.text = ("Your Score is: " + qualityScore.ToString() + "% Quality!");
+            pointScoreText.text = (qualityScore.ToString() + "%");
         }
         else
         {
             qualityScore = 100;
-            pointScoreText.text = ("Your Score is: " + qualityScore.ToString() + "% Quality!");
+            pointScoreText.text = (qualityScore.ToString() + "%");
         }
     }
 
