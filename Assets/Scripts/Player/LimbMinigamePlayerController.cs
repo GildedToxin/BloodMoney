@@ -185,6 +185,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         try
         {
             FindAnyObjectByType<GameManager>().StopMiniGame("LimbMiniGame", cam);
+            FindAnyObjectByType<GameManager>().Body.SpawnOrgan("LimbMiniGame");
             FindAnyObjectByType<GameManager>().Body.IsLimbsHarvested = true;
             FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
         }
