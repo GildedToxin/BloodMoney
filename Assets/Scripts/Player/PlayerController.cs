@@ -39,6 +39,7 @@ public class PlayerController : MonoBehaviour
     public float playerHight;
     public LayerMask Ground;
     public bool grounded;
+    public float gravity;
 
     public Transform orientation;
 
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
             rb.linearDamping = 0;
         }
 
-
+/*
         if (Input.GetKey(KeyCode.J)){
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
             Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
@@ -130,18 +131,25 @@ public class PlayerController : MonoBehaviour
                 hit.collider.GetComponent<DecalProjector>().fadeFactor -= 0.01f;
             }
         }
+*/
     }
 
     private void FixedUpdate()
     {
+
 
         if (GameManager.Instance.isInMiniGame)  
             return;
 
         MovePlayer();
 
-       // if (!cartScript.isMoving)
-         //   stepclimb();
+        // if (!cartScript.isMoving)
+        //   stepclimb();
+
+        if (!grounded)
+        {
+            rb.AddForce(Vector3.down * gravity, ForceMode.Acceleration);
+        }
     }
     public void Save(ref PlayerSaveData data)
     {

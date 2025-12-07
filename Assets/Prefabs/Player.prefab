@@ -114,37 +114,6 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!1 &2381957637177502500
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6626552505990464595}
-  m_Layer: 0
-  m_Name: Cart_Position
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6626552505990464595
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2381957637177502500}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.29, z: 1.16}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 261752684191090665}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!1 &2700824240856020937
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,9 +128,10 @@ GameObject:
   - component: {fileID: 153797956869431695}
   - component: {fileID: 4055777116043404963}
   - component: {fileID: 700656557543491913}
+  - component: {fileID: 6828562056041446315}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Player
+  m_TagString: Teleportable
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -183,7 +153,6 @@ Transform:
   - {fileID: 1529264598274154182}
   - {fileID: 4279783603869561095}
   - {fileID: 8589752650493286919}
-  - {fileID: 6626552505990464595}
   - {fileID: 3995075253909699239}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -196,7 +165,7 @@ Rigidbody:
   m_GameObject: {fileID: 2700824240856020937}
   serializedVersion: 5
   m_Mass: 1
-  m_LinearDamping: 0
+  m_LinearDamping: 5
   m_AngularDamping: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -232,6 +201,7 @@ MonoBehaviour:
   lerpSpeed: 5
   RightHand: {fileID: 0}
   LeftHand: {fileID: 0}
+  canDropItem: 0
 --- !u!114 &153797956869431695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -246,10 +216,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerController
   RightHand: {fileID: 0}
   LeftHand: {fileID: 0}
-  moveSpeed: 10
-  sprintSpeed: 15
-  crouchSpeed: 5
-  groundDrag: 3.57
+  moveSpeed: 7
+  sprintSpeed: 12
+  crouchSpeed: 3
+  groundDrag: 5
   jumpForce: 8
   jumpCooldown: 0.25
   airMultiplier: 0.4
@@ -258,18 +228,22 @@ MonoBehaviour:
   sprintKey: 304
   crouchKey: 306
   InventoryKey: 113
-  playerHight: 5
+  playerHight: 2
   Ground:
     serializedVersion: 2
     m_Bits: 8
+  grounded: 0
+  gravity: 20
   orientation: {fileID: 1529264598274154182}
+  horizontalInput: 0
+  verticalInput: 0
   playerTestFloat: 0
   inventoryUIManager: {fileID: 0}
   cartScript: {fileID: 0}
   cam: {fileID: 0}
   stepRayUpper: {fileID: 0}
   stepRayLower: {fileID: 0}
-  stepHight: 0.3
+  stepHight: 0.4
   stepSmoth: 0.1
 --- !u!114 &4055777116043404963
 MonoBehaviour:
@@ -300,9 +274,30 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interact
   interactKey: 114
-  interactionSource: {fileID: 0}
+  interactionSource: {fileID: 1529264598274154182}
   interactionRange: 3
   noInteraction: 1
+--- !u!65 &6828562056041446315
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2700824240856020937}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3840081037476857007
 GameObject:
   m_ObjectHideFlags: 0
@@ -559,7 +554,7 @@ Transform:
   m_GameObject: {fileID: 7084567557137089921}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: -0.29, z: 1.16}
+  m_LocalPosition: {x: 0, y: -0.22, z: 1.16}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

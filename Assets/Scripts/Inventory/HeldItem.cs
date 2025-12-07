@@ -34,7 +34,7 @@ public class HeldItem : MonoBehaviour
 
         RightHand.SetBool("isGrabbing", hasItem);
         LeftHand.SetBool("isGrabbing", hasItem);
-        Debug.Log("is this thing on???");
+        //Debug.Log("is this thing on???");
     }
     public void PickUpItem(GameObject item)
     {
@@ -49,7 +49,7 @@ public class HeldItem : MonoBehaviour
     public void DropItem(GameObject item)
     {
         StartCoroutine(PickUpCooldownTimer());
-        currentItem.transform.SetParent(null);
+        currentItem.transform.SetParent(null, worldPositionStays: true);
         var rb = currentItem.GetComponent<Rigidbody>();
         rb.useGravity = true;
         currentItem = null;

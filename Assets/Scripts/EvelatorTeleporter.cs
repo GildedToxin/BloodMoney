@@ -34,7 +34,6 @@ public class EvelatorTeleporter : MonoBehaviour
         else if (buttonPressed == true && targetFloor == currentFloor)
             buttonPressed = false;
 
-        Debug.Log(listOfObjects.Count);
     }
 
     void Teleport(int current, int target, GameObject obj)//Transform fromBox, Transform toBox, GameObject obj)
