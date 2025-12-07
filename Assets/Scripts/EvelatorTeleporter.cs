@@ -13,7 +13,7 @@ public class EvelatorTeleporter : MonoBehaviour
     public List<GameObject> listOfElevatorPlatforms = new List<GameObject>();
     public List<GameObject> listOfObjects = new List<GameObject>();
 
-    void Update()
+    void FixedUpdate()
     {
         if (buttonPressed == true && targetFloor != currentFloor)
         {
