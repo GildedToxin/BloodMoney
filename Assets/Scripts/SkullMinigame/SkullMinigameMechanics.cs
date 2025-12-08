@@ -165,7 +165,7 @@ public class MinigameFunctions : MonoBehaviour
     {
         Debug.Log(remainingTime);
         Debug.Log(totalTime * timerThreshhold);
-        if (CrackLevel <= 4)
+        if (CrackLevel >= 4)
         {
             qualityScore = 0;
             pointScoreText.text = (qualityScore.ToString() + "%");
