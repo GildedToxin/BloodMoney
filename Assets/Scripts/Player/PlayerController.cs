@@ -122,7 +122,8 @@ public class PlayerController : MonoBehaviour
             rb.linearDamping = 0;
         }
 
-        stepclimb();
+        if(!cartScript.isMoving)
+            stepclimb();
 
 /*
         if (Input.GetKey(KeyCode.J)){
