@@ -11,6 +11,8 @@ public class CameraMovement : MonoBehaviour
     private float yRotation;
 
     public bool isUIOpen;
+
+    public CartScript cartScript;
     void Start()
     {
         //Keeps Cursor in place and invisible for gameplay
@@ -19,6 +21,12 @@ public class CameraMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (cartScript.isMoving)
+            sensitivityY = 0;
+        else
+            sensitivityY = 400;
+
+
         if (isUIOpen)
             return;
 
@@ -30,10 +38,12 @@ public class CameraMovement : MonoBehaviour
 
         xRotation -= mouseY;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-        
+
         // Rotates Camera and Orientation
+        
         transform.rotation = Quaternion.Euler(xRotation, yRotation, 0);
         orientation.rotation = Quaternion.Euler(0, yRotation, 0);
+        
     }
 
     public void OpenUI()
