@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject stepRayUpper;
     [SerializeField] GameObject stepRayLower;
     [SerializeField] float stepHight = 0.3f; //how high can they step up
-    [SerializeField] float stepSmoth = 0.1f; //smooth the transition between one step and another
+    [SerializeField] float stepSmoth = 1f; //smooth the transition between one step and another
 
     private IPlayerLookTarget currentLookAt;
 
@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         //cameraZRotation = cam.transform.rotation.z;
 
         transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
+        
 
 
 
@@ -121,6 +122,8 @@ public class PlayerController : MonoBehaviour
             rb.linearDamping = 0;
         }
 
+        stepclimb();
+
 /*
         if (Input.GetKey(KeyCode.J)){
             Ray ray = new Ray(cam.transform.position, cam.transform.forward);
@@ -131,6 +134,8 @@ public class PlayerController : MonoBehaviour
                 hit.collider.GetComponent<DecalProjector>().fadeFactor -= 0.01f;
             }
         }
+
+
 */
     }
 
@@ -308,12 +313,16 @@ public class PlayerController : MonoBehaviour
     private void stepclimb()
     {
         RaycastHit hitLower;
+
         if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.2f))
         {
             RaycastHit hitUpper;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.3f))
+            Debug.Log(hitLower);
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), Color.red, 0.2f);
+                Debug.Log("hit mid");
+                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
             }
         }
 
@@ -321,9 +330,12 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.2f))
         {
             RaycastHit hitUpper45;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.3f))
+            Debug.Log(hitLower45);
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), Color.red, 0.2f);
+                Debug.Log("hit positive");
+                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
             }
         }
 
@@ -331,9 +343,12 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinus45, 0.2f))
         {
             RaycastHit hitUpperMinus45;
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.3f))
+            Debug.Log(hitLowerMinus45);
+            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.2f))
             {
-                rb.position -= new Vector3(0f, -stepSmoth, 0f);
+                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), Color.red, 0.2f);
+                Debug.Log("hit negative");
+                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
             }
         }
     }
