@@ -322,7 +322,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), Color.red, 0.2f);
                 Debug.Log("hit mid");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
+                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
             }
         }
 
@@ -335,7 +335,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), Color.red, 0.2f);
                 Debug.Log("hit positive");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
+                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
             }
         }
 
@@ -348,7 +348,7 @@ public class PlayerController : MonoBehaviour
             {
                 Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), Color.red, 0.2f);
                 Debug.Log("hit negative");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.1f);
+                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
             }
         }
     }
