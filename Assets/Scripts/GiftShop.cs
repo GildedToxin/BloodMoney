@@ -10,6 +10,7 @@ public class GiftShop : MonoBehaviour, IPlayerLookTarget
         {
             //FindAnyObjectByType<ShopManager>().gameObject.SetActive(true);
             ShopManager.Instance.transform.GetChild(0).gameObject.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("");
 
             ShopManager.Instance.RefreshShop(ShopManager.Instance.itemShopContent);
             ShopManager.Instance.RefreshShop(ShopManager.Instance.toolShopContent);
