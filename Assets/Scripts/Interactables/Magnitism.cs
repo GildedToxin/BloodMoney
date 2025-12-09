@@ -4,36 +4,19 @@ using UnityEngine;
 
 public class Magnitism : CartScript
 {
-    public List<Rigidbody> rb = new List<Rigidbody>();
     private void OnTriggerEnter(Collider other)
     {
-        Rigidbody newRB = other.GetComponent<Rigidbody>();
-
-        if (newRB != null)
+        Debug.Log(other.tag);
+        if (other.tag == "Teleportable")
         {
-            rb.Add(newRB);
+            other.gameObject.transform.SetParent(cart.transform);
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        Rigidbody newRB = other.GetComponent<Rigidbody>();
-
-        if (newRB != null)
-        {
-            rb.Remove(newRB);
-        }
-    }
-
-    private void Update()
-    {
-        if (isMoving)
-        {
-            foreach (Rigidbody rBodies in rb)
-            {
-                rBodies.AddForce(Vector3.down * 500); 
-            }
-        }
+        if (other.tag == "Teleportable")
+            other.gameObject.transform.SetParent(null);
     }
 
 }

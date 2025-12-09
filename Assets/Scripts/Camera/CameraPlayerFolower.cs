@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UIElements;
+using static UnityEngine.GraphicsBuffer;
 
 [ExecuteAlways]
 public class CameraPlayerFolower : MonoBehaviour
@@ -7,6 +9,7 @@ public class CameraPlayerFolower : MonoBehaviour
 
     private void LateUpdate()
     {
+
         transform.position = cameraPosition.position;
     }
 }
