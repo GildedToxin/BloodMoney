@@ -24,7 +24,7 @@ public class CameraMovement : MonoBehaviour
         if (cartScript.isMoving)
             sensitivityY = 0;
         else
-            sensitivityY = 400;
+           sensitivityY = 400;
 
 
         if (isUIOpen)

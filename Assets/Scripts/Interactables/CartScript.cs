@@ -34,7 +34,30 @@ public class CartScript : MonoBehaviour, IInteractable
             player.layer = LayerMask.NameToLayer("TransparentFX");
             playerController.canJump = false;
             transform.parent.parent = cartHolder.transform;
-            
+
+
+            var cleaningCart = transform.parent;
+
+ 
+            Transform parent = cleaningCart.parent;
+
+
+            cleaningCart.localPosition = Vector3.zero;
+
+
+            Vector3 local = cleaningCart.localEulerAngles;
+            cleaningCart.localEulerAngles = new Vector3(0, 0, local.z);
+
+
+            Vector3 world = cleaningCart.rotation.eulerAngles;
+            world.z = 0;
+            cleaningCart.rotation = Quaternion.Euler(world);
+
+            local = cleaningCart.localEulerAngles;
+            cleaningCart.localEulerAngles = new Vector3(0, 0, local.z);
+
+
+
             if (Input.GetKey(letGoKey) && isMoving)
             {
                 player.layer = LayerMask.NameToLayer("Default");
