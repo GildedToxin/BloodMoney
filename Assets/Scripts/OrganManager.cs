@@ -44,7 +44,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
         }
     }
-
+    /*
     void OnCollisionEnter(Collision collision)
     {
         float impactSpeed = collision.relativeVelocity.magnitude;
@@ -82,7 +82,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         GameObject vfxInstance = Instantiate(bloodEffect, transform.position, Quaternion.LookRotation(-collision.contacts[0].normal));
         Destroy(vfxInstance.gameObject, 15);
     }
-
+    */
     public void OnLookEnter()
     {
         islookedAt = true;

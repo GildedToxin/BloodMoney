@@ -29,13 +29,6 @@ public class InventoryController : MonoBehaviour
         {
             selectedIndex.Value = newSelection != selectedIndex ? newSelection : selectedIndex;
         }
-
-        if (Input.GetKey(KeyCode.T))
-        {
-
-            print(selectedIndex.Value);
-        }
-
     }
     private int GetNumberKeyDown()
     {

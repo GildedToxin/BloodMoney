@@ -6,7 +6,7 @@ public class GiftShop : MonoBehaviour, IPlayerLookTarget
    
     void Update()
     {
-        if(isLookedAt && Input.GetKeyDown(KeyCode.Q))
+        if(isLookedAt && Input.GetKeyDown(KeyCode.E))
         {
             //FindAnyObjectByType<ShopManager>().gameObject.SetActive(true);
             ShopManager.Instance.transform.GetChild(0).gameObject.SetActive(true);
@@ -21,7 +21,7 @@ public class GiftShop : MonoBehaviour, IPlayerLookTarget
     public void OnLookEnter()
     {
         FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press Q to Open Shop");
+        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to Open Shop");
 
         isLookedAt = true;
     }

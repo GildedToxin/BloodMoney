@@ -108,6 +108,6 @@ public class ShopManager : MonoBehaviour
     { 
         transform.GetChild(0).gameObject.SetActive(false);
         Camera.main.GetComponent<CameraMovement>().CloseUI();
-        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press Q to Open Shop");
+        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to Open Shop");
     }
 }

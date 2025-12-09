@@ -32,7 +32,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     {
         if (isLookedAt && canBuyItem && !isServed)
         {
-            if (Input.GetKeyDown(KeyCode.Q)) {
+            if (Input.GetKeyDown(KeyCode.E)) {
                 isServed = true;
                 FindAnyObjectByType<VendorStand>().SellOrgan(desiredOrgan, this);
             }
@@ -54,7 +54,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
 
         if (canBuyItem && !isServed)
         {
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press Q to Sell {desiredOrgan.ToString()}");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Sell {desiredOrgan.ToString()}");
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
         }
     }
