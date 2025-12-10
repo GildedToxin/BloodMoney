@@ -36,6 +36,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject brainPrefab;
     public Transform brainSpawnLocation;
 
+    public GameObject headTop;
+
     public List<GameObject> limbPrefabs;
     public List<Transform> limbSpawnLocations;
 
@@ -117,6 +119,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             case "SkullMinigame":
                 Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
                 Destroy(BodyBrain);
+                Destroy(headTop);
                 break;
             case "Fingers":
                 //IsFingersHighlighted = true;
