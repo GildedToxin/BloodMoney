@@ -21,7 +21,7 @@ public class CameraMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
-        if (cartScript.isMoving)
+        if (cartScript != null && cartScript.isMoving)
             sensitivityY = 0;
         else
             sensitivityY = 400;

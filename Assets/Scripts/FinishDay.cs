@@ -33,6 +33,8 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
     public void EndVerticalSlice()
     {
         FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).lostGame.SetActive(false);
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).wonGame.SetActive(true);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         FindAnyObjectByType<PlayerController>().enabled = false;

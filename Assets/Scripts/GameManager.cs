@@ -357,6 +357,8 @@ public class GameManager : MonoBehaviour
     public void PlayerFailedDay()
     {
         FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).lostGame.SetActive(true);
+        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).wonGame.SetActive(false);
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         FindAnyObjectByType<PlayerController>().enabled = false;
