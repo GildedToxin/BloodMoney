@@ -78,7 +78,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         if ((distanceMoved >= 360f || limbTimer > limbTimerLimit) && isMinigameActive)  // Determines when the minigame is over
         {
             EndMinigameRound();
-            if (currentRound < 4)
+            if (currentRound < 1)
             {
                 StartCoroutine(StartMinigameRoundWithDelay());
             }
@@ -91,7 +91,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
             isMinigameActive = false;
         }
 
-        if (currentRound > 4)  // Ends the entire minigame after all limbs are done
+        if (currentRound > 1)  // Ends the entire minigame after all limbs are done
         {
             EndMinigame();
         }
@@ -185,9 +185,16 @@ public class LimbMinigamePlayerController : MonoBehaviour
         try
         {
             FindAnyObjectByType<GameManager>().StopMiniGame("LimbMiniGame", cam);
-            FindAnyObjectByType<GameManager>().Body.SpawnOrgan("LimbMiniGame");
-            FindAnyObjectByType<GameManager>().Body.IsLimbsHarvested = true;
-            FindAnyObjectByType<GameManager>().Body.RemoveHighlight();
+
+            var body = FindAnyObjectByType<GameManager>().Body;
+
+            body.SpawnOrgan("LimbMiniGame");
+            body.limbsHarvested++;
+            if(body.limbsHarvested >= 4)
+            {
+                body.IsLimbsHarvested = true;
+            }
+            body.RemoveHighlight();
         }
         catch (System.Exception e)
         {

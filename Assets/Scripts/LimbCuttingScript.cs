@@ -52,7 +52,7 @@ public class LimbCuttingScript : MonoBehaviour
             Vector3 pointPosition = new Vector3(x, y, z) + circleCenter;
 
             pointsArray[i] = pointPosition;
-            Debug.Log($"Point {i}: {pointsArray[i]}");
+            //Debug.Log($"Point {i}: {pointsArray[i]}");
         }
 
         return pointsArray;
@@ -95,6 +95,6 @@ public class LimbCuttingScript : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         currentLimb++;
-        limbs.transform.GetChild(currentLimb).gameObject.SetActive(true);
+        limbs.transform.GetChild(GameManager.Instance.Body.limbsHarvested).gameObject.SetActive(true);
     }
 }

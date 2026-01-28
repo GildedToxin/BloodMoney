@@ -46,6 +46,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject BodyBrain;
     public GameObject[] BodyLimbs;
 
+    public int limbsHarvested = 0;
+
     public void Update()
     {
         if (isLookedAt)
@@ -101,14 +103,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
         switch (sceneOrgan)
         {
             case "LimbMiniGame":
-                foreach(GameObject limb in BodyLimbs)
-                {
-                    Destroy(limb);
-                }
-                Instantiate(limbPrefabs[0], limbSpawnLocations[0].position, limbSpawnLocations[0].rotation);
-                Instantiate(limbPrefabs[1], limbSpawnLocations[1].position, limbSpawnLocations[1].rotation);
-                Instantiate(limbPrefabs[2], limbSpawnLocations[2].position, limbSpawnLocations[2].rotation);
-                Instantiate(limbPrefabs[3], limbSpawnLocations[3].position, limbSpawnLocations[3].rotation);
+
+                Destroy(BodyLimbs[limbsHarvested * 2]);
+                Destroy(BodyLimbs[(limbsHarvested * 2) + 1]);
+
+                Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
                 break;
             case "Bones":
                 //IsBonesHighlighted = true;
