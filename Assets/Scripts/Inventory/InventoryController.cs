@@ -1,6 +1,7 @@
 using JetBrains.Annotations;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class InventoryController : MonoBehaviour
@@ -11,15 +12,32 @@ public class InventoryController : MonoBehaviour
 
     public Dictionary<string, bool> items = new Dictionary<string, bool>()
           {
-        { "Mop", true },
-        { "Syringe", false },
-        { "Hatchet", false },
+        { "Mop", false },
+        { "Wood Saw", false },
         { "Jig Saw", false },
-        { "Wood Saw", true },
-        { "Scooper", false },
+        { "Syringe", false },
         { "Mallet", false },
+        { "Hatchet", false },
+        { "Scooper", false },
     };
 
+    private void Start()
+    {
+        for(int i = 0; i <= GameManager.Instance.currentDay; i++)
+        {
+            try
+            {
+                var itemCheck = items.ElementAt(i);
+
+                if (itemCheck.Key != null)
+                    items[itemCheck.Key] = true;
+
+            }            catch (ArgumentOutOfRangeException)
+            {
+                break;
+            }
+        }
+    }
 
     private void Update()
     {
