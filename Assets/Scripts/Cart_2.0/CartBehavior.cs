@@ -8,7 +8,7 @@ public class CartBehavior : MonoBehaviour
     public GameObject Player;
     public Transform cart_center;
 
-    private bool moveing = false;
+    public bool moveing = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -21,7 +21,7 @@ public class CartBehavior : MonoBehaviour
 
     private void FollowPlayer(GameObject player)
     {
-        this.transform.parent = player.transform;
+        this.transform.parent = cart_center;
         this.transform.position = cart_center.position;
         moveing = true;
     }
@@ -30,7 +30,7 @@ public class CartBehavior : MonoBehaviour
     {
         if (moveing)
         {
-            if(Input.GetKeyDown(KeyCode.RightShift))
+            if (Input.GetKeyDown(KeyCode.RightShift))
             {
                 this.transform.parent = null;
                 TriggerArea.SetActive(true);
