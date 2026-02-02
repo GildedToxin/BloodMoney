@@ -2,11 +2,13 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using Mono.Cecil;
 
 public class BloodMinigameScript : MonoBehaviour
 {
     public GameObject bloodDropStartPoint;
     public GameObject bloodDropEndPoint;
+    public GameObject bloodDropEndPoint2;
     public GameObject playerHitZone;
     public GameObject bloodDropPrefab;
     public Slider scoreVisual;  // Displays score with a slider (should be replaced with proper visuals later)
@@ -35,6 +37,7 @@ public class BloodMinigameScript : MonoBehaviour
 
     void Update()
     {
+
         if (gameRunning && minigameTime > 0)  // Main game loop
         {
             bloodDropTimer += Time.deltaTime;
@@ -49,6 +52,16 @@ public class BloodMinigameScript : MonoBehaviour
             if (gameRunning && Input.GetKeyDown(KeyCode.E))
             {
                 CollectBloodDrop();
+            }
+
+            foreach(GameObject bloodDrop in activeBloodDrops)
+            {
+                if (Vector3.Distance(bloodDrop.GetComponent<RectTransform>().position,
+                    playerHitZone.GetComponent<RectTransform>().position) < 80f)
+                {
+                    bloodDrop.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+                }
+                else { bloodDrop.transform.localScale = new Vector3(1f, 1f, 1f); }
             }
         }
         else if (gameRunning && minigameTime <= 0)
@@ -98,6 +111,18 @@ public class BloodMinigameScript : MonoBehaviour
             GameObject bloodDrop = activeBloodDrops[i];
             if (bloodDrop.GetComponent<RectTransform>().position.x <= bloodDropEndPoint.transform.position.x)
             {
+                bloodDrop.transform.GetChild(0).localScale *= 0.99f;
+                var image = bloodDrop.transform.GetChild(0).GetComponent<Image>();
+                image.color = Color.Lerp(image.color, new Color(0, 0, 0, 0), 0.02f);
+            }
+
+            if (bloodDrop.GetComponent<RectTransform>().position.x <= bloodDropEndPoint2.transform.position.x)
+            {
+                bloodDrop.transform.GetChild(0).localScale *= 0.99f;
+                var image = bloodDrop.transform.GetChild(0).GetComponent<Image>();
+                image.color = Color.Lerp(image.color, new Color(0, 0, 0, 0), 0.02f);
+
+
                 Destroy(bloodDrop);
                 activeBloodDrops.RemoveAt(i);
                 if (collectedBloodDrops > 0)
@@ -146,7 +171,7 @@ public class BloodMinigameScript : MonoBehaviour
         for (int i = activeBloodDrops.Count - 1; i >= 0; i--)
         {
             GameObject bloodDrop = activeBloodDrops[i];
-            float minDistance = 50f;
+            float minDistance = 80f;
 
             // Checks for the closest blood drop in range
             if (Vector3.Distance(bloodDrop.GetComponent<RectTransform>().position, 
