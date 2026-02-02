@@ -269,7 +269,7 @@ public class GameManager : MonoBehaviour
             case "Bones":
                 return "";
             case "Blood":
-                return "";
+                return "BloodMiniGame";
             case "Brain":
                 return "SkullMinigame";
             case "Fingers":
@@ -282,6 +282,10 @@ public class GameManager : MonoBehaviour
     public void StartMiniGame()
     {
         currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
+
+        print(OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1)));
+        print(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
+        print(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1);
         try
         {
             if (currentMiniGame == "")

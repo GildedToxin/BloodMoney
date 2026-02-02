@@ -64,7 +64,6 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Harvest {organ}");
             if (Input.GetKeyDown(KeyCode.E))
                 GameManager.Instance.StartMiniGame();
-            print(IsBrainHarvested);
         }
     }
     public void Highlight(string organ)

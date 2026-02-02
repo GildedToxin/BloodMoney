@@ -21,12 +21,13 @@ public class InventoryController : MonoBehaviour
         { "Scooper", false },
     };
 
-    private void Start()
+    private void Awake()
     {
         for(int i = 0; i <= GameManager.Instance.currentDay; i++)
         {
             try
             {
+                print(i);
                 var itemCheck = items.ElementAt(i);
 
                 if (itemCheck.Key != null)

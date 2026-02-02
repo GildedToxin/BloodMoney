@@ -35,6 +35,16 @@ public class BloodMinigameScript : MonoBehaviour
 
     private List<GameObject> activeBloodDrops = new List<GameObject>();
 
+
+    public Canvas StartCanvas;
+    public Canvas EndCanvas;
+    public Camera cam;
+
+
+    private void Start()
+    {
+        StartCoroutine(StartMinigameRoundWithDelay());
+    }
     void Update()
     {
 
@@ -162,6 +172,10 @@ public class BloodMinigameScript : MonoBehaviour
     {
         gameRunning = false;
         startGameBool = false;
+
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
+        EndCanvas.gameObject.SetActive(true);
     }
 
     private void CollectBloodDrop()
@@ -190,5 +204,47 @@ public class BloodMinigameScript : MonoBehaviour
         Destroy(closestBloodDrop);
         activeBloodDrops.RemoveAt(closestBloodDropIndex);
         collectedBloodDrops++;
+    }
+
+
+
+    private IEnumerator StartMinigameRoundWithDelay()
+    {
+
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        Debug.Log("Starting in 3...");
+        yield return new WaitForSeconds(1f);
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        Debug.Log("Starting in 2...");
+        yield return new WaitForSeconds(1f);
+        Debug.Log("Starting in 1...");
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        StartGame();
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        Debug.Log("Mini-game started!");
+    }
+
+
+    public void StopMiniGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        try
+        {
+            GameManager.Instance.StopMiniGame("BloodMiniGame", cam);
+            if (score > 0)
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BloodMiniGame");
+            GameManager.Instance.Body.IsBrainHarvested = true;
+            GameManager.Instance.Body.RemoveHighlight();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error ending minigame: " + e.Message);
+
+        }
     }
 }
