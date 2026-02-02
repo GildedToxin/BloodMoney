@@ -283,9 +283,6 @@ public class GameManager : MonoBehaviour
     {
         currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
 
-        print(OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1)));
-        print(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
-        print(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1);
         try
         {
             if (currentMiniGame == "")

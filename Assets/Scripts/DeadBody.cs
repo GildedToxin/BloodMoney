@@ -48,6 +48,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
     public int limbsHarvested = 0;
 
+
+    public GameObject bloodPrefab;
+    public Transform bloodSpawnLocation;
+
     public void Update()
     {
         if (isLookedAt)
@@ -83,6 +87,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 break;
             case "Blood":
                 IsBloodHighlighted = true;
+                    Blood.layer = LayerMask.NameToLayer("Highlight");
                 break;
             case "Brain":
                 IsBrainHighlighted = true;
@@ -111,8 +116,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             case "Bones":
                 //IsBonesHighlighted = true;
                 break;
-            case "Blood":
-                //IsBloodHighlighted = true;
+            case "BloodMiniGame":
+                Instantiate(bloodPrefab, bloodSpawnLocation.position, bloodSpawnLocation.rotation);
                 break;
             case "SkullMinigame":
                 Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
@@ -145,6 +150,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
 
         Brain.layer = LayerMask.NameToLayer("Default");
+        Blood.layer = LayerMask.NameToLayer("Default");
     }
 
     public void OnLookEnter()

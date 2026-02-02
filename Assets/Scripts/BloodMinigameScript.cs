@@ -238,7 +238,7 @@ public class BloodMinigameScript : MonoBehaviour
             GameManager.Instance.StopMiniGame("BloodMiniGame", cam);
             if (score > 0)
                 FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BloodMiniGame");
-            GameManager.Instance.Body.IsBrainHarvested = true;
+            GameManager.Instance.Body.IsBloodHarvested = true;
             GameManager.Instance.Body.RemoveHighlight();
         }
         catch (System.Exception e)
