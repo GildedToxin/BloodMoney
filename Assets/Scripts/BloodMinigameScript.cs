@@ -87,7 +87,7 @@ public class BloodMinigameScript : MonoBehaviour
         }
 
         // Stuff that should only happen once at the end of the minigame
-        if (gameRunning && minigameTime <= 0 || collectedBloodDrops >= totalBloodDrops)
+        if (gameRunning && (minigameTime <= 0 || collectedBloodDrops >= totalBloodDrops))
         {
             if (collectedBloodDrops >= totalBloodDrops)
             {
@@ -168,13 +168,20 @@ public class BloodMinigameScript : MonoBehaviour
         
     }
 
+    public bool once = true;
     private void EndGame()
     {
         gameRunning = false;
         startGameBool = false;
 
         Cursor.lockState = CursorLockMode.Confined;
-        Cursor.visible = true;
+
+        //if(once)
+        //{
+            once = false;
+            Cursor.visible = true;
+        //}
+
         EndCanvas.gameObject.SetActive(true);
     }
 
@@ -246,5 +253,8 @@ public class BloodMinigameScript : MonoBehaviour
             Debug.LogError("Error ending minigame: " + e.Message);
 
         }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        print(Cursor.visible);
     }
 }

@@ -2508,6 +2508,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3070651157124372945, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
+      propertyPath: Blood
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 3070651157124372945, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
       propertyPath: Brain
       value: 
       objectReference: {fileID: 0}
@@ -2623,7 +2627,9 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 7493487800411293194, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
+    - {fileID: 3070651157124372945, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
     m_RemovedGameObjects:
     - {fileID: 1227706671337590324, guid: f71b35454d45a3e40b7bb64e1e62e248, type: 3}
     m_AddedGameObjects: []
