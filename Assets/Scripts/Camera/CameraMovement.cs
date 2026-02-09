@@ -10,6 +10,9 @@ public class CameraMovement : MonoBehaviour
     private float xRotation;
     private float yRotation;
 
+    [SerializeField] private int maxRotation = 90;
+    [SerializeField] private int minRotation = -90;
+
     public bool isUIOpen;
 
     public CartScript cartScript;
@@ -37,7 +40,7 @@ public class CameraMovement : MonoBehaviour
         yRotation += mouseX;
 
         xRotation -= mouseY;
-        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        xRotation = Mathf.Clamp(xRotation, minRotation, maxRotation);
 
         // Rotates Camera and Orientation
         
