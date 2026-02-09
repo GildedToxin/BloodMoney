@@ -58,6 +58,10 @@ public class InventoryController : MonoBehaviour
 
     public void ChangeModel(int index)
     {
+        if(GetComponent<HeldItem>().currentItem != null)
+        {
+            return;
+        }
         foreach (GameObject tool in tools)
         {
             if (tool != null)
