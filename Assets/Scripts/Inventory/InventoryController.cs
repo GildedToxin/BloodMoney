@@ -39,6 +39,7 @@ public class InventoryController : MonoBehaviour
                 break;
             }
         }
+        selectedIndex.Value = 1;
     ChangeModel(1);
     }
 
@@ -62,9 +63,17 @@ public class InventoryController : MonoBehaviour
             if (tool != null)
                 tool.SetActive(false);
         }
-        tools[index-1]?.SetActive(true);
+        tools[index - 1]?.SetActive(true);
 
 
+    }
+    public void HideAllTools()
+    {
+        foreach (GameObject tool in tools)
+        {
+            if (tool != null)
+                tool.SetActive(false);
+        }
     }
     private int GetNumberKeyDown()
     {

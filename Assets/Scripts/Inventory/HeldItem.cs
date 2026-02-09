@@ -44,6 +44,7 @@ public class HeldItem : MonoBehaviour
         currentItem.transform.position = heldItemPosition.position;
         currentItem.transform.SetParent(heldItemPosition);
         currentItem.GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<InventoryController>().HideAllTools();
 
     }
     public void DropItem(GameObject item)
@@ -54,7 +55,7 @@ public class HeldItem : MonoBehaviour
         rb.useGravity = true;
         currentItem = null;
         canDropItem = false;
-
+        GetComponent<InventoryController>().ChangeModel(GetComponent<InventoryController>().selectedIndex.Value);
     }
     IEnumerator PickUpCooldownTimer()
     {
