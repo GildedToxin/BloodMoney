@@ -20,6 +20,7 @@ public class InventoryController : MonoBehaviour
         { "Hatchet", false },
         { "Scooper", false },
     };
+    public List<GameObject> tools = new List<GameObject>(); 
 
     private void Awake()
     {
@@ -38,6 +39,7 @@ public class InventoryController : MonoBehaviour
                 break;
             }
         }
+    ChangeModel(1);
     }
 
     private void Update()
@@ -47,7 +49,22 @@ public class InventoryController : MonoBehaviour
         if (DoesPlayerHaveItemInSlot(newSelection - 1))
         {
             selectedIndex.Value = newSelection != selectedIndex ? newSelection : selectedIndex;
+            ChangeModel(selectedIndex.Value);
+
+
         }
+    }
+
+    public void ChangeModel(int index)
+    {
+        foreach (GameObject tool in tools)
+        {
+            if (tool != null)
+                tool.SetActive(false);
+        }
+        tools[index-1]?.SetActive(true);
+
+
     }
     private int GetNumberKeyDown()
     {
