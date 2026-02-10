@@ -8,21 +8,25 @@ public class CartMagnitism : MonoBehaviour
     public float Pull = 2.0f;
     CartBehavior cartBehavior;
     public GameObject objectHolder;
+    public List<Rigidbody> rb = new List<Rigidbody>();
 
     private void Start()
     {
-        cartBehavior = GetComponent<CartBehavior>();
+        cartBehavior = FindAnyObjectByType<CartBehavior>();
     }
 
     private void OnTriggerEnter(Collider other)
     {
         CartObjects.Add(other.gameObject);
+        if(other.gameObject.GetComponent<Rigidbody>() != null)
+            rb.Add(other.gameObject.GetComponent<Rigidbody>());
         ObjectLock();
     }
 
     private void OnTriggerExit(Collider other)
     {
         CartObjects.Remove(other.gameObject);
+        rb.Remove(other.gameObject.GetComponent<Rigidbody>());
         ObjectUnLock();
     }
 
@@ -38,8 +42,12 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
-            //obj.GetComponent<Rigidbody>().enable = false;
             obj.GetComponent<Transform>().SetParent(objectHolder.transform);
+        }
+        foreach (Rigidbody rb in rb)
+        {
+            rb.isKinematic = true;
+
         }
     }
 
@@ -47,8 +55,11 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
-            //obj.GetComponent<Rigidbody>().enable = false;
             obj.GetComponent<Transform>().SetParent(null);
+        }
+        foreach (Rigidbody rb in rb)
+        {
+            rb.isKinematic = false;
         }
     }
 }
