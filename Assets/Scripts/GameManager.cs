@@ -60,6 +60,18 @@ public class GameManager : MonoBehaviour
     public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
 
+
+
+    public Dictionary<string, bool> HasShownTutorial = new Dictionary<string, bool>()
+    {
+        { "LimbMiniGame", false },
+        { "BloodMiniGame", false },
+        { "SkullMinigame", false },
+        { "HandsMinigame", false },
+        { "EyeMinigame", false },
+        { "BoneMinigame", false },
+    };
+
     private void Awake()
     {
         if (instance == null)
