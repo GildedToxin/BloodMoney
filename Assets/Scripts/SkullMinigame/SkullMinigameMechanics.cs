@@ -57,6 +57,8 @@ public class MinigameFunctions : MonoBehaviour
     private bool isAnimated = false;
 
 
+    public Material bloodyMat;
+
     private void Awake()
     {
         neededHits = Random.Range(minHammerHits, maxHammerHits);
@@ -158,6 +160,12 @@ public class MinigameFunctions : MonoBehaviour
         if (CrackLevel == 3)
         {
             neededHits = 1;
+        }
+
+        if (CrackLevel == 2)
+        {
+            hammer.transform.GetChild(0).GetChild(0).GetComponent<Renderer>().material = bloodyMat;
+            hammer.transform.GetChild(0).GetChild(1).GetComponent<Renderer>().material = bloodyMat;
         }
     }
 
