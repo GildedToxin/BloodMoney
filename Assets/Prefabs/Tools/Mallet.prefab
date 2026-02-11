@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &3228927587264086303
+--- !u!1001 &8279768426539982530
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,16 +9,28 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 17.433748
+      value: 19.362
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 3.449
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 5.6005716
+      value: -27.029
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
       propertyPath: m_LocalRotation.w
@@ -48,18 +60,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: f7411774dc47031459fee502bf09ca51, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -6089459750782294586, guid: f7411774dc47031459fee502bf09ca51, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 0abe801281423a544ba05ebf42dca65e, type: 2}
     - target: {fileID: 919132149155446097, guid: f7411774dc47031459fee502bf09ca51, type: 3}
       propertyPath: m_Name
       value: Mallet
       objectReference: {fileID: 0}
-    - target: {fileID: 7619838968199346788, guid: f7411774dc47031459fee502bf09ca51, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 3086bd6f02ebac94f9a3f2d7010bdfbc, type: 2}
-    - target: {fileID: 8524823538139195233, guid: f7411774dc47031459fee502bf09ca51, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: 1c0f02197ac01834fb1c5b11950614e6, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
