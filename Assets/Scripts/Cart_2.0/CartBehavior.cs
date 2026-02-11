@@ -23,6 +23,7 @@ public class CartBehavior : MonoBehaviour
     {
         this.transform.parent = cart_center;
         this.transform.position = cart_center.position;
+        this.transform.rotation = cart_center.rotation;
         moveing = true;
     }
 

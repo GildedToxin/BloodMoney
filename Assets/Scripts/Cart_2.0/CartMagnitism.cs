@@ -17,9 +17,12 @@ public class CartMagnitism : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        CartObjects.Add(other.gameObject);
-        if(other.gameObject.GetComponent<Rigidbody>() != null)
-            rb.Add(other.gameObject.GetComponent<Rigidbody>());
+        if (other.GetComponent<OrganManager>() != null)
+        {
+            CartObjects.Add(other.gameObject);
+            if (other.gameObject.GetComponent<Rigidbody>() != null)
+                rb.Add(other.gameObject.GetComponent<Rigidbody>());
+        }
         ObjectLock();
     }
 
