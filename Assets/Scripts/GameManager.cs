@@ -293,6 +293,14 @@ public class GameManager : MonoBehaviour
             Player.GetComponent<PlayerController>().enabled = false;
             FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
             isInMiniGame = true;
+
+            if(currentMiniGame == "BloodMiniGame")
+            {
+                
+                FindAnyObjectByType<BloodMinigameScript>().UpdateDeadBodyModel(HandsHarvested: Body.handsHarvested, LimbsHavested: Body.limbsHarvested, Hands: Body.IsFingersHarvested, 
+                    Limbs: Body.IsLimbsHarvested, Skull: Body.IsBrainHarvested, Ribs: Body.IsBonesHarvested);
+            }
+
         }
         catch (Exception e)
         {

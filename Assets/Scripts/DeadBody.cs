@@ -47,6 +47,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject[] BodyLimbs;
 
     public int limbsHarvested = 0;
+    public int handsHarvested = 0;
 
 
     public GameObject bloodPrefab;

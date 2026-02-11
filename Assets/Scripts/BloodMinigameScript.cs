@@ -41,6 +41,8 @@ public class BloodMinigameScript : MonoBehaviour
     public Camera cam;
 
 
+    public GameObject deadBody;
+
     private void Start()
     {
         StartCoroutine(StartMinigameRoundWithDelay());
@@ -256,5 +258,37 @@ public class BloodMinigameScript : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         print(Cursor.visible);
+    }
+
+    public void UpdateDeadBodyModel(int HandsHarvested, int LimbsHavested, bool Hands, bool Limbs, bool Skull, bool Ribs)
+    {
+        if (Ribs) {
+            deadBody.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        if (Skull)
+        {
+            deadBody.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        }
+        if (HandsHarvested == 1)
+        {
+            deadBody.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+        }
+        else if (HandsHarvested == 2)
+        {
+            deadBody.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+            deadBody.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+        }
+        if (LimbsHavested == 1)
+        {
+            deadBody.transform.GetChild(0).GetChild(7).gameObject.SetActive(false);
+            deadBody.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+        }
+        else if (LimbsHavested == 2)
+        {
+            deadBody.transform.GetChild(0).GetChild(7).gameObject.SetActive(false);
+            deadBody.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+            deadBody.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
+            deadBody.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
+        }
     }
 }
