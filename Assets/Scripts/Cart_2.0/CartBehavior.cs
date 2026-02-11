@@ -14,7 +14,8 @@ public class CartBehavior : MonoBehaviour
     {
         Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
-        {            FollowPlayer(Player);
+        {            
+            FollowPlayer(Player);
             TriggerArea.SetActive(false);
         }
     }
