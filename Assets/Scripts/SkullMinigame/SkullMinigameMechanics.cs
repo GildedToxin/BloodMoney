@@ -199,7 +199,12 @@ public class MinigameFunctions : MonoBehaviour
             GameManager.Instance.StopMiniGame("SkullMinigame", cam);
             if(qualityScore > 0)
                 FindAnyObjectByType<GameManager>().Body.SpawnOrgan("SkullMinigame");
-            GameManager.Instance.Body.IsBrainHarvested = true;
+            else
+            {
+                Destroy(FindAnyObjectByType<GameManager>().Body.BodyBrain);
+                Destroy(FindAnyObjectByType<GameManager>().Body.headTop);
+            }
+                GameManager.Instance.Body.IsBrainHarvested = true;
             GameManager.Instance.Body.RemoveHighlight();
         }
         catch (System.Exception e)
