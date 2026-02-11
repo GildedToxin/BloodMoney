@@ -286,7 +286,15 @@ public class PlayerController : MonoBehaviour
         Ray ray = new Ray(Camera.main.transform.position, Camera.main.transform.forward);
         Debug.DrawRay(ray.origin, ray.direction * 50, Color.green);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, Physics.DefaultRaycastLayers, QueryTriggerInteraction.Ignore))
+        int layerMask = Physics.DefaultRaycastLayers;
+
+        if (GetComponent<HeldItem>().currentItem != null)
+        {
+            int ignoreLayer = LayerMask.NameToLayer("Organs");
+            layerMask &= ~(1 << ignoreLayer);
+        }
+
+        if (Physics.Raycast(ray, out RaycastHit hit, 10f, layerMask, QueryTriggerInteraction.Ignore))
         {
             IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
                           ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();

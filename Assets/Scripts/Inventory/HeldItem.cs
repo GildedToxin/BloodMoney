@@ -21,7 +21,7 @@ public class HeldItem : MonoBehaviour
     {
         if(hasItem && currentItem != null)
         {
-            if(canDropItem && Input.GetKeyDown(KeyCode.E))
+            if(canDropItem && Input.GetKeyDown(KeyCode.E) && !FindFirstObjectByType<MeatGrinder>().isLookedAt)
             {
                 DropItem(currentItem);
                 return;
