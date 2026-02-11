@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
 {
-    public int buttonFloor;
+    public int buttonFloor; // Set to 0 in the inspector for the button to act as a elevator call button
     public EvelatorTeleporter elevatorScript;
 
     public bool isLookedAt = false;
@@ -11,22 +11,45 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
     {
         if (isLookedAt && Input.GetKeyDown(KeyCode.E) && !EvelatorTeleporter.isMoving)
         {
-            EvelatorTeleporter.isMoving = true;
-            Interact();
-            elevatorScript.StartCoroutine(elevatorScript.WaitOneSecond());
+            if (buttonFloor != 0)
+            {
+                EvelatorTeleporter.isMoving = true;
+                Interact();
+                elevatorScript.StartCoroutine(elevatorScript.WaitOneSecond());
+            }
+            else
+            {
+                Interact();
+            }
         } 
     }
     public void Interact()
     {
-        elevatorScript.targetFloor = buttonFloor;
-        elevatorScript.buttonPressed = true;
-        Debug.Log("Button Pressed");
+        if (buttonFloor != 0)
+        {
+            elevatorScript.targetFloor = buttonFloor;
+            elevatorScript.buttonPressed = true;
+            Debug.Log("Button Pressed");
+        }
+        else
+        {
+            elevatorScript.doorsOpen = !elevatorScript.doorsOpen; // Toggle the door state
+        }
+        
     }
 
     public void OnLookEnter()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator to floor " + buttonFloor);
+        if (buttonFloor != 0)
+        {
+            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator to floor " + buttonFloor);
+        }
+        else
+        {
+            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator");
+        }
         isLookedAt = true;
     }
 

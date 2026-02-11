@@ -10,8 +10,25 @@ public class EvelatorTeleporter : MonoBehaviour
 
     public int currentFloor;
     public int targetFloor;
+    public bool doorsOpen = false;
+    public GameObject rightDoor;
+    public GameObject leftDoor;
+    private Vector3 rightDoorOpenPos;
+    private Vector3 rightDoorClosedPos;
+    private Vector3 leftDoorOpenPos;
+    private Vector3 leftDoorClosedPos;
     public List<GameObject> listOfElevatorPlatforms = new List<GameObject>();
     public List<GameObject> listOfObjects = new List<GameObject>();
+
+    void Start()
+    {
+        rightDoorOpenPos = rightDoor.transform.position;
+        leftDoorOpenPos = leftDoor.transform.position;
+        rightDoorClosedPos = rightDoor.transform.position + new Vector3(0, 0, 1.05f);
+        leftDoorClosedPos = leftDoor.transform.position - new Vector3(0, 0, 1.05f);
+        rightDoor.transform.position = rightDoorClosedPos;
+        leftDoor.transform.position = leftDoorClosedPos;
+    }
 
     void FixedUpdate()
     {
@@ -33,6 +50,8 @@ public class EvelatorTeleporter : MonoBehaviour
         }
         else if (buttonPressed == true && targetFloor == currentFloor)
             buttonPressed = false;
+
+        OpenCloseDoors();
 
     }
 
@@ -68,5 +87,19 @@ public class EvelatorTeleporter : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         isMoving = false;
+    }
+
+    public void OpenCloseDoors()
+    {
+        if (doorsOpen == false)
+        {
+            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, rightDoorClosedPos, Time.deltaTime * 2);
+            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, leftDoorClosedPos, Time.deltaTime * 2);
+        }
+        else
+        {
+            rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, rightDoorOpenPos, Time.deltaTime * 2);
+            leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, leftDoorOpenPos, Time.deltaTime * 2);
+        }
     }
 }
