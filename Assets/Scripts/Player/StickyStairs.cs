@@ -2,15 +2,26 @@ using UnityEngine;
 
 public class StickyStairs : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public GameObject player;
+    private bool onStair = false;
+
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.tag == "Stairs")
+        {
+            onStair = true;
+        }
+        else if (collision.gameObject.tag == "Ground")
+        {
+            onStair = false;
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
+        if(onStair)
+        {
+            //player.
+        }
     }
 }
