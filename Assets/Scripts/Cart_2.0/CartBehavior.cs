@@ -12,9 +12,9 @@ public class CartBehavior : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
-        {
-            FollowPlayer(Player);
+        {            FollowPlayer(Player);
             TriggerArea.SetActive(false);
         }
     }
