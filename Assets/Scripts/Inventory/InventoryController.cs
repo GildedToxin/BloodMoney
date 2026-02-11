@@ -22,7 +22,7 @@ public class InventoryController : MonoBehaviour
     };
     public List<GameObject> tools = new List<GameObject>(); 
 
-    private void Awake()
+    private void Start()
     {
         for(int i = 0; i <= GameManager.Instance.currentDay; i++)
         {
