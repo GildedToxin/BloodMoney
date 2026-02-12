@@ -5,8 +5,7 @@ using UnityEngine;
 public class CartMagnitism : MonoBehaviour
 {
     public List<GameObject> CartObjects = new List<GameObject>();
-    public float Pull = 2.0f;
-    CartBehavior cartBehavior;
+    public CartBehavior cartBehavior;
     public GameObject objectHolder;
     public List<Rigidbody> rb = new List<Rigidbody>();
 

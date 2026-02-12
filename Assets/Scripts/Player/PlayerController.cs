@@ -53,7 +53,7 @@ public class PlayerController : MonoBehaviour
     public float playerTestFloat;
     public HUDManager inventoryUIManager;
 
-    public CartScript cartScript;
+    public CartBehavior CartBehavior;
 
     //other variables
     public Camera cam;
@@ -121,10 +121,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearDamping = 0;
         }
-
-
-        if(cartScript != null && !cartScript.isMoving)
-            stepclimb();
 
 /*
         if (Input.GetKey(KeyCode.J)){
