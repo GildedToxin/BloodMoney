@@ -38,20 +38,20 @@ public class LimbMinigamePlayerController : MonoBehaviour
         playerCursor = this.transform.position;
 
         // Start the 3 second timer before starting the mini-game
-        StartMinigame();
+        //StartMinigame();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            distanceMoved = 0f;
-            collectedPoints = 0f;
-            scorePercentage = 0f;
-            this.transform.position = playerCursor;  // Resets player position
-            playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
-            playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
-        }
+     //   if (Input.GetKeyDown(KeyCode.I))
+     //   {
+     //       distanceMoved = 0f;
+     //       collectedPoints = 0f;
+     //       scorePercentage = 0f;
+     //       this.transform.position = playerCursor;  // Resets player position
+     //       playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
+     //       playerLimb.GetComponentInChildren<LimbCuttingScript>().CreatePoints();  // Creates new points
+     //   }
 
         if (isMinigameActive)
         {
@@ -85,7 +85,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
             else
             {
                 limbEndScreen.gameObject.SetActive(true);
-                limbEndScreen.UpdateText(limbScores);
+                limbEndScreen.UpdateText(scorePercentage);
                 //StopMiniGame();
             }
             isMinigameActive = false;
@@ -128,7 +128,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         Debug.Log("Mini-game started!");
     }
 
-    private void StartMinigame() // Restarts the minigame
+    public void StartMinigame() // Restarts the minigame
     {
         limbScores = new float[4];  
         endMinigame = false;
@@ -143,13 +143,13 @@ public class LimbMinigamePlayerController : MonoBehaviour
         currentRound += 1;
         limbTimer = 0f;
         distanceMoved = 0f;
-        collectedPoints = 0f;
+       // collectedPoints = 0f;
         scorePercentage = 0f;
     }
 
     private void EndMinigameRound()  // Ends the current minigame round
     {
-        playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();
+       // playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();
         CalculateScore();
         Debug.Log("Round Over! Score: " + scorePercentage + "%");
     }
@@ -166,16 +166,21 @@ public class LimbMinigamePlayerController : MonoBehaviour
     {
         scorePercentage = collectedPoints / startingNumberOfPoints * 100f;
 
+        // print("Collected Points: " + collectedPoints);
+
         // add scorePercentage to limbScores array
         limbScores[currentRound - 1] = scorePercentage;
     }
-
+    public int i = 0;
     private void OnTriggerEnter(Collider other)  // Detects when the player collects a point then destroys it
     {
         if (other.gameObject.CompareTag("LimbGamePoint"))
         {
             collectedPoints += 1f;
             Destroy(other.gameObject);
+            i++;
+           // print(i);
+           // print(collectedPoints);
             //Debug.Log("Collected Points: " + collectedPoints);
         }
     }

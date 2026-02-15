@@ -62,11 +62,24 @@ public class LimbCuttingScript : MonoBehaviour
     {
         this.transform.rotation = limbRotation; // Resets the limb transform rotation/position
         Vector3[] points = GeneratePointsOnCircle(numberOfPoints, radius, centerPoint);
+        // print(points.Length);
 
+        var i = 0;
         foreach (Vector3 point in points)
         {
             if (pointPrefab != null)
-                Instantiate(pointPrefab, point, Quaternion.identity, this.transform);
+            {
+                try
+                {
+                    Instantiate(pointPrefab, point, Quaternion.identity, this.transform);
+                    i++;
+                //    print(i + " POINTS MADE");
+                }
+                catch
+                {
+                    print("NO POINT MADE");
+                }
+            }
             else
             {
                 Debug.LogError("Generated Point: " + point);
@@ -80,12 +93,14 @@ public class LimbCuttingScript : MonoBehaviour
         bool firstChild = true;
         foreach (Transform child in transform)
         {
+      
             if (firstChild)
             {
                 firstChild = false;
                 continue; // Skip the first child (the limb itself)
             }
             Destroy(child.gameObject);
+            print("DESTROYING");
         }
     }
     public void NextLimb()
@@ -95,6 +110,13 @@ public class LimbCuttingScript : MonoBehaviour
             child.gameObject.SetActive(false);
         }
         currentLimb++;
-        limbs.transform.GetChild(GameManager.Instance.Body.limbsHarvested).gameObject.SetActive(true);
+        try
+        {
+            limbs.transform.GetChild(GameManager.Instance.Body.limbsHarvested).gameObject.SetActive(true);
+        }
+        catch
+        {
+            limbs.transform.GetChild(1).gameObject.SetActive(true);
+        }
     }
 }

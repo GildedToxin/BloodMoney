@@ -6,6 +6,7 @@ public class MiniGameTutorialController : MonoBehaviour
     void Start()
     {
         this.gameObject.SetActive(true); 
+        Cursor.lockState = CursorLockMode.Confined; // Confine the cursor to the game window
         Cursor.visible = true; // Show the cursor when the tutorial is active
 
     }
@@ -13,7 +14,7 @@ public class MiniGameTutorialController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       // Cursor.visible = true;
     }
 
     public void EndTutorial()

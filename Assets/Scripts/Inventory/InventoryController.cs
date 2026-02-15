@@ -28,7 +28,7 @@ public class InventoryController : MonoBehaviour
         {
             try
             {
-                print(i);
+                //print(i);
                 var itemCheck = items.ElementAt(i);
 
                 if (itemCheck.Key != null)
