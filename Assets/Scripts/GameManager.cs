@@ -384,4 +384,68 @@ public class GameManager : MonoBehaviour
         Cursor.visible = true;
         FindAnyObjectByType<PlayerController>().enabled = false;
     }
+
+
+    public MiniGameType testMiniGame;
+
+    [ContextMenu("Start Test MiniGame")]
+    public void StartTestMiniGame()
+    {
+        switch (testMiniGame)
+        {
+            case MiniGameType.Blood:
+                SceneManager.LoadScene("BloodMiniGame", LoadSceneMode.Additive);
+                break;
+            case MiniGameType.Limb:
+                SceneManager.LoadScene("LimbMiniGame", LoadSceneMode.Additive);
+                break;
+            case MiniGameType.Brain:
+                SceneManager.LoadScene("SkullMinigame", LoadSceneMode.Additive);
+                break;
+        }
+
+        Camera.main.gameObject.SetActive(false);
+        Player.GetComponent<PlayerController>().enabled = false;
+        FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
+        isInMiniGame = true;
+
+        if (currentMiniGame == "BloodMiniGame")
+        {
+
+            FindAnyObjectByType<BloodMinigameScript>().UpdateDeadBodyModel(HandsHarvested: Body.handsHarvested, LimbsHavested: Body.limbsHarvested, Hands: Body.IsFingersHarvested,
+                Limbs: Body.IsLimbsHarvested, Skull: Body.IsBrainHarvested, Ribs: Body.IsBonesHarvested);
+        }
+
+    }
+    [ContextMenu("Stop Test MiniGame")]
+    public void StopTestMiniGame()
+    {
+        switch (testMiniGame)
+        {
+            case MiniGameType.Blood:
+                SceneManager.UnloadSceneAsync("BloodMiniGame");
+                break;
+            case MiniGameType.Limb:
+                SceneManager.UnloadSceneAsync("LimbMiniGame");
+                break;
+            case MiniGameType.Brain:
+                SceneManager.UnloadSceneAsync("SkullMinigame");
+                break;
+        }
+
+        Player.GetComponent<PlayerController>().enabled = true;
+        cam.gameObject.SetActive(true);
+        hudManager.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        isInMiniGame = false;
+        //Body.SpawnOrgan(sceneName);
+    }
 }
+public enum MiniGameType
+{
+    Blood,
+    Limb,
+    Brain
+}
+
