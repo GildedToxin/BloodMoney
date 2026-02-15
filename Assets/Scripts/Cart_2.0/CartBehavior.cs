@@ -9,19 +9,32 @@ public class CartBehavior : MonoBehaviour
     public Transform cart_center;
 
     public bool moveing = false;
-
+    public bool canPickUp = false;
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("collider");
+      //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
-        {            
-            FollowPlayer(Player);
-            TriggerArea.SetActive(false);
+        {    
+            canPickUp = true;
+
+            // FollowPlayer(Player);
+            // TriggerArea.SetActive(false);
         }
     }
+    private void OnTriggerExit(Collider other)
+    {
+        //  Debug.Log("collider");
+        if (other.gameObject == Player && !moveing)
+        {
+            canPickUp = false;
 
+            // FollowPlayer(Player);
+            // TriggerArea.SetActive(false);
+        }
+    }
     private void FollowPlayer(GameObject player)
     {
+        TriggerArea.SetActive(false);
         this.transform.parent = cart_center;
         this.transform.position = cart_center.position;
         this.transform.rotation = cart_center.rotation;
@@ -30,14 +43,19 @@ public class CartBehavior : MonoBehaviour
 
     private void Update()
     {
-        if (moveing)
+
+
+        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
         {
-            if (Input.GetKeyDown(KeyCode.RightShift))
-            {
-                this.transform.parent = null;
-                TriggerArea.SetActive(true);
-                StartCoroutine(ResetMovement(1f));
-            }
+           this.transform.parent = null;
+           TriggerArea.SetActive(true);
+           StartCoroutine(ResetMovement(1f));
+        }
+        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
+        {
+            FollowPlayer(Player);
+            canPickUp = false;
+
         }
     }
 

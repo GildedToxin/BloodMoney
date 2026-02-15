@@ -16,11 +16,13 @@ public class CartMagnitism : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.GetComponent<OrganManager>() != null)
+        //print(other.name);
+        if (other.GetComponentInParent<OrganManager>() != null && !other.isTrigger)
         {
-            CartObjects.Add(other.gameObject);
-            if (other.gameObject.GetComponent<Rigidbody>() != null)
-                rb.Add(other.gameObject.GetComponent<Rigidbody>());
+            var item = other.GetComponentInParent<OrganManager>().gameObject;
+            CartObjects.Add(item);
+            if (item.GetComponent<Rigidbody>() != null)
+                rb.Add(item.GetComponent<Rigidbody>());
         }
         ObjectLock();
     }
@@ -36,7 +38,7 @@ public class CartMagnitism : MonoBehaviour
     {
         if (cartBehavior != null)
         {
-            Debug.Log("no cartbehavior");
+       //     Debug.Log("no cartbehavior");
         }
 
     }
@@ -44,7 +46,7 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
-            obj.GetComponent<Transform>().SetParent(objectHolder.transform);
+            obj.GetComponent<Transform>().SetParent(objectHolder.transform, true);
         }
         foreach (Rigidbody rb in rb)
         {
@@ -57,7 +59,7 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
-            obj.GetComponent<Transform>().SetParent(null);
+            obj.GetComponent<Transform>().SetParent(null, true);
         }
         foreach (Rigidbody rb in rb)
         {

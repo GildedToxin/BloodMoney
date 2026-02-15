@@ -21,7 +21,7 @@ public class HeldItem : MonoBehaviour
     {
         if(hasItem && currentItem != null)
         {
-            if(canDropItem && Input.GetKeyDown(KeyCode.E) && !FindFirstObjectByType<MeatGrinder>().isLookedAt)
+            if(canDropItem && Input.GetKeyDown(KeyCode.E) && (FindFirstObjectByType<MeatGrinder>() == null || !FindFirstObjectByType<MeatGrinder>().isLookedAt))
             {
                 DropItem(currentItem);
                 return;
@@ -45,6 +45,7 @@ public class HeldItem : MonoBehaviour
         currentItem.transform.SetParent(heldItemPosition);
         currentItem.GetComponent<Rigidbody>().useGravity = false;
         GetComponent<InventoryController>().HideAllTools();
+        currentItem.GetComponent<Rigidbody>().isKinematic = false;
 
     }
     public void DropItem(GameObject item)

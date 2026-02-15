@@ -39,7 +39,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     }
     void Update()
     {
-        if(islookedAt && Input.GetKeyDown(KeyCode.E) && !FindAnyObjectByType<HeldItem>().hasItem)
+        if(islookedAt && Input.GetKeyDown(KeyCode.E) && !FindAnyObjectByType<HeldItem>().hasItem && !FindAnyObjectByType<CartBehavior>().moveing)
         {
             FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
         }

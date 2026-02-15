@@ -171,6 +171,8 @@ public class PlayerController : MonoBehaviour
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
 
+       
+        /*
         //when player jumps
         if(Input.GetKey(jumpKey) && canJump)
         {
@@ -178,6 +180,7 @@ public class PlayerController : MonoBehaviour
 
             Jump();
         }
+        */
 
         // when player sprints
         if (Input.GetKeyDown(sprintKey) && grounded && !crouching)
@@ -190,9 +193,9 @@ public class PlayerController : MonoBehaviour
         {
             sprinting = false;
         }
-
+        /*
         //when player crouching
-        if (Input.GetKeyDown(crouchKey) && grounded && interact.noInteraction)
+        if ( Input.GetKeyDown(crouchKey) && grounded && interact.noInteraction)
         {
             if (!crouching)
             {
@@ -205,7 +208,7 @@ public class PlayerController : MonoBehaviour
                 transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
             }
         }    
-
+        */
     }
 
     private void MovePlayer()
