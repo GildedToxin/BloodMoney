@@ -19,6 +19,9 @@ public class EvelatorTeleporter : MonoBehaviour
     private Vector3 leftDoorClosedPos;
     public List<GameObject> listOfElevatorPlatforms = new List<GameObject>();
     public List<GameObject> listOfObjects = new List<GameObject>();
+    public List<GameObject> listOfEvelatorTeleporters = new List<GameObject>();
+
+    private bool isTeleporting = false;
 
     void Start()
     {
@@ -34,25 +37,14 @@ public class EvelatorTeleporter : MonoBehaviour
     {
         if (buttonPressed == true && targetFloor != currentFloor)
         {
-            foreach (GameObject obj in listOfObjects)
-            {
-                try
-                {
-                    Teleport(currentFloor, targetFloor, obj);
-                }
-                catch
-                {
-                    Debug.Log("Teleport to box" + targetFloor + " failed");
-                }
-
-            }
+            doorsOpen = false;
+            Invoke("QueueTeleport", 1);
             buttonPressed = false;
         }
         else if (buttonPressed == true && targetFloor == currentFloor)
             buttonPressed = false;
 
         OpenCloseDoors();
-
     }
 
     void Teleport(int current, int target, GameObject obj)//Transform fromBox, Transform toBox, GameObject obj)
@@ -101,5 +93,22 @@ public class EvelatorTeleporter : MonoBehaviour
             rightDoor.transform.position = Vector3.Lerp(rightDoor.transform.position, rightDoorOpenPos, Time.deltaTime * 2);
             leftDoor.transform.position = Vector3.Lerp(leftDoor.transform.position, leftDoorOpenPos, Time.deltaTime * 2);
         }
+    }
+
+    public void QueueTeleport()
+    {
+        foreach (GameObject obj in listOfObjects)
+        {
+            try
+            {
+                Teleport(currentFloor, targetFloor, obj);
+            }
+            catch
+            {
+                Debug.Log("Teleport to box" + targetFloor + " failed");
+            }
+        }
+        GameObject targetTeleporter = listOfEvelatorTeleporters[targetFloor - 1];
+        targetTeleporter.GetComponent<EvelatorTeleporter>().doorsOpen = true;
     }
 }
