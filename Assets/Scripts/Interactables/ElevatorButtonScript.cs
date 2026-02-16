@@ -33,6 +33,16 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
         }
         else
         {
+            foreach (GameObject elevator in elevatorScript.listOfEvelatorTeleporters)
+            {
+                if (elevator.GetComponent<EvelatorTeleporter>().doorsOpen)
+                {
+                    if (elevator.GetComponent<EvelatorTeleporter>().currentFloor == elevatorScript.currentFloor)
+                        return;
+                    else
+                        elevator.GetComponent<EvelatorTeleporter>().doorsOpen = false; // Close the doors if they are open
+                }
+            }
             elevatorScript.doorsOpen = !elevatorScript.doorsOpen; // Toggle the door state
         }
         
