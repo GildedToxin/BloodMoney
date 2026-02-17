@@ -67,8 +67,10 @@ public class MinigameFunctions : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(StartMinigameRoundWithDelay());
-        timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+        //   StartCoroutine(StartMinigameRoundWithDelay());
+        //   timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
     private void Update()
     {
@@ -232,5 +234,13 @@ public class MinigameFunctions : MonoBehaviour
         isMinigameActive = true;
         StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
         Debug.Log("Mini-game started!");
+    }
+
+    public void StartMiniGameAfterTutorial()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        StartCoroutine(StartMinigameRoundWithDelay());
+        timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
     }
 }

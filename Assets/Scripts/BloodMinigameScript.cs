@@ -45,7 +45,9 @@ public class BloodMinigameScript : MonoBehaviour
 
     private void Start()
     {
-        StartCoroutine(StartMinigameRoundWithDelay());
+        // StartCoroutine(StartMinigameRoundWithDelay());
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
     void Update()
     {
@@ -290,5 +292,11 @@ public class BloodMinigameScript : MonoBehaviour
             deadBody.transform.GetChild(0).GetChild(6).gameObject.SetActive(false);
             deadBody.transform.GetChild(0).GetChild(3).gameObject.SetActive(false);
         }
+    }
+    public void StartMiniGameAfter()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        StartCoroutine(StartMinigameRoundWithDelay());
     }
 }

@@ -133,7 +133,8 @@ public class LimbMinigamePlayerController : MonoBehaviour
         limbScores = new float[4];  
         endMinigame = false;
         currentRound = 0;
-
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         StartCoroutine(StartMinigameRoundWithDelay());
     }
     
