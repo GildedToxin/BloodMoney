@@ -15,6 +15,8 @@ public class EyeMinigameController : MonoBehaviour
     public float speed = 0.01f;
     private float SliderMovement = 0f;
 
+    public bool fill = false;
+
     public void Awake()
     {
         scoopSliderVertical.value = 0;
@@ -25,14 +27,31 @@ public class EyeMinigameController : MonoBehaviour
 
     private void Update()
     {
+        float sliderPosition = scoopSliderVertical.value;
+
         if (minigameRunning)
         {
-            VerticalMovement();
+            if (sliderPosition == 0 || fill)
+            {
+                sliderFill(scoopSliderVertical);
+                fill = true;
+            }
+
+            if (sliderPosition == 1 || !fill)
+            {
+                sliderEmpty(scoopSliderVertical);
+                fill = false;
+            }
         }
     }
 
-    void VerticalMovement()
+    void sliderFill(Slider slider)
     {
-        scoopSliderVertical.value = scoopSliderVertical.value + SliderMovement;
+        slider.value = slider.value + SliderMovement;
+    }
+
+    void sliderEmpty(Slider slider)
+    {
+        slider.value = slider.value + (SliderMovement * -1);
     }
 }
