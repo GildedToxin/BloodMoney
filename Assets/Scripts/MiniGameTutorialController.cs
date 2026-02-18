@@ -19,6 +19,6 @@ public class MiniGameTutorialController : MonoBehaviour
 
     public void EndTutorial()
     {
-        this.gameObject.SetActive(false); 
+        this.transform.parent.gameObject.SetActive(false); 
     }
 }
