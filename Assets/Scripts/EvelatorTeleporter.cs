@@ -38,7 +38,7 @@ public class EvelatorTeleporter : MonoBehaviour
         if (buttonPressed == true && targetFloor != currentFloor)
         {
             doorsOpen = false;
-            Invoke("QueueTeleport", 1);
+            StartCoroutine(TeleportWithDelay(1f));
             buttonPressed = false;
         }
         else if (buttonPressed == true && targetFloor == currentFloor)
@@ -97,6 +97,29 @@ public class EvelatorTeleporter : MonoBehaviour
 
     public void QueueTeleport()
     {
+        foreach (GameObject obj in listOfObjects)
+        {
+            try
+            {
+                Teleport(currentFloor, targetFloor, obj);
+            }
+            catch
+            {
+                Debug.Log("Teleport to box" + targetFloor + " failed");
+            }
+        }
+        GameObject targetTeleporter = listOfEvelatorTeleporters[targetFloor - 1];
+        targetTeleporter.GetComponent<EvelatorTeleporter>().doorsOpen = true;
+    }
+
+    public IEnumerator TeleportWithDelay(float seconds)
+    {
+        float timer = 0f;
+        while (timer < seconds)
+        {
+            timer += Time.deltaTime;
+            yield return new WaitForFixedUpdate();
+        }
         foreach (GameObject obj in listOfObjects)
         {
             try
