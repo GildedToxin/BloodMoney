@@ -221,7 +221,8 @@ public class BloodMinigameScript : MonoBehaviour
 
     private IEnumerator StartMinigameRoundWithDelay()
     {
-
+        transform.GetChild(0).gameObject.SetActive(true);
+        transform.GetChild(2).gameObject.SetActive(true);
         StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         Debug.Log("Starting in 3...");
         yield return new WaitForSeconds(1f);
