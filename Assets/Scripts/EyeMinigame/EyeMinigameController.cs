@@ -1,6 +1,7 @@
 using Unity.Hierarchy;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class EyeMinigameController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class EyeMinigameController : MonoBehaviour
     public GameObject scoopIcon;
     public Slider scoopSliderVertical;
     public Slider scoopSliderHorizontal;
+    public GameObject VerticalHandel;
+    public GameObject HorizontalHandel;
+
     private float scoopVerticalPosition = 0f;
     private float scoopHorizontalPosition = 0f;
     public float speed = 0.01f;
@@ -28,6 +32,7 @@ public class EyeMinigameController : MonoBehaviour
     private void Update()
     {
         float sliderPosition = scoopSliderVertical.value;
+        bool swapSlider = false;
 
         if (minigameRunning)
         {
@@ -43,11 +48,26 @@ public class EyeMinigameController : MonoBehaviour
                 fill = false;
             }
         }
+
+        Input.GetKeyDown(KeyCode.Space);
+        {
+            if (!swapSlider)
+            {
+                scoopVerticalPosition = scoopIcon.transform.position.y;
+            }
+            else if (swapSlider)
+            {
+                scoopHorizontalPosition = scoopIcon.transform.position.x;
+            }
+        }
     }
+
+    
 
     void sliderFill(Slider slider)
     {
         slider.value = slider.value + SliderMovement;
+        scoopIcon.transform.position = new Vector3(scoopIcon.transform.position.x, VerticalHandel.transform.position.y, scoopIcon.transform.position.z);
     }
 
     void sliderEmpty(Slider slider)
