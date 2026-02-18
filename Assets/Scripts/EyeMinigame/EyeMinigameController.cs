@@ -33,23 +33,6 @@ public class EyeMinigameController : MonoBehaviour
 
     void VerticalMovement()
     {
-        bool fill = true;
-        if (fill)
-        {
-            scoopSliderVertical.value = scoopSliderVertical.value + SliderMovement;
-        }
-        else if (!fill)
-        {
-            scoopSliderVertical.value = scoopSliderVertical.value - SliderMovement;
-        }
-
-        if (scoopSliderVertical.value == 1)
-        {
-            fill = false;
-        }
-        else if (scoopSliderVertical.value == 0)
-        {
-            fill = true;
-        }
+        scoopSliderVertical.value = scoopSliderVertical.value + SliderMovement;
     }
 }
