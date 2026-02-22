@@ -5,11 +5,25 @@ public class owner : MonoBehaviour, IPlayerLookTarget
   
     public bool isLookedAt = false;
 
+    public bool hasShownScreen = false;
+
 
     private void Update()
     {
-        if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E))
+        if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E) && !hasShownScreen)
         {
+            if (GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
+            {
+                var fmd = FindAnyObjectByType<FirstDayManager>();
+                fmd.currentScreen++;
+                fmd.isShowingScreen = true;
+                fmd.tutorialScreens[fmd.currentScreen].SetActive(true);
+                hasShownScreen = true;
+                StartCoroutine(fmd.WaitForNextScreen());
+            }
+
+
+
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
             GameManager.Instance.GivePlayerKey();
             GameManager.Instance.doesPlayerHaveKey = true;

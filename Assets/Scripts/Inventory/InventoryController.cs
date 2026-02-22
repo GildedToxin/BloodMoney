@@ -24,7 +24,7 @@ public class InventoryController : MonoBehaviour
 
     private void Start()
     {
-        for(int i = 0; i <= GameManager.Instance.currentDay; i++)
+        for(int i = 0; i <= GameManager.Instance.currentDay + 1; i++)
         {
             try
             {

@@ -53,6 +53,14 @@ public class CartBehavior : MonoBehaviour
         }
         if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
         {
+            if(GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
+            {
+                var fmd = FindAnyObjectByType<FirstDayManager>();
+                fmd.currentScreen++;
+                fmd.isShowingScreen = true;
+                fmd.tutorialScreens[fmd.currentScreen].SetActive(true);
+                StartCoroutine(fmd.WaitForNextScreen());
+            }
             FollowPlayer(Player);
             canPickUp = false;
 

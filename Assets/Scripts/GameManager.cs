@@ -56,7 +56,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int currentDay = 0;
-    private int maxDay = 30;
+    private const int MAXDAY = 10;
     public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
 
@@ -71,6 +71,8 @@ public class GameManager : MonoBehaviour
         { "EyeMinigame", false },
         { "BoneMinigame", false },
     };
+
+    public int[] quota;
 
     private void Awake()
     {
@@ -88,7 +90,9 @@ public class GameManager : MonoBehaviour
     }
     private void Start()
     {
-        if(currentDay == 0)
+
+        quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
+        if (currentDay == 0)
         {
             FirstDayTutorial();
         }
@@ -360,7 +364,7 @@ public class GameManager : MonoBehaviour
         // show UI message for first day tutorial
 
         FindAnyObjectByType<owner>().transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Highlight");
-        currentDay++;
+        //currentDay++;
     }
 
     public int CalculateQuota()
@@ -368,7 +372,7 @@ public class GameManager : MonoBehaviour
         // For now this returns a fixed quota for the first day
         // Later this can be expanded to have dynamic quotas based on day and difficulty
 
-        return 1000;
+        return quota[currentDay];
     }
     public bool HasPlayerHitQuota()
     {
