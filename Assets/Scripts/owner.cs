@@ -12,14 +12,14 @@ public class owner : MonoBehaviour, IPlayerLookTarget
     {
         if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E) && !hasShownScreen)
         {
-            if (GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
+            if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
             {
-                var fmd = FindAnyObjectByType<FirstDayManager>();
-                fmd.currentScreen++;
-                fmd.isShowingScreen = true;
-                fmd.tutorialScreens[fmd.currentScreen].SetActive(true);
+                var fdm = FindAnyObjectByType<FirstDayManager>();
+                fdm.currentScreen++;
+                fdm.isShowingScreen = true;
+                fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
                 hasShownScreen = true;
-                StartCoroutine(fmd.WaitForNextScreen());
+                StartCoroutine(fdm.WaitForNextScreen());
             }
 
 

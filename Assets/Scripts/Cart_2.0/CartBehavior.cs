@@ -55,11 +55,11 @@ public class CartBehavior : MonoBehaviour
         {
             if(GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
             {
-                var fmd = FindAnyObjectByType<FirstDayManager>();
-                fmd.currentScreen++;
-                fmd.isShowingScreen = true;
-                fmd.tutorialScreens[fmd.currentScreen].SetActive(true);
-                StartCoroutine(fmd.WaitForNextScreen());
+                var fdm = FindAnyObjectByType<FirstDayManager>();
+                fdm.currentScreen++;
+                fdm.isShowingScreen = true;
+                fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+                StartCoroutine(fdm.WaitForNextScreen());
             }
             FollowPlayer(Player);
             canPickUp = false;

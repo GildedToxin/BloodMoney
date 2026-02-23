@@ -1,6 +1,7 @@
-using UnityEngine;
-using System.Collections.Generic;
 using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using static Unity.Burst.Intrinsics.X86;
 
 public class EvelatorTeleporter : MonoBehaviour
 {
@@ -23,6 +24,8 @@ public class EvelatorTeleporter : MonoBehaviour
 
     private bool isTeleporting = false;
 
+    public bool hasShownScreen;
+    public bool hasShownScreen2;
     void Start()
     {
         rightDoorOpenPos = rightDoor.transform.position;
@@ -66,6 +69,17 @@ public class EvelatorTeleporter : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
+        print("test");
+
+        if(GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 6)
+        {
+            var fdm = FindAnyObjectByType<FirstDayManager>();
+            fdm.currentScreen++; //7
+            fdm.isShowingScreen = true;
+            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+            hasShownScreen = true;
+            StartCoroutine(fdm.WaitForNextScreen());
+        }
         //compare tag
         if (other.gameObject.tag == "Teleportable")
             listOfObjects.Add(other.gameObject);
@@ -133,5 +147,15 @@ public class EvelatorTeleporter : MonoBehaviour
         }
         GameObject targetTeleporter = listOfEvelatorTeleporters[targetFloor - 1];
         targetTeleporter.GetComponent<EvelatorTeleporter>().doorsOpen = true;
+
+        if (GameManager.Instance.currentDay == 0 && !hasShownScreen2 && FindAnyObjectByType<FirstDayManager>().currentScreen == 7)
+        {
+            var fdm = FindAnyObjectByType<FirstDayManager>();
+            fdm.currentScreen++; //8
+            fdm.isShowingScreen = true;
+            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+            hasShownScreen2 = true;
+            StartCoroutine(fdm.WaitForNextScreen());
+        }
     }
 }

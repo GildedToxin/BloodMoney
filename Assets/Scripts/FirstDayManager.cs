@@ -56,14 +56,24 @@ public class FirstDayManager : MonoBehaviour
             tutorialScreens[currentScreen].SetActive(false);
             isShowingScreen = false;
             // 5
-            StartCoroutine(WaitForNextScreen());
         }
         else if (currentScreen == 6 && Input.anyKeyDown && canMoveScreen)
         {
             tutorialScreens[currentScreen].SetActive(false);
             isShowingScreen = false;
-            // 5
-            StartCoroutine(WaitForNextScreen());
+            // 6
+       }
+        else if (currentScreen == 7 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            // 7
+        }
+        else if (currentScreen == 8 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            // 8
         }
     }
 
