@@ -75,6 +75,50 @@ public class FirstDayManager : MonoBehaviour
             isShowingScreen = false;
             // 8
         }
+        else if (currentScreen == 9 && Input.GetKeyDown(KeyCode.Alpha2) && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            currentScreen++; //10
+            tutorialScreens[currentScreen].SetActive(true);
+            StartCoroutine(WaitForNextScreen());
+        }
+        else if (currentScreen == 10 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            // 10
+        }
+        else if (currentScreen == 11 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            // 11
+        }
+        else if (currentScreen == 12 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            // 12
+        }
+        else if (currentScreen == 13 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            currentScreen++; //14
+            tutorialScreens[currentScreen].SetActive(true);
+            StartCoroutine(WaitForNextScreen());
+        }
+        else if (currentScreen == 14 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            //14
+        }
+        else if (currentScreen == 15 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            //15
+        }
     }
 
     public IEnumerator WaitForNextScreen()

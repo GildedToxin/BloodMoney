@@ -9,6 +9,7 @@ public class VendorStand : MonoBehaviour
     public List<OrganManager> organsToSell;
     public List<Customer> customers;
 
+    public bool hasShownScreen;
     void Start()
     {
 
@@ -95,6 +96,16 @@ public class VendorStand : MonoBehaviour
         //Destroy(customer.gameObject);
 
         UpdateVenders();
+
+        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 14)
+        {
+            var fdm = FindAnyObjectByType<FirstDayManager>();
+            fdm.currentScreen++; //15
+            fdm.isShowingScreen = true;
+            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+            hasShownScreen = true;
+            StartCoroutine(fdm.WaitForNextScreen());
+        }
     }
 
     public void RefreshCustomers()

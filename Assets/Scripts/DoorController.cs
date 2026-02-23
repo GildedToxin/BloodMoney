@@ -12,6 +12,10 @@ public class DoorController : MonoBehaviour, IPlayerLookTarget
     {
         if (Input.GetKeyDown(KeyCode.E) && isLookedAt && GameManager.Instance.CurrentDoor != null && GameManager.Instance.CurrentDoor == this && !isOpened && GameManager.Instance.doesPlayerHaveKey)
         {
+        
+                
+
+
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
 
 

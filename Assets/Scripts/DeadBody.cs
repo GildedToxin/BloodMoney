@@ -53,6 +53,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject bloodPrefab;
     public Transform bloodSpawnLocation;
 
+
+    public bool hasShownScreen = false;
+    public bool hasShownScreen2 = false;
+
     public void Update()
     {
         if (isLookedAt)
@@ -69,6 +73,18 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Harvest {organ}");
             if (Input.GetKeyDown(KeyCode.E))
                 GameManager.Instance.StartMiniGame();
+        }
+    }
+    public void OnTriggerEnter(Collider other)
+    {
+        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 8)
+        {
+            var fdm = FindAnyObjectByType<FirstDayManager>();
+            fdm.currentScreen++;
+            fdm.isShowingScreen = true;
+            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+            hasShownScreen = true;
+            StartCoroutine(fdm.WaitForNextScreen());
         }
     }
     public void Highlight(string organ)
@@ -132,6 +148,16 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 //IsEyesHighlighted = true;
                 break;
 
+        }
+
+        if (GameManager.Instance.currentDay == 0 && !hasShownScreen2 && FindAnyObjectByType<FirstDayManager>().currentScreen == 10)
+        {
+            var fdm = FindAnyObjectByType<FirstDayManager>();
+            fdm.currentScreen++; // 11
+            fdm.isShowingScreen = true;
+            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
+            hasShownScreen2 = true;
+            StartCoroutine(fdm.WaitForNextScreen());
         }
     }
     public void RemoveHighlight()
