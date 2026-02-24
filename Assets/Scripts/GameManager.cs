@@ -40,17 +40,6 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-#if UNITY_EDITOR
-            if (!Application.isPlaying)
-            {
-                return null;
-            }
-
-            if (instance == null)
-            {
-                Instantiate(Resources.Load<GameManager>("GameManager"));
-            }
-#endif
             return instance;
         }
     }
@@ -79,11 +68,11 @@ public class GameManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
-            DontDestroyOnLoad(gameObject);
+            DontDestroyOnLoad(this);
         }
         else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
@@ -444,6 +433,11 @@ public class GameManager : MonoBehaviour
         Cursor.visible = false;
         isInMiniGame = false;
         //Body.SpawnOrgan(sceneName);
+    }
+    [ContextMenu("HitQuota")]
+    public void HitQuota()
+    {
+        FindAnyObjectByType<InventoryController>().AddMoney(quota[currentDay]);
     }
 }
 public enum MiniGameType

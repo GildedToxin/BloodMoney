@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FinishDay : MonoBehaviour, IPlayerLookTarget
 {
@@ -9,8 +10,9 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
         if (isLookedAt && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.HasPlayerHitQuota())
         {
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
-            EndVerticalSlice();
-
+            // EndVerticalSlice();
+            GameManager.Instance.currentDay++;
+           SceneManager.LoadScene("Hotel");
         }
     }
 
