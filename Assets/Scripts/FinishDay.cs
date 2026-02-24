@@ -12,6 +12,7 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
             FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
             // EndVerticalSlice();
             GameManager.Instance.currentDay++;
+            GameManager.Instance.moneyMadeToday = 0;
            SceneManager.LoadScene("Hotel");
         }
     }

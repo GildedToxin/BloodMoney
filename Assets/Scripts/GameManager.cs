@@ -76,11 +76,12 @@ public class GameManager : MonoBehaviour
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
+        quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
     }
     private void Start()
     {
 
-        quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
+
         if (currentDay == 0)
         {
             FirstDayTutorial();
