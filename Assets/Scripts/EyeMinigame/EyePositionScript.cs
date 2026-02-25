@@ -6,7 +6,7 @@ public class EyePositionScript : MonoBehaviour
 
     public void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.name == "Scoop Icon")
+        if(other.gameObject.name == "Scoop")
         {
             emc.scoopInPosition = true;
         }
@@ -14,7 +14,7 @@ public class EyePositionScript : MonoBehaviour
 
     public void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.name == "Scoop Icon")
+        if (other.gameObject.name == "Scoop")
         {
             emc.scoopInPosition = false;
         }

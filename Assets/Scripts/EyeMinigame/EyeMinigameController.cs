@@ -4,20 +4,24 @@ using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class EyeMinigameController : MonoBehaviour
 {
+    private bool miniGameRunning = true;
+
+    [Header("Scroll Values")]
     public int maxY;
     public int minY;
     public int maxX;
     public int minX;
     public float movementSpeed = 1f;
-
+    private int horizontalMovement = 0;
     private Vector3 originalPosition;
 
-
+    [Header("Scoop Objects")]
     public GameObject scoop;
-    private bool miniGameRunning = true;
-    private int horizontalMovement = 0;
-
     public bool scoopInPosition = false;
+    public GameObject mashMinigame;
+
+    [Header("OtherScript")]
+    public mashingMinigame mm;
 
     private void Start()
     {
@@ -49,8 +53,9 @@ public class EyeMinigameController : MonoBehaviour
         {
             if(scoopInPosition)
             {
-                Debug.Log("EndMiniGame");
+                mashMinigame.SetActive(true);
                 horizontalMovement = 3;
+                mm.isMashing = true;
             }
             else
             {
