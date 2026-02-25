@@ -1,77 +1,46 @@
 using Unity.Hierarchy;
 using UnityEngine;
-using UnityEngine.UI;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class EyeMinigameController : MonoBehaviour
 {
-    public bool minigameRunning = true;
+    public float maxY = 0f;
+    public float minY = 0f;
+    public float maxX = 0f;
+    public float minX = 0f;
 
-    [Header("slider variables")]
-    public GameObject scoopIcon;
-    public Slider scoopSliderVertical;
-    public Slider scoopSliderHorizontal;
-    public GameObject VerticalHandel;
-    public GameObject HorizontalHandel;
+    public float movementSpeed = 0.1f;
 
-    private float scoopVerticalPosition = 0f;
-    private float scoopHorizontalPosition = 0f;
-    public float speed = 0.01f;
-    private float SliderMovement = 0f;
+    public GameObject scoop;
+    private bool miniGameRunning = true;
+    private int direction = 0;
 
-    public bool fill = false;
 
-    public void Awake()
+    public void Update()
     {
-        scoopSliderVertical.value = 0;
-        scoopSliderHorizontal.value = 0;
-        scoopSliderHorizontal.enabled = false;
-        SliderMovement = speed * Time.deltaTime;
-    }
-
-    private void Update()
-    {
-        float sliderPosition = scoopSliderVertical.value;
-        bool swapSlider = false;
-
-        if (minigameRunning)
+        if (miniGameRunning)
         {
-            if (sliderPosition == 0 || fill)
+            Debug.Log("isRunning");
+            if (direction == 0)
             {
-                sliderFill(scoopSliderVertical);
-                fill = true;
+                Debug.Log("goingUp");
+                float moveUp = scoop.transform.position.y + movementSpeed * Time.deltaTime;
+                transform.position = new Vector3(scoop.transform.position.x, moveUp, scoop.transform.position.z);
+                if (scoop.transform.position.y == maxY)
+                {
+                    direction = 1;
+                }
             }
-
-            if (sliderPosition == 1 || !fill)
+            else if (direction == 1)
             {
-                sliderEmpty(scoopSliderVertical);
-                fill = false;
+                Debug.Log("goingDown");
+                float moveDown = scoop.transform.position.y - movementSpeed * Time.deltaTime;
+                transform.position = new Vector3(scoop.transform.position.x, moveDown, scoop.transform.position.z);
+                if (scoop.transform.position.y == minY)
+                {
+                    direction = 0;
+                }
             }
         }
-
-        Input.GetKeyDown(KeyCode.Space);
-        {
-            if (!swapSlider)
-            {
-                scoopVerticalPosition = scoopIcon.transform.position.y;
-            }
-            else if (swapSlider)
-            {
-                scoopHorizontalPosition = scoopIcon.transform.position.x;
-            }
-        }
-    }
-
-    
-
-    void sliderFill(Slider slider)
-    {
-        slider.value = slider.value + SliderMovement;
-        scoopIcon.transform.position = new Vector3(scoopIcon.transform.position.x, VerticalHandel.transform.position.y, scoopIcon.transform.position.z);
-    }
-
-    void sliderEmpty(Slider slider)
-    {
-        slider.value = slider.value + (SliderMovement * -1);
     }
 }
