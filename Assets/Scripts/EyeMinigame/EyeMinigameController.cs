@@ -4,43 +4,42 @@ using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class EyeMinigameController : MonoBehaviour
 {
-    public float maxY = 0f;
-    public float minY = 0f;
-    public float maxX = 0f;
-    public float minX = 0f;
+    public int maxY;
+    public int minY;
+    public int maxX;
+    public int minX;
+    public float movementSpeed = 1f;
 
-    public float movementSpeed = 0.1f;
 
     public GameObject scoop;
     private bool miniGameRunning = true;
-    private int direction = 0;
+    private int horizontalMovement = 0;
 
 
     public void Update()
     {
         if (miniGameRunning)
         {
-            Debug.Log("isRunning");
-            if (direction == 0)
+            if (horizontalMovement == 0)
             {
-                Debug.Log("goingUp");
-                float moveUp = scoop.transform.position.y + movementSpeed * Time.deltaTime;
-                transform.position = new Vector3(scoop.transform.position.x, moveUp, scoop.transform.position.z);
-                if (scoop.transform.position.y == maxY)
-                {
-                    direction = 1;
-                }
+                float y = Mathf.PingPong(Time.time * movementSpeed, 1) * maxY - minY;
+                scoop.transform.position = new Vector3(scoop.transform.position.x, y, scoop.transform.position.z);
             }
-            else if (direction == 1)
+            else if (horizontalMovement == 1)
             {
-                Debug.Log("goingDown");
-                float moveDown = scoop.transform.position.y - movementSpeed * Time.deltaTime;
-                transform.position = new Vector3(scoop.transform.position.x, moveDown, scoop.transform.position.z);
-                if (scoop.transform.position.y == minY)
-                {
-                    direction = 0;
-                }
+                float x = Mathf.PingPong(Time.time * movementSpeed, 1) * maxX - minX;
+                scoop.transform.position = new Vector3(x, scoop.transform.position.y, scoop.transform.position.z);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 0)
+        {
+            scoop.transform.position = new Vector3(scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
+            horizontalMovement = 1;
+        }
+        else if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 1)
+        {
+            Debug.Log("CheckSpot");
         }
     }
 }
