@@ -11,6 +11,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     [SerializeField] private BoneMiniGameScript mainScript; // Reference to the main script for the mini game
     [SerializeField] public bool startGame = false;
 
+    private Vector3 initialPlayerPos;
     private float playerTargetRange = 25f; // how far the player must be from the target to gain points
     private bool playerInput = false;
     [SerializeField] private float score = 0; // current score
@@ -19,7 +20,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
 
     void Start()
     {
-        
+        initialPlayerPos = player.GetComponent<RectTransform>().position;
     }
 
     void Update()
@@ -43,6 +44,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
             {
                 mainScript.currentBone++;
                 startGame = false;
+                ResetValues();
             }
             }
     }
@@ -74,5 +76,11 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
         {
             score += scoringRate * Time.deltaTime;
         }
+    }
+
+    private void ResetValues()
+    {
+        score = 0;
+        player.GetComponent<RectTransform>().position = initialPlayerPos;
     }
 }

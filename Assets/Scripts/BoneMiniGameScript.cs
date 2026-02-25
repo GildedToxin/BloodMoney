@@ -73,7 +73,7 @@ public class BoneMiniGameScript : MonoBehaviour
             {
                 if (hit.collider.gameObject == boneObjects[i] && boneOrder[i] == currentBone)
                 {
-                    selectedBoneIndex =+ 1;
+                    selectedBoneIndex = boneOrder[i];
                     return;
                 }
             }
