@@ -10,11 +10,19 @@ public class EyeMinigameController : MonoBehaviour
     public int minX;
     public float movementSpeed = 1f;
 
+    private Vector3 originalPosition;
+
 
     public GameObject scoop;
     private bool miniGameRunning = true;
     private int horizontalMovement = 0;
 
+    public bool scoopInPosition = false;
+
+    private void Start()
+    {
+        originalPosition = new Vector3 (scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
+    }
 
     public void Update()
     {
@@ -39,7 +47,16 @@ public class EyeMinigameController : MonoBehaviour
         }
         else if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 1)
         {
-            Debug.Log("CheckSpot");
+            if(scoopInPosition)
+            {
+                Debug.Log("EndMiniGame");
+                horizontalMovement = 3;
+            }
+            else
+            {
+                scoop.transform.position = originalPosition;
+                horizontalMovement = 0;
+            }
         }
     }
 }
