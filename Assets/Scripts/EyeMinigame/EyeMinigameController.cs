@@ -1,3 +1,4 @@
+using TMPro;
 using Unity.Hierarchy;
 using UnityEngine;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
@@ -22,6 +23,10 @@ public class EyeMinigameController : MonoBehaviour
 
     [Header("OtherScript")]
     public mashingMinigame mm;
+
+    [Header("timmer")]
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] float remainingTime;
 
     private void Start()
     {
