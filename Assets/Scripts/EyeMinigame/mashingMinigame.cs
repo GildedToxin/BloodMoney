@@ -15,6 +15,7 @@ public class mashingMinigame : MonoBehaviour
     public int tiltAngel1;
     public int tiltAngel2;
     public int smooth;
+    public EyeMinigameController emc;
 
     public void Start()
     {
@@ -54,6 +55,7 @@ public class mashingMinigame : MonoBehaviour
                 buttonPress = 2;
                 Debug.Log("win");
                 isMashing = false;
+                emc.timerStop = true;
             }
         }
     }

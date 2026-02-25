@@ -2609,8 +2609,10 @@ MonoBehaviour:
   scoopInPosition: 0
   mashMinigame: {fileID: 1266187963}
   mm: {fileID: 1991456144}
-  timerText: {fileID: 0}
+  timerText: {fileID: 1222977049}
   remainingTime: 0
+  totalTime: 30
+  timerStop: 0
 --- !u!4 &1991456143
 Transform:
   m_ObjectHideFlags: 0
@@ -2647,6 +2649,7 @@ MonoBehaviour:
   tiltAngel1: 25
   tiltAngel2: -25
   smooth: 25
+  emc: {fileID: 1991456142}
 --- !u!1 &2120682023
 GameObject:
   m_ObjectHideFlags: 0
