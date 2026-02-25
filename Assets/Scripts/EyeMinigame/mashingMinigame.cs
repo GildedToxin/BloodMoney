@@ -14,6 +14,7 @@ public class mashingMinigame : MonoBehaviour
     public GameObject scoop;
     public int tiltAngel1;
     public int tiltAngel2;
+    public int smooth;
 
     public void Start()
     {
@@ -28,19 +29,32 @@ public class mashingMinigame : MonoBehaviour
             {
                 mashBar.value++;
                 buttonPress = 1;
-                float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngel1;
-                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAroundZ);
-
             }
             else if (Input.GetKeyDown(button1) && buttonPress == 1)
             {
                 mashBar.value++;
                 buttonPress = 0;
-                float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngel2;
-                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAroundZ);
             }
 
+            if(buttonPress == 0)
+            {
+                float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngel1;
+                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAroundZ);
+                scoop.transform.rotation = UnityEngine.Quaternion.Slerp(scoop.transform.rotation, target, Time.deltaTime * smooth);
+            }
+            else if (buttonPress == 1)
+            {
+                float tiltAroundZ = Input.GetAxis("Horizontal") * tiltAngel2;
+                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAroundZ);
+                scoop.transform.rotation = UnityEngine.Quaternion.Slerp(scoop.transform.rotation, target, Time.deltaTime * smooth);
+            }
 
+            if(mashBar.value == mashBar.maxValue)
+            {
+                buttonPress = 2;
+                Debug.Log("win");
+                isMashing = false;
+            }
         }
     }
 

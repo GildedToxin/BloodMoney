@@ -696,8 +696,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 3.78}
-  m_LocalScale: {x: 7.4, y: 6.82991, z: 0.17885196}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 13.03, y: 10.68, z: 0.17885196}
+  m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2120682024}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1689,6 +1689,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::mashingMinigame
   isMashing: 0
   mashBar: {fileID: 1407039733}
+  button0: 109
+  button1: 110
+  mashDuration: 50
+  scoop: {fileID: 1020441787}
+  tiltAngel1: 25
+  tiltAngel2: -25
+  smooth: 25
 --- !u!1 &2120682023
 GameObject:
   m_ObjectHideFlags: 0
