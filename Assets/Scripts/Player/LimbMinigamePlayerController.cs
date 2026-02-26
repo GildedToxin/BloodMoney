@@ -31,6 +31,8 @@ public class LimbMinigamePlayerController : MonoBehaviour
     public GameObject StartCanvas;
     public bool isMinigameActive = false;
 
+    public AudioClip sawSFX;
+    public AudioClip startSFX;
     void Start()
     {
         startingNumberOfPoints = playerLimb.GetComponentInChildren<LimbCuttingScript>().numberOfPoints;
@@ -78,6 +80,8 @@ public class LimbMinigamePlayerController : MonoBehaviour
         if ((distanceMoved >= 360f || limbTimer > limbTimerLimit) && isMinigameActive)  // Determines when the minigame is over
         {
             EndMinigameRound();
+            AudioPool.Instance.StopClip(sawSFX);
+
             if (currentRound < 1)
             {
                 StartCoroutine(StartMinigameRoundWithDelay());
@@ -105,6 +109,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
 
     private IEnumerator StartMinigameRoundWithDelay()
     {
+        AudioPool.Instance.PlayClip2D(startSFX);
 
         this.transform.position = playerCursor;  // Resets player position
         playerLimb.GetComponentInChildren<LimbCuttingScript>().DestroyPoints();  // Makes sure no points are left over
@@ -146,6 +151,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
         distanceMoved = 0f;
        // collectedPoints = 0f;
         scorePercentage = 0f;
+        AudioPool.Instance.PlayClip2D(sawSFX);
     }
 
     private void EndMinigameRound()  // Ends the current minigame round

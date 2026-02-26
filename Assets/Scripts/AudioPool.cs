@@ -112,4 +112,16 @@ public class AudioPool : MonoBehaviour
         source.pitch = pitch;
         source.Play();
     }
+
+    public void StopClip(AudioClip clip)
+    {
+        foreach (var source in allSources)
+        {
+            if (source.clip == clip && source.isPlaying)
+            {
+                source.Stop();
+                ReturnAudioSource(source);
+            }
+        }
+    }
 }
