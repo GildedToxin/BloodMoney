@@ -53,6 +53,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject bloodPrefab;
     public Transform bloodSpawnLocation;
 
+    public GameObject eyePrefab;
+    public Transform rightEyeSpawnLocation;
+    public Transform leftEyeSpawnLocation;
+
 
     public bool hasShownScreen = false;
     public bool hasShownScreen2 = false;
@@ -145,7 +149,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 //IsFingersHighlighted = true;
                 break;
             case "Eyes":
-                //IsEyesHighlighted = true;
+                Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
+                Instantiate(eyePrefab, leftEyeSpawnLocation.position, leftEyeSpawnLocation.rotation);
                 break;
 
         }
