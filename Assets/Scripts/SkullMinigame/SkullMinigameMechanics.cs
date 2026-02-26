@@ -59,6 +59,12 @@ public class MinigameFunctions : MonoBehaviour
 
     public Material bloodyMat;
 
+
+    public AudioClip hammerSFX;
+    public AudioClip boneCrunchSFX;
+    public AudioClip startSFX;
+    public AudioClip failedSFX;
+
     private void Awake()
     {
         neededHits = Random.Range(minHammerHits, maxHammerHits);
@@ -82,6 +88,7 @@ public class MinigameFunctions : MonoBehaviour
             HammerAni.Play("Hammer_Swing", 0, 0.25f);
             numberOfHits++;
             HammerAni.ResetTrigger("Hammer_Swing");
+            AudioPool.Instance.PlayClip2D(hammerSFX);
         }
 
         if (numberOfHits == neededHits)
@@ -89,7 +96,7 @@ public class MinigameFunctions : MonoBehaviour
             numberOfHits = 0;
             neededHits = Random.Range(minHammerHits, maxHammerHits);
             NextCrackStage();
-
+            AudioPool.Instance.PlayClip2D(clip: boneCrunchSFX, volume: 0.7f, pitch: 1.3f);
         }
 
         //win conditions
@@ -116,6 +123,7 @@ public class MinigameFunctions : MonoBehaviour
             blood.SetActive(true);
             timerStop = true;
             timerCountdown += Time.deltaTime;
+           // AudioPool.Instance.PlayClip2D(failedSFX, volume: 0.7f, pit);
             if (timerCountdown >= winLoseTimerDuration)
             {
                 minigameEnd = true;
@@ -216,7 +224,7 @@ public class MinigameFunctions : MonoBehaviour
 
     private IEnumerator StartMinigameRoundWithDelay()
     {
-
+        AudioPool.Instance.PlayClip2D(startSFX);
         StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         Debug.Log("Starting in 3...");
         yield return new WaitForSeconds(1f);

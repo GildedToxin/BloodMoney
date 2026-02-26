@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MiniGameTutorialController : MonoBehaviour
 {
+    public AudioClip buttonClickSFX; // Sound effect for button clicks
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -19,6 +20,7 @@ public class MiniGameTutorialController : MonoBehaviour
 
     public void EndTutorial()
     {
+        AudioPool.Instance.PlayClip2D(buttonClickSFX);
         this.transform.parent.gameObject.SetActive(false); 
     }
 }
