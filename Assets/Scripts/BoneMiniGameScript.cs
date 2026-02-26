@@ -59,6 +59,8 @@ public class BoneMiniGameScript : MonoBehaviour
             boneOrder[j] = temp;
         }
         startGame = false;
+        selectedBoneIndex = 0;
+        currentBone = 1;
     }
 
     private void SelectBone()
@@ -68,15 +70,18 @@ public class BoneMiniGameScript : MonoBehaviour
 
         if (Physics.Raycast(ray, out hit, maxDistance, hitLayers))
         {
-            int i;
+            /*int i;
             for (i = boneObjects.Count - 1; i > 0; i--)
             {
-                if (hit.collider.gameObject == boneObjects[i] && boneOrder[i] == currentBone)
+                if (hit.collider.gameObject == boneObjects[i+1] && boneOrder[i+1] == currentBone)
                 {
+                    Debug.Log(boneOrder[i]);
                     selectedBoneIndex = boneOrder[i];
                     return;
                 }
-            }
+            }*/
+            if (boneObjects.Contains(hit.collider.gameObject))
+                selectedBoneIndex = boneOrder[boneObjects.IndexOf(hit.collider.gameObject)];
 
             if (selectedBoneIndex != currentBone)
                 Debug.Log("Incorrect Bone");
