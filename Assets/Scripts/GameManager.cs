@@ -281,12 +281,13 @@ public class GameManager : MonoBehaviour
             case "Fingers":
                 return "";
             case "Eyes":
-                return "";
+                return "EyeBallMinigame";
         }
         return "";
     }
     public void StartMiniGame()
     {
+        print(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
         currentMiniGame = OrganToScene(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
 
         try
