@@ -3446,6 +3446,63 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8448826513636057587, guid: 4c08ae29a7e79244eaed6fea6a3046ff, type: 3}
   m_PrefabInstance: {fileID: 1520397105}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1542812508
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 122.96736
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.36146
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -34.15501
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1474773639911661276, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1669413817275924077, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
+      propertyPath: m_Name
+      value: AudioManager
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 1ebab94c09749af4cb99ad3c8e733e2c, type: 3}
 --- !u!1 &1596780803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3581,6 +3638,8 @@ MonoBehaviour:
   EndCanvas: {fileID: 1823945683}
   cam: {fileID: 165848565}
   deadBody: {fileID: 1690377210}
+  collectBloodSFX: {fileID: 8300000, guid: 49f5d7095631d2d43b33e2a8a0e5b36b, type: 3}
+  startSFX: {fileID: 8300000, guid: 9f5fb923e6375e1498d010c30444da13, type: 3}
   once: 1
 --- !u!114 &1632318244
 MonoBehaviour:
@@ -4568,3 +4627,4 @@ SceneRoots:
   - {fileID: 703051522}
   - {fileID: 796754525}
   - {fileID: 1632318247}
+  - {fileID: 1542812508}

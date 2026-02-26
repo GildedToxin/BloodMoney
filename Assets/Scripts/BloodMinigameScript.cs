@@ -43,6 +43,10 @@ public class BloodMinigameScript : MonoBehaviour
 
     public GameObject deadBody;
 
+
+    public AudioClip collectBloodSFX;
+    public AudioClip startSFX;
+
     private void Start()
     {
         // StartCoroutine(StartMinigameRoundWithDelay());
@@ -215,12 +219,14 @@ public class BloodMinigameScript : MonoBehaviour
         Destroy(closestBloodDrop);
         activeBloodDrops.RemoveAt(closestBloodDropIndex);
         collectedBloodDrops++;
+        AudioPool.Instance.PlayClip2D(collectBloodSFX, volume: 0.8f);
     }
 
 
 
     private IEnumerator StartMinigameRoundWithDelay()
     {
+        AudioPool.Instance.PlayClip2D(startSFX);
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(2).gameObject.SetActive(true);
         StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
