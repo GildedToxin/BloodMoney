@@ -173,8 +173,6 @@ public class MinigameFunctions : MonoBehaviour
 
     private void pointDeduction()
     {
-        Debug.Log(remainingTime);
-        Debug.Log(totalTime * timerThreshhold);
         if (CrackLevel >= 4)
         {
             qualityScore = 0;
