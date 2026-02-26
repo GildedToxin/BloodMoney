@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using TMPro;
 using Unity.Hierarchy;
 using UnityEngine;
@@ -6,6 +7,13 @@ using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 public class EyeMinigameController : MonoBehaviour
 {
     private bool miniGameRunning = true;
+
+    [Header("Body Values")]
+    public GameObject Body;
+    public float maxBodyY;
+    public float minBodyY;
+    public float maxBodyX;
+    public float minBodyX;
 
     [Header("Scroll Values")]
     public int maxY;
@@ -30,6 +38,12 @@ public class EyeMinigameController : MonoBehaviour
     public float totalTime;
     public bool timerStop = false;
 
+    [Header("score System")]
+    public int totalPoints = 100;
+    public int timerPunishment = 2;
+    [SerializeField] TextMeshProUGUI pointScoreText;
+    public GameObject winScreen;
+
     private void Awake()
     {
         remainingTime = totalTime;
@@ -39,12 +53,16 @@ public class EyeMinigameController : MonoBehaviour
     {
         originalPosition = new Vector3 (scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
         timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+        float newX = Random.Range(minBodyX, maxBodyX);
+        float newY = Random.Range(minBodyY, maxBodyY);
+        Body.transform.position = new Vector3(newX, newY, Body.transform.position.z);
     }
 
     public void Update()
     {
         if (miniGameRunning)
         {
+            //for the crane mechanics 0 for vertical and 1 for horizontal. 3 stops the movement
             if (horizontalMovement == 0)
             {
                 float y = Mathf.PingPong(Time.time * movementSpeed, 1) * maxY - minY;
@@ -56,6 +74,7 @@ public class EyeMinigameController : MonoBehaviour
                 scoop.transform.position = new Vector3(x, scoop.transform.position.y, scoop.transform.position.z);
             }
 
+            // this swaps from vertical movement to horizontal
             if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 0)
             {
                 scoop.transform.position = new Vector3(scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
@@ -63,6 +82,7 @@ public class EyeMinigameController : MonoBehaviour
             }
             else if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 1)
             {
+                // this checks if the player enters the mash minigame or resets to the start
                 if (scoopInPosition)
                 {
                     mashMinigame.SetActive(true);
@@ -76,6 +96,7 @@ public class EyeMinigameController : MonoBehaviour
                 }
             }
 
+            //this ticks down the timer
             if (!timerStop)
             {
                 remainingTime -= Time.deltaTime;
@@ -86,8 +107,25 @@ public class EyeMinigameController : MonoBehaviour
                     timerText.text = string.Format("{00}", 0);
                     timerStop = true;
                     miniGameRunning = false;
+                    winGame();
                 }
             }
+        }
+    }
+
+    public void winGame()
+    {
+        winScreen.SetActive(true);
+        // if time == 0 then they get no points, otherwise run the same calculations made for the skull minigame
+        if (remainingTime < 0 && !miniGameRunning)
+        {
+            totalPoints = 0;
+            pointScoreText.text = (totalPoints.ToString() + "%");
+        }
+        else
+        {
+            totalPoints = totalPoints - ((Mathf.RoundToInt(totalTime) - Mathf.RoundToInt(remainingTime)) * timerPunishment);
+            pointScoreText.text = totalPoints.ToString() + "%";
         }
     }
 }
