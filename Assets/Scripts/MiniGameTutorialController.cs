@@ -20,7 +20,7 @@ public class MiniGameTutorialController : MonoBehaviour
 
     public void EndTutorial()
     {
-       // AudioPool.Instance.PlayClip2D(buttonClickSFX);
+        AudioPool.Instance.PlayClip2D(buttonClickSFX);
         this.transform.parent.gameObject.SetActive(false); 
     }
 }
