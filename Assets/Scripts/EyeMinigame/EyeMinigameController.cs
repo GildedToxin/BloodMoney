@@ -7,6 +7,13 @@ public class EyeMinigameController : MonoBehaviour
 {
     private bool miniGameRunning = true;
 
+    [Header("Body Values")]
+    public GameObject Body;
+    public float maxBodyY;
+    public float minBodyY;
+    public float maxBodyX;
+    public float minBodyX;
+
     [Header("Scroll Values")]
     public int maxY;
     public int minY;
@@ -39,6 +46,9 @@ public class EyeMinigameController : MonoBehaviour
     {
         originalPosition = new Vector3 (scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
         timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+        float newX = Random.Range(minBodyX, maxBodyX);
+        float newY = Random.Range(minBodyY, maxBodyY);
+        Body.transform.position = new Vector3(newX, newY, Body.transform.position.z);
     }
 
     public void Update()
