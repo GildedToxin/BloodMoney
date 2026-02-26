@@ -82,11 +82,26 @@ public class EvelatorTeleporter : MonoBehaviour
         }
         //compare tag
         if (other.gameObject.tag == "Teleportable")
+        {
             listOfObjects.Add(other.gameObject);
+            
+            if (other.gameObject.GetComponent<PlayerController>() && FindAnyObjectByType<CartBehavior>().moveing == true)
+            {
+                listOfObjects.Add(FindAnyObjectByType<CartBehavior>().gameObject);
+            }
+        }
     }
     void OnTriggerExit(Collider other)
     {
         listOfObjects.Remove(other.gameObject);
+
+    
+            
+            if (other.gameObject.GetComponent<PlayerController>() && FindAnyObjectByType<CartBehavior>().moveing == true)
+            {
+                listOfObjects.Remove(FindAnyObjectByType<CartBehavior>().gameObject);
+            }
+
     }
 
     public IEnumerator WaitOneSecond()
@@ -145,6 +160,7 @@ public class EvelatorTeleporter : MonoBehaviour
                 Debug.Log("Teleport to box" + targetFloor + " failed");
             }
         }
+        listOfObjects.Clear();
         GameObject targetTeleporter = listOfEvelatorTeleporters[targetFloor - 1];
         targetTeleporter.GetComponent<EvelatorTeleporter>().doorsOpen = true;
 
