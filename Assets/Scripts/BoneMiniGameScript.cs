@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class BoneMiniGameScript : MonoBehaviour
 {
+    [SerializeField] private Material highlightMat;
+    private int highlightNum; // used to determine with object should be highlighted
     [SerializeField] private List<int> boneOrder = new List<int> { 1, 2, 3, 4, 5, 6 };
     [SerializeField] private List<GameObject> boneObjects = new List<GameObject>();
     [SerializeField] private int selectedBoneIndex = 0;
@@ -35,8 +37,7 @@ public class BoneMiniGameScript : MonoBehaviour
     {
         if (start == true)
         {
-            StartGame();
-
+            StartSequence();
         }
 
         // Raycast out from camera from mouse cursor to highlight bones
@@ -115,8 +116,13 @@ public class BoneMiniGameScript : MonoBehaviour
         foreach (float score in scores)
         {
             scoreAverage = scoreAverage + score;
-            Debug.Log(scoreAverage);
         }
         scoreAverage = scoreAverage / 6;
+    }
+
+    private void StartSequence()
+    {
+        // place highlighting mat logic here and use the StartGame(); function after all objects have been highlighted in sequence
+        StartGame();
     }
 }
