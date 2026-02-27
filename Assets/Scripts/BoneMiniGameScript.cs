@@ -23,10 +23,12 @@ public class BoneMiniGameScript : MonoBehaviour
     public float scoreAverage = 0f;  // Average of all the scores in the scores list
     public bool failedCutting = false;  // Becomes true if the player runs out of time during the cutting
     [HideInInspector] public float failedCuttingDamage = 30f; // multiplies each score that was failed with this number
+    private bool enabledInput = false; // determines when to begin using input at the beginning of the game after highlighting objects
 
     void Start()
     {
         cuttingScript = this.gameObject.GetComponent<BoneCuttingMiniGameScript>();
+        enabledInput = true;
     }
 
     void Update()
@@ -41,14 +43,14 @@ public class BoneMiniGameScript : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
-        if (Physics.Raycast(ray, out hit, maxDistance, hitLayers) && selectedBoneIndex != currentBone)
+        if (Physics.Raycast(ray, out hit, maxDistance, hitLayers) && selectedBoneIndex != currentBone && enabledInput)
         {
             Debug.Log("Hit object: " + hit.collider.gameObject.name);
         }
 
 
         // Actions that should happen when left clicking (use to select bone)
-        if (Input.GetMouseButtonDown(0) && selectedBoneIndex != currentBone)
+        if (Input.GetMouseButtonDown(0) && selectedBoneIndex != currentBone && enabledInput)
         {
             SelectBone();
         }

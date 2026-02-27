@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class BoneCuttingMiniGameScript : MonoBehaviour
 {
+    [SerializeField] private GameObject UserInterface; // enabled and disabled to hide cutting UI until the bone is selected
     [SerializeField] private GameObject topArea; // Top bounds of minigame
     [SerializeField] private GameObject bottomArea; // bottom bounds of minigame
     [SerializeField] private GameObject player;
@@ -30,12 +31,14 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
         initialTargetPos = targetArea.GetComponent<RectTransform>().position;
         targetNewPos = initialTargetPos;
         timer = startTime;
+        UserInterface.SetActive(false);
     }
 
     void Update()
     {
         if (startGame)
         {
+            UserInterface.SetActive(true);
             // checks the players y pos against the bottom bounds and applies "gravity" to the player
             Gravity();
 
@@ -127,5 +130,6 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
         mainScript.currentBone++;
         startGame = false;
         ResetValues();
+        UserInterface.SetActive(false);
     }
 }

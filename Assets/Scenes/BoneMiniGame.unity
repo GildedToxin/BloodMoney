@@ -890,10 +890,23 @@ MonoBehaviour:
   - {fileID: 1560887251}
   selectedBoneIndex: 0
   currentBone: 1
-  startGame: 0
+  start: 0
   hitLayers:
     serializedVersion: 2
     m_Bits: 8192
+  scores:
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  - 0
+  currentScore: 100
+  pointsDamage: 10
+  numberOfIncorrect: 0
+  scoreAverage: 0
+  failedCutting: 0
+  failedCuttingDamage: 30
 --- !u!4 &526774989
 Transform:
   m_ObjectHideFlags: 0
@@ -921,6 +934,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5dab1cf98249d14282ccd53d6b39e16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  UserInterface: {fileID: 305024986}
   topArea: {fileID: 336717386}
   bottomArea: {fileID: 1204717043}
   player: {fileID: 78061408}
@@ -930,6 +944,7 @@ MonoBehaviour:
   startGame: 0
   score: 0
   scoringRate: 20
+  timer: 0
 --- !u!1 &751733035
 GameObject:
   m_ObjectHideFlags: 0
