@@ -1,12 +1,14 @@
+using System.Collections;
 using System.Diagnostics;
 using TMPro;
 using Unity.Hierarchy;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using static UnityEngine.Rendering.VirtualTexturing.Debugging;
 
 public class EyeMinigameController : MonoBehaviour
 {
-    private bool miniGameRunning = true;
+    public bool miniGameRunning = true;
 
     [Header("Body Values")]
     public GameObject Body;
@@ -44,6 +46,9 @@ public class EyeMinigameController : MonoBehaviour
     [SerializeField] TextMeshProUGUI pointScoreText;
     public GameObject winScreen;
 
+    public AudioClip startSFX;
+    public GameObject StartCanvas;
+    public Camera cam;
     private void Awake()
     {
         remainingTime = totalTime;
@@ -51,11 +56,8 @@ public class EyeMinigameController : MonoBehaviour
 
     private void Start()
     {
-        originalPosition = new Vector3 (scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
-        timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
-        float newX = Random.Range(minBodyX, maxBodyX);
-        float newY = Random.Range(minBodyY, maxBodyY);
-        Body.transform.position = new Vector3(newX, newY, Body.transform.position.z);
+     
+
     }
 
     public void Update()
@@ -66,7 +68,7 @@ public class EyeMinigameController : MonoBehaviour
             if (horizontalMovement == 0)
             {
                 float y = Mathf.PingPong(Time.time * movementSpeed, 1) * maxY - minY;
-                scoop.transform.position = new Vector3(scoop.transform.position.x, y, scoop.transform.position.z);
+                scoop.transform.position = new Vector3(scoop.transform.position.x, scoop.transform.position.y, y);
             }
             else if (horizontalMovement == 1)
             {
@@ -75,12 +77,12 @@ public class EyeMinigameController : MonoBehaviour
             }
 
             // this swaps from vertical movement to horizontal
-            if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 0)
+            if (Input.GetKeyDown(KeyCode.E) && horizontalMovement == 0)
             {
                 scoop.transform.position = new Vector3(scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
                 horizontalMovement = 1;
             }
-            else if (Input.GetKeyDown(KeyCode.Space) && horizontalMovement == 1)
+            else if (Input.GetKeyDown(KeyCode.E) && horizontalMovement == 1)
             {
                 // this checks if the player enters the mash minigame or resets to the start
                 if (scoopInPosition)
@@ -88,6 +90,7 @@ public class EyeMinigameController : MonoBehaviour
                     mashMinigame.SetActive(true);
                     horizontalMovement = 3;
                     mm.isMashing = true;
+                    mm.LockPosition();
                 }
                 else
                 {
@@ -113,6 +116,59 @@ public class EyeMinigameController : MonoBehaviour
         }
     }
 
+    [ContextMenu("Move Body")]
+    public void MoveBody()
+    {
+        float newX = Random.Range(minBodyX, maxBodyX);
+        float newY = Random.Range(minBodyY, maxBodyY);
+        Body.transform.position = new Vector3(newX, Body.transform.position.y, newY);
+    }
+
+     public void StartMiniGameRound()
+    {
+        StartCoroutine(StartMinigameRoundWithDelay());
+
+    }
+    public IEnumerator MoveBodyTest()
+    {
+        for (int i = 0; i < 100; i++)
+        {
+            float newX = Random.Range(minBodyX, maxBodyX);
+            float newY = Random.Range(minBodyY, maxBodyY);
+            Body.transform.position = new Vector3(newX, Body.transform.position.y, newY);
+            yield return new WaitForSeconds(.1f);
+        }
+        yield return null;
+    }
+    public void StartMiniGame()
+    {
+        miniGameRunning = true;
+        originalPosition = new Vector3(scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
+        timerText.text = string.Format("{00}", Mathf.FloorToInt(remainingTime % 60));
+    }
+    private IEnumerator StartMinigameRoundWithDelay()
+    {
+
+        AudioPool.Instance.PlayClip2D(startSFX);
+        MoveBody();
+
+
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
+        UnityEngine.Debug.Log("Starting in 3...");
+        yield return new WaitForSeconds(1f);
+        StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
+        UnityEngine.Debug.Log("Starting in 2...");
+        yield return new WaitForSeconds(1f);
+        UnityEngine.Debug.Log("Starting in 1...");
+        StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+
+        StartMiniGame();
+        StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(false);
+        UnityEngine.Debug.Log("Mini-game started!");
+    }
     public void winGame()
     {
         winScreen.SetActive(true);
@@ -127,5 +183,26 @@ public class EyeMinigameController : MonoBehaviour
             totalPoints = totalPoints - ((Mathf.RoundToInt(totalTime) - Mathf.RoundToInt(remainingTime)) * timerPunishment);
             pointScoreText.text = totalPoints.ToString() + "%";
         }
+    }
+    public void StopMiniGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        try
+        {
+            GameManager.Instance.StopMiniGame("EyeBallMinigame", cam);
+            if (totalPoints > 0)
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("EyeBallMinigame");
+            GameManager.Instance.Body.IsEyesHarvested = true;
+            GameManager.Instance.Body.RemoveHighlight();
+        }
+        catch (System.Exception e)
+        {
+            UnityEngine.Debug.LogError("Error ending minigame: " + e.Message);
+
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        //print(Cursor.visible);
     }
 }

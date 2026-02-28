@@ -148,7 +148,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             case "Fingers":
                 //IsFingersHighlighted = true;
                 break;
-            case "Eyes":
+            case "EyeBallMinigame":
                 Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
                 Instantiate(eyePrefab, leftEyeSpawnLocation.position, leftEyeSpawnLocation.rotation);
                 break;

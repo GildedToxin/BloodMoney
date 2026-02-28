@@ -26,11 +26,33 @@ public class mashingMinigame : MonoBehaviour
     public GameObject button0SpritePress;
     public GameObject button1SpritePress;
 
+
+    public GameObject leftEye;
+    public GameObject rightEye;
+
+    public bool hasLeft = false;
     public void Start()
     {
         mashBar.maxValue = mashDuration;
     }
+    public float yOffset;
 
+    [ContextMenu("Lock Position")]
+    public void LockPosition()
+    {
+        scoop.transform.GetChild(0).GetComponent<MeshRenderer>().enabled = true;
+        scoop.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
+        // float distASqr = (scoop.transform.position - leftEye.transform.position).sqrMagnitude;
+        //  float distBSqr = (scoop.transform.position - rightEye.transform.position).sqrMagnitude;
+
+        Transform closest = hasLeft ? leftEye.transform : rightEye.transform;
+
+        UnityEngine.Vector3 targetPos = closest.position;
+        targetPos.z += yOffset;   // raise it
+
+        scoop.transform.position = targetPos;
+        hasLeft = true;
+    }
     public void Update()
     {
         if (isMashing)
@@ -38,7 +60,7 @@ public class mashingMinigame : MonoBehaviour
             //Rotates the object twards the button direction needed, then swaps to the other button when pressed
             if (buttonPress == 0)
             {
-                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAngel1);
+                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(90, 0, tiltAngel1);
                 scoop.transform.rotation = UnityEngine.Quaternion.Slerp(scoop.transform.rotation, target, Time.deltaTime * smooth);
                 button0Sprite.SetActive(false);
                 button1Sprite.SetActive(true);
@@ -54,7 +76,7 @@ public class mashingMinigame : MonoBehaviour
 
             else if (buttonPress == 1)
             {
-                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(0, 0, tiltAngel2);
+                UnityEngine.Quaternion target = UnityEngine.Quaternion.Euler(90, 0, tiltAngel2);
                 scoop.transform.rotation = UnityEngine.Quaternion.Slerp(scoop.transform.rotation, target, Time.deltaTime * smooth);
                 button0Sprite.SetActive(true);
                 button1Sprite.SetActive(false);
