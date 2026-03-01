@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -24,6 +25,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     private float maxScore = 100f;
     private float startTime = 60f;  // Set this to set the time limit of the cutting minigame
     public float timer = 0f;
+    private bool waitingForNewTarget = false;
 
     void Start()
     {
@@ -111,12 +113,20 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     private void MoveTarget()
     {
         // Selects new position once it reaches the new position
-        if (Vector3.Distance(targetArea.GetComponent<RectTransform>().position, targetNewPos) <= 10f)
+        if (Mathf.Abs(targetArea.GetComponent<RectTransform>().position.y - targetNewPos.y) <= 3f && waitingForNewTarget == false)
         {
-            Vector3 newerPosition = new Vector3(0, UnityEngine.Random.Range(bottomArea.GetComponent<RectTransform>().position.y + 30, topArea.GetComponent<RectTransform>().position.y - 30));
-            targetNewPos = newerPosition;
+            waitingForNewTarget = true;
+            StartCoroutine(WaitForTarget(2f));
         }
-        Vector3.Lerp(targetArea.GetComponent<RectTransform>().position, targetNewPos, 5 * Time.deltaTime);
+        targetArea.GetComponent<RectTransform>().position = new Vector3(targetArea.GetComponent<RectTransform>().position.x, Mathf.Lerp(targetArea.GetComponent<RectTransform>().position.y, targetNewPos.y, 5 * Time.deltaTime), targetArea.GetComponent<RectTransform>().position.z);
+    }
+
+    public IEnumerator WaitForTarget(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        Vector3 newerPosition = new Vector3(0, UnityEngine.Random.Range(bottomArea.GetComponent<RectTransform>().position.y + 30, topArea.GetComponent<RectTransform>().position.y - 30));
+        targetNewPos = newerPosition;
+        waitingForNewTarget = false;
     }
 
     private void EndGame()
