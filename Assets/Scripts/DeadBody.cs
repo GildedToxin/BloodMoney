@@ -140,7 +140,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
                 break;
             case "BoneMiniGame":
-                //IsBonesHighlighted = true;
+                Instantiate(BonePrefab, BoneSpawnLocation.position, BoneSpawnLocation.rotation);
                 break;
             case "BloodMiniGame":
                 Instantiate(bloodPrefab, bloodSpawnLocation.position, bloodSpawnLocation.rotation);

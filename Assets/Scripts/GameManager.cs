@@ -210,12 +210,12 @@ public class GameManager : MonoBehaviour
                 return "";
 
             case 1:
-                if (Body.IsLimbsHarvested)
+                if (Body.IsBonesHarvested)
                     break;
 
                 return "Bones";
             case 2:
-                if (Body.IsBonesHarvested)
+                if (Body.IsLimbsHarvested)
                     break;
 
                 return "Limbs";

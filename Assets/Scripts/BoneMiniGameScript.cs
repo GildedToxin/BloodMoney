@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class BoneMiniGameScript : MonoBehaviour
 {
@@ -28,7 +29,9 @@ public class BoneMiniGameScript : MonoBehaviour
     private bool enabledInput = false; // determines when to begin using input at the beginning of the game after highlighting objects
 
     public GameObject StartCanvas;
+    public GameObject EndCanvas;
     public GameObject currentBoneGO;
+    public Camera cam;
     void Start()
     {
         cuttingScript = this.gameObject.GetComponent<BoneCuttingMiniGameScript>();
@@ -76,6 +79,8 @@ public class BoneMiniGameScript : MonoBehaviour
             scores[i] = 0f;
         }
         scoreAverage = 0f;
+
+        FindAnyObjectByType<BoneMouseScript>().enabled = true;
     }
     public void RandomizeBones()
     {
@@ -115,6 +120,7 @@ public class BoneMiniGameScript : MonoBehaviour
     {
         failedCutting = false;
         cuttingScript.startGame = true;
+        FindAnyObjectByType<BoneMouseScript>().enabled = false;
     }
 
     private void EndGame()
@@ -126,15 +132,44 @@ public class BoneMiniGameScript : MonoBehaviour
             scoreAverage = scoreAverage + score;
         }
         scoreAverage = scoreAverage / 6;
+
+        EndCanvas.gameObject.SetActive(true);
+        Cursor.lockState = CursorLockMode.Confined;
+        Cursor.visible = true;
     }
 
- 
+    [ContextMenu("Stop MiniGame")]
+    public void StopMiniGame()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        try
+        {
+
+            GameManager.Instance.StopMiniGame("BoneMiniGame", cam);
+            if (scoreAverage > 0)
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BoneMiniGame");
+            GameManager.Instance.Body.IsBonesHarvested = true;
+            Destroy(GameManager.Instance.Body.Chest);
+            GameManager.Instance.Body.RemoveHighlight();
+        }
+        catch (System.Exception e)
+        {
+            Debug.LogError("Error ending minigame: " + e.Message);
+
+        }
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+        print(Cursor.visible);
+    }
     public void ShowStartGame()
     {
         StartCoroutine(StartMinigameRoundWithDelay());
     }
     private IEnumerator StartMinigameRoundWithDelay()
     {
+        Cursor.visible = false;
+        Cursor.lockState= CursorLockMode.Locked;  
         //AudioPool.Instance.PlayClip2D(startSFX);
         //transform.GetChild(0).gameObject.SetActive(true);
         //transform.GetChild(2).gameObject.SetActive(true);

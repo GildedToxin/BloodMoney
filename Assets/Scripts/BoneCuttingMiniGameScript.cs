@@ -40,14 +40,13 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     {
         if (startGame)
         {
+            mainScript.currentBoneGO.transform.GetChild(3).gameObject.SetActive(true);
             UserInterface.SetActive(true);
             // checks the players y pos against the bottom bounds and applies "gravity" to the player
             Gravity();
 
             // clamps the player's position
-            print(player.GetComponent<RectTransform>().position.y);
-            print(bottomArea.GetComponent<RectTransform>().position.y);
-            print(topArea.GetComponent<RectTransform>().position.y);
+
                 Mathf.Clamp(player.GetComponent<RectTransform>().position.y, bottomArea.GetComponent<RectTransform>().position.y, topArea.GetComponent<RectTransform>().position.y);
             
             // player input
@@ -143,6 +142,8 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
         ResetValues();
         UserInterface.SetActive(false);
         mainScript.currentBoneGO.transform.GetChild(0).gameObject.SetActive(false);
+        mainScript.currentBoneGO.transform.GetChild(3).gameObject.SetActive(false);
         mainScript.currentBoneGO.transform.GetChild(2).gameObject.SetActive(true);
+        FindAnyObjectByType<BoneMouseScript>().enabled = true;
     }
 }
