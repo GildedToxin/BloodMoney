@@ -141,5 +141,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
         startGame = false;
         ResetValues();
         UserInterface.SetActive(false);
+        mainScript.currentBoneGO.transform.GetChild(0).gameObject.SetActive(false);
+        mainScript.currentBoneGO.transform.GetChild(2).gameObject.SetActive(true);
     }
 }

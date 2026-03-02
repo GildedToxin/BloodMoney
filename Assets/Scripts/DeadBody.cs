@@ -63,6 +63,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public bool hasShownScreen = false;
     public bool hasShownScreen2 = false;
 
+    public GameObject BonePrefab;
+    public Transform BoneSpawnLocation;
+    public GameObject Chest;
     public void Update()
     {
         if (isLookedAt)
@@ -136,7 +139,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
                 Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
                 break;
-            case "Bones":
+            case "BoneMiniGame":
                 //IsBonesHighlighted = true;
                 break;
             case "BloodMiniGame":

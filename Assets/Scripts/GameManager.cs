@@ -273,7 +273,7 @@ public class GameManager : MonoBehaviour
             case "Limbs":
                 return "LimbMiniGame";
             case "Bones":
-                return "";
+                return "BoneMiniGame";
             case "Blood":
                 return "BloodMiniGame";
             case "Brain":
@@ -400,6 +400,9 @@ public class GameManager : MonoBehaviour
             case MiniGameType.Eye:
                 SceneManager.LoadScene("EyeBallMinigame", LoadSceneMode.Additive);
                 break;
+            case MiniGameType.Bone:
+                SceneManager.LoadScene("BoneMiniGame", LoadSceneMode.Additive);
+                break;
         }
 
         Camera.main.gameObject.SetActive(false);
@@ -429,6 +432,12 @@ public class GameManager : MonoBehaviour
             case MiniGameType.Brain:
                 SceneManager.UnloadSceneAsync("SkullMinigame");
                 break;
+            case MiniGameType.Eye:
+                SceneManager.UnloadSceneAsync("EyeBallMinigame");
+                break;
+            case MiniGameType.Bone:
+                SceneManager.UnloadSceneAsync("BoneMiniGame");
+                break;
         }
 
         Player.GetComponent<PlayerController>().enabled = true;
@@ -451,5 +460,6 @@ public enum MiniGameType
     Limb,
     Brain,
     Eye,
+    Bone,
 }
 
