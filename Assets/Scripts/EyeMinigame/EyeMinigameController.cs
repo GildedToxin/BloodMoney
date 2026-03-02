@@ -129,7 +129,14 @@ public class EyeMinigameController : MonoBehaviour
         StartCoroutine(StartMinigameRoundWithDelay());
 
     }
-    public IEnumerator MoveBodyTest()
+
+    [ContextMenu("Move Body Test")]
+    public void MoveBodyTest()
+    {
+        StartCoroutine(MoveBodyTesting());
+
+    }
+    public IEnumerator MoveBodyTesting()
     {
         for (int i = 0; i < 100; i++)
         {
@@ -193,8 +200,10 @@ public class EyeMinigameController : MonoBehaviour
             GameManager.Instance.StopMiniGame("EyeBallMinigame", cam);
             if (totalPoints > 0)
                 FindAnyObjectByType<GameManager>().Body.SpawnOrgan("EyeBallMinigame");
-            GameManager.Instance.Body.IsEyesHarvested = true;
             GameManager.Instance.Body.RemoveHighlight();
+            GameManager.Instance.Body.eyesHarvested++;
+            if(GameManager.Instance.Body.eyesHarvested >= 2)
+                GameManager.Instance.Body.IsEyesHarvested = true;
         }
         catch (System.Exception e)
         {

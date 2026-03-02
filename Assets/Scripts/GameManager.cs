@@ -397,6 +397,9 @@ public class GameManager : MonoBehaviour
             case MiniGameType.Brain:
                 SceneManager.LoadScene("SkullMinigame", LoadSceneMode.Additive);
                 break;
+            case MiniGameType.Eye:
+                SceneManager.LoadScene("EyeBallMinigame", LoadSceneMode.Additive);
+                break;
         }
 
         Camera.main.gameObject.SetActive(false);
@@ -446,6 +449,7 @@ public enum MiniGameType
 {
     Blood,
     Limb,
-    Brain
+    Brain,
+    Eye,
 }
 

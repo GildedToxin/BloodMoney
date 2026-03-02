@@ -1897,12 +1897,12 @@ Transform:
   m_GameObject: {fileID: 789626677}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.53, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5300002, z: 0}
   m_LocalScale: {x: 0.34086648, y: 0.34086648, z: 0.34086648}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2090980424}
-  m_Father: {fileID: 1647547407}
+  m_Father: {fileID: 990105128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925626038
 GameObject:
@@ -1979,6 +1979,39 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 925626038}
   m_CullTransparentMesh: 1
+--- !u!1 &990105127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 990105128}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &990105128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 990105127}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.31, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 789626678}
+  - {fileID: 1266187964}
+  m_Father: {fileID: 1647547407}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &999670074
 GameObject:
   m_ObjectHideFlags: 0
@@ -2442,16 +2475,16 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266187963}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.29999933}
   m_LocalScale: {x: 0.029999997, y: 0.029999997, z: 0.029999997}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1407039732}
-  m_Father: {fileID: 1647547407}
+  m_Father: {fileID: 990105128}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 1.9799991}
   m_SizeDelta: {x: 454.80005, y: 405.8}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1266187965
@@ -2515,7 +2548,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!1 &1391730978
 GameObject:
@@ -2969,7 +3002,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -2980,7 +3013,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1457476252}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3080,7 +3113,7 @@ BoxCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
@@ -3091,7 +3124,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524834390}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -3428,8 +3461,7 @@ Transform:
   m_LocalScale: {x: 4.05, y: 4.05, z: 4.05}
   m_ConstrainProportionsScale: 1
   m_Children:
-  - {fileID: 789626678}
-  - {fileID: 1266187964}
+  - {fileID: 990105128}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &1647547408
@@ -4230,10 +4262,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::EyeMinigameController
   miniGameRunning: 0
   Body: {fileID: 1972850479}
-  maxBodyY: 50
+  maxBodyY: 30
   minBodyY: 0
-  maxBodyX: 25
-  minBodyX: -25
+  maxBodyX: 30
+  minBodyX: -30
   maxY: 61
   minY: -24
   maxX: 124
@@ -4253,7 +4285,7 @@ MonoBehaviour:
   winScreen: {fileID: 1575792769}
   startSFX: {fileID: 8300000, guid: 9f5fb923e6375e1498d010c30444da13, type: 3}
   StartCanvas: {fileID: 1923233258}
-  cam: {fileID: 0}
+  cam: {fileID: 1391730980}
 --- !u!4 &1991456143
 Transform:
   m_ObjectHideFlags: 0
@@ -4298,7 +4330,7 @@ MonoBehaviour:
   leftEye: {fileID: 105337312}
   rightEye: {fileID: 1995940599}
   hasLeft: 0
-  yOffset: 15
+  yOffset: 0
 --- !u!1 &1995940599
 GameObject:
   m_ObjectHideFlags: 0

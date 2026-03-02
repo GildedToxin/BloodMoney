@@ -45,12 +45,25 @@ public class mashingMinigame : MonoBehaviour
         // float distASqr = (scoop.transform.position - leftEye.transform.position).sqrMagnitude;
         //  float distBSqr = (scoop.transform.position - rightEye.transform.position).sqrMagnitude;
 
-        Transform closest = hasLeft ? leftEye.transform : rightEye.transform;
+        Transform closest;
+
+        if (GameManager.Instance == null || GameManager.Instance.Body == null)
+        {
+            closest = leftEye.transform;
+        }
+        else
+        {
+            closest = GameManager.Instance.Body.eyesHarvested == 0 ? leftEye.transform : rightEye.transform;
+        }
+
+        
+        
 
         UnityEngine.Vector3 targetPos = closest.position;
         targetPos.z += yOffset;   // raise it
 
-        scoop.transform.position = targetPos;
+        scoop.transform.parent.transform.position = targetPos;
+        //scoop.transform.GetChild(0).GetChild(0).transform.position = targetPos;
         hasLeft = true;
     }
     public void Update()

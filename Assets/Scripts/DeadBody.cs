@@ -57,6 +57,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public Transform rightEyeSpawnLocation;
     public Transform leftEyeSpawnLocation;
 
+    public int eyesHarvested = 0;
+
 
     public bool hasShownScreen = false;
     public bool hasShownScreen2 = false;
@@ -149,8 +151,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 //IsFingersHighlighted = true;
                 break;
             case "EyeBallMinigame":
-                Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
+                if(eyesHarvested == 0)
                 Instantiate(eyePrefab, leftEyeSpawnLocation.position, leftEyeSpawnLocation.rotation);
+
+                if(eyesHarvested == 1)
+                Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
                 break;
 
         }
