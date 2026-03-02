@@ -18,7 +18,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     private Vector3 initialPlayerPos;
     private Vector3 initialTargetPos;
     private Vector3 targetNewPos;
-    private float playerTargetRange = 25f; // how far the player must be from the target to gain points
+    public float playerTargetRange = 25f; // how far the player must be from the target to gain points
     private bool playerInput = false;
     [SerializeField] private float score = 0; // current score
     [SerializeField] private float scoringRate = 20f; // the speed that the score goes up when the player is in range
@@ -45,8 +45,9 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
             Gravity();
 
             // clamps the player's position
-            if (player.GetComponent<RectTransform>().position.y < bottomArea.GetComponent<RectTransform>().position.y || 
-            player.GetComponent<RectTransform>().position.y > topArea.GetComponent<RectTransform>().position.y)
+            print(player.GetComponent<RectTransform>().position.y);
+            print(bottomArea.GetComponent<RectTransform>().position.y);
+            print(topArea.GetComponent<RectTransform>().position.y);
                 Mathf.Clamp(player.GetComponent<RectTransform>().position.y, bottomArea.GetComponent<RectTransform>().position.y, topArea.GetComponent<RectTransform>().position.y);
             
             // player input
@@ -75,7 +76,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
 
     private void PlayerInput()
     {
-        if (Input.GetKey(KeyCode.E))
+        if (Input.GetKey(KeyCode.E) && player.GetComponent<RectTransform>().position.y < topArea.GetComponent<RectTransform>().position.y)
             {
                 Vector3 playerFallVector = new Vector3(0, 200, 0);
                 player.GetComponent<RectTransform>().position += playerFallVector * Time.deltaTime;
