@@ -8,9 +8,8 @@ public enum OrganType
 {
     Brain,
     Bone,
-    Meat,
     Limb,
-    Finger,
+    Hand,
     Eye,
     Blood
 }

@@ -362,8 +362,11 @@ public class GameManager : MonoBehaviour
     {
         // For now this returns a fixed quota for the first day
         // Later this can be expanded to have dynamic quotas based on day and difficulty
-
-        return quota[currentDay];
+        try {
+            return quota[currentDay];
+        }
+        catch {  return 1000; }
+        
     }
     public bool HasPlayerHitQuota()
     {

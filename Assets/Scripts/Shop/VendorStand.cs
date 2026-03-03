@@ -91,9 +91,12 @@ public class VendorStand : MonoBehaviour
         organsToSell.Remove(organ);
         Destroy(organ.gameObject);
 
-        customers.Remove(customer);
-        customer.gameObject.SetActive(false);
-        //Destroy(customer.gameObject);
+        //customers.Remove(customer);
+        //customer.gameObject.SetActive(false);
+        customer.RandomCustomer();
+
+        FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"");
+        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
 
         UpdateVenders();
 

@@ -1,13 +1,12 @@
+using System.Collections;
+using UnityEditor.Rendering;
 using UnityEngine;
 
 public enum CustomerType
 {
-    Werewolf,
-    Vampire,
     Zombie,
     Skeleton,
-    Whitch,
-    Frankestein
+    Witch,
 }
 public class Customer : MonoBehaviour, IPlayerLookTarget
 {
@@ -20,14 +19,11 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     public bool isServed = false;
     public bool isLookedAt = false;
     public bool canBuyItem = false;
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public ParticleSystem blood;
+    private void Start()
     {
-        
+        RandomCustomer();
     }
-
-    // Update is called once per frame
     void Update()
     {
         if (isLookedAt && canBuyItem && !isServed)
@@ -41,12 +37,43 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         } 
     }
 
+    [ContextMenu("Random Customer")]
     public void RandomCustomer()
     {
-        customerType = (CustomerType)Random.Range(0, System.Enum.GetValues(typeof(CustomerType)).Length);
+        var oldCustomer = customerType;
+        do {
+            customerType = (CustomerType)Random.Range(0, System.Enum.GetValues(typeof(CustomerType)).Length);
+        }while(customerType == oldCustomer);
+
+        desiredOrgan = (OrganType)Random.Range(0, System.Enum.GetValues(typeof(OrganType)).Length);
+
+        StartCoroutine(PlayParticles());
     }
 
+    public void SwitchCustomerModel()
+    {
+        switch (customerType)
+        {
+            case CustomerType.Zombie:
+                transform.GetChild(2).GetChild(1).gameObject.SetActive(true);
 
+                transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
+                break;
+            case CustomerType.Skeleton:
+                transform.GetChild(2).GetChild(2).gameObject.SetActive(true);
+
+                transform.GetChild(2).GetChild(0).gameObject.SetActive(false);
+                transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
+                break;
+            case CustomerType.Witch:
+                transform.GetChild(2).GetChild(0).gameObject.SetActive(true);
+
+                transform.GetChild(2).GetChild(1).gameObject.SetActive(false);
+                transform.GetChild(2).GetChild(2).gameObject.SetActive(false);
+                break;
+        }
+    }
     public void OnLookEnter()
     {
         customerRequest.enabled = true;
@@ -66,5 +93,13 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
     }
 
+    public IEnumerator PlayParticles()
+    {
+        blood.Play();
+        yield return new WaitForSeconds(0.5f);
+        SwitchCustomerModel();
+        yield return new WaitForSeconds(0.5f);
+        blood.Stop(false, ParticleSystemStopBehavior.StopEmitting);
+    }
 }
 
