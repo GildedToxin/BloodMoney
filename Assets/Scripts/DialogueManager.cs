@@ -5,33 +5,56 @@ using System.Collections.Generic;
 
 public class DialogueManager : MonoBehaviour
 {
-    public List<ScriptableObject> dialogueConversations = new List<ScriptableObject>();
-
+    public List<Dialogue> dialogueConversations = new List<Dialogue>();
     private Dialogue currentDialogue;
+    private int conversationIndex = 0;
+    private string repeatedLine;
     private int currentLineIndex = 0;
-    private bool conversationActive = false;
-    private bool RepeatDialogue = false;
+    private bool DialogueActive = false;
+    public bool testBoolCondition = false;
+    public bool secondTestBoolCondition = false;
+
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (conversationActive)
+            if (DialogueActive)
+            {
                 NextLine();
+            }
             else
             {
-                StartDialogue((Dialogue)dialogueConversations[0]); // Start the first dialogue for testing purposes
-                conversationActive = true;
+                switch (conversationIndex)
+                {
+                    case 0:
+                        if (testBoolCondition)
+                            StartDialogue(dialogueConversations[0]);
+                        else
+                            goto default;
+                        break;
+                    case 1:
+                        if (secondTestBoolCondition)
+                            StartDialogue(dialogueConversations[1]);
+                        else
+                            RepeatLine();
+                        break;
+                    default:
+                        if (repeatedLine != null)
+                            RepeatLine();
+                        else
+                            Debug.Log("No conversation available");
+                        break;
+                }
             }
-                
         }
     }
 
     public void StartDialogue(Dialogue dialogue)
     {
-        currentDialogue = dialogue;
+        DialogueActive = true;
         currentLineIndex = 0;
-
+        currentDialogue = dialogue;
         DisplayCurrentLine();
     }
 
@@ -49,17 +72,22 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayCurrentLine()
     {
-        DialogueLine line = currentDialogue.lines[currentLineIndex];
+        Debug.Log(currentDialogue.lines[currentLineIndex].speakerName + ": " + currentDialogue.lines[currentLineIndex].line);
 
-        Debug.Log(line.speakerName + ": " + line.line);
-
-        // Update UI elements here
+        // Update UI here
     }
 
     public void EndDialogue()
     {
-        Debug.Log("Dialogue ended.");
-        currentDialogue = null;
-        conversationActive = false;
+        DialogueActive = false;
+        conversationIndex++;
+        repeatedLine = currentDialogue.repeatLine.line;
+        Debug.Log(currentDialogue.repeatLine.speakerName + ": " + repeatedLine);
+    }
+
+    public void RepeatLine()
+    {
+        Debug.Log(currentDialogue.repeatLine.speakerName + ": " + repeatedLine);
+        DisplayCurrentLine();
     }
 }
