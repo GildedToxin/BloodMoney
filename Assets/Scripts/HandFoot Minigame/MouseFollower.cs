@@ -7,7 +7,9 @@ public class MouseFollower : MonoBehaviour
 
     Ray ray;
     RaycastHit hit;
-    private bool follow = false;
+    public bool follow = false;
+
+    public GameObject follower;
 
     private void Update()
     {
@@ -23,6 +25,7 @@ public class MouseFollower : MonoBehaviour
         if (follow == true)
         {
             transform.position = Camera.main.ScreenToWorldPoint(position);
+            follower.layer = LayerMask.NameToLayer("Ignore Raycast");
         }
     }
 }
