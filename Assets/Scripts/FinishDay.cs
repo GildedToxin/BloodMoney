@@ -9,12 +9,21 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
     {
         if (isLookedAt && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.HasPlayerHitQuota())
         {
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
-            // EndVerticalSlice();
-            GameManager.Instance.currentDay++;
-            GameManager.Instance.moneyMadeToday = 0;
-           SceneManager.LoadScene("Hotel");
+            if (GameManager.Instance.currentDay == 9)
+            {
+                GameManager.Instance.PlayEndSequence();
+            }
+            else
+            {
+                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+                // EndVerticalSlice();
+                GameManager.Instance.currentDay++;
+                GameManager.Instance.moneyMadeToday = 0;
+                SceneManager.LoadScene("Hotel");
+            }
         }
+
+
     }
 
     public void OnLookEnter()

@@ -72,7 +72,7 @@ public class HUDManager : MonoBehaviour
             }
         }
         moneyText.GetComponent<TextMeshProUGUI>().text = $"${inventoryController.money.Value}";
-        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {GameManager.Instance.currentDay}/30";
+        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {GameManager.Instance.currentDay + 1}/10";
 
         quotaText.GetComponent<TextMeshProUGUI>().text = $"Quota: {GameManager.Instance.moneyMadeToday}/{GameManager.Instance.CalculateQuota()}";
 

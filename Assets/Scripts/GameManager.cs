@@ -456,6 +456,12 @@ public class GameManager : MonoBehaviour
     {
         FindAnyObjectByType<InventoryController>().AddMoney(quota[currentDay]);
     }
+
+    public void PlayEndSequence()
+    {
+        print("The player has beaten the game");
+        SceneManager.LoadScene("MainMenu");
+    }
 }
 public enum MiniGameType
 {
