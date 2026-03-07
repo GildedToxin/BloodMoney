@@ -1,19 +1,25 @@
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainMenuScript : MonoBehaviour
 {
 
     [SerializeField] CanvasGroup settingsMenu;
     [SerializeField] CanvasGroup mainMenu;
-    public void NewGame()
-    {
-        SceneManager.LoadSceneAsync("Hotel");
-    }
+    [SerializeField] CanvasGroup dayMenu;
 
-    public void ContinueGame()
+    public Button playGame;
+    public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("ProgrammingTestScene 1");
+        if (GameManager.Instance.highestReachedDay != 0)
+        {
+            playGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Contiune");
+        }
+        GameManager.Instance.currentDay = GameManager.Instance.highestReachedDay;
+        SceneManager.LoadSceneAsync("Hotel");
+
     }
 
     public void StatsMenu()
@@ -31,7 +37,15 @@ public class MainMenuScript : MonoBehaviour
         mainMenu.blocksRaycasts = false;
 
     }
-
+    public void SelectADay()
+    {
+            dayMenu.alpha = 1;
+            dayMenu.interactable = true;
+            dayMenu.blocksRaycasts = true;
+            mainMenu.alpha = 0;
+            mainMenu.interactable = false;
+            mainMenu.blocksRaycasts = false;
+    }
     public void CreditsScene()
     {
         Debug.Log("Credits");

@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int currentDay = 0;
+    public int highestReachedDay = 0;
     private const int MAXDAY = 10;
     public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
@@ -81,7 +82,6 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 
-
         if (currentDay == 0)
         {
             FirstDayTutorial();
@@ -89,7 +89,11 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        if(moneyMadeToday >= CalculateQuota())
+        if (highestReachedDay < currentDay)
+            highestReachedDay = currentDay;
+
+
+        if (moneyMadeToday >= CalculateQuota())
         {
             EndDay();
         }
@@ -190,7 +194,11 @@ public class GameManager : MonoBehaviour
             lastMinute = minute;
             string suffix = "AM";
             int displayHour = hour == 0 ? 12 : hour;
-            clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+            try
+            {
+                clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+            }
+            catch { }
         }
 
         if (t >= 1f)
@@ -257,15 +265,21 @@ public class GameManager : MonoBehaviour
                 Body.Highlight(highlight);
             }
         };
-        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
+        try
+        {
+            FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
+        }
+        catch { }
     }
 
     private void OnDisable()
     {
-        // Remove the same delegate
-        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
+        try
+        {
+            FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
+        }
+        catch { }
     }
-
     public string OrganToScene(string organ)
     {
         switch (organ)

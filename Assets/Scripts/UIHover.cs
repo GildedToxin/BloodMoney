@@ -12,13 +12,13 @@ public class UIHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
 
         isHovered = true;
-        FindFirstObjectByType<DaySelectManager>().UpdateHover(this);
+      //  FindFirstObjectByType<DaySelectManager>().UpdateHover(this);
 
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         isHovered = false;
-        FindFirstObjectByType<DaySelectManager>().UpdateHover(this);
+       // FindFirstObjectByType<DaySelectManager>().UpdateHover(this);
     }
 }
