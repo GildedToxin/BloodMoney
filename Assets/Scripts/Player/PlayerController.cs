@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
             layerMask &= ~(1 << ignoreLayer);
         }
 
-        if (Physics.Raycast(ray, out RaycastHit hit, 10f, layerMask, QueryTriggerInteraction.Ignore))
+        if (Physics.Raycast(ray, out RaycastHit hit, 3.75f, layerMask, QueryTriggerInteraction.Ignore))
         {
             IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
                           ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();

@@ -24,7 +24,7 @@ public class owner : MonoBehaviour, IPlayerLookTarget
 
 
 
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             GameManager.Instance.GivePlayerKey();
             GameManager.Instance.doesPlayerHaveKey = true;
             transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Default");
@@ -32,18 +32,18 @@ public class owner : MonoBehaviour, IPlayerLookTarget
     }
     public void OnLookEnter()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-        if(!GameManager.Instance.doesPlayerHaveKey)
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+        if (!GameManager.Instance.doesPlayerHaveKey)
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to collect room Key");
         else
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("You already have the room Key");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("");
 
         isLookedAt = true;
 
     }
     public void OnLookExit()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         isLookedAt = false;
     }
 }

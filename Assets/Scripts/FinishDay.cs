@@ -15,7 +15,7 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
             }
             else
             {
-                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+                FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
                 // EndVerticalSlice();
                 GameManager.Instance.currentDay++;
                 GameManager.Instance.moneyMadeToday = 0;
@@ -28,17 +28,17 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookEnter()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         if (GameManager.Instance.HasPlayerHitQuota())
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to leave the hotel and end your shift");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to end your shift");
         else
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("You must complete your quota before ending your shift");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("You must complete your quota");
 
         isLookedAt = true;
     }
     public void OnLookExit()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         isLookedAt = false;
     }
 

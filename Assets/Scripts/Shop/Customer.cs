@@ -81,8 +81,8 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
 
         if (canBuyItem && !isServed)
         {
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Sell {desiredOrgan.ToString()}");
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to sell {desiredOrgan.ToString()}");
+            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         }
     }
     public void OnLookExit()
@@ -90,7 +90,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         if(customerRequest != null)
             customerRequest.enabled = false;
         isLookedAt = false;
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 
     public IEnumerator PlayParticles()

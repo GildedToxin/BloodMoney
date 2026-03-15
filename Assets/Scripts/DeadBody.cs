@@ -75,11 +75,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 return;
 
             if (organ == "")
-                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+                FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             else
-                FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+                FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
 
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to Harvest {organ}");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to harvest {organ}");
             if (Input.GetKeyDown(KeyCode.E))
                 GameManager.Instance.StartMiniGame();
         }
@@ -196,11 +196,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public void OnLookEnter()
     {
         isLookedAt = true;
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
     }
     public void OnLookExit()
     {
         isLookedAt = false;
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 }

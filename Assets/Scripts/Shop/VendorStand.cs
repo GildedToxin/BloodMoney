@@ -95,8 +95,8 @@ public class VendorStand : MonoBehaviour
         //customer.gameObject.SetActive(false);
         customer.RandomCustomer();
 
-        FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"");
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("");
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
 
         UpdateVenders();
 

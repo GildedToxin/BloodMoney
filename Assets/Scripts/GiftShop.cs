@@ -20,14 +20,14 @@ public class GiftShop : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookEnter()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to Open Shop");
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+        FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to open shop");
 
         isLookedAt = true;
     }
     public void OnLookExit()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         isLookedAt = false;
     }
 }
