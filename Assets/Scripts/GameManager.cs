@@ -149,7 +149,7 @@ public class GameManager : MonoBehaviour
         Body.Highlight(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
 
         FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
-        FindAnyObjectByType<VendorStand>().RefreshCustomers();
+       // FindAnyObjectByType<VendorStand>().RefreshCustomers();
     }
     public DoorController ChooseNewRoom()
     {

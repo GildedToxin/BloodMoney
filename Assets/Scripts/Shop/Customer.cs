@@ -20,6 +20,8 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     public bool isLookedAt = false;
     public bool canBuyItem = false;
     public ParticleSystem blood;
+
+    public string currentText;
     private void Start()
     {
         RandomCustomer();
@@ -46,8 +48,13 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         }while(customerType == oldCustomer);
 
         desiredOrgan = (OrganType)Random.Range(0, System.Enum.GetValues(typeof(OrganType)).Length);
+        currentText = FindAnyObjectByType<HUDManager>().customerRequestUI.GetText(desiredOrgan);
 
         StartCoroutine(PlayParticles());
+        isServed = false;
+
+        FindAnyObjectByType<HUDManager>().customerRequestUI.gameObject.SetActive(false);
+        //OnLookEnter();
     }
 
     public void SwitchCustomerModel()
@@ -79,17 +86,25 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         print("test");
         customerRequest.enabled = true;
         isLookedAt = true;
-
+        var customerUI = FindAnyObjectByType<HUDManager>().customerRequestUI;
         if (canBuyItem && !isServed)
         {
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to sell {desiredOrgan.ToString()}");
-            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+            // customerUI.gameObject.SetActive(true);
+            // customerUI.SetText(currentText);
+
+            customerUI.gameObject.SetActive(true);
+            customerUI.SetTextSell(desiredOrgan);
+            customerUI.SetIcon(desiredOrgan);
+
+
+            //  FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to sell {desiredOrgan.ToString()}");
+            //  FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         }
         else if (!canBuyItem && !isServed)
         {
-            print("test");
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"I would like a {desiredOrgan.ToString()}");
-            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+            customerUI.gameObject.SetActive(true);
+            customerUI.SetText(currentText);
+            customerUI.SetIcon(desiredOrgan);
         }
     }
     public void OnLookExit()
@@ -98,6 +113,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
             customerRequest.enabled = false;
         isLookedAt = false;
         FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
+        FindAnyObjectByType<HUDManager>().customerRequestUI.gameObject.SetActive(false);
     }
 
     public IEnumerator PlayParticles()

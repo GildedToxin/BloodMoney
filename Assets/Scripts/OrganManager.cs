@@ -107,8 +107,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public int GetOrganPrice()  
     {
-        var mult = (currentHealth / 10);
-        return (itemData.price) +  10 *  mult;
+        // var mult = (currentHealth / 10);
+        return (itemData.price); //+  10 *  mult;
     }
 
     public void RefreshOrgan()

@@ -24,6 +24,8 @@ public class HUDManager : MonoBehaviour
     public GameObject bloodSelection;
 
     public GameObject quotaText;
+
+    public CustomerRequestUI customerRequestUI;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
