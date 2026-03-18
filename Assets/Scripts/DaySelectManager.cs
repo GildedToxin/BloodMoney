@@ -44,6 +44,8 @@ public class DaySelectManager : MonoBehaviour
 
         GameManager.Instance.currentDay = day;
         SceneManager.LoadSceneAsync("Hotel");
+
+        //GameManager.Instance
     }
 
     public void ReturnToMenu()

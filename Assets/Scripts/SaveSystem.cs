@@ -28,7 +28,11 @@ public class SaveSystem
 
     private static void HandleSaveData()
     {
-        GameManager.Instance.Player.Save(ref _saveData.PlayerData);
+        try
+        {
+            GameManager.Instance.Player.Save(ref _saveData.PlayerData);
+        }
+        catch { }
         GameManager.Instance.Save(ref _saveData.GameManagerSaveData);
     }
 
@@ -42,7 +46,11 @@ public class SaveSystem
 
     private static void HandleLoadData()
     {
-        GameManager.Instance.Player.Load(_saveData.PlayerData);
+        try
+        {
+            GameManager.Instance.Player.Load(_saveData.PlayerData);
+        }
+        catch { }
         GameManager.Instance.Load(_saveData.GameManagerSaveData);
     }
 }

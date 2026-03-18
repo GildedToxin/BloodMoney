@@ -78,6 +78,9 @@ public class GameManager : MonoBehaviour
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
         quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
+
+            SaveSystem.Load();
+
     }
     private void Start()
     {
@@ -90,7 +93,10 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (highestReachedDay < currentDay)
+        {
             highestReachedDay = currentDay;
+            SaveSystem.Save();
+        }
 
 
         if (moneyMadeToday >= CalculateQuota())
@@ -98,11 +104,9 @@ public class GameManager : MonoBehaviour
             EndDay();
         }
         UpdateClock();
-        if (Input.GetKeyDown(KeyCode.X)) {
-            GivePlayerKey();
-        }
         if (Input.GetKeyDown(KeyCode.V))
         {
+            Debug.Log(Application.persistentDataPath);
             SaveSystem.Save();
         }
 

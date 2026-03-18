@@ -47,7 +47,14 @@ public class CartBehavior : MonoBehaviour
 
     private void Update()
     {
+        if(moveing == false && canPickUp == false)
+        {
+        //    this.transform.parent = null;
+        //    TriggerArea.SetActive(true);
+        //    StartCoroutine(ResetMovement(1f));
 
+
+        }
 
         if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
