@@ -213,6 +213,10 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
+        if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
+        {
+            return;
+        }
         //finds the movement direction
         movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
 

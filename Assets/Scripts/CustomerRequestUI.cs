@@ -17,8 +17,8 @@ public class CustomerRequestUI : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        string currentText = textOptions[Random.Range(0, textOptions.Count)];
-        text.text = currentText;
+       // string currentText = textOptions[Random.Range(0, textOptions.Count)];
+       // text.text = currentText;
     }
 
     public void SetText(string newText) {

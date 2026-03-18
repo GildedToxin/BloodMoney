@@ -35,7 +35,14 @@ public class FirstDayManager : MonoBehaviour
             tutorialScreens[currentScreen].SetActive(false);
             currentScreen++; //2 or 3
             tutorialScreens[currentScreen].SetActive(true);
+
+            var hud = FindAnyObjectByType<HUDManager>();
+            hud.bookPanel.SetActive(!hud.bookPanel.activeSelf);
+            hud.bookClosed.SetActive(!hud.bookClosed.activeSelf);
+            hud.bookOpen.SetActive(!hud.bookOpen.activeSelf);
+
             StartCoroutine(WaitForNextScreen());
+
         }
         else if(currentScreen == 3 && Input.anyKeyDown && canMoveScreen)
         {
@@ -124,7 +131,7 @@ public class FirstDayManager : MonoBehaviour
     public IEnumerator WaitForNextScreen()
     {
         canMoveScreen = false;
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(2f);
         canMoveScreen = true;
         yield return null;
     }

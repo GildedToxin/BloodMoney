@@ -49,13 +49,13 @@ public class CartBehavior : MonoBehaviour
     {
 
 
-        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
+        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
-           this.transform.parent = null;
-           TriggerArea.SetActive(true);
-           StartCoroutine(ResetMovement(1f));
+            this.transform.parent = null;
+            TriggerArea.SetActive(true);
+            StartCoroutine(ResetMovement(1f));
         }
-        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
+        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
             if(GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
             {
