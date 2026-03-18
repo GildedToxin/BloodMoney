@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
@@ -90,8 +90,15 @@ public class GameManager : MonoBehaviour
             FirstDayTutorial();
         }
     }
+    public bool once = false;
     private void Update()
     {
+        if(once == false && SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            hudManager = FindAnyObjectByType<HUDManager>();
+            cam = Camera.main;
+            once = true;
+        }
         if (highestReachedDay < currentDay)
         {
             highestReachedDay = currentDay;
