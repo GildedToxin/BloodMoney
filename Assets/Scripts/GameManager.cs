@@ -476,6 +476,20 @@ public class GameManager : MonoBehaviour
         print("The player has beaten the game");
         SceneManager.LoadScene("MainMenu");
     }
+
+    #region Save and Load
+
+    public void Save(ref GameManagerSaveData data)
+    {
+        data.maxReachedDay = highestReachedDay;
+    }
+
+    public void Load(GameManagerSaveData data)
+    {
+        highestReachedDay = data.maxReachedDay;
+    }
+
+    #endregion
 }
 public enum MiniGameType
 {
@@ -484,5 +498,11 @@ public enum MiniGameType
     Brain,
     Eye,
     Bone,
+}
+
+[System.Serializable]
+public struct GameManagerSaveData
+{
+    public int maxReachedDay;
 }
 
