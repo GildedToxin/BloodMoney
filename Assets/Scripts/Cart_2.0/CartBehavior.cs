@@ -55,6 +55,9 @@ public class CartBehavior : MonoBehaviour
 
 
         }
+        if (this.transform.parent != null && moveing == false)
+            moveing = true;
+
 
         if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
