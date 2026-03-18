@@ -14,7 +14,10 @@ public class CartBehavior : MonoBehaviour
     {
       //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
-        {    
+        {
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to Push Cart");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+
             canPickUp = true;
 
             // FollowPlayer(Player);
@@ -26,6 +29,7 @@ public class CartBehavior : MonoBehaviour
         //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
         {
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             canPickUp = false;
 
             // FollowPlayer(Player);
@@ -63,6 +67,9 @@ public class CartBehavior : MonoBehaviour
             }
             FollowPlayer(Player);
             canPickUp = false;
+
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
 
         }
     }

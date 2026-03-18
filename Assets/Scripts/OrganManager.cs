@@ -6,12 +6,12 @@ using UnityEngine.VFX;
 
 public enum OrganType
 {
-    Brain,
     Bone,
     Limb,
+    Blood,
+    Brain,
     Hand,
-    Eye,
-    Blood
+    Eye
 }
 
 public class OrganManager : MonoBehaviour, IPlayerLookTarget

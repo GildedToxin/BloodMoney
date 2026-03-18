@@ -47,7 +47,9 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
             customerType = (CustomerType)Random.Range(0, System.Enum.GetValues(typeof(CustomerType)).Length);
         }while(customerType == oldCustomer);
 
-        desiredOrgan = (OrganType)Random.Range(0, System.Enum.GetValues(typeof(OrganType)).Length);
+
+        var ran = Mathf.Clamp(GameManager.Instance.currentDay, 0, System.Enum.GetValues(typeof(OrganType)).Length);
+        desiredOrgan = (OrganType)Random.Range(0, ran);
         currentText = FindAnyObjectByType<HUDManager>().customerRequestUI.GetText(desiredOrgan);
 
         StartCoroutine(PlayParticles());
