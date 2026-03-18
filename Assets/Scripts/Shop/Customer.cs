@@ -76,12 +76,19 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     }
     public void OnLookEnter()
     {
+        print("test");
         customerRequest.enabled = true;
         isLookedAt = true;
 
         if (canBuyItem && !isServed)
         {
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to sell {desiredOrgan.ToString()}");
+            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+        }
+        else if (!canBuyItem && !isServed)
+        {
+            print("test");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"I would like a {desiredOrgan.ToString()}");
             FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         }
     }
