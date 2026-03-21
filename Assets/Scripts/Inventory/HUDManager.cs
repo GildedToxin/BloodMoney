@@ -26,6 +26,7 @@ public class HUDManager : MonoBehaviour
     public GameObject quotaText;
 
     public CustomerRequestUI customerRequestUI;
+    public MeatGrinderUI meatGrinderUI;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
