@@ -35,7 +35,7 @@ public class CameraMovement : MonoBehaviour
             sensitivityY = 400;
 
 
-        if (isUIOpen)
+        if (isUIOpen || GameManager.Instance.isPaused)
             return;
 
         //Mouse Camera Inputs

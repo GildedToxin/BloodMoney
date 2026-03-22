@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     public HUDManager hudManager;
 
     public bool doesPlayerHaveKey = false;
+
+    public bool isPaused = false;
+    public PauseMenu pauseMenu; 
     public static GameManager Instance
     {
         get

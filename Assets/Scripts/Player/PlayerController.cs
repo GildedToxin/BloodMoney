@@ -85,8 +85,25 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (GameManager.Instance.isInMiniGame) 
-        {             
+        if(Input.GetKeyDown(KeyCode.P) && !GameManager.Instance.isPaused) 
+        {
+            Time.timeScale = 0f;
+            GameManager.Instance.pauseMenu.gameObject.SetActive(true);
+            GameManager.Instance.isPaused = true;
+            UnityEngine.Cursor.lockState = CursorLockMode.Confined;
+            UnityEngine.Cursor.visible = true;
+            return;
+        }else if(Input.GetKeyDown(KeyCode.P) && GameManager.Instance.isPaused) 
+        {
+            Time.timeScale = 1f;
+            GameManager.Instance.pauseMenu.gameObject.SetActive(false);
+            GameManager.Instance.isPaused = false;
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = false;
+            return;
+        }
+        if (GameManager.Instance.isInMiniGame)
+        {
             return;
         }
         RaycastLookDirection();
@@ -141,7 +158,7 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (GameManager.Instance.isInMiniGame)  
+        if (GameManager.Instance.isInMiniGame || GameManager.Instance.isPaused)  
             return;
 
         MovePlayer();
