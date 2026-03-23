@@ -24,6 +24,9 @@ public class HUDManager : MonoBehaviour
     public GameObject bloodSelection;
 
     public GameObject quotaText;
+
+    public CustomerRequestUI customerRequestUI;
+    public MeatGrinderUI meatGrinderUI;
     private void Awake()
     {
         inventoryController = FindAnyObjectByType<InventoryController>();
@@ -42,6 +45,8 @@ public class HUDManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
+            if (FindFirstObjectByType<FirstDayManager>() != null && FindFirstObjectByType<FirstDayManager>().isShowingScreen == true)
+                return;
             //FindAnyObjectByType<InventoryController>().money.Value += 10;
             bookPanel.SetActive(!bookPanel.activeSelf);
             bookClosed.SetActive(!bookClosed.activeSelf);
@@ -72,7 +77,7 @@ public class HUDManager : MonoBehaviour
             }
         }
         moneyText.GetComponent<TextMeshProUGUI>().text = $"${inventoryController.money.Value}";
-        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {GameManager.Instance.currentDay}/30";
+        dayText.GetComponent<TextMeshProUGUI>().text = $"Day {GameManager.Instance.currentDay + 1}/10";
 
         quotaText.GetComponent<TextMeshProUGUI>().text = $"Quota: {GameManager.Instance.moneyMadeToday}/{GameManager.Instance.CalculateQuota()}";
 

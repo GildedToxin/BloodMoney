@@ -6,13 +6,12 @@ using UnityEngine.VFX;
 
 public enum OrganType
 {
-    Brain,
     Bone,
-    Meat,
     Limb,
-    Finger,
-    Eye,
-    Blood
+    Blood,
+    Brain,
+    Hand,
+    Eye
 }
 
 public class OrganManager : MonoBehaviour, IPlayerLookTarget
@@ -87,11 +86,16 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     {
         islookedAt = true;
         toolTip.enabled = true;
+
+        FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to pick up");
+        FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
     }
     public void OnLookExit()
     {
         islookedAt = false;
         toolTip.enabled = false;
+
+        FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 
    
@@ -108,8 +112,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public int GetOrganPrice()  
     {
-        var mult = (currentHealth / 10);
-        return (itemData.price) +  10 *  mult;
+        // var mult = (currentHealth / 10);
+        return (itemData.price); //+  10 *  mult;
     }
 
     public void RefreshOrgan()

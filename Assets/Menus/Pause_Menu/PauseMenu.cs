@@ -3,38 +3,43 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenu : MonoBehaviour
 {
-    [SerializeField] GameObject pauseMenu;
+    [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject settingsMenu;
+    [SerializeField] GameObject AreUSure;
 
-    private bool isPaused = false;
 
-    private void Update()
+    private void Start()
     {
-        if(Input.GetKey(KeyCode.Escape) && isPaused == false)
-        {
-            isPaused = true;
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0;
-        }
+        GameManager.Instance.pauseMenu= this;   
+        gameObject.SetActive(false);
 
     }
 
     public void Resume()
     {
-        isPaused = false;
-        pauseMenu.SetActive(false);
-        Time.timeScale = 1;
+        Time.timeScale = 1f;
+        GameManager.Instance.pauseMenu.gameObject.SetActive(false);
+            GameManager.Instance.isPaused = false;
+            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+            UnityEngine.Cursor.visible = false;
+            return;
+
     }
 
-    public void Settings()
+    public void AreYouSure()
     {
-        pauseMenu.SetActive(false);
-        settingsMenu.SetActive(true);
+        AreUSure.SetActive(true);
+    }
+    public void NotSure()
+    {
+        AreUSure.SetActive(false);
+    }
+    public void MainMenu()
+    {
+        Time.timeScale = 1f;
+        GameManager.Instance.pauseMenu.gameObject.SetActive(false);
+        GameManager.Instance.isPaused = false;
+        SceneManager.LoadScene("MainMenu");
     }
 
-    public void ReturnToMenu()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadSceneAsync("MainMenu");
-    }
 }

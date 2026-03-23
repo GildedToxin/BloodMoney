@@ -14,7 +14,10 @@ public class CartBehavior : MonoBehaviour
     {
       //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
-        {    
+        {
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to Push Cart");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+
             canPickUp = true;
 
             // FollowPlayer(Player);
@@ -26,6 +29,7 @@ public class CartBehavior : MonoBehaviour
         //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
         {
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             canPickUp = false;
 
             // FollowPlayer(Player);
@@ -43,15 +47,25 @@ public class CartBehavior : MonoBehaviour
 
     private void Update()
     {
-
-
-        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
+        if(moveing == false && canPickUp == false)
         {
-           this.transform.parent = null;
-           TriggerArea.SetActive(true);
-           StartCoroutine(ResetMovement(1f));
+        //    this.transform.parent = null;
+        //    TriggerArea.SetActive(true);
+        //    StartCoroutine(ResetMovement(1f));
+
+
         }
-        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
+        if (this.transform.parent != null && moveing == false)
+            moveing = true;
+
+
+        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        {
+            this.transform.parent = null;
+            TriggerArea.SetActive(true);
+            StartCoroutine(ResetMovement(1f));
+        }
+        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
             if(GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
             {
@@ -63,6 +77,9 @@ public class CartBehavior : MonoBehaviour
             }
             FollowPlayer(Player);
             canPickUp = false;
+
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
 
         }
     }

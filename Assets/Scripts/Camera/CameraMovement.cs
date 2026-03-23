@@ -24,13 +24,18 @@ public class CameraMovement : MonoBehaviour
     }
     void FixedUpdate()
     {
+        if (FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
+        {
+            return;
+        }
+
         if (cartScript != null && cartScript.isMoving)
             sensitivityY = 0;
         else
             sensitivityY = 400;
 
 
-        if (isUIOpen)
+        if (isUIOpen || GameManager.Instance.isPaused)
             return;
 
         //Mouse Camera Inputs

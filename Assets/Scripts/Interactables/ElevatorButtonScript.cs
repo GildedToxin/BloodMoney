@@ -52,12 +52,12 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
     {
         if (buttonFloor != 0)
         {
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator to floor " + buttonFloor);
+            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator");
         }
         else
         {
-            FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(true);
+            FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to call elevator");
         }
         isLookedAt = true;
@@ -65,7 +65,7 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
 
     public void OnLookExit()
     {
-        FindAnyObjectByType<HUDManager>().CrossHairText.SetActive(false);
+        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         isLookedAt = false;
     }
 }

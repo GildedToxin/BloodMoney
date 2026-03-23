@@ -12,14 +12,32 @@ public class MeatGrinder : MonoBehaviour, IPlayerLookTarget
             var item = FindFirstObjectByType<HeldItem>().currentItem;
             Destroy(item);
             FindFirstObjectByType<HeldItem>().DropItem(item);
-            
+            FindAnyObjectByType<HUDManager>().meatGrinderUI.gameObject.SetActive(false);
+            // add money
+            FindAnyObjectByType<InventoryController>().AddMoney(item.GetComponent<OrganManager>().GetOrganPrice() / 4);
+
         }
     }
     public void OnLookEnter() { 
         isLookedAt = true;
+
+        FindAnyObjectByType<HUDManager>().meatGrinderUI.gameObject.SetActive(true);
+
+        if(FindFirstObjectByType<HeldItem>().currentItem != null)
+        {
+            FindAnyObjectByType<HUDManager>().meatGrinderUI.SetIcon(FindFirstObjectByType<HeldItem>().currentItem.GetComponent<OrganManager>().organType);
+            FindAnyObjectByType<HUDManager>().meatGrinderUI.SetTextSell(FindFirstObjectByType<HeldItem>().currentItem.GetComponent<OrganManager>().organType);
+
+        }
+        else
+        {
+
+            FindAnyObjectByType<HUDManager>().meatGrinderUI.SetText("You're not holding an organ!");
+        }
     }
     public void OnLookExit()
     {
         isLookedAt = false;
+        FindAnyObjectByType<HUDManager>().meatGrinderUI.gameObject.SetActive(false);
     }
 }

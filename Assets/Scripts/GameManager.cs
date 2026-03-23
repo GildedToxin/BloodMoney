@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
     public HUDManager hudManager;
 
     public bool doesPlayerHaveKey = false;
+
+    public bool isPaused = false;
+    public PauseMenu pauseMenu; 
     public static GameManager Instance
     {
         get
@@ -45,6 +48,7 @@ public class GameManager : MonoBehaviour
     }
 
     public int currentDay = 0;
+    public int highestReachedDay = 0;
     private const int MAXDAY = 10;
     public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
@@ -72,33 +76,47 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
         quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
+
+            SaveSystem.Load();
+
     }
     private void Start()
     {
-
 
         if (currentDay == 0)
         {
             FirstDayTutorial();
         }
     }
+    public bool once = false;
     private void Update()
     {
-        if(moneyMadeToday >= CalculateQuota())
+        if(once == false && SceneManager.GetActiveScene().name != "MainMenu")
+        {
+            hudManager = FindAnyObjectByType<HUDManager>();
+            cam = Camera.main;
+            once = true;
+        }
+        if (highestReachedDay < currentDay)
+        {
+            highestReachedDay = currentDay;
+            SaveSystem.Save();
+        }
+
+
+        if (moneyMadeToday >= CalculateQuota())
         {
             EndDay();
         }
         UpdateClock();
-        if (Input.GetKeyDown(KeyCode.X)) {
-            GivePlayerKey();
-        }
         if (Input.GetKeyDown(KeyCode.V))
         {
+            Debug.Log(Application.persistentDataPath);
             SaveSystem.Save();
         }
 
@@ -145,7 +163,7 @@ public class GameManager : MonoBehaviour
         Body.Highlight(GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value));
 
         FindAnyObjectByType<HUDManager>().UpdateRoomNumber(CurrentDoor.RoomNumber);
-        FindAnyObjectByType<VendorStand>().RefreshCustomers();
+       // FindAnyObjectByType<VendorStand>().RefreshCustomers();
     }
     public DoorController ChooseNewRoom()
     {
@@ -190,7 +208,11 @@ public class GameManager : MonoBehaviour
             lastMinute = minute;
             string suffix = "AM";
             int displayHour = hour == 0 ? 12 : hour;
-            clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+            try
+            {
+                clockText.GetComponent<TextMeshProUGUI>().text = $"{displayHour:00}:{minute:00} {suffix}";
+            }
+            catch { }
         }
 
         if (t >= 1f)
@@ -257,15 +279,21 @@ public class GameManager : MonoBehaviour
                 Body.Highlight(highlight);
             }
         };
-        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
+        try
+        {
+            FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged += onSelectedIndexChanged;
+        }
+        catch { }
     }
 
     private void OnDisable()
     {
-        // Remove the same delegate
-        FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
+        try
+        {
+            FindAnyObjectByType<InventoryController>().selectedIndex.OnValueChanged -= onSelectedIndexChanged;
+        }
+        catch { }
     }
-
     public string OrganToScene(string organ)
     {
         switch (organ)
@@ -362,8 +390,11 @@ public class GameManager : MonoBehaviour
     {
         // For now this returns a fixed quota for the first day
         // Later this can be expanded to have dynamic quotas based on day and difficulty
-
-        return quota[currentDay];
+        try {
+            return quota[currentDay];
+        }
+        catch {  return 1000; }
+        
     }
     public bool HasPlayerHitQuota()
     {
@@ -453,6 +484,26 @@ public class GameManager : MonoBehaviour
     {
         FindAnyObjectByType<InventoryController>().AddMoney(quota[currentDay]);
     }
+
+    public void PlayEndSequence()
+    {
+        print("The player has beaten the game");
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    #region Save and Load
+
+    public void Save(ref GameManagerSaveData data)
+    {
+        data.maxReachedDay = highestReachedDay;
+    }
+
+    public void Load(GameManagerSaveData data)
+    {
+        highestReachedDay = data.maxReachedDay;
+    }
+
+    #endregion
 }
 public enum MiniGameType
 {
@@ -461,5 +512,11 @@ public enum MiniGameType
     Brain,
     Eye,
     Bone,
+}
+
+[System.Serializable]
+public struct GameManagerSaveData
+{
+    public int maxReachedDay;
 }
 
