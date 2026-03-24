@@ -81,6 +81,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
 
         if (isLookedAt && moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             this.transform.parent = null;
             TriggerArea.SetActive(true);
             StartCoroutine(ResetMovement(1f));
