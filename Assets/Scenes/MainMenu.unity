@@ -3568,7 +3568,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &815529171
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3584,9 +3584,9 @@ RectTransform:
   - {fileID: 1292107597}
   m_Father: {fileID: 2106704741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 80, y: -12.05}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 160, y: 24.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &815529172
@@ -3635,7 +3635,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1377501012}
         m_TargetAssemblyTypeName: MainMenuScript, Assembly-CSharp
-        m_MethodName: NewGame
+        m_MethodName: PlayGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

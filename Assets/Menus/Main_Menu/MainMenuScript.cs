@@ -11,15 +11,22 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] CanvasGroup dayMenu;
 
     public Button playGame;
-    public void PlayGame()
+
+
+
+    public void Start()
     {
         if (GameManager.Instance.highestReachedDay != 0)
         {
             playGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Contiune");
         }
+    }
+
+
+    public void PlayGame()
+    {
         GameManager.Instance.currentDay = GameManager.Instance.highestReachedDay;
         SceneManager.LoadSceneAsync("Hotel");
-
     }
 
     public void StatsMenu()
