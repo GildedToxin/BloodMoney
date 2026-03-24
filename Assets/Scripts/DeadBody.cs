@@ -196,7 +196,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public void OnLookEnter()
     {
         isLookedAt = true;
-        FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+      //  FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+      //  FindAnyObjectByType<HUDManager>().UpdateCrossHairText("");
+
     }
     public void OnLookExit()
     {
