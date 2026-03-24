@@ -187,4 +187,8 @@ public class EvelatorTeleporter : MonoBehaviour
             StartCoroutine(fdm.WaitForNextScreen());
         }
     }
+    public void SetTargetFloor(int targetFloor)
+    {
+        this.targetFloor = targetFloor;
+    }
 }

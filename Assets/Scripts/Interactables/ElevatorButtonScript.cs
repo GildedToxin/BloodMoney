@@ -40,7 +40,13 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
                     if (elevator.GetComponent<EvelatorTeleporter>().currentFloor == elevatorScript.currentFloor)
                         return;
                     else
+                    {
                         elevator.GetComponent<EvelatorTeleporter>().doorsOpen = false; // Close the doors if they are open
+                        elevator.GetComponent<EvelatorTeleporter>().SetTargetFloor(this.GetComponentInParent<EvelatorTeleporter>().currentFloor); // Set the target floor to the current floor of the button's elevator
+
+                        StartCoroutine(elevator.GetComponent<EvelatorTeleporter>().TeleportWithDelay(0f));
+                        // elevator.GetComponent<EvelatorTeleporter>().TeleportWithDelay (this.GetComponentInParent<EvelatorTeleporter>().currentFloor); // Set the target floor to the current floor of the button's elevator
+                    }
                 }
             }
             elevatorScript.doorsOpen = !elevatorScript.doorsOpen; // Toggle the door state
