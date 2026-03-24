@@ -11,22 +11,23 @@ public class HandFeetMinigameManager : MonoBehaviour
     private Vector3 position;
     public float offset = 3f;
 
-    Ray ray;
     RaycastHit hit;
+    Ray ray;
 
     public MouseFollower mouseFollower;
+    public GameObject raycastHolder;
 
     public void Update()
     {
         position = Input.mousePosition;
-        ray = Camera.main.ScreenPointToRay(position);
         position.z = offset;
 
         if (mouseFollower.follow)
         {
-            if (Physics.Raycast(ray, out hit) && hit.collider != mazes[currentMaze])
+            Debug.DrawRay(raycastHolder.transform.position, Vector3.forward * 20, Color.green);
+            if (Physics.Raycast(raycastHolder.transform.position, Vector3.forward * 1000, out hit) && hit.collider.gameObject == mazes[currentMaze])
             {
-                Debug.Log("miss");
+                Debug.Log("hit " + hit.collider);
             }
         }
     }
