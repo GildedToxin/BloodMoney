@@ -65,6 +65,11 @@ public class EvelatorTeleporter : MonoBehaviour
 
         // Move player
         obj.transform.position = newWorldPos;
+
+        if (obj.GetComponent<CartBehavior>() != null)
+        {
+            toBox.parent.GetComponentInChildren<EvelatorTeleporter>().listOfObjects.Add(obj);
+        }
     }
     
     void OnTriggerEnter(Collider other)
@@ -151,6 +156,14 @@ public class EvelatorTeleporter : MonoBehaviour
         }
         foreach (GameObject obj in listOfObjects)
         {
+            if (FindAnyObjectByType<CartBehavior>() != null && FindAnyObjectByType<CartBehavior>().moveing == true)
+            {
+                if (obj == FindAnyObjectByType<CartBehavior>().gameObject)
+                {
+                    print("skipping cart");
+                    continue;
+                }
+            }
             try
             {
                 Teleport(currentFloor, targetFloor, obj);
