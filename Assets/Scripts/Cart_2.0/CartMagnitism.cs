@@ -17,7 +17,7 @@ public class CartMagnitism : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //print(other.name);
-        if (other.GetComponentInParent<OrganManager>() != null && !other.isTrigger)
+        if (other.GetComponentInParent<OrganManager>() != null && !other.isTrigger && !CartObjects.Contains(other.GetComponentInParent<OrganManager>().gameObject))
         {
             var item = other.GetComponentInParent<OrganManager>().gameObject;
             CartObjects.Add(item);

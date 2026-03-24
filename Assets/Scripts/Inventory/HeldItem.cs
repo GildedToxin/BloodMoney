@@ -20,6 +20,7 @@ public class HeldItem : MonoBehaviour
     public bool hasShownScreen = false;
     private void Update()
     {
+      
         if(hasItem && currentItem != null)
         {
             if(canDropItem && Input.GetKeyDown(KeyCode.E) && (FindFirstObjectByType<MeatGrinder>() == null || !FindFirstObjectByType<MeatGrinder>().isLookedAt))
@@ -57,6 +58,16 @@ public class HeldItem : MonoBehaviour
         currentItem.GetComponent<Rigidbody>().useGravity = false;
         GetComponent<InventoryController>().HideAllTools();
         currentItem.GetComponent<Rigidbody>().isKinematic = false;
+
+    }
+    IEnumerator ABC()
+    {
+
+        //returning 0 will make it wait 1 frame
+        yield return 0;
+
+        //code goes here
+
 
     }
     public void DropItem(GameObject item)

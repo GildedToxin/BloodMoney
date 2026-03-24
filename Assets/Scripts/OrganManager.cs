@@ -42,6 +42,11 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         {
             FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
         }
+
+        if (!FindAnyObjectByType<CartMagnitism>().CartObjects.Contains(this.gameObject))
+        {
+            gameObject.GetComponent<Rigidbody>().isKinematic = false;
+        }
     }
     /*
     void OnCollisionEnter(Collision collision)
@@ -100,15 +105,6 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
    
 
-    public void LaunchForward(Rigidbody rb)
-    {
-        if (rb == null) return;
-
-        rb.linearVelocity = Vector3.zero;
-
-        // Apply force in the object's forward direction
-        rb.AddForce(transform.forward * 50, ForceMode.VelocityChange);
-    }
 
     public int GetOrganPrice()  
     {
