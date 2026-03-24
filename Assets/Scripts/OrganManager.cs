@@ -89,17 +89,23 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     */
     public void OnLookEnter()
     {
-        islookedAt = true;
+       
         toolTip.enabled = true;
 
+        if(FindFirstObjectByType<CartBehavior>() != null && FindFirstObjectByType<CartBehavior>().moveing || FindFirstObjectByType<CartBehavior>().canPickUp)
+             return;
+        islookedAt = true;
         FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to pick up");
         FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
     }
     public void OnLookExit()
     {
-        islookedAt = false;
+        
         toolTip.enabled = false;
 
+        if (FindFirstObjectByType<CartBehavior>() != null && FindFirstObjectByType<CartBehavior>().moveing || FindFirstObjectByType<CartBehavior>().canPickUp)
+            return;
+        islookedAt = false;
         FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 
