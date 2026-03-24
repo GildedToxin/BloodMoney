@@ -164,6 +164,11 @@ public class EvelatorTeleporter : MonoBehaviour
                     continue;
                 }
             }
+            if (FindAnyObjectByType<CartMagnitism>().CartObjects.Contains(obj))
+            {
+                print("skipping magnetized object");
+                continue;
+            }
             try
             {
                 Teleport(currentFloor, targetFloor, obj);
