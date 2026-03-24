@@ -2,7 +2,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine;
 
-public class CartBehavior : MonoBehaviour
+public class CartBehavior : MonoBehaviour, IPlayerLookTarget
 {
     public GameObject TriggerArea;
     public GameObject Player;
@@ -10,12 +10,32 @@ public class CartBehavior : MonoBehaviour
 
     public bool moveing = false;
     public bool canPickUp = false;
+    public bool isLookedAt = false;
+    public void OnLookEnter()
+    {
+        isLookedAt = true;
+
+        if (moveing)
+        {
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+
+        }
+    }
+    public void OnLookExit()
+    {
+        isLookedAt = false;
+
+        if (moveing)
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
       //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
         {
-            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to Push Cart");
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to push cart");
             FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
 
             canPickUp = true;
@@ -59,7 +79,7 @@ public class CartBehavior : MonoBehaviour
             moveing = true;
 
 
-        if (moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (isLookedAt && moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
             this.transform.parent = null;
             TriggerArea.SetActive(true);
