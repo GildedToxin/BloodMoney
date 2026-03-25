@@ -10,6 +10,7 @@ public class MouseFollower : MonoBehaviour
     public bool follow = false;
 
     public GameObject follower;
+    public HandFeetMinigameManager feetMinigameManager;
 
     private void Update()
     {
@@ -22,7 +23,7 @@ public class MouseFollower : MonoBehaviour
             follow = true;
         }
 
-        if (follow == true)
+        if (follow == true && !feetMinigameManager.minigameEnd)
         {
             transform.position = Camera.main.ScreenToWorldPoint(position);
             follower.layer = LayerMask.NameToLayer("Ignore Raycast");
