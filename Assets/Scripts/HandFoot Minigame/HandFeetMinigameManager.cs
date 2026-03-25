@@ -1,5 +1,6 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class HandFeetMinigameManager : MonoBehaviour
@@ -24,12 +25,18 @@ public class HandFeetMinigameManager : MonoBehaviour
 
     public bool minigameEnd = false;
 
+    [Header("timmer")]
+    [SerializeField] TextMeshProUGUI timerText;
+    [SerializeField] float remainingTime;
+    public float totalTime;
+    public bool timerStop = false;
+
     public void Start()
     {
         currentMaze = Random.Range(0, 3);
         limbs[Random.Range(0, 3)].SetActive(true);
         mazes[currentMaze].SetActive(true);
-
+        totalTime = remainingTime;
         mouseFollower.transform.position = pointerHolder[currentMaze].transform.position;
     }
 
@@ -57,10 +64,26 @@ public class HandFeetMinigameManager : MonoBehaviour
                 }
             }
         }
+
+        if (!timerStop)
+        {
+            remainingTime -= Time.deltaTime;
+            int seconds = Mathf.FloorToInt(remainingTime % 60);
+            timerText.text = string.Format("{00}", seconds);
+            if (remainingTime < 0)
+            {
+                timerText.text = string.Format("{00}", 0);
+                timerStop = true;
+                minigameEnd = true;
+                score = 0;
+                EndMinigame();
+            }
+        }
     }
 
     private void EndMinigame()
     {
+        timerStop = true;
         minigameEnd = true;
         score = Mathf.Round(score);
         Debug.Log(score);
