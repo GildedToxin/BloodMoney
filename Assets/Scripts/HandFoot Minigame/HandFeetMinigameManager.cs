@@ -31,6 +31,9 @@ public class HandFeetMinigameManager : MonoBehaviour
     public float totalTime;
     public bool timerStop = false;
 
+    [SerializeField] TextMeshProUGUI winText;
+    public GameObject winScreen;
+
     public void Start()
     {
         currentMaze = Random.Range(0, 3);
@@ -86,7 +89,8 @@ public class HandFeetMinigameManager : MonoBehaviour
         timerStop = true;
         minigameEnd = true;
         score = Mathf.Round(score);
-        Debug.Log(score);
+        winText.text = score.ToString() + "%";
+        winScreen.SetActive(true);
     }
 
 }
