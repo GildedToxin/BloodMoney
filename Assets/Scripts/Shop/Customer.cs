@@ -1,6 +1,9 @@
+using NUnit.Framework;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEditor.Rendering;
 using UnityEngine;
+using static UnityEditor.Experimental.GraphView.GraphView;
 
 public enum CustomerType
 {
@@ -22,6 +25,8 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     public ParticleSystem blood;
 
     public string currentText;
+
+    public OrganManager RequestedOrgan;
     private void Start()
     {
         RandomCustomer();
@@ -32,7 +37,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         {
             if (Input.GetKeyDown(KeyCode.E)) {
                 isServed = true;
-                FindAnyObjectByType<VendorStand>().SellOrgan(desiredOrgan, this);
+                FindAnyObjectByType<VendorStand>().SellOrgan(desiredOrgan, this, RequestedOrgan);
             }
 
            
@@ -57,6 +62,8 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
 
         FindAnyObjectByType<HUDManager>().customerRequestUI.gameObject.SetActive(false);
         //OnLookEnter();
+
+        FindAnyObjectByType<VendorStand>().UpdateVenders();
     }
 
     public void SwitchCustomerModel()
@@ -94,10 +101,22 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
             // customerUI.gameObject.SetActive(true);
             // customerUI.SetText(currentText);
 
+            List<OrganManager> organs = new List<OrganManager>();
+
+            foreach (var organ in FindAnyObjectByType<VendorStand>().organsToSell)
+            {
+                if (organ.organType == desiredOrgan)
+                {
+                    organs.Add(organ);
+                }
+            }
+            organs.Sort((a, b) => b.GetOrganPrice().CompareTo(a.GetOrganPrice()));
+
             customerUI.gameObject.SetActive(true);
-            customerUI.SetTextSell(desiredOrgan);
+            customerUI.SetTextSell(organs[0]);
             customerUI.SetIcon(desiredOrgan);
 
+            RequestedOrgan = organs[0];
 
             //  FindAnyObjectByType<HUDManager>().UpdateCrossHairText($"Press E to sell {desiredOrgan.ToString()}");
             //  FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
@@ -116,6 +135,7 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
         isLookedAt = false;
         FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         FindAnyObjectByType<HUDManager>().customerRequestUI.gameObject.SetActive(false);
+        RequestedOrgan = null;
     }
 
     public IEnumerator PlayParticles()

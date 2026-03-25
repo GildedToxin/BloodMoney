@@ -64,10 +64,10 @@ public class CustomerRequestUI : MonoBehaviour
         return text;
     }
 
-    public void SetTextSell(OrganType organ)
+    public void SetTextSell(OrganManager organ)
     {
         var text = "";
-        var organString = organ.ToString().ToLower();
+        var organString = organ.organType.ToString().ToLower();
 
         if (organString == "blood")
             organString = "blood vial";
@@ -75,7 +75,7 @@ public class CustomerRequestUI : MonoBehaviour
         var itemData = Resources.Load<Item>($"items/{organ.ToString()}");
        
 
-        text = $"Press E to sell the {organString} for ${itemData.price}";
+        text = $"Press E to sell the {organString} for ${organ.GetOrganPrice()}";
 
 
         this.text.text = text;

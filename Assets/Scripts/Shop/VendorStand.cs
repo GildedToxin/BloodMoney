@@ -69,10 +69,9 @@ public class VendorStand : MonoBehaviour
             CheckToSell(organ);
     }
 
-    public void SellOrgan(OrganType organType, Customer customer)
+    public void SellOrgan(OrganType organType, Customer customer, OrganManager organ)
     {
         // Find the organ to sell
-        OrganManager organ = organsToSell.FirstOrDefault(o => o.organType == organType);
 
         if (organ == null)
         {
