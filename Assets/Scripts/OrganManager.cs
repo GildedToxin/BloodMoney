@@ -48,7 +48,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
-    /*
+    
     void OnCollisionEnter(Collision collision)
     {
         float impactSpeed = collision.relativeVelocity.magnitude;
@@ -65,15 +65,15 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             Destroy(gameObject);
         }
 
-        int index = Random.Range(0, decalMaterials.Length);
-        Material chosenMaterial = decalMaterials[index];
+    //    int index = Random.Range(0, decalMaterials.Length);
+    //    Material chosenMaterial = decalMaterials[index];
 
 
-        Vector3 avgPoint = Vector3.zero;
-        foreach (var c in collision.contacts)
-            avgPoint += c.point;
+   //     Vector3 avgPoint = Vector3.zero;
+   //     foreach (var c in collision.contacts)
+     //       avgPoint += c.point;
 
-        avgPoint /= collision.contacts.Length;
+     //   avgPoint /= collision.contacts.Length;
 
 
       //  GameObject decal = Instantiate(decalPrefab, avgPoint, Quaternion.LookRotation(-collision.contacts[0].normal));
@@ -83,10 +83,10 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
        // decal.transform.Rotate(Vector3.forward, Random.Range(0f, 360f));
        // decal.GetComponent<DecalProjector>().material = chosenMaterial;
 
-        GameObject vfxInstance = Instantiate(bloodEffect, transform.position, Quaternion.LookRotation(-collision.contacts[0].normal));
-        Destroy(vfxInstance.gameObject, 15);
+    //    GameObject vfxInstance = Instantiate(bloodEffect, transform.position, Quaternion.LookRotation(-collision.contacts[0].normal));
+     //   Destroy(vfxInstance.gameObject, 15);
     }
-    */
+    
     public void OnLookEnter()
     {
        
@@ -109,13 +109,13 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 
-   
 
 
+    [ContextMenu("Get Organ Price")]
     public int GetOrganPrice()  
     {
-        // var mult = (currentHealth / 10);
-        return (itemData.price); //+  10 *  mult;
+        float mult = (currentHealth / 100f);
+        return (int)(itemData.price * mult); //+  10 *  mult;
     }
 
     public void RefreshOrgan()
