@@ -2,6 +2,9 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
+using UnityEngine.InputSystem;
+
 
 public class HandFeetMinigameManager : MonoBehaviour
 {
@@ -34,8 +37,16 @@ public class HandFeetMinigameManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI winText;
     public GameObject winScreen;
 
+
+    public Camera cam;
+    public Transform target;
+
     public void Start()
     {
+
+        Vector3 screenPos = cam.WorldToScreenPoint(target.position);
+        Mouse.current.WarpCursorPosition(screenPos);
+
         currentMaze = Random.Range(0, 3);
         limbs[Random.Range(0, 3)].SetActive(true);
         mazes[currentMaze].SetActive(true);
