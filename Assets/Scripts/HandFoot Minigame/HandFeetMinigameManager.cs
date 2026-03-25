@@ -17,6 +17,9 @@ public class HandFeetMinigameManager : MonoBehaviour
     public MouseFollower mouseFollower;
     public GameObject raycastHolder;
 
+    public float score = 100f;
+    public float pointDeduction = 0.2f; 
+
     public void Update()
     {
         position = Input.mousePosition;
@@ -25,19 +28,14 @@ public class HandFeetMinigameManager : MonoBehaviour
         if (mouseFollower.follow)
         {
             Debug.DrawRay(raycastHolder.transform.position, Vector3.forward * 5, Color.green);
-            if (Physics.Raycast(raycastHolder.transform.position, Vector3.forward * 1000, out hit))
+            if (Physics.Raycast(raycastHolder.transform.position, Vector3.forward * 5, out hit))
             {
-                Debug.Log(hit.collider);
 
-                //if (hit.collider == null)
-                //{
-                //    Debug.Log("miss");
-                //}
-
-                //else if (hit.collider.gameObject.transform.parent.name == "Guide")
-                //{
-                //    Debug.Log("hit");
-                //}
+            }
+            else
+            {
+                score -= pointDeduction;
+                Debug.Log(score);
             }
         }
     }
