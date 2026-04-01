@@ -1,51 +1,13 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
 
 public class SettingsMenuScript : MonoBehaviour
 {
-    [SerializeField] Toggle Window;
-    [SerializeField] Toggle FullScreen;
-    [SerializeField] CanvasGroup settingsMenu;
-    [SerializeField] CanvasGroup mainMenu;
-    [SerializeField] CanvasGroup Controlsmenu;
-    public void WindowScreenSize (bool toggleValue)
+    public AudioMixer audioMixer;
+
+    public void setVolume (float volume)
     {
-
-        if (Window.isOn)
-        {
-            Screen.fullScreen = false;//swaps screen to window
-        }
-    }
-
-    public void FullScreneScreenSize(bool toggleValue)
-    {
-
-        if (FullScreen.isOn)
-        {
-            Screen.fullScreen = true; //swaps screen to full screen
-        }
-
-    }
-
-    public void ReturnToMenu()
-    {
-        settingsMenu.alpha = 0;
-        settingsMenu.interactable = false;  
-        settingsMenu.blocksRaycasts = false;
-        mainMenu.alpha = 1;
-        mainMenu.interactable = true;
-        mainMenu.blocksRaycasts = true;
-
-        Debug.Log("working");
-    }
-
-    public void ControlsMenu()
-    {
-        Controlsmenu.alpha = 1;
-        Controlsmenu.interactable = true;
-        Controlsmenu.blocksRaycasts = true;
-        settingsMenu.alpha = 0;
-        settingsMenu.interactable = false;
-        settingsMenu.blocksRaycasts = false;
+        audioMixer.SetFloat("volume", volume);
     }
 }

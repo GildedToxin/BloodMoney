@@ -79,7 +79,6 @@ public class PlayerController : MonoBehaviour
         canJump = true;
         sprinting = false;
         cam = Camera.main;
-        pauseMenu = gameObject.GetComponent<PauseMenu>();
     }
 
     private void Update()
