@@ -255,7 +255,7 @@ public class GameManager : MonoBehaviour
                 if (Body.IsFingersHarvested)
                     break;
 
-                return "Fingers";
+                return "Hands";
             case 6:
                 if (Body.IsEyesHarvested)
                     break;
@@ -310,6 +310,8 @@ public class GameManager : MonoBehaviour
                 return "";
             case "Eyes":
                 return "EyeBallMinigame";
+            case "Hands":
+                return "HandMinigame";
         }
         return "";
     }
@@ -434,6 +436,9 @@ public class GameManager : MonoBehaviour
             case MiniGameType.Bone:
                 SceneManager.LoadScene("BoneMiniGame", LoadSceneMode.Additive);
                 break;
+            case MiniGameType.Hand:
+                SceneManager.LoadScene("HandMinigame", LoadSceneMode.Additive);
+                break;
         }
 
         Camera.main.gameObject.SetActive(false);
@@ -468,6 +473,9 @@ public class GameManager : MonoBehaviour
                 break;
             case MiniGameType.Bone:
                 SceneManager.UnloadSceneAsync("BoneMiniGame");
+                break;
+            case MiniGameType.Hand:
+                SceneManager.UnloadSceneAsync("HandMinigame");
                 break;
         }
 
@@ -512,6 +520,7 @@ public enum MiniGameType
     Brain,
     Eye,
     Bone,
+    Hand,
 }
 
 [System.Serializable]

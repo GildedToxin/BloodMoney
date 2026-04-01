@@ -206,6 +206,14 @@ public class LimbMinigamePlayerController : MonoBehaviour
             {
                 body.IsLimbsHarvested = true;
             }
+            if(body.limbsHarvested > body.handsHarvested)
+            {
+                body.handsHarvested = body.limbsHarvested;
+                if (body.handsHarvested >= 4)
+                {
+                    body.IsFingersHarvested = true;
+                }
+            }
             body.RemoveHighlight();
         }
         catch (System.Exception e)

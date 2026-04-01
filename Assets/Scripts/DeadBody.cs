@@ -47,8 +47,14 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject[] BodyLimbs;
 
     public int limbsHarvested = 0;
-    public int handsHarvested = 0;
 
+
+    public int handsHarvested = 0;
+    public GameObject[] Hands;
+    public GameObject[] BodyHands;
+
+    public List<GameObject> handPrefabs;
+    public List<Transform> handSpawnLocations;
 
     public GameObject bloodPrefab;
     public Transform bloodSpawnLocation;
@@ -66,6 +72,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public GameObject BonePrefab;
     public Transform BoneSpawnLocation;
     public GameObject Chest;
+
+
+
+
     public void Update()
     {
         if (isLookedAt)
@@ -120,6 +130,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                     Brain.layer = LayerMask.NameToLayer("Highlight");
                 break;
             case "Fingers":
+                foreach (GameObject hand in Hands)
+                {
+                    hand.SetActive(true);
+                    hand.layer = LayerMask.NameToLayer("Highlight");
+                }
                 IsFingersHighlighted = true;
                 break;
             case "Eyes":
@@ -137,7 +152,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 Destroy(BodyLimbs[limbsHarvested * 2]);
                 Destroy(BodyLimbs[(limbsHarvested * 2) + 1]);
 
-                Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
+                var limb = Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
+                if (handsHarvested > limbsHarvested)
+                    limb.GetComponent<LimbManager>().isHandHarvested = true;
                 break;
             case "BoneMiniGame":
                 Instantiate(BonePrefab, BoneSpawnLocation.position, BoneSpawnLocation.rotation);
@@ -150,8 +167,10 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 Destroy(BodyBrain);
                 Destroy(headTop);
                 break;
-            case "Fingers":
-                //IsFingersHighlighted = true;
+            case "HandMinigame":
+
+                Destroy(BodyHands[handsHarvested]);
+                Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
                 break;
             case "EyeBallMinigame":
                 if(eyesHarvested == 0)
@@ -187,7 +206,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             limb.layer = LayerMask.NameToLayer("Default");
             limb.SetActive(false);
         }
-
+        foreach (GameObject hand in Hands)
+        {
+            hand.layer = LayerMask.NameToLayer("Default");
+            hand.SetActive(false);
+        }
 
         Brain.layer = LayerMask.NameToLayer("Default");
         Blood.layer = LayerMask.NameToLayer("Default");
