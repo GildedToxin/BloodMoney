@@ -35,7 +35,7 @@ public class DialogueManager : MonoBehaviour
                 switch (conversationIndex)
                 {
                     case 0:
-                        if (testBoolCondition)
+                        if (GameManager.Instance.currentDay == 1)
                             StartDialogue(dialogueConversations[0]);
                         else
                             goto default;
