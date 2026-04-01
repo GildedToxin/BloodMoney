@@ -1,10 +1,17 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 
 
 public class DialogueManager : MonoBehaviour
 {
+    [Header("References")]
+    public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI speakerNameText;
+
+
+    [Header("Misc")]
     public List<Dialogue> dialogueConversations = new List<Dialogue>();
     private Dialogue currentDialogue;
     private int conversationIndex = 0;
@@ -72,9 +79,17 @@ public class DialogueManager : MonoBehaviour
 
     public void DisplayCurrentLine()
     {
-        Debug.Log(currentDialogue.lines[currentLineIndex].speakerName + ": " + currentDialogue.lines[currentLineIndex].line);
+        if(currentLineIndex >= currentDialogue.lines.Length)
+        {
+            currentLineIndex = currentDialogue.lines.Length - 1;
+            return;
+        }
+        else
+            Debug.Log(currentDialogue.lines[currentLineIndex].speakerName + ": " + currentDialogue.lines[currentLineIndex].line);
 
         // Update UI here
+        speakerNameText.text = currentDialogue.lines[currentLineIndex].speakerName;
+        dialogueText.text = currentDialogue.lines[currentLineIndex].line;
     }
 
     public void EndDialogue()
