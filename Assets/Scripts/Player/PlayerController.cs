@@ -67,10 +67,8 @@ public class PlayerController : MonoBehaviour
 
     private IPlayerLookTarget currentLookAt;
 
-    private void Awake()
-    {
-        //stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHight, stepRayUpper.transform.position.z); // makes it so it sets upper raycast to max step hight
-    }
+    public bool isPaused = false;
+    public PauseMenu pauseMenu;
 
     private void Start()
     {
@@ -81,27 +79,24 @@ public class PlayerController : MonoBehaviour
         canJump = true;
         sprinting = false;
         cam = Camera.main;
+        pauseMenu = gameObject.GetComponent<PauseMenu>();
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P) && !GameManager.Instance.isPaused) 
+        if (Input.GetKeyDown(KeyCode.P))
         {
-            Time.timeScale = 0f;
-            GameManager.Instance.pauseMenu.gameObject.SetActive(true);
-            GameManager.Instance.isPaused = true;
-            UnityEngine.Cursor.lockState = CursorLockMode.Confined;
-            UnityEngine.Cursor.visible = true;
-            return;
-        }else if(Input.GetKeyDown(KeyCode.P) && GameManager.Instance.isPaused) 
-        {
-            Time.timeScale = 1f;
-            GameManager.Instance.pauseMenu.gameObject.SetActive(false);
-            GameManager.Instance.isPaused = false;
-            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            UnityEngine.Cursor.visible = false;
-            return;
+            if (isPaused)
+            {
+                pauseMenu.Resume();
+            }
+
+            else if (!isPaused)
+            {
+                pauseMenu.Pause();
+            }
         }
+
         if (GameManager.Instance.isInMiniGame)
         {
             return;

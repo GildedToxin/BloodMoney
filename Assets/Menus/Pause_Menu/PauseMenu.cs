@@ -10,7 +10,7 @@ public class PauseMenu : MonoBehaviour
 
     private void Start()
     {
-        GameManager.Instance.pauseMenu= this;   
+        GameManager.Instance.pauseMenu = this;   
         gameObject.SetActive(false);
 
     }
@@ -24,6 +24,16 @@ public class PauseMenu : MonoBehaviour
             UnityEngine.Cursor.visible = false;
             return;
 
+    }
+
+    public void Pause()
+    {
+        Time.timeScale = 0f;
+        GameManager.Instance.pauseMenu.gameObject.SetActive(true);
+        GameManager.Instance.isPaused = true;
+        UnityEngine.Cursor.lockState = CursorLockMode.None;
+        UnityEngine.Cursor.visible = true;
+        return;
     }
 
     public void AreYouSure()

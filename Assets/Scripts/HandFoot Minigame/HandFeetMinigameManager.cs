@@ -94,7 +94,6 @@ public class HandFeetMinigameManager : MonoBehaviour
             }
         }
     }
-
     private void EndMinigame()
     {
         timerStop = true;
