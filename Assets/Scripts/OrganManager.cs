@@ -57,7 +57,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             return; // Organ is already destroyed
 
         currentHealth -= Mathf.RoundToInt(Mathf.Min(impactSpeed, maxDamage));
-        qualityText.GetComponent<TextMeshProUGUI>().text = $"Quality: {currentHealth}%";
+        toolTip.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)currentHealth / maxHealth;
+        qualityText.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString();
         if (currentHealth <= 0)
         {
             currentHealth = 0;
@@ -90,7 +91,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public void OnLookEnter()
     {
        
-        toolTip.enabled = true;
+        //toolTip.enabled = true;
 
         if(FindFirstObjectByType<CartBehavior>() != null && FindFirstObjectByType<CartBehavior>().moveing || FindFirstObjectByType<CartBehavior>().canPickUp)
              return;
@@ -101,7 +102,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public void OnLookExit()
     {
         
-        toolTip.enabled = false;
+        //toolTip.enabled = false;
 
         if (FindFirstObjectByType<CartBehavior>() != null && FindFirstObjectByType<CartBehavior>().moveing || FindFirstObjectByType<CartBehavior>().canPickUp)
             return;
