@@ -2,18 +2,20 @@ using UnityEngine;
 
 public class RoomCheck : MonoBehaviour
 {
-    private void OnTriggerEnter(Collider other)
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.GetComponent<PlayerController>())
         {
             GameManager.Instance.isInHotelRoom = true;
+            GameManager.Instance.Body.Highlight(GameManager.Instance.GetOrganFromSlot(FindAnyObjectByType<InventoryController>().selectedIndex.Value - 1));
         }
     }
-    private void OntriggerExit(Collider other)
+    public void OnTriggerExit(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other)
         {
             GameManager.Instance.isInHotelRoom = false;
+            GameManager.Instance.Body.RemoveHighlight();
         }
     }
 }

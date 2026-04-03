@@ -819,6 +819,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7743906168225120771}
   - component: {fileID: 1433078524077499411}
+  - component: {fileID: 8955231045967288520}
   m_Layer: 0
   m_Name: RoomCheck
   m_TagString: Untagged
@@ -862,6 +863,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8955231045967288520
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5308101609423543456}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 118d8c11767330443b0fcb5af3409a13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::RoomCheck
 --- !u!1 &5549666751982514134
 GameObject:
   m_ObjectHideFlags: 0

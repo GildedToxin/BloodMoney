@@ -109,6 +109,9 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     public void Highlight(string organ)
     {
         RemoveHighlight();
+        if(GameManager.Instance.isInHotelRoom == false)
+            return;
+
         switch (organ) {
             case "Limbs":
                 IsLimbsHighlighted = true;
