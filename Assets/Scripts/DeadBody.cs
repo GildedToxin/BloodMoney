@@ -120,6 +120,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 break;
             case "Bones":
                 IsBonesHighlighted = true;
+                foreach (GameObject bone in Bones)
+                {
+                    bone.SetActive(true);
+                    bone.layer = LayerMask.NameToLayer("Highlight");
+                }
                 break;
             case "Blood":
                 IsBloodHighlighted = true;
@@ -129,7 +134,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 IsBrainHighlighted = true;
                     Brain.layer = LayerMask.NameToLayer("Highlight");
                 break;
-            case "Fingers":
+            case "Hands":
                 foreach (GameObject hand in Hands)
                 {
                     hand.SetActive(true);
@@ -138,6 +143,11 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 IsFingersHighlighted = true;
                 break;
             case "Eyes":
+                foreach (GameObject eye in Eyes)
+                {
+                    eye.SetActive(true);
+                    eye.layer = LayerMask.NameToLayer("Highlight");
+                }
                 IsEyesHighlighted = true;
                 break;
 
@@ -210,6 +220,16 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
         {
             hand.layer = LayerMask.NameToLayer("Default");
             hand.SetActive(false);
+        }
+        foreach (GameObject eye in Eyes)
+        {
+            eye.layer = LayerMask.NameToLayer("Default");
+            eye.SetActive(false);
+        }
+        foreach (GameObject bone in Bones)
+        {
+            bone.layer = LayerMask.NameToLayer("Default");
+            bone.SetActive(false);
         }
 
         Brain.layer = LayerMask.NameToLayer("Default");
