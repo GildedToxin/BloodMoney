@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour
         //stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHight, stepRayUpper.transform.position.z); // makes it so it sets upper raycast to max step hight
     }
 
+    public AudioPool audioPool;
+
     private void Start()
     {
         GameManager.Instance.Player = this;
@@ -241,6 +243,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
+            audioPool.PlayClip2D(, 1f, 1f);
         }
         else if (grounded && sprinting && !crouching)
         {
