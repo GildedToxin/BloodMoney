@@ -206,7 +206,7 @@ public class MinigameFunctions : MonoBehaviour
         {
             GameManager.Instance.StopMiniGame("SkullMinigame", cam);
             if(qualityScore > 0)
-                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("SkullMinigame");
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("SkullMinigame", qualityScore);
             else
             {
                 Destroy(FindAnyObjectByType<GameManager>().Body.BodyBrain);

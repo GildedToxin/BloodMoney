@@ -200,7 +200,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
 
             var body = FindAnyObjectByType<GameManager>().Body;
 
-            body.SpawnOrgan("LimbMiniGame");
+            body.SpawnOrgan("LimbMiniGame", (int)limbScores[0]);
             body.limbsHarvested++;
             if(body.limbsHarvested >= 4)
             {
@@ -214,7 +214,7 @@ public class LimbMinigamePlayerController : MonoBehaviour
                     body.IsFingersHarvested = true;
                 }
             }
-            body.RemoveHighlight();
+         //   body.RemoveHighlight();
         }
         catch (System.Exception e)
         {

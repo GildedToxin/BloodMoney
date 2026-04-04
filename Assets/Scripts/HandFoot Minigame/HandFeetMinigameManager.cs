@@ -56,8 +56,14 @@ public class HandFeetMinigameManager : MonoBehaviour
 
     public void Update()
     {
-        if(!isInMiniGame)
+        if(minigameEnd && winScreen.activeSelf)
         {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.Confined;
+        }
+        if (!isInMiniGame)
+        {
+
             return;
         }
         position = Input.mousePosition;
@@ -120,7 +126,7 @@ public class HandFeetMinigameManager : MonoBehaviour
         {
             GameManager.Instance.StopMiniGame("HandMinigame", cam);
             if (score > 0)
-                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("HandMinigame");
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("HandMinigame", (int)score);
 
 
 
@@ -133,7 +139,7 @@ public class HandFeetMinigameManager : MonoBehaviour
             }
 
             //This needs to be changed, 4 hands like limbs
-            GameManager.Instance.Body.RemoveHighlight();
+          //  GameManager.Instance.Body.RemoveHighlight();
         }
         catch (System.Exception e)
         {

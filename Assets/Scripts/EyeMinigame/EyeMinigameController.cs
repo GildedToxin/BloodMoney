@@ -199,7 +199,7 @@ public class EyeMinigameController : MonoBehaviour
         {
             GameManager.Instance.StopMiniGame("EyeBallMinigame", cam);
             if (totalPoints > 0)
-                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("EyeBallMinigame");
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("EyeBallMinigame", totalPoints);
             GameManager.Instance.Body.RemoveHighlight();
             GameManager.Instance.Body.eyesHarvested++;
             if(GameManager.Instance.Body.eyesHarvested >= 2)

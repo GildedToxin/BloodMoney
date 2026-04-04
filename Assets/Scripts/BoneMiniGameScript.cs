@@ -148,7 +148,7 @@ public class BoneMiniGameScript : MonoBehaviour
 
             GameManager.Instance.StopMiniGame("BoneMiniGame", cam);
             if (scoreAverage > 0)
-                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BoneMiniGame");
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BoneMiniGame", (int)scoreAverage);
             GameManager.Instance.Body.IsBonesHarvested = true;
             Destroy(GameManager.Instance.Body.Chest);
             GameManager.Instance.Body.RemoveHighlight();

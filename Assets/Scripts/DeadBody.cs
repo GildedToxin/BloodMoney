@@ -117,6 +117,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 IsLimbsHighlighted = true;
                 foreach(GameObject limb in Limbs)
                 {
+                    if (limb == null) continue;
+
                     limb.SetActive(true);
                     limb.layer= LayerMask.NameToLayer("Highlight");
                 }
@@ -140,6 +142,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             case "Hands":
                 foreach (GameObject hand in Hands)
                 {
+                    if (hand == null) continue;
+
                     hand.SetActive(true);
                     hand.layer = LayerMask.NameToLayer("Highlight");
                 }
@@ -156,16 +160,19 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
         }
     }
-    public void SpawnOrgan(string sceneOrgan)
+    public void SpawnOrgan(string sceneOrgan, int quality)
     {
         switch (sceneOrgan)
         {
             case "LimbMiniGame":
 
                 Destroy(BodyLimbs[limbsHarvested * 2]);
+                Destroy(Limbs[limbsHarvested * 2]);
+                Destroy(Hands[limbsHarvested]);
                 Destroy(BodyLimbs[(limbsHarvested * 2) + 1]);
 
                 var limb = Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
+                limb.GetComponent<OrganManager>().currentHealth = quality;
                 if (handsHarvested > limbsHarvested)
                     limb.GetComponent<LimbManager>().isHandHarvested = true;
                 break;
@@ -183,6 +190,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             case "HandMinigame":
 
                 Destroy(BodyHands[handsHarvested]);
+                Destroy(Hands[handsHarvested]);
                 Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
                 break;
             case "EyeBallMinigame":
@@ -216,11 +224,15 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
         foreach (GameObject limb in Limbs)
         {
+            if (limb == null) continue;
+
             limb.layer = LayerMask.NameToLayer("Default");
             limb.SetActive(false);
         }
         foreach (GameObject hand in Hands)
         {
+            if (hand == null) continue;
+
             hand.layer = LayerMask.NameToLayer("Default");
             hand.SetActive(false);
         }
@@ -234,8 +246,8 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
             bone.layer = LayerMask.NameToLayer("Default");
             bone.SetActive(false);
         }
-
-        Brain.layer = LayerMask.NameToLayer("Default");
+        if(Brain != null)
+            Brain.layer = LayerMask.NameToLayer("Default");
         Blood.layer = LayerMask.NameToLayer("Default");
     }
 

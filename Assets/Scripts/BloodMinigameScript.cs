@@ -255,7 +255,7 @@ public class BloodMinigameScript : MonoBehaviour
         {
             GameManager.Instance.StopMiniGame("BloodMiniGame", cam);
             if (score > 0)
-                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BloodMiniGame");
+                FindAnyObjectByType<GameManager>().Body.SpawnOrgan("BloodMiniGame", (int)score);
             GameManager.Instance.Body.IsBloodHarvested = true;
             GameManager.Instance.Body.RemoveHighlight();
         }
