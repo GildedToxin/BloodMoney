@@ -63,6 +63,12 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         this.transform.position = cart_center.position;
         this.transform.rotation = cart_center.rotation;
         moveing = true;
+
+        foreach(Rigidbody rb in GetComponentInChildren<CartMagnitism>().rb)
+        {
+            rb.GetComponent<OrganManager>().lockedPosition = rb.transform.localPosition;
+            rb.GetComponent<OrganManager>().lockedRotation = rb.transform.localRotation;
+        }
     }
 
     private void Update()

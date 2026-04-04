@@ -32,6 +32,9 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public Item itemData;
 
     public bool islookedAt = false;
+
+    public Vector3 lockedPosition;
+    public Quaternion lockedRotation;
     void Start()
     {
         itemData = Resources.Load<Item>($"items/{organType.ToString()}");
@@ -41,6 +44,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         if(islookedAt && Input.GetKeyDown(KeyCode.E) && !FindAnyObjectByType<HeldItem>().hasItem && !FindAnyObjectByType<CartBehavior>().moveing)
         {
             FindAnyObjectByType<HeldItem>().PickUpItem(gameObject);
+            toolTip.enabled = false;
         }
 
         if (!FindAnyObjectByType<CartMagnitism>().CartObjects.Contains(this.gameObject))
@@ -48,7 +52,14 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             gameObject.GetComponent<Rigidbody>().isKinematic = false;
         }
     }
-    
+    void LateUpdate()
+    {
+        if (GetComponent<Rigidbody>().isKinematic && FindAnyObjectByType<CartBehavior>().moveing){
+
+            transform.localPosition = lockedPosition;
+            transform.localRotation = lockedRotation;
+        }
+    }
     void OnCollisionEnter(Collision collision)
     {
         float impactSpeed = collision.relativeVelocity.magnitude;
@@ -66,27 +77,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
             Destroy(gameObject);
         }
 
-    //    int index = Random.Range(0, decalMaterials.Length);
-    //    Material chosenMaterial = decalMaterials[index];
-
-
-   //     Vector3 avgPoint = Vector3.zero;
-   //     foreach (var c in collision.contacts)
-     //       avgPoint += c.point;
-
-     //   avgPoint /= collision.contacts.Length;
-
-
-      //  GameObject decal = Instantiate(decalPrefab, avgPoint, Quaternion.LookRotation(-collision.contacts[0].normal));
-
-
-      //  decal.transform.SetParent(collision.transform);
-       // decal.transform.Rotate(Vector3.forward, Random.Range(0f, 360f));
-       // decal.GetComponent<DecalProjector>().material = chosenMaterial;
-
-    //    GameObject vfxInstance = Instantiate(bloodEffect, transform.position, Quaternion.LookRotation(-collision.contacts[0].normal));
-     //   Destroy(vfxInstance.gameObject, 15);
     }
+ 
     
     public void OnLookEnter()
     {

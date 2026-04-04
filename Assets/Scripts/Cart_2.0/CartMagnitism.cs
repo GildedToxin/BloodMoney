@@ -1,6 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class CartMagnitism : MonoBehaviour
 {
@@ -50,6 +51,7 @@ public class CartMagnitism : MonoBehaviour
         }
         foreach (Rigidbody rb in rb)
         {
+            rb.GetComponent<OrganManager>().toolTip.enabled = false;
             rb.isKinematic = true;
 
         }

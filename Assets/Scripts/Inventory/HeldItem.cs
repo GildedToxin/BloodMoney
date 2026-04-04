@@ -50,6 +50,8 @@ public class HeldItem : MonoBehaviour
             StartCoroutine(fdm.WaitForNextScreen());
         }
 
+
+        //item.GetComponent<OrganManager>
         StartCoroutine(DropCooldownTimer());
         hasItem = true;
         currentItem = item;
@@ -72,6 +74,7 @@ public class HeldItem : MonoBehaviour
     }
     public void DropItem(GameObject item)
     {
+        item.GetComponent<OrganManager>().toolTip.enabled = true;
         StartCoroutine(PickUpCooldownTimer());
         currentItem.transform.SetParent(null, worldPositionStays: true);
         var rb = currentItem.GetComponent<Rigidbody>();
