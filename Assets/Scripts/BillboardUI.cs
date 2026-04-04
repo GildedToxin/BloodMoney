@@ -12,7 +12,8 @@ public class BillboardUI : MonoBehaviour
         transform.position = target.position + Vector3.up * heightOffset;
 
         transform.rotation = Quaternion.identity;
-        transform.LookAt(Camera.main.transform);
+        if(Camera.main != null)
+            transform.LookAt(Camera.main.transform);
         transform.Rotate(0, 180, 0); // Fix flipping if needed
     }
 }
