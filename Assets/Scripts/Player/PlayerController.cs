@@ -243,7 +243,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            audioPool.PlayClip2D(, 1f, 1f);
+            //audioPool.PlayClip2D(, 1f, 1f);
         }
         else if (grounded && sprinting && !crouching)
         {

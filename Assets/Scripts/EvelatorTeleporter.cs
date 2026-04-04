@@ -74,7 +74,7 @@ public class EvelatorTeleporter : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        print("test");
+       // print("test");
 
         if(GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 6)
         {
