@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
 
-        //RaycastLookDirection();
+        RaycastLookDirection();
 
 
         //grounded check
@@ -288,6 +288,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3.75f, layerMask, QueryTriggerInteraction.Ignore))
         {
+            print(hit.collider.gameObject);
             IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
                           ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();
             if (lookable != null)

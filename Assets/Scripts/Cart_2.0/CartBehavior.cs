@@ -15,12 +15,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
     {
         isLookedAt = true;
 
-        if (moveing)
-        {
-            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
-            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
-
-        }
+     
     }
     public void OnLookExit()
     {
@@ -64,7 +59,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         rb.linearDamping = 0f;
         rb.angularDamping = 0.05f;
         rb.useGravity = false;
-        rb.isKinematic = false;
+        rb.isKinematic = true;
         rb.interpolation = RigidbodyInterpolation.None;
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
         rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -99,18 +94,38 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         if (this.transform.parent != null && moveing == false)
             moveing = true;
 
+        if (moveing && Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 )
+        {
+           // FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
+       //     FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
 
-        if (isLookedAt && moveing && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        }
+
+        if (Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 && moveing && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        {
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
+                moveing= false;
+                this.transform.parent = null;
+                TriggerArea.SetActive(true);
+                StartCoroutine(ResetMovement(1f));
+                SetupRigidbody(this.gameObject);
+            }
+        }
+        else if (moveing)
         {
             FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
-            this.transform.parent = null;
-            TriggerArea.SetActive(true);
-            StartCoroutine(ResetMovement(1f));
-            SetupRigidbody(this.gameObject);
+        }
+        else
+        {
+            //print(Camera.main.transform.eulerAngles.x);
         }
         if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
-            if(GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
+            if (GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
             {
                 var fdm = FindAnyObjectByType<FirstDayManager>();
                 fdm.currentScreen++;
