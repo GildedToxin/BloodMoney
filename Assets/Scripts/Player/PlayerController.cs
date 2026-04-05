@@ -67,10 +67,13 @@ public class PlayerController : MonoBehaviour
 
     private IPlayerLookTarget currentLookAt;
 
-    private void Awake()
-    {
-        //stepRayUpper.transform.position = new Vector3(stepRayUpper.transform.position.x, stepHight, stepRayUpper.transform.position.z); // makes it so it sets upper raycast to max step hight
-    }
+
+    public float sensitivityX;
+    public float sensitivityY;
+
+
+    private float xRotation;
+    private float yRotation;
 
     public AudioPool audioPool;
 
@@ -79,10 +82,13 @@ public class PlayerController : MonoBehaviour
         GameManager.Instance.Player = this;
         interact = gameObject.GetComponent<Interact>();
         rb = GetComponent<Rigidbody>();
-        rb.freezeRotation = true;
+        //rb.freezeRotation = true;
         canJump = true;
         sprinting = false;
         cam = Camera.main;
+
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
     }
 
     private void Update()
@@ -108,14 +114,8 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        RaycastLookDirection();
-        //these arent used, but ill leave them here for now
-        //cameraXRotation = cam.transform.rotation.x;
-        //cameraZRotation = cam.transform.rotation.z;
 
-        transform.rotation = Quaternion.Euler(transform.eulerAngles.x, cam.transform.eulerAngles.y, transform.eulerAngles.z);
-        
-
+        //RaycastLookDirection();
 
 
         //grounded check
@@ -126,10 +126,7 @@ public class PlayerController : MonoBehaviour
 
         //bool for sprinting animation!!
         bool isSprinting = sprinting && grounded;
-       // RightHand.SetBool("isSprinting", isSprinting);
-        //LeftHand.SetBool("isSprinting", isSprinting);
-
-
+ 
         // player movement drag
         if (grounded)
         {
@@ -140,20 +137,6 @@ public class PlayerController : MonoBehaviour
         {
             rb.linearDamping = 0;
         }
-
-/*
-        if (Input.GetKey(KeyCode.J)){
-            Ray ray = new Ray(cam.transform.position, cam.transform.forward);
-            Debug.DrawRay(ray.origin, ray.direction * 10, Color.red);
-
-            if (Physics.Raycast(ray, out RaycastHit hit, 10))
-            {
-                hit.collider.GetComponent<DecalProjector>().fadeFactor -= 0.01f;
-            }
-        }
-
-
-*/
     }
 
     private void FixedUpdate()
@@ -187,19 +170,20 @@ public class PlayerController : MonoBehaviour
 
     private void MyInput()
     {
+        float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
+        float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
+
+        // Vertical (camera)
+        xRotation -= mouseY;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+        cam.transform.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
+
+        // Horizontal (player)
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(0f, mouseX, 0f));
+
+
         horizontalInput = Input.GetAxisRaw("Horizontal");
         verticalInput = Input.GetAxisRaw("Vertical");
-
-       
-        /*
-        //when player jumps
-        if(Input.GetKey(jumpKey) && canJump)
-        {
-            canJump = false;
-
-            Jump();
-        }
-        */
 
         // when player sprints
         if (Input.GetKeyDown(sprintKey) && grounded && !crouching)
@@ -212,22 +196,7 @@ public class PlayerController : MonoBehaviour
         {
             sprinting = false;
         }
-        /*
-        //when player crouching
-        if ( Input.GetKeyDown(crouchKey) && grounded && interact.noInteraction)
-        {
-            if (!crouching)
-            {
-                crouching = true;
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y / 2, transform.localScale.z);
-            }
-            else if (crouching)
-            {
-                crouching = false;
-                transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y * 2, transform.localScale.z);
-            }
-        }    
-        */
+ 
     }
 
     private void MovePlayer()
@@ -237,7 +206,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
         //finds the movement direction
-        movementDirection = orientation.forward * verticalInput + orientation.right * horizontalInput;
+        movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
 
         // on ground
         if (grounded && !sprinting && !crouching)
@@ -343,48 +312,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void stepclimb()
-    {
-        RaycastHit hitLower;
 
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(Vector3.forward), out hitLower, 0.2f))
-        {
-            RaycastHit hitUpper;
-            Debug.Log(hitLower);
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), out hitUpper, 0.2f))
-            {
-                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(Vector3.forward), Color.red, 0.2f);
-                Debug.Log("hit mid");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
-            }
-        }
-
-        RaycastHit hitLower45;
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitLower45, 0.2f))
-        {
-            RaycastHit hitUpper45;
-            Debug.Log(hitLower45);
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), out hitUpper45, 0.2f))
-            {
-                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(1.5f, 0, 1), Color.red, 0.2f);
-                Debug.Log("hit positive");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
-            }
-        }
-
-        RaycastHit hitLowerMinus45;
-        if (Physics.Raycast(stepRayLower.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitLowerMinus45, 0.2f))
-        {
-            RaycastHit hitUpperMinus45;
-            Debug.Log(hitLowerMinus45);
-            if (!Physics.Raycast(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), out hitUpperMinus45, 0.2f))
-            {
-                Debug.DrawRay(stepRayUpper.transform.position, transform.TransformDirection(-1.5f, 0, 1), Color.red, 0.2f);
-                Debug.Log("hit negative");
-                rb.position -= new Vector3(0f, -stepSmoth, 0.2f);
-            }
-        }
-    }
 }
 
 [System.Serializable]

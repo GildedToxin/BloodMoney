@@ -34,8 +34,8 @@ public class HeldItem : MonoBehaviour
             currentItem.transform.position = heldItemPosition.position;
         }
 
-        RightHand.SetBool("isGrabbing", hasItem);
-        LeftHand.SetBool("isGrabbing", hasItem);
+      //  RightHand.SetBool("isGrabbing", hasItem);
+       // LeftHand.SetBool("isGrabbing", hasItem);
         //Debug.Log("is this thing on???");
     }
     public void PickUpItem(GameObject item)

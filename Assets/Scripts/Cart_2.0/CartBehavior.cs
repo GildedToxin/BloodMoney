@@ -56,8 +56,22 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
             // TriggerArea.SetActive(false);
         }
     }
+    void SetupRigidbody(GameObject obj)
+    {
+        Rigidbody rb = obj.AddComponent<Rigidbody>();
+
+        rb.mass = 1f;
+        rb.linearDamping = 0f;
+        rb.angularDamping = 0.05f;
+        rb.useGravity = false;
+        rb.isKinematic = false;
+        rb.interpolation = RigidbodyInterpolation.None;
+        rb.collisionDetectionMode = CollisionDetectionMode.Continuous;
+        rb.constraints = RigidbodyConstraints.FreezeRotation;
+    }
     private void FollowPlayer(GameObject player)
     {
+        Destroy(GetComponent<Rigidbody>());
         TriggerArea.SetActive(false);
         this.transform.parent = cart_center;
         this.transform.position = cart_center.position;
@@ -78,6 +92,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         //    this.transform.parent = null;
         //    TriggerArea.SetActive(true);
         //    StartCoroutine(ResetMovement(1f));
+        //    StartCoroutine(ResetMovement(1f));
 
 
         }
@@ -91,6 +106,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
             this.transform.parent = null;
             TriggerArea.SetActive(true);
             StartCoroutine(ResetMovement(1f));
+            SetupRigidbody(this.gameObject);
         }
         if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
