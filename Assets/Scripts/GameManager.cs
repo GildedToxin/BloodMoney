@@ -137,6 +137,18 @@ public class GameManager : MonoBehaviour
             ScoreBloodSplatter();
         }
 
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            if (isPaused)
+            {
+                pauseMenu.Resume();
+            }
+
+            else if (!isPaused)
+            {
+                pauseMenu.Pause();
+            }
+        }
     }
     public void GivePlayerKey()
     {

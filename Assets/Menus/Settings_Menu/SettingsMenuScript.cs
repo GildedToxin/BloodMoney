@@ -1,51 +1,61 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Audio;
+using UnityEngine.UI;
+using NUnit.Framework;
+using System.Collections.Generic;
+using TMPro;
 
 public class SettingsMenuScript : MonoBehaviour
 {
-    [SerializeField] Toggle Window;
-    [SerializeField] Toggle FullScreen;
-    [SerializeField] CanvasGroup settingsMenu;
-    [SerializeField] CanvasGroup mainMenu;
-    [SerializeField] CanvasGroup Controlsmenu;
-    public void WindowScreenSize (bool toggleValue)
-    {
+    public AudioMixer audioMixer;
+    public TMP_Dropdown resolutionDropdown;
 
-        if (Window.isOn)
+    Resolution[] resolutions;
+
+    void Start()
+    {
+        resolutions = Screen.resolutions;
+
+        resolutionDropdown.ClearOptions();
+
+        List<string> options = new List<string>();
+
+        int currentResolutionIndex = 0;
+        for (int i = 0; i < resolutions.Length; i++)
         {
-            Screen.fullScreen = false;//swaps screen to window
-        }
-    }
+            string option = resolutions[i].width + "x" + resolutions[i].height;
+            options.Add(option);
 
-    public void FullScreneScreenSize(bool toggleValue)
-    {
-
-        if (FullScreen.isOn)
-        {
-            Screen.fullScreen = true; //swaps screen to full screen
+            if (resolutions[i].width == Screen.currentResolution.width && resolutions[i].height == Screen.currentResolution.height)
+            {
+                currentResolutionIndex = i;
+            }
         }
 
+        resolutionDropdown.AddOptions(options);
+        resolutionDropdown.value = currentResolutionIndex;
+        resolutionDropdown.RefreshShownValue();
     }
 
-    public void ReturnToMenu()
+    public void setVolume (float volume)
     {
-        settingsMenu.alpha = 0;
-        settingsMenu.interactable = false;  
-        settingsMenu.blocksRaycasts = false;
-        mainMenu.alpha = 1;
-        mainMenu.interactable = true;
-        mainMenu.blocksRaycasts = true;
-
-        Debug.Log("working");
+        audioMixer.SetFloat("volume", volume);
     }
 
-    public void ControlsMenu()
+    public void setQuality (int qualityIndex)
     {
-        Controlsmenu.alpha = 1;
-        Controlsmenu.interactable = true;
-        Controlsmenu.blocksRaycasts = true;
-        settingsMenu.alpha = 0;
-        settingsMenu.interactable = false;
-        settingsMenu.blocksRaycasts = false;
+        QualitySettings.SetQualityLevel (qualityIndex);
+    }
+
+    public void fullScreen(bool isFullScreen)
+    {
+        Screen.fullScreen = isFullScreen;
+    }
+
+    public void setResolution(int resolutionIndex)
+    {
+        Resolution resolution = resolutions[resolutionIndex];
+        Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 }
