@@ -117,14 +117,20 @@ public class FirstDayManager : MonoBehaviour
         else if (currentScreen == 14 && Input.anyKeyDown && canMoveScreen)
         {
             tutorialScreens[currentScreen].SetActive(false);
-            isShowingScreen = false;
-            //14
+            currentScreen++; //15
+            tutorialScreens[currentScreen].SetActive(true);
         }
         else if (currentScreen == 15 && Input.anyKeyDown && canMoveScreen)
         {
             tutorialScreens[currentScreen].SetActive(false);
             isShowingScreen = false;
             //15
+        }
+        else if (currentScreen == 16 && Input.anyKeyDown && canMoveScreen)
+        {
+            tutorialScreens[currentScreen].SetActive(false);
+            isShowingScreen = false;
+            //16
         }
     }
 

@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
-        quota = new int[MAXDAY] { 1000, 1500, 2000, 2500, 3000, 3500, 4000, 4500, 5000, 5500 };
+        quota = new int[MAXDAY] { 250, 500, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 3000 };
 
             SaveSystem.Load();
 
@@ -89,19 +89,50 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
 
-        if (currentDay == 0)
-        {
-            FirstDayTutorial();
-        }
+ 
     }
     public bool once = false;
     private void Update()
     {
         if(once == false && SceneManager.GetActiveScene().name != "MainMenu")
         {
+            if (currentDay == 0)
+            {
+                FirstDayTutorial();
+            }
+
+            moneyMadeToday = 0;
+            FindAnyObjectByType<InventoryController>().money.Value = 0;
             hudManager = FindAnyObjectByType<HUDManager>();
             cam = Camera.main;
+
+
+            
+            doesPlayerHaveKey = false;
+ 
+
+            clockText = hudManager.timerText.gameObject;
+            clockText.GetComponent<TextMeshProUGUI>().text = $"12:00";
+            elapsedTime = 0;
+            pauseMenu = FindAnyObjectByType<PauseMenu>(FindObjectsInactive.Include);
+
             once = true;
+        }
+
+        if(clockText == null && SceneManager.GetActiveScene().name == "Hotel")
+        {
+            hudManager = FindAnyObjectByType<HUDManager>();
+            pauseMenu = FindAnyObjectByType<PauseMenu>(FindObjectsInactive.Include);
+            cam = Camera.main;
+
+
+            moneyMadeToday = 0;
+            doesPlayerHaveKey = false;
+
+
+            clockText = hudManager.timerText.gameObject;
+            clockText.GetComponent<TextMeshProUGUI>().text = $"12:00";
+            elapsedTime = 0;
         }
         Mathf.Clamp(currentDay, 0, 9);
         Mathf.Clamp(highestReachedDay, 0, 9);
@@ -328,10 +359,10 @@ public class GameManager : MonoBehaviour
     }
     public void StopMiniGame(string sceneName, Camera miniGameCam)
     {
-        Player.GetComponent<PlayerController>().enabled = true;
-        SceneManager.UnloadSceneAsync(sceneName);
         cam.gameObject.SetActive(true);
         miniGameCam.gameObject.SetActive(false);
+        Player.GetComponent<PlayerController>().enabled = true;
+        SceneManager.UnloadSceneAsync(sceneName);
         hudManager.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -481,10 +512,9 @@ public class GameManager : MonoBehaviour
         print("The player has beaten the game");
         SceneManager.LoadScene("MainMenu");
     }
-    public void LoadFromOldDay()
+    public void LoadSceneAndAssign()
     {
-        
-
+        SceneManager.LoadScene("Hotel");
     }
 
     #region Save and Load
