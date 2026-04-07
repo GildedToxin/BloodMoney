@@ -85,7 +85,7 @@ public class PlayerController : MonoBehaviour
         //rb.freezeRotation = true;
         canJump = true;
         sprinting = false;
-        cam = Camera.main;
+        //cam = Camera.main;
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
@@ -121,8 +121,9 @@ public class PlayerController : MonoBehaviour
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
 
-        if (!GameManager.Instance.isInMiniGame && !GameManager.Instance.isPaused && FindAnyObjectByType<FirstDayManager>() != null && !FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0)
+        if (!GameManager.Instance.isInMiniGame && !GameManager.Instance.isPaused)
             MyInput();
+
         SpeedControl();
 
         //bool for sprinting animation!!
@@ -144,9 +145,12 @@ public class PlayerController : MonoBehaviour
     {
 
 
-        if (GameManager.Instance.isInMiniGame || GameManager.Instance.isPaused)  
-            return;
+        if (GameManager.Instance.isInMiniGame || GameManager.Instance.isPaused)
+        {
 
+            print("returning");
+            return;
+        }
         MovePlayer();
 
         // if (!cartScript.isMoving)
@@ -171,6 +175,8 @@ public class PlayerController : MonoBehaviour
 
     private void MyInput()
     {
+        if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0)
+            return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
 
@@ -204,6 +210,7 @@ public class PlayerController : MonoBehaviour
     {
         if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
         {
+            print("returning");
             return;
         }
         //finds the movement direction
