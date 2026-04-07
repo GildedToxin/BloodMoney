@@ -78,7 +78,7 @@ public class MeatGrinderUI : MonoBehaviour
         var itemData = Resources.Load<Item>($"items/{organ.ToString()}");
 
         // 1/4 of the price
-        text = $"Press E to sell the {organString} for ${itemData.price / 4}";
+        text = $"Press E to sell the {organString} for ${itemData.price / 2}";
 
 
         this.text.text = text;

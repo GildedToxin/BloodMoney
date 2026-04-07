@@ -14,7 +14,7 @@ public class MeatGrinder : MonoBehaviour, IPlayerLookTarget
             FindFirstObjectByType<HeldItem>().DropItem(item);
             FindAnyObjectByType<HUDManager>().meatGrinderUI.gameObject.SetActive(false);
             // add money
-            FindAnyObjectByType<InventoryController>().AddMoney(item.GetComponent<OrganManager>().GetOrganPrice() / 4);
+            FindAnyObjectByType<InventoryController>().AddMoney(item.GetComponent<OrganManager>().GetOrganPrice() / 2);
 
         }
     }
