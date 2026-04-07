@@ -115,40 +115,6 @@ public class GameManager : MonoBehaviour
             EndDay();
         }
         UpdateClock();
-        if (Input.GetKeyDown(KeyCode.V))
-        {
-            Debug.Log(Application.persistentDataPath);
-            SaveSystem.Save();
-        }
-
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            SaveSystem.Load();
-        }
-
-
-        // input for testing blood splatter scoring
-        if (Input.GetKeyDown(KeyCode.N))
-        {
-            StartBloodCalculation();
-        }
-        if (Input.GetKeyDown(KeyCode.M))
-        {
-            ScoreBloodSplatter();
-        }
-
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            if (isPaused)
-            {
-                pauseMenu.Resume();
-            }
-
-            else if (!isPaused)
-            {
-                pauseMenu.Pause();
-            }
-        }
     }
     public void GivePlayerKey()
     {
