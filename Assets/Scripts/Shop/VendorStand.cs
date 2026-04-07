@@ -23,6 +23,8 @@ public class VendorStand : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if (other.isTrigger) return;
+
         if (!other.GetComponentInParent<OrganManager>())
             return;
         if (organsToSell.Contains(other.GetComponentInParent<OrganManager>()))
@@ -40,6 +42,8 @@ public class VendorStand : MonoBehaviour
             return;
 
         organsToSell.Remove(other.GetComponentInParent<OrganManager>());
+
+        UpdateVenders();
     }
 
     public void CreateCustomers()
@@ -99,7 +103,7 @@ public class VendorStand : MonoBehaviour
 
         UpdateVenders();
 
-        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 14)
+        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 15)
         {
             var fdm = FindAnyObjectByType<FirstDayManager>();
             fdm.currentScreen++; //15
