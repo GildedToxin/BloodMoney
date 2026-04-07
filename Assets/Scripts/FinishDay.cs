@@ -9,18 +9,11 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
     {
         if (isLookedAt && Input.GetKeyDown(KeyCode.E) && GameManager.Instance.HasPlayerHitQuota())
         {
-            if (GameManager.Instance.currentDay == 9)
-            {
-                GameManager.Instance.PlayEndSequence();
-            }
-            else
-            {
-                FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
-                // EndVerticalSlice();
-                GameManager.Instance.currentDay++;
-                GameManager.Instance.moneyMadeToday = 0;
-                SceneManager.LoadScene("Hotel");
-            }
+            FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
+            FindAnyObjectByType<EndGameCanvas>().EndDay(true);
+            Cursor.lockState = CursorLockMode.Confined;
+            Cursor.visible = true;
+            FindAnyObjectByType<PlayerController>().enabled = false;
         }
 
 
@@ -45,9 +38,8 @@ public class FinishDay : MonoBehaviour, IPlayerLookTarget
     public void EndVerticalSlice()
     {
         FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
-        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).lostGame.SetActive(false);
-        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).wonGame.SetActive(true);
-        Cursor.lockState = CursorLockMode.None;
+        FindAnyObjectByType<EndGameCanvas>().EndDay(true);
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         FindAnyObjectByType<PlayerController>().enabled = false;
     }

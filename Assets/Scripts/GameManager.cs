@@ -103,6 +103,9 @@ public class GameManager : MonoBehaviour
             cam = Camera.main;
             once = true;
         }
+        Mathf.Clamp(currentDay, 0, 9);
+        Mathf.Clamp(highestReachedDay, 0, 9);
+
         if (highestReachedDay < currentDay)
         {
             highestReachedDay = currentDay;
@@ -383,12 +386,12 @@ public class GameManager : MonoBehaviour
         return moneyMadeToday >= CalculateQuota();
     }
 
+    [ContextMenu("FailDay")]
     public void PlayerFailedDay()
     {
         FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).gameObject.SetActive(true);
-        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).lostGame.SetActive(true);
-        FindAnyObjectByType<EndGameCanvas>(FindObjectsInactive.Include).wonGame.SetActive(false);
-        Cursor.lockState = CursorLockMode.None;
+        FindAnyObjectByType<EndGameCanvas>().EndDay(false);
+        Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
         FindAnyObjectByType<PlayerController>().enabled = false;
     }
@@ -478,11 +481,17 @@ public class GameManager : MonoBehaviour
         print("The player has beaten the game");
         SceneManager.LoadScene("MainMenu");
     }
+    public void LoadFromOldDay()
+    {
+        
+
+    }
 
     #region Save and Load
 
     public void Save(ref GameManagerSaveData data)
     {
+        Mathf.Clamp(highestReachedDay, 0, 9);
         data.maxReachedDay = highestReachedDay;
     }
 
@@ -508,4 +517,6 @@ public struct GameManagerSaveData
 {
     public int maxReachedDay;
 }
+
+
 
