@@ -60,8 +60,7 @@ public class EndGameCanvas : MonoBehaviour
 
         quotaBar.GetComponent<Image>().fillAmount = Mathf.Clamp((float)GameManager.Instance.moneyMadeToday / GameManager.Instance.quota[GameManager.Instance.currentDay], .15f, 1);
 
-        GameManager.Instance.moneyMadeToday = 0;
-
+      
 
         if (hitQuota && GameManager.Instance.currentDay != 9)
             GameManager.Instance.currentDay += 1;
@@ -72,12 +71,13 @@ public class EndGameCanvas : MonoBehaviour
     }
     public void Retry()
     {
-        SceneManager.LoadScene("Hotel");
+
+        GameManager.Instance.LoadSceneAndAssign();
     }
     public void Contiune()
     {
-        SceneManager.LoadScene("Hotel");
-       // GameManager.Instance.LoadFromOldDay();
+
+        GameManager.Instance.LoadSceneAndAssign();
     }
     public void Finish()
     {
