@@ -10,7 +10,7 @@ public class owner : MonoBehaviour, IPlayerLookTarget
 
     private void Update()
     {
-        if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E) && !hasShownScreen)
+        if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E))
         {
             if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
             {
