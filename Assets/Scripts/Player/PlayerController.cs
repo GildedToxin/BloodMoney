@@ -121,7 +121,7 @@ public class PlayerController : MonoBehaviour
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
 
-        if (!GameManager.Instance.isInMiniGame && !GameManager.Instance.isPaused)
+        if (!GameManager.Instance.isInMiniGame && !GameManager.Instance.isPaused && FindAnyObjectByType<FirstDayManager>() != null && !FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0)
             MyInput();
         SpeedControl();
 
