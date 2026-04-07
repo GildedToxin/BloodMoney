@@ -9820,6 +9820,11 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!4 &495833380 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1843823495083722769, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+  m_PrefabInstance: {fileID: 1131366068}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &498649123 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2372101842476191254, guid: bc415ef89e704b14bac423e10003260d, type: 3}
@@ -11191,23 +11196,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7263032818048513601, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7263032818048513601, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8684149070554477734, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_Name
@@ -11215,7 +11220,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8684149070554477734, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -24522,7 +24527,7 @@ PrefabInstance:
     - target: {fileID: 1485508436413475768, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
       propertyPath: heldItemPosition
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 495833380}
     - target: {fileID: 2700824240856020937, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
       propertyPath: m_Name
       value: Player
