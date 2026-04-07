@@ -83,7 +83,7 @@ public class MinigameFunctions : MonoBehaviour
         if(!isMinigameActive)
             return;
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             HammerAni.Play("Hammer_Swing", 0, 0.25f);
             numberOfHits++;
