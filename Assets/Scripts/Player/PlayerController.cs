@@ -121,7 +121,8 @@ public class PlayerController : MonoBehaviour
         //grounded check
         grounded = Physics.Raycast(transform.position, Vector3.down, playerHight * 0.5f + 0.2f, Ground);
 
-        MyInput();
+        if (!GameManager.Instance.isInMiniGame && !GameManager.Instance.isPaused)
+            MyInput();
         SpeedControl();
 
         //bool for sprinting animation!!
@@ -288,7 +289,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, 3.75f, layerMask, QueryTriggerInteraction.Ignore))
         {
-            print(hit.collider.gameObject);
+            //print(hit.collider.gameObject);
             IPlayerLookTarget lookable = hit.collider.GetComponent<IPlayerLookTarget>()
                           ?? hit.collider.GetComponentInParent<IPlayerLookTarget>();
             if (lookable != null)
