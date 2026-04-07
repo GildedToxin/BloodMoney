@@ -92,6 +92,9 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
     }
     public void OnLookEnter()
     {
+        if(FindFirstObjectByType<HeldItem>().currentItem != null)
+            return;
+
         print("test");
         customerRequest.enabled = true;
         isLookedAt = true;
