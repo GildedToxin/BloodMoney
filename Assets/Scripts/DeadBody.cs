@@ -166,10 +166,16 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
         {
             case "LimbMiniGame":
 
-                Destroy(BodyLimbs[limbsHarvested * 2]);
-                Destroy(Limbs[limbsHarvested * 2]);
-                Destroy(Hands[limbsHarvested]);
-                Destroy(BodyLimbs[(limbsHarvested * 2) + 1]);
+                if(BodyLimbs[limbsHarvested * 2] != null)
+                    Destroy(BodyLimbs[limbsHarvested * 2]);
+
+                if(BodyLimbs[(limbsHarvested * 2) + 1] != null)
+                    Destroy(BodyLimbs[(limbsHarvested * 2) + 1]);
+
+                Destroy(Limbs[limbsHarvested]);
+
+                if(Hands[limbsHarvested] != null)
+                    Destroy(Hands[limbsHarvested]);
 
                 var limb = Instantiate(limbPrefabs[limbsHarvested], limbSpawnLocations[limbsHarvested].position, limbSpawnLocations[limbsHarvested].rotation);
                 limb.GetComponent<OrganManager>().currentHealth = quality;
@@ -191,6 +197,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
                 Destroy(BodyHands[handsHarvested]);
                 Destroy(Hands[handsHarvested]);
+
                 Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
                 break;
             case "EyeBallMinigame":
