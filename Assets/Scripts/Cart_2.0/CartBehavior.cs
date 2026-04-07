@@ -66,7 +66,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
     }
     private void FollowPlayer(GameObject player)
     {
-        Destroy(GetComponent<Rigidbody>());
+        //Destroy(GetComponent<Rigidbody>());
         TriggerArea.SetActive(false);
         this.transform.parent = cart_center;
         this.transform.position = cart_center.position;
@@ -112,7 +112,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
                 this.transform.parent = null;
                 TriggerArea.SetActive(true);
                 StartCoroutine(ResetMovement(1f));
-                SetupRigidbody(this.gameObject);
+                //SetupRigidbody(this.gameObject);
             }
         }
         else if (moveing)
