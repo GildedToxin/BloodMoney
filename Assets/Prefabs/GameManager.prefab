@@ -48,7 +48,7 @@ MonoBehaviour:
   CurrentRoom: {fileID: 0}
   CurrentDoor: {fileID: 0}
   clockText: {fileID: 0}
-  realDuration: 300
+  realDuration: 360
   isInHotelRoom: 0
   isInMiniGame: 0
   Body: {fileID: 0}
@@ -60,7 +60,11 @@ MonoBehaviour:
   cam: {fileID: 0}
   hudManager: {fileID: 0}
   doesPlayerHaveKey: 0
-  currentDay: 10
+  isPaused: 0
+  pauseMenu: {fileID: 0}
+  currentDay: 0
+  highestReachedDay: 0
   moneyMadeToday: 0
   quota: 
-  testMiniGame: 1
+  once: 0
+  testMiniGame: 4
