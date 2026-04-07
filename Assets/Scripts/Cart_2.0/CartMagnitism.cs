@@ -47,10 +47,14 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
+            if (obj == null)
+                continue;
             obj.GetComponent<Transform>().SetParent(objectHolder.transform, true);
         }
         foreach (Rigidbody rb in rb)
         {
+            if (rb == null)
+                continue;
             rb.GetComponent<OrganManager>().toolTip.enabled = false;
             rb.isKinematic = true;
 
@@ -61,10 +65,14 @@ public class CartMagnitism : MonoBehaviour
     {
         foreach (GameObject obj in CartObjects)
         {
+            if (obj == null)
+                continue;
             obj.GetComponent<Transform>().SetParent(null, true);
         }
         foreach (Rigidbody rb in rb)
         {
+            if (rb == null)
+                continue;
             rb.isKinematic = false;
         }
     }

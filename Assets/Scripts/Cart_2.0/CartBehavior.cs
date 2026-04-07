@@ -75,6 +75,8 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
 
         foreach(Rigidbody rb in GetComponentInChildren<CartMagnitism>().rb)
         {
+            if (rb == null)
+                continue;
             rb.GetComponent<OrganManager>().lockedPosition = rb.transform.localPosition;
             rb.GetComponent<OrganManager>().lockedRotation = rb.transform.localRotation;
         }
@@ -101,7 +103,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
 
         }
 
-        if (Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 && moveing && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (!GameManager.Instance.isInMiniGame && Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 && moveing && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
             FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
             FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
