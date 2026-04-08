@@ -242,7 +242,7 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
         }
 
-        if (!audioSource.isPlaying && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        if (!audioSource.isPlaying && (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)))
         {
             audioSource.clip = walking[Random.Range(0, walking.Count)];
             audioSource.Play();
