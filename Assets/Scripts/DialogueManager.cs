@@ -10,99 +10,111 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI speakerNameText;
 
+    [Header("Text Settings")]
+    [SerializeField] private float textSpeed = 0.05f;
+
 
     [Header("Misc")]
-    public List<Dialogue> dialogueConversations = new List<Dialogue>();
+    public List<Dialogue> dialogueConversations = new List<Dialogue>(); // change based on enum in switch statement
     private Dialogue currentDialogue;
-    private int conversationIndex = 0;
+    //private int conversationIndex = 0;  // replace with enum, change enum based on conditions (switch case or if statements)
+    private conversationType currentConversationType;
     private string repeatedLine;
     private int currentLineIndex = 0;
+    private int currentDisplayingText = 0;
     private bool DialogueActive = false;
     public bool testBoolCondition = false;
     public bool secondTestBoolCondition = false;
+    private bool conversationStarted = false;
+    private bool repeatLine = false;
 
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            if (DialogueActive)
-            {
-                NextLine();
-            }
-            else
-            {
-                switch (conversationIndex)
-                {
-                    case 0:
-                        if (GameManager.Instance.currentDay == 1)
-                            StartDialogue(dialogueConversations[0]);
-                        else
-                            goto default;
-                        break;
-                    case 1:
-                        if (secondTestBoolCondition)
-                            StartDialogue(dialogueConversations[1]);
-                        else
-                            RepeatLine();
-                        break;
-                    default:
-                        if (repeatedLine != null)
-                            RepeatLine();
-                        else
-                            Debug.Log("No conversation available");
-                        break;
-                }
-            }
+            ActivateText();
+        }
+
+        if (testBoolCondition)
+        {
+            currentConversationType = conversationType.FirstDayConversation;
+        }
+        if (secondTestBoolCondition)
+        {
+            currentConversationType = conversationType.SecondDayConversation;
+        }
+
+        switch (currentConversationType)
+        {
+            case conversationType.FirstDayConversation:
+                currentDialogue = dialogueConversations[0];
+                break;
+            case conversationType.SecondDayConversation:
+                currentDialogue = dialogueConversations[1];
+                break;
+            default:
+                Debug.LogError("Invalid conversation type!");
+                break;
         }
     }
 
-    public void StartDialogue(Dialogue dialogue)
+    public void ActivateText() 
     {
-        DialogueActive = true;
-        currentLineIndex = 0;
-        currentDialogue = dialogue;
-        DisplayCurrentLine();
-    }
-
-    public void NextLine()
-    {
-        currentLineIndex++;
-        if (currentLineIndex >= currentDialogue.lines.Length)
+        if (!conversationStarted)
         {
-            EndDialogue();
-            return;
-        }
-
-        DisplayCurrentLine();
-    }
-
-    public void DisplayCurrentLine()
-    {
-        if(currentLineIndex >= currentDialogue.lines.Length)
-        {
-            currentLineIndex = currentDialogue.lines.Length - 1;
-            return;
+            currentLineIndex = 0;
+            conversationStarted = true;
+            StartCoroutine(AnimateText());
         }
         else
-            Debug.Log(currentDialogue.lines[currentLineIndex].speakerName + ": " + currentDialogue.lines[currentLineIndex].line);
+        {
+            if (currentLineIndex < currentDialogue.lines.Length - 1)
+            {
+                currentLineIndex++;
+                StartCoroutine(AnimateText());
+            }
+            else if (currentLineIndex == currentDialogue.lines.Length - 1)
+            {
+                
+            }
+            {
+                EndDialogue();
+                return;
+            }
+        }
+    }
 
-        // Update UI here
-        speakerNameText.text = currentDialogue.lines[currentLineIndex].speakerName;
-        dialogueText.text = currentDialogue.lines[currentLineIndex].line;
+    IEnumerator AnimateText()
+    {
+        string currentText = currentDialogue.lines[currentLineIndex].line;
+        string repeatedText = currentDialogue.repeatLine.line;
+        if (!repeatLine)
+        {
+            for (int i = 0; i < currentText.Length + 1; i++)
+            {
+                dialogueText.text = currentText.Substring(0, i);
+                yield return new WaitForSeconds(textSpeed);
+            }
+        }
+        else
+        {
+            for (int i = 0; i < repeatedText.Length + 1; i++)
+            {
+                dialogueText.text = repeatedText.Substring(0, i);
+                yield return new WaitForSeconds(textSpeed);
+            }
+        }
     }
 
     public void EndDialogue()
     {
-        DialogueActive = false;
-        conversationIndex++;
-        repeatedLine = currentDialogue.repeatLine.line;
-        Debug.Log(currentDialogue.repeatLine.speakerName + ": " + repeatedLine);
+        
     }
+}
 
-    public void RepeatLine()
-    {
-        Debug.Log(currentDialogue.repeatLine.speakerName + ": " + repeatedLine);
-        DisplayCurrentLine();
-    }
+public enum conversationType
+{
+    FirstDayConversation,
+    SecondDayConversation,
 }
