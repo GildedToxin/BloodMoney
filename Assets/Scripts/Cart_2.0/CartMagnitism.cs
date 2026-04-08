@@ -35,11 +35,12 @@ public class CartMagnitism : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        var item = other.GetComponentInParent<OrganManager>().gameObject;
+        
 
-        if (!CartObjects.Contains(item))
+        if (!CartObjects.Contains(other.GetComponentInParent<OrganManager>().gameObject))
             return;
 
+        var item = other.GetComponentInParent<OrganManager>().gameObject;
         CartObjects.Remove(item);
         rb.Remove(item.GetComponent<Rigidbody>());
       //  other.gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask(, "Organs");
