@@ -191,7 +191,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 blood.GetComponent<OrganManager>().currentHealth = quality;
                 break;
             case "SkullMinigame":
-                Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
+                //Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
                 Destroy(BodyBrain);
                 Destroy(headTop);
                 var brain = Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
@@ -202,7 +202,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 Destroy(BodyHands[handsHarvested]);
                 Destroy(Hands[handsHarvested]);
 
-                Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
+            //    Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
 
                 var hand = Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
                 hand.GetComponent<OrganManager>().currentHealth = quality;
