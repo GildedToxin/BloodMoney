@@ -17,7 +17,6 @@ public class SettingsMenuScript : MonoBehaviour
     public AudioPool audiopool;
     public AudioClip buttonHover;
     public AudioClip Click;
-
     void Start()
     {
         PauseMenu.SetActive(false);
@@ -47,7 +46,11 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void setVolume (float volume)
     {
-        audioMixer.SetFloat("Volume", volume);
+        if (volume == 0)
+        {
+            volume = 0.01f;
+        }
+        audioMixer.SetFloat("Volume", Mathf.Log10(volume / 100) * 20f);
     }
 
     public void backButton ()

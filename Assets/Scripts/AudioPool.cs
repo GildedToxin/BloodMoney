@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class AudioPool : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class AudioPool : MonoBehaviour
 
     private Queue<AudioSource> availableSources = new Queue<AudioSource>();
     private List<AudioSource> allSources = new List<AudioSource>();
+
+    public AudioMixerGroup audioMixer;
 
     private void Awake()
     {
@@ -49,6 +52,7 @@ public class AudioPool : MonoBehaviour
         }
 
         AudioSource source = obj.GetComponent<AudioSource>();
+        source.outputAudioMixerGroup = audioMixer;
         source.playOnAwake = false;
 
         allSources.Add(source);
