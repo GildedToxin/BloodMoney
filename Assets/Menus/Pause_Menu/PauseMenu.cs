@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using static Unity.Collections.AllocatorManager;
 
 public class PauseMenu : MonoBehaviour
 {
@@ -7,16 +8,19 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject AreUSure;
 
-
+    public AudioPool audiopool;
+    public AudioClip buttonHover;
+    public AudioClip Click;
     private void Start()
     {
         GameManager.Instance.pauseMenu = this;   
-       // gameObject.SetActive(false);
+        gameObject.SetActive(false);
 
     }
 
     public void Resume()
     {
+        audiopool.PlayClip2D(Click);
         Time.timeScale = 1f;
         GameManager.Instance.pauseMenu.gameObject.SetActive(false);
             GameManager.Instance.isPaused = false;
@@ -52,4 +56,9 @@ public class PauseMenu : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void SettingsMenu()
+    {
+        settingsMenu.SetActive(true);
+        audiopool.PlayClip2D(Click);
+    }
 }

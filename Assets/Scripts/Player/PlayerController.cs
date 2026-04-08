@@ -1,9 +1,11 @@
 using JetBrains.Annotations;
 using NUnit.Framework.Constraints;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Audio;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UIElements;
 
@@ -76,6 +78,7 @@ public class PlayerController : MonoBehaviour
     private float yRotation;
 
     public AudioPool audioPool;
+    public List<AudioClip> walking;
 
     private void Start()
     {
@@ -93,7 +96,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P) && !GameManager.Instance.isPaused) 
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused) 
         {
             Time.timeScale = 0f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(true);
@@ -101,7 +104,7 @@ public class PlayerController : MonoBehaviour
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             UnityEngine.Cursor.visible = true;
             return;
-        }else if(Input.GetKeyDown(KeyCode.P) && GameManager.Instance.isPaused) 
+        }else if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused) 
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
@@ -208,7 +211,7 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
+        if (FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
         {
             print("returning");
             return;
@@ -220,7 +223,7 @@ public class PlayerController : MonoBehaviour
         if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            //audioPool.PlayClip2D(, 1f, 1f);
+            //audioPool.PlayClip2D(walking[Random.Range(0, walking.Count)]);
         }
         else if (grounded && sprinting && !crouching)
         {

@@ -13,6 +13,10 @@ public class SettingsMenuScript : MonoBehaviour
 
     Resolution[] resolutions;
 
+    public AudioPool audiopool;
+    public AudioClip buttonHover;
+    public AudioClip Click;
+
     void Start()
     {
         resolutions = Screen.resolutions;
@@ -40,17 +44,19 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void setVolume (float volume)
     {
-        audioMixer.SetFloat("volume", volume);
+        audioMixer.SetFloat("Volume", volume);
     }
 
-    public void setQuality (int qualityIndex)
+    public void backButton ()
     {
-        QualitySettings.SetQualityLevel (qualityIndex);
+        this.gameObject.SetActive(false);
+        audiopool.PlayClip2D(Click);
     }
 
     public void fullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
+        audiopool.PlayClip2D(Click);
     }
 
     public void setResolution(int resolutionIndex)
