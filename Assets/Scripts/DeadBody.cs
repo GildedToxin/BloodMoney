@@ -183,15 +183,19 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                     limb.GetComponent<LimbManager>().isHandHarvested = true;
                 break;
             case "BoneMiniGame":
-                Instantiate(BonePrefab, BoneSpawnLocation.position, BoneSpawnLocation.rotation);
+               var bone = Instantiate(BonePrefab, BoneSpawnLocation.position, BoneSpawnLocation.rotation);
+                bone.GetComponent<OrganManager>().currentHealth = quality;
                 break;
             case "BloodMiniGame":
-                Instantiate(bloodPrefab, bloodSpawnLocation.position, bloodSpawnLocation.rotation);
+                var blood = Instantiate(bloodPrefab, bloodSpawnLocation.position, bloodSpawnLocation.rotation);
+                blood.GetComponent<OrganManager>().currentHealth = quality;
                 break;
             case "SkullMinigame":
                 Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
                 Destroy(BodyBrain);
                 Destroy(headTop);
+                var brain = Instantiate(brainPrefab, brainSpawnLocation.position, brainSpawnLocation.rotation);
+                brain.GetComponent<OrganManager>().currentHealth = quality;
                 break;
             case "HandMinigame":
 
@@ -199,13 +203,21 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
                 Destroy(Hands[handsHarvested]);
 
                 Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
+
+                var hand = Instantiate(handPrefabs[handsHarvested], handSpawnLocations[handsHarvested].position, handSpawnLocations[handsHarvested].rotation);
+                hand.GetComponent<OrganManager>().currentHealth = quality;
                 break;
             case "EyeBallMinigame":
+
+                var eye = gameObject;
                 if(eyesHarvested == 0)
-                Instantiate(eyePrefab, leftEyeSpawnLocation.position, leftEyeSpawnLocation.rotation);
+                eye = Instantiate(eyePrefab, leftEyeSpawnLocation.position, leftEyeSpawnLocation.rotation);
 
                 if(eyesHarvested == 1)
-                Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
+                eye = Instantiate(eyePrefab, rightEyeSpawnLocation.position, rightEyeSpawnLocation.rotation);
+
+                eye.GetComponent<OrganManager>().currentHealth = quality;
+
                 break;
 
         }
