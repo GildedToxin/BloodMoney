@@ -60,6 +60,7 @@ public class PauseMenu : MonoBehaviour
     public void SettingsMenu()
     {
         settingsMenu.SetActive(true);
+        this.gameObject.SetActive(false );
         audiopool.PlayClip2D(Click);
     }
 

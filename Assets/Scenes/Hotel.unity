@@ -4235,6 +4235,40 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 500dd22176f78014dabcb74d9d70528c, type: 3}
   m_PrefabInstance: {fileID: 245315214}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &250770776 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5572346302891519213, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 550542315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &250770779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 250770776}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 550542317}
+          m_TargetAssemblyTypeName: SettingsMenuScript, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &252300092
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10282,6 +10316,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8300000, guid: 1e1e86a69852e7f4aa21f148ecdfdb57, type: 3}
     - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: PauseMenu
+      value: 
+      objectReference: {fileID: 417178227}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: audiopool
       value: 
       objectReference: {fileID: 572353496}
@@ -10313,6 +10351,10 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8654226137782045629, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8684149070554477734, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_Name
       value: Settings Menu
@@ -10332,7 +10374,16 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 5348598245957789301, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1172517861}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8654226137782045629, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1431994652}
+    - targetCorrespondingSourceObject: {fileID: 5572346302891519213, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 250770779}
+    - targetCorrespondingSourceObject: {fileID: 6236114837082640957, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1642585045}
   m_SourcePrefab: {fileID: 100100000, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
 --- !u!1 &550542316 stripped
 GameObject:
@@ -22948,6 +22999,7 @@ GameObject:
   - component: {fileID: 1172517864}
   - component: {fileID: 1172517863}
   - component: {fileID: 1172517862}
+  - component: {fileID: 1172517865}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -23069,6 +23121,35 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1172517860}
   m_CullTransparentMesh: 1
+--- !u!114 &1172517865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1172517860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 550542317}
+          m_TargetAssemblyTypeName: SettingsMenuScript, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1185462114
 GameObject:
   m_ObjectHideFlags: 0
@@ -27349,6 +27430,40 @@ Transform:
   - {fileID: 639700640}
   m_Father: {fileID: 7058664797554180789}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!1 &1431994647 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8654226137782045629, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 550542315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1431994652
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1431994647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 550542317}
+          m_TargetAssemblyTypeName: SettingsMenuScript, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1439168371
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -35981,6 +36096,40 @@ Light:
   m_LightUnit: 0
   m_LuxAtDistance: 1
   m_EnableSpotReflector: 1
+--- !u!1 &1642585042 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6236114837082640957, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 550542315}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1642585045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1642585042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.EventSystems.EventTrigger
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 550542317}
+          m_TargetAssemblyTypeName: SettingsMenuScript, Assembly-CSharp
+          m_MethodName: ButtonHover
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1644031590
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -68,4 +68,9 @@ public class SettingsMenuScript : MonoBehaviour
         Resolution resolution = resolutions[resolutionIndex];
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
+
+    public void ButtonHover()
+    {
+        audiopool.PlayClip2D(buttonHover);
+    }
 }
