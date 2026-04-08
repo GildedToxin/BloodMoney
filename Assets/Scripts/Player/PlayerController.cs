@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
     private float xRotation;
     private float yRotation;
 
-    public AudioPool audioPool;
+    public AudioSource audioSource;
     public List<AudioClip> walking;
 
     private void Start()
@@ -223,22 +223,41 @@ public class PlayerController : MonoBehaviour
         if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            //audioPool.PlayClip2D(walking[Random.Range(0, walking.Count)]);
+            audioSource.clip = walking[Random.Range(0, walking.Count)];
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
         else if (grounded && sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * sprintSpeed * 10f, ForceMode.Force);
+            audioSource.clip = walking[Random.Range(0, walking.Count)];
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
 
         }
         else if (grounded && !sprinting && crouching)
         {
             rb.AddForce(movementDirection.normalized * crouchSpeed * 10f, ForceMode.Force);
+            audioSource.clip = walking[Random.Range(0, walking.Count)];
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
 
         // in air
         else if (!grounded)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+            audioSource.clip = walking[Random.Range(0, walking.Count)];
+            if (!audioSource.isPlaying)
+            {
+                audioSource.Play();
+            }
         }
     }
 
