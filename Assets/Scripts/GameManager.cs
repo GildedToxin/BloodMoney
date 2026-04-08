@@ -133,6 +133,7 @@ public class GameManager : MonoBehaviour
             clockText = hudManager.timerText.gameObject;
             clockText.GetComponent<TextMeshProUGUI>().text = $"12:00";
             elapsedTime = 0;
+            hudManager.moneyText.GetComponent<TextMeshProUGUI>().text = $"${moneyMadeToday}";
         }
         Mathf.Clamp(currentDay, 0, 9);
         Mathf.Clamp(highestReachedDay, 0, 9);
