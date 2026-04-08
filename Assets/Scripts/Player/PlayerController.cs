@@ -92,6 +92,7 @@ public class PlayerController : MonoBehaviour
 
         UnityEngine.Cursor.lockState = CursorLockMode.Locked;
         UnityEngine.Cursor.visible = false;
+        audioSource.clip = walking[Random.Range(0, walking.Count)];
     }
 
     private void Update()
@@ -223,41 +224,28 @@ public class PlayerController : MonoBehaviour
         if (grounded && !sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f, ForceMode.Force);
-            audioSource.clip = walking[Random.Range(0, walking.Count)];
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
+
         }
         else if (grounded && sprinting && !crouching)
         {
             rb.AddForce(movementDirection.normalized * sprintSpeed * 10f, ForceMode.Force);
-            audioSource.clip = walking[Random.Range(0, walking.Count)];
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
 
         }
         else if (grounded && !sprinting && crouching)
         {
             rb.AddForce(movementDirection.normalized * crouchSpeed * 10f, ForceMode.Force);
-            audioSource.clip = walking[Random.Range(0, walking.Count)];
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
         }
 
         // in air
         else if (!grounded)
         {
             rb.AddForce(movementDirection.normalized * moveSpeed * 10f * airMultiplier, ForceMode.Force);
+        }
+
+        if (!audioSource.isPlaying && Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D))
+        {
             audioSource.clip = walking[Random.Range(0, walking.Count)];
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play();
-            }
+            audioSource.Play();
         }
     }
 
