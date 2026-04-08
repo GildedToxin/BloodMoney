@@ -115,6 +115,7 @@ public class GameManager : MonoBehaviour
             clockText.GetComponent<TextMeshProUGUI>().text = $"12:00";
             elapsedTime = 0;
             pauseMenu = FindAnyObjectByType<PauseMenu>(FindObjectsInactive.Include);
+            hudManager.RefreshUI();
 
             once = true;
         }
@@ -133,6 +134,7 @@ public class GameManager : MonoBehaviour
             clockText = hudManager.timerText.gameObject;
             clockText.GetComponent<TextMeshProUGUI>().text = $"12:00";
             elapsedTime = 0;
+            hudManager.RefreshUI();
         }
         Mathf.Clamp(currentDay, 0, 9);
         Mathf.Clamp(highestReachedDay, 0, 9);

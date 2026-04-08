@@ -2,6 +2,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class CartMagnitism : MonoBehaviour
 {
@@ -17,22 +18,33 @@ public class CartMagnitism : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        //print(other.name);
-        if (other.GetComponentInParent<OrganManager>() != null && !other.isTrigger && !CartObjects.Contains(other.GetComponentInParent<OrganManager>().gameObject))
-        {
-            var item = other.GetComponentInParent<OrganManager>().gameObject;
-            CartObjects.Add(item);
-            if (item.GetComponent<Rigidbody>() != null)
-                rb.Add(item.GetComponent<Rigidbody>());
-        }
-        ObjectLock();
+        print(other.name);
+        if (other.GetComponentInParent<OrganManager>() == null || other.isTrigger || CartObjects.Contains(other.GetComponentInParent<OrganManager>().gameObject))
+            return;
+
+
+        var item = other.GetComponentInParent<OrganManager>().gameObject;
+        CartObjects.Add(item);
+        if (item.GetComponent<Rigidbody>() != null)
+        rb.Add(item.GetComponent<Rigidbody>());
+      //  item.GetComponent<Rigidbody>().MovePosition(item.GetComponent<Rigidbody>().position + Vector3.down * 0.05f);
+        //  item.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask("OrganIgnore", "Organs");
+        ObjectLock(item, item.GetComponent<Rigidbody>());
+        
     }
 
     private void OnTriggerExit(Collider other)
     {
-        CartObjects.Remove(other.gameObject);
-        rb.Remove(other.gameObject.GetComponent<Rigidbody>());
-        ObjectUnLock();
+        
+
+        if (!CartObjects.Contains(other.GetComponentInParent<OrganManager>().gameObject))
+            return;
+
+        var item = other.GetComponentInParent<OrganManager>().gameObject;
+        CartObjects.Remove(item);
+        rb.Remove(item.GetComponent<Rigidbody>());
+      //  other.gameObject.GetComponent<Rigidbody>().excludeLayers = LayerMask.GetMask(, "Organs");
+        ObjectUnLock(item, item.GetComponent<Rigidbody>());
     }
 
     private void Update()
@@ -43,37 +55,18 @@ public class CartMagnitism : MonoBehaviour
         }
 
     }
-    public void ObjectLock()
+    public void ObjectLock(GameObject obj, Rigidbody rb)
     {
-        foreach (GameObject obj in CartObjects)
-        {
-            if (obj == null)
-                continue;
+
             obj.GetComponent<Transform>().SetParent(objectHolder.transform, true);
-        }
-        foreach (Rigidbody rb in rb)
-        {
-            if (rb == null)
-                continue;
             rb.GetComponent<OrganManager>().toolTip.enabled = false;
             rb.isKinematic = true;
-
-        }
     }
 
-    public void ObjectUnLock()
+    public void ObjectUnLock(GameObject obj, Rigidbody rb)
     {
-        foreach (GameObject obj in CartObjects)
-        {
-            if (obj == null)
-                continue;
+        
             obj.GetComponent<Transform>().SetParent(null, true);
-        }
-        foreach (Rigidbody rb in rb)
-        {
-            if (rb == null)
-                continue;
             rb.isKinematic = false;
-        }
     }
 }

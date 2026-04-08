@@ -3009,7 +3009,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &182218757
 Transform:
   m_ObjectHideFlags: 0
@@ -4867,7 +4867,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8990260805237242358, guid: f75b2a2961cf30748b678b8511223b05, type: 3}
       propertyPath: currentScreen
-      value: 12
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -47914,6 +47914,10 @@ PrefabInstance:
       propertyPath: pauseMenu
       value: 
       objectReference: {fileID: 417178228}
+    - target: {fileID: 2581367086287196747, guid: 267fa27f8bc23fd4281d406bec51d240, type: 3}
+      propertyPath: currentDay
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4803805358353060240, guid: 267fa27f8bc23fd4281d406bec51d240, type: 3}
       propertyPath: m_Name
       value: GameManager

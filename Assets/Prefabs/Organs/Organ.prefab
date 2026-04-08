@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 2100253822976634029}
   - component: {fileID: 7462111425150372110}
   - component: {fileID: 8505781417201097915}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: GameObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -711,7 +711,7 @@ Rigidbody:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8192
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
@@ -747,6 +747,8 @@ MonoBehaviour:
   bloodEffect: {fileID: 2830657874432123496, guid: d9852bfddd0da4b46a2d4df5d6d1cf87, type: 3}
   itemData: {fileID: 0}
   islookedAt: 0
+  lockedPosition: {x: 0, y: 0, z: 0}
+  lockedRotation: {x: 0, y: 0, z: 0, w: 0}
 --- !u!65 &-2707817955859395643
 BoxCollider:
   m_ObjectHideFlags: 0
