@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UIElements;
 using static Unity.Collections.AllocatorManager;
 
 public class PauseMenu : MonoBehaviour
@@ -60,5 +61,10 @@ public class PauseMenu : MonoBehaviour
     {
         settingsMenu.SetActive(true);
         audiopool.PlayClip2D(Click);
+    }
+
+    public void ButtonHover()
+    {
+        audiopool.PlayClip2D(buttonHover);
     }
 }
