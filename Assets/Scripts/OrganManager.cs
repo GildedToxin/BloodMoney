@@ -74,6 +74,11 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         {
             currentHealth = 0;
             Debug.Log("Organ destroyed!");
+            if(FindAnyObjectByType<VendorStand>().organsToSell.Contains(this))
+            {
+                FindAnyObjectByType<VendorStand>().organsToSell.Remove(this);
+                FindAnyObjectByType<VendorStand>().UpdateVenders();
+            }
             Destroy(gameObject);
         }
 
