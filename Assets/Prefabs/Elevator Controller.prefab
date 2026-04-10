@@ -126,8 +126,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
-  buttonFloor: 4
+  buttonFloor: 1
   elevatorScript: {fileID: 8602693640103564851}
+  isLookedAt: 0
 --- !u!1 &4013453055815384449
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,8 +255,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
-  buttonFloor: 1
+  buttonFloor: 4
   elevatorScript: {fileID: 8602693640103564851}
+  isLookedAt: 0
 --- !u!1 &5263182652355213024
 GameObject:
   m_ObjectHideFlags: 0
@@ -306,20 +308,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee5119c24859dbc4f923bace257bfa2d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EvelatorTeleporter
-  box1: {fileID: 0}
-  box2: {fileID: 0}
-  box3: {fileID: 0}
-  box4: {fileID: 0}
-  collider: {fileID: 4057270720839493751}
   buttonPressed: 0
   currentFloor: 1
   targetFloor: 0
+  doorsOpen: 0
+  rightDoor: {fileID: 0}
+  leftDoor: {fileID: 0}
   listOfElevatorPlatforms:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   listOfObjects: []
+  listOfEvelatorTeleporters: []
+  hasShownScreen: 0
+  hasShownScreen2: 0
 --- !u!54 &4377353667229137997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -473,8 +476,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
-  buttonFloor: 2
+  buttonFloor: 3
   elevatorScript: {fileID: 8602693640103564851}
+  isLookedAt: 0
 --- !u!1 &8064738301083597422
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,5 +716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36401127806bc6a4f955b18d593074e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::ElevatorButtonScript
-  buttonFloor: 3
+  buttonFloor: 2
   elevatorScript: {fileID: 8602693640103564851}
+  isLookedAt: 0
