@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             UnityEngine.Cursor.visible = true;
             return;
-        }else if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused) 
+        }else if(Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused) 
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
