@@ -35,12 +35,21 @@ public class SaveSystem
         catch { }
         GameManager.Instance.Save(ref _saveData.GameManagerSaveData);
     }
-
     public static void Load()
     {
-        string saveContent = File.ReadAllText(SaveFileName());
+        string path = SaveFileName();
 
+        if (!File.Exists(path))
+        {
+            Debug.Log("No save file found. Creating new save.");
+            _saveData = new SaveData(); // default data
+            Save();
+            return;
+        }
+
+        string saveContent = File.ReadAllText(path);
         _saveData = JsonUtility.FromJson<SaveData>(saveContent);
+
         HandleLoadData();
     }
 
