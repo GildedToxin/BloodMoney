@@ -118,7 +118,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         }
         else if (moveing)
         {
-            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
+           // FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
         }
         else
         {
