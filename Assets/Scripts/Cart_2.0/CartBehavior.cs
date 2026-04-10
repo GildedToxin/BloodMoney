@@ -30,8 +30,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
       //  Debug.Log("collider");
         if (other.gameObject == Player && !moveing)
         {
-            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to push cart");
-            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+
 
             canPickUp = true;
 
@@ -125,7 +124,12 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         {
             //print(Camera.main.transform.eulerAngles.x);
         }
-        if (canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (isLookedAt && canPickUp && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        {
+            FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to push cart");
+            FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
+        }
+        if (isLookedAt && canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
         {
             if (GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
             {
