@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8047193809148359563}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: 'Spiral Collider '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43,7 +43,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6208431084871454961}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Test1 (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,6 +73,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8047193809148359563}
     m_Modifications:
+    - target: {fileID: 65222419532768319, guid: 3970d7bff521a6f45bc7d17568b1ff5b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 1553216740173129590, guid: 3970d7bff521a6f45bc7d17568b1ff5b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -117,6 +121,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Test1
       objectReference: {fileID: 0}
+    - target: {fileID: 2217445339932523980, guid: 3970d7bff521a6f45bc7d17568b1ff5b, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -135,9 +143,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8047193809148359563}
     m_Modifications:
+    - target: {fileID: 1667316245479855240, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3389607242098706820, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 3494656198880664687, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 3904762436105626094, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
       propertyPath: m_Name
       value: StairColliderTest (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3904762436105626094, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4200714575116911030, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4372525202869173405, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4430222704388160340, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
       propertyPath: m_LocalPosition.x
@@ -179,6 +211,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5553596038250502664, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5873269373007441715, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6887172876224899405, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 8041883720729558086, guid: 1484ff699c0e4074aafc897afa70e0d3, type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -200,6 +248,10 @@ PrefabInstance:
     - target: {fileID: 5920395957784118705, guid: 04ca21abc4690504fb4b497c22fe0d95, type: 3}
       propertyPath: m_Name
       value: Test1 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5920395957784118705, guid: 04ca21abc4690504fb4b497c22fe0d95, type: 3}
+      propertyPath: m_Layer
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6440895603530653451, guid: 04ca21abc4690504fb4b497c22fe0d95, type: 3}
       propertyPath: m_LocalPosition.x
