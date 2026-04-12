@@ -76,9 +76,6 @@ public class DialogueManager : MonoBehaviour
             }
             else if (currentLineIndex == currentDialogue.lines.Length - 1)
             {
-                
-            }
-            {
                 EndDialogue();
                 return;
             }
@@ -109,7 +106,7 @@ public class DialogueManager : MonoBehaviour
 
     public void EndDialogue()
     {
-        
+        conversationStarted = false;
     }
 }
 
