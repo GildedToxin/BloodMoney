@@ -110,6 +110,18 @@ public class DialogueManager : MonoBehaviour
                 currentDialogue = dialogueConversations[10];
                 pauseConvo = false;
                 break;
+            case conversationType.FourthDayConvo01:
+                currentDialogue = dialogueConversations[11];
+                pauseConvo = true;
+                break;
+            case conversationType.FourthDayConvo02:
+                currentDialogue = dialogueConversations[12];
+                pauseConvo = true;
+                break;
+            case conversationType.FourthDayConvo03:
+                currentDialogue = dialogueConversations[13];
+                pauseConvo = false;
+                break;
             default:
                 Debug.Log("Invalid conversation type!");
                 break;
@@ -232,6 +244,14 @@ public class DialogueManager : MonoBehaviour
                 extraActive = true;
                 infoPanels[6].SetActive(true);
                 break;
+            case conversationType.FourthDayConvo01:
+                extraActive = true;
+                infoPanels[7].SetActive(true);
+                break;
+            case conversationType.FourthDayConvo02:
+                extraActive = true;
+                infoPanels[8].SetActive(true);
+                break;
         }
     }
 
@@ -306,6 +326,12 @@ public class DialogueManager : MonoBehaviour
             {
                 case 0:
                     currentConversationType = conversationType.FourthDayConvo01;
+                    break;
+                case 1:
+                    currentConversationType = conversationType.FourthDayConvo02;
+                    break;
+                case 2:
+                    currentConversationType = conversationType.FourthDayConvo03;
                     break;
                 default:
                     Debug.Log("Ran out of conversations");
@@ -408,6 +434,8 @@ public enum conversationType
     ThirdDayConvo02,
     ThirdDayConvo03,
     FourthDayConvo01,
+    FourthDayConvo02,
+    FourthDayConvo03,
     FifthDayConvo01,
     SixthDayConvo01,
     SeventhDayConvo01,
