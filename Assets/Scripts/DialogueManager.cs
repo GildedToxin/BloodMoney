@@ -27,12 +27,14 @@ public class DialogueManager : MonoBehaviour
     public bool secondTestBoolCondition = false;
     private bool conversationStarted = false;
     private bool repeatLine = false;
+    private bool canContinue = true;
 
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E) && canContinue)
         {
+            canContinue = false;
             ActivateText();
         }
 
@@ -93,6 +95,7 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.text = currentText.Substring(0, i);
                 yield return new WaitForSeconds(textSpeed);
             }
+            canContinue = true;
         }
         else
         {
@@ -107,6 +110,7 @@ public class DialogueManager : MonoBehaviour
     public void EndDialogue()
     {
         conversationStarted = false;
+        canContinue = true;
     }
 }
 
