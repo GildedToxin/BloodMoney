@@ -10,25 +10,28 @@ public class DialogueManager : MonoBehaviour
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI speakerNameText;
+    public List<GameObject> infoPanels = new List<GameObject>();
 
     [Header("Text Settings")]
     [SerializeField] private float textSpeed = 0.03f;
 
-
     [Header("Misc")]
     public List<Dialogue> dialogueConversations = new List<Dialogue>(); // change based on enum in switch statement
     private Dialogue currentDialogue;
-    //private int conversationIndex = 0;  // replace with enum, change enum based on conditions (switch case or if statements)
     private conversationType currentConversationType;
+    private int completedConversations = 0; // may be used for tracking completed conversations for conditions
     private string repeatedLine;
     private int currentLineIndex = 0;
     private int currentDisplayingText = 0;
     private bool DialogueActive = false;
-    public bool testBoolCondition = false;
-    public bool secondTestBoolCondition = false;
     private bool conversationStarted = false;
     private bool repeatLine = false;
     private bool canContinue = true;
+
+    // if true during a conversation, after conversation ends it will briefly pause before setting next conversation
+    // Pause is used for info panels, audio stings, etc. It will be progressed like normal dialogue input
+    private bool pauseConvo = false;
+    private bool extraActive = false;
 
 
     void Update()
@@ -36,34 +39,76 @@ public class DialogueManager : MonoBehaviour
         // Player input to start and progress dialogue.
         if (Input.GetKeyDown(KeyCode.E) && canContinue)
         {
-            canContinue = false;
-            dialoguePanel.SetActive(true);
-            ActivateText();
+            if (extraActive)
+            {
+                for (int i = 0; i < infoPanels.Count; i++)
+                {
+                    infoPanels[i].SetActive(false);
+                }
+                extraActive = false;
+                StartConversation();
+                return;
+            }
+            else
+            {
+                if (currentConversationType != conversationType.None)
+                {
+                    StartConversation();
+                }
+            }
         }
 
         // Set current conversation using an Enum based on conditions
-        if (testBoolCondition)
-        {
-            currentConversationType = conversationType.FirstDayConvo01;
-        }
-        if (secondTestBoolCondition)
-        {
-            currentConversationType = conversationType.FirstDayConvo02;
-        }
+        SetCurrentConversation();
 
         // Switch statement to set current conversation based on Enum value, mostly to prevent issues with setting more than one convo
         switch (currentConversationType)
         {
             case conversationType.FirstDayConvo01:
                 currentDialogue = dialogueConversations[0];
+                // set the speakerText
+                speakerNameText.text = currentDialogue.lines[currentLineIndex].speakerName;
+                pauseConvo = true;
                 break;
             case conversationType.FirstDayConvo02:
                 currentDialogue = dialogueConversations[1];
+                pauseConvo = true;
+                break;
+            case conversationType.FirstDayConvo03:
+                currentDialogue = dialogueConversations[2];
+                pauseConvo = true;
+                break;
+            case conversationType.FirstDayConvo04:
+                currentDialogue = dialogueConversations[3];
+                pauseConvo = true;
+                break;
+            case conversationType.FirstDayConvo05:
+                currentDialogue = dialogueConversations[4];
+                pauseConvo = false;
+                break;
+            case conversationType.SecondDayConvo01:
+                currentDialogue = dialogueConversations[5];
+                pauseConvo = true;
+                break;
+            case conversationType.SecondDayConvo02:
+                currentDialogue = dialogueConversations[6];
+                pauseConvo = true;
+                break;
+            case conversationType.SecondDayConvo03:
+                currentDialogue = dialogueConversations[7];
+                pauseConvo = false;
                 break;
             default:
-                Debug.LogError("Invalid conversation type!");
+                Debug.Log("Invalid conversation type!");
                 break;
         }
+    }
+
+    public void StartConversation()
+    {
+        canContinue = false;
+        dialoguePanel.SetActive(true);
+        ActivateText();
     }
 
     // Logic for starting and progressing dialogue
@@ -114,12 +159,211 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    IEnumerator WaitForAudioSting()
+    {
+        yield return new WaitForSeconds(2f); // length of audio sting
+        StartConversation();
+        extraActive = false;
+    }
+
     // All end of dialogue logic should go here
     public void EndDialogue()
     {
         conversationStarted = false;
         canContinue = true;
         dialoguePanel.SetActive(false);
+        completedConversations++;
+
+        // Used for extra info panels or audio stings between dialogue
+        if (pauseConvo)
+        {
+            InfoPanel();
+        }
+    }
+
+    public void InfoPanel() // Per day info panels and extras between dialogue
+    {
+        // Example of showing an info panel after a conversation ends, can be used for audio cues, etc.
+        switch (currentConversationType)
+        {
+            case conversationType.FirstDayConvo01:
+                extraActive = true;
+                Debug.Log("Audio Sting plays here");
+                // does StartConversation() after a delay
+                StartCoroutine(WaitForAudioSting());
+                break;
+            case conversationType.FirstDayConvo02:
+                extraActive = true;
+                infoPanels[0].SetActive(true);
+                break;
+            case conversationType.FirstDayConvo03:
+                extraActive = true;
+                infoPanels[1].SetActive(true);
+                break;
+            case conversationType.FirstDayConvo04:
+                extraActive = true;
+                infoPanels[2].SetActive(true);
+                break;
+            case conversationType.SecondDayConvo01:
+                extraActive = true;
+                infoPanels[3].SetActive(true);
+                break;
+            case conversationType.SecondDayConvo02:
+                extraActive = true;
+                infoPanels[4].SetActive(true);
+                break;
+        }
+    }
+
+    public void SetCurrentConversation() // this could probably be optimized lmao
+    {
+        if (GameManager.Instance.currentDay == 0) // Day 1 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.FirstDayConvo01;
+                    break;
+                case 1:
+                    currentConversationType = conversationType.FirstDayConvo02;
+                    break;
+                case 2:
+                    currentConversationType = conversationType.FirstDayConvo03;
+                    break;
+                case 3:
+                    currentConversationType = conversationType.FirstDayConvo04;
+                    break;
+                case 4:
+                    currentConversationType = conversationType.FirstDayConvo05;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 1) // Day 2 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.SecondDayConvo01;
+                    break;
+                case 1:
+                    currentConversationType = conversationType.SecondDayConvo02;
+                    break;
+                case 2:
+                    currentConversationType = conversationType.SecondDayConvo03;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 2) // Day 3 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.ThirdDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 3) // Day 4 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.FourthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 4) // Day 5 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.FifthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 5) // Day 6 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.SixthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 6) // Day 7 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.SeventhDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 7) // Day 8 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.EighthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 8) // Day 9 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.NinthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
+
+        if (GameManager.Instance.currentDay == 9) // Day 10 conversation conditions
+        {
+            switch (completedConversations)
+            {
+                case 0:
+                    currentConversationType = conversationType.TenthDayConvo01;
+                    break;
+                default:
+                    Debug.Log("Ran out of conversations");
+                    break;
+            }
+        }
     }
 }
 
@@ -128,7 +372,12 @@ public enum conversationType
     None,
     FirstDayConvo01,
     FirstDayConvo02,
+    FirstDayConvo03,
+    FirstDayConvo04,
+    FirstDayConvo05,
     SecondDayConvo01,
+    SecondDayConvo02,
+    SecondDayConvo03,
     ThirdDayConvo01,
     FourthDayConvo01,
     FifthDayConvo01,
