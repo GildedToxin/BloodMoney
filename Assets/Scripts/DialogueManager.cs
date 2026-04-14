@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI speakerNameText;
 
     [Header("Text Settings")]
-    [SerializeField] private float textSpeed = 0.05f;
+    [SerializeField] private float textSpeed = 0.03f;
 
 
     [Header("Misc")]
