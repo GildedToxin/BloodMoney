@@ -17,7 +17,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5428889965998671665
 RectTransform:
   m_ObjectHideFlags: 0
@@ -464,10 +464,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6903efe6f8862674d960408c068f7eec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::DialogueManager
+  dialoguePanel: {fileID: 1148438400020827744}
   dialogueText: {fileID: 3158586881234058720}
   speakerNameText: {fileID: 3308401599906973505}
   textSpeed: 0.03
   dialogueConversations:
   - {fileID: 11400000, guid: 9ba172f83baa38f4489a7c5474c00809, type: 2}
+  - {fileID: 11400000, guid: 8afe5872005a24a4db84593a03936757, type: 2}
   testBoolCondition: 0
   secondTestBoolCondition: 0

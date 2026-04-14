@@ -7,6 +7,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     [Header("References")]
+    public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI speakerNameText;
 
@@ -35,24 +36,25 @@ public class DialogueManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E) && canContinue)
         {
             canContinue = false;
+            dialoguePanel.SetActive(true);
             ActivateText();
         }
 
         if (testBoolCondition)
         {
-            currentConversationType = conversationType.FirstDayConversation;
+            currentConversationType = conversationType.FirstDayConvo01;
         }
         if (secondTestBoolCondition)
         {
-            currentConversationType = conversationType.SecondDayConversation;
+            currentConversationType = conversationType.FirstDayConvo02;
         }
 
         switch (currentConversationType)
         {
-            case conversationType.FirstDayConversation:
+            case conversationType.FirstDayConvo01:
                 currentDialogue = dialogueConversations[0];
                 break;
-            case conversationType.SecondDayConversation:
+            case conversationType.FirstDayConvo02:
                 currentDialogue = dialogueConversations[1];
                 break;
             default:
@@ -111,11 +113,21 @@ public class DialogueManager : MonoBehaviour
     {
         conversationStarted = false;
         canContinue = true;
+        dialoguePanel.SetActive(false);
     }
 }
 
 public enum conversationType
 {
-    FirstDayConversation,
-    SecondDayConversation,
+    FirstDayConvo01,
+    FirstDayConvo02,
+    SecondDayConvo01,
+    ThirdDayConvo01,
+    FourthDayConvo01,
+    FifthDayConvo01,
+    SixthDayConvo01,
+    SeventhDayConvo01,
+    EighthDayConvo01,
+    NinthDayConvo01,
+    TenthDayConvo01,
 }
