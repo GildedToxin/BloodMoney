@@ -1,4 +1,5 @@
 using System.Collections; // Required for coroutines
+using System.Net.Sockets;
 using UnityEngine;
 
 public class LimbMinigamePlayerController : MonoBehaviour
@@ -33,6 +34,9 @@ public class LimbMinigamePlayerController : MonoBehaviour
 
     public AudioClip sawSFX;
     public AudioClip startSFX;
+
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
     void Start()
     {
         startingNumberOfPoints = playerLimb.GetComponentInChildren<LimbCuttingScript>().numberOfPoints;
@@ -90,6 +94,15 @@ public class LimbMinigamePlayerController : MonoBehaviour
             {
                 limbEndScreen.gameObject.SetActive(true);
                 limbEndScreen.UpdateText(scorePercentage);
+
+                if(scorePercentage > 0)
+                {
+                    AudioPool.Instance.PlayClip2D(winSFX);
+                }
+                else
+                {
+                    AudioPool.Instance.PlayClip2D(loseSFX);
+                }
                 //StopMiniGame();
             }
             isMinigameActive = false;

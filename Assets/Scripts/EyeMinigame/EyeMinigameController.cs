@@ -49,6 +49,10 @@ public class EyeMinigameController : MonoBehaviour
     public AudioClip startSFX;
     public GameObject StartCanvas;
     public Camera cam;
+
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
+    public AudioClip spoonSFX;
     private void Awake()
     {
         remainingTime = totalTime;
@@ -81,9 +85,11 @@ public class EyeMinigameController : MonoBehaviour
             {
                 scoop.transform.position = new Vector3(scoop.transform.position.x, scoop.transform.position.y, scoop.transform.position.z);
                 horizontalMovement = 1;
+                AudioPool.Instance.PlayClip2D(spoonSFX);    
             }
             else if (Input.GetKeyDown(KeyCode.E) && horizontalMovement == 1)
             {
+                AudioPool.Instance.PlayClip2D(spoonSFX);
                 // this checks if the player enters the mash minigame or resets to the start
                 if (scoopInPosition)
                 {
@@ -190,6 +196,12 @@ public class EyeMinigameController : MonoBehaviour
             totalPoints = totalPoints - ((Mathf.RoundToInt(totalTime) - Mathf.RoundToInt(remainingTime)) * timerPunishment);
             pointScoreText.text = totalPoints.ToString() + "%";
         }
+        if (totalPoints > 0)
+        {
+            AudioPool.Instance.PlayClip2D(winSFX);
+        }
+        else
+            AudioPool.Instance.PlayClip2D(loseSFX);
     }
     public void StopMiniGame()
     {

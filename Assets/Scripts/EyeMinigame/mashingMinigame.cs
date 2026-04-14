@@ -37,6 +37,8 @@ public class mashingMinigame : MonoBehaviour
     }
     public float yOffset;
 
+    public AudioClip mashSFX;
+
     [ContextMenu("Lock Position")]
     public void LockPosition()
     {
@@ -84,6 +86,7 @@ public class mashingMinigame : MonoBehaviour
                 {
                     mashBar.value++;
                     buttonPress = 1;
+                    AudioPool.Instance.PlayClip2D(mashSFX, pitch: 2.25f, volume: .6f);
                 }
             }
 
@@ -100,6 +103,7 @@ public class mashingMinigame : MonoBehaviour
                 {
                     mashBar.value++;
                     buttonPress = 0;
+                    AudioPool.Instance.PlayClip2D(mashSFX, pitch: 2, volume: .6f);
                 }
             }
             

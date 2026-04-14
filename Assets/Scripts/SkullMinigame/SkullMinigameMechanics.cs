@@ -63,7 +63,9 @@ public class MinigameFunctions : MonoBehaviour
     public AudioClip hammerSFX;
     public AudioClip boneCrunchSFX;
     public AudioClip startSFX;
-    public AudioClip failedSFX;
+
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
 
     private void Awake()
     {
@@ -113,6 +115,8 @@ public class MinigameFunctions : MonoBehaviour
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
                 isMinigameActive = false;
+
+                AudioPool.Instance.PlayClip2D(winSFX);
             }
 
         }
@@ -129,7 +133,7 @@ public class MinigameFunctions : MonoBehaviour
                 minigameEnd = true;
                 pointDeduction();
                 winScreen.SetActive(true);
-
+                AudioPool.Instance.PlayClip2D(loseSFX);
                 Cursor.lockState = CursorLockMode.Confined;
                 Cursor.visible = true;
                 isMinigameActive = false;
@@ -145,6 +149,7 @@ public class MinigameFunctions : MonoBehaviour
             Cursor.lockState = CursorLockMode.Confined;
             Cursor.visible = true;
             isMinigameActive = false;
+            AudioPool.Instance.PlayClip2D(winSFX);
         }
 
         //timer countdown script

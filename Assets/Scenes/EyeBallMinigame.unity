@@ -616,7 +616,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 341674959}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -8.6}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.97, y: 2.97, z: 2.97}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2369,7 +2369,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0:00
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 3ddce7f670a0c4a4faec6997980fd5c5, type: 2}
   m_sharedMaterial: {fileID: 334303650022508515, guid: 3ddce7f670a0c4a4faec6997980fd5c5, type: 2}
@@ -4309,7 +4309,7 @@ MonoBehaviour:
   mm: {fileID: 1991456144}
   timerText: {fileID: 1222977049}
   remainingTime: 0
-  totalTime: 100000
+  totalTime: 15
   timerStop: 0
   totalPoints: 100
   timerPunishment: 2
@@ -4318,6 +4318,9 @@ MonoBehaviour:
   startSFX: {fileID: 8300000, guid: 9f5fb923e6375e1498d010c30444da13, type: 3}
   StartCanvas: {fileID: 1923233258}
   cam: {fileID: 1391730980}
+  winSFX: {fileID: 8300000, guid: 5de62f47dddc43947aa961c36093f73f, type: 3}
+  loseSFX: {fileID: 8300000, guid: 07ab46e63086755459e86829c20a96d3, type: 3}
+  spoonSFX: {fileID: 8300000, guid: 49f5d7095631d2d43b33e2a8a0e5b36b, type: 3}
 --- !u!4 &1991456143
 Transform:
   m_ObjectHideFlags: 0
@@ -4363,6 +4366,7 @@ MonoBehaviour:
   rightEye: {fileID: 1995940599}
   hasLeft: 0
   yOffset: 0
+  mashSFX: {fileID: 8300000, guid: b9bc858b53a87b04fb65154c3a45c877, type: 3}
 --- !u!1 &1995940599
 GameObject:
   m_ObjectHideFlags: 0

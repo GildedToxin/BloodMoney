@@ -47,6 +47,9 @@ public class HandFeetMinigameManager : MonoBehaviour
 
     public bool isInMiniGame = false;
 
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
+    public AudioClip chopSFX;
     public void Start()
     {
   
@@ -76,7 +79,7 @@ public class HandFeetMinigameManager : MonoBehaviour
             {
                 if (hit.collider.gameObject.name == endpoints[currentMaze].gameObject.name)
                 {
-                    EndMinigame();
+                    StartCoroutine(cutSFX());
                 }
             }
             else
@@ -85,7 +88,7 @@ public class HandFeetMinigameManager : MonoBehaviour
                 if (score < 0)
                 {
                     score = 0;
-                    EndMinigame();
+                    StartCoroutine(cutSFX());
                 }
             }
         }
@@ -101,18 +104,35 @@ public class HandFeetMinigameManager : MonoBehaviour
                 timerStop = true;
                 minigameEnd = true;
                 score = 0;
-                EndMinigame();
+                StartCoroutine(cutSFX());
+                
             }
         }
     }
+    public IEnumerator cutSFX()
+    {
+        FindAnyObjectByType<BoneMouseScript>().enabled = false;
+        AudioPool.Instance.PlayClip2D(chopSFX);
+        yield return new WaitForSeconds(0.5f);
+        EndMinigame();
+    }
     private void EndMinigame()
     {
+        if(score > 0)
+        {
+            AudioPool.Instance.PlayClip2D(winSFX);
+           
+        }
+        else
+        {
+            AudioPool.Instance.PlayClip2D(loseSFX);
+        }
+
         timerStop = true;
         minigameEnd = true;
         score = Mathf.Round(score);
         winText.text = score.ToString() + "%";
         winScreen.SetActive(true);
-        FindAnyObjectByType<BoneMouseScript>().enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
     }

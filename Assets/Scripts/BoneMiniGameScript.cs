@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SocialPlatforms.Impl;
+using TMPro;
 
 public class BoneMiniGameScript : MonoBehaviour
 {
@@ -32,6 +33,15 @@ public class BoneMiniGameScript : MonoBehaviour
     public GameObject EndCanvas;
     public GameObject currentBoneGO;
     public Camera cam;
+
+
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
+
+    public AudioClip readySFX;
+    public AudioClip goSFX;
+    public AudioClip boneColorSFX;
+    public AudioClip wrongBoneSFX;
     void Start()
     {
         cuttingScript = this.gameObject.GetComponent<BoneCuttingMiniGameScript>();
@@ -108,9 +118,16 @@ public class BoneMiniGameScript : MonoBehaviour
                 currentBoneGO = hit.collider.gameObject;
 
                 if (boneObjects.IndexOf(hit.collider.gameObject) + 1 == boneOrder[currentBone - 1])
+                {
+                    AudioPool.Instance.PlayClip2D(boneColorSFX);
                     StartCuttingGame();
+                    cuttingScript.reel.Play();
+                }
                 else
+                {
                     numberOfIncorrect++;
+                    AudioPool.Instance.PlayClip2D(wrongBoneSFX);
+                }
             }
                 
         }
@@ -133,9 +150,19 @@ public class BoneMiniGameScript : MonoBehaviour
         }
         scoreAverage = scoreAverage / 6;
 
+        EndCanvas.transform.GetChild(0).GetChild(2).GetChild(0).GetComponent<TextMeshProUGUI>().text = Mathf.Round(scoreAverage) + "%";
         EndCanvas.gameObject.SetActive(true);
         Cursor.lockState = CursorLockMode.Confined;
         Cursor.visible = true;
+
+        if(scoreAverage > 0)
+        {
+            AudioPool.Instance.PlayClip2D(winSFX);
+        }
+        else
+        {
+            AudioPool.Instance.PlayClip2D(loseSFX);
+        }
     }
 
     [ContextMenu("Stop MiniGame")]
@@ -175,10 +202,12 @@ public class BoneMiniGameScript : MonoBehaviour
         //transform.GetChild(2).gameObject.SetActive(true);
         StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(true);
         Debug.Log("Starting in 3...");
+        AudioPool.Instance.PlayClip2D(readySFX);
         yield return new WaitForSeconds(1f);
         StartCanvas.transform.GetChild(0).GetChild(0).gameObject.SetActive(false);
         StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(true);
         Debug.Log("Starting in 2...");
+        AudioPool.Instance.PlayClip2D(readySFX);
         yield return new WaitForSeconds(1f);
         StartCanvas.transform.GetChild(0).GetChild(1).gameObject.SetActive(false);
 
@@ -187,6 +216,7 @@ public class BoneMiniGameScript : MonoBehaviour
         foreach(int boneNum in boneOrder)
         {
             boneObjects[boneNum - 1].transform.GetChild(1).gameObject.SetActive(true);
+            AudioPool.Instance.PlayClip2D(boneColorSFX);
             yield return new WaitForSeconds(.5f);
             boneObjects[boneNum - 1].transform.GetChild(1).gameObject.SetActive(false);
         }
@@ -197,6 +227,7 @@ public class BoneMiniGameScript : MonoBehaviour
         Debug.Log("Starting in 1...");
 
         StartCanvas.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
+        AudioPool.Instance.PlayClip2D(goSFX);
         yield return new WaitForSeconds(1f);
 
         

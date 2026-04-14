@@ -21,9 +21,9 @@ public class BloodMinigameScript : MonoBehaviour
 
     private bool gameRunning = false;
     private float bloodDropSpeed;
-    private float bloodDropStartSpeed = 200.0f; // Starting speed for blood drops
-    private float bloodDropMaxSpeed = 1000.0f; // Maximum speed for blood drops
-    private float bloodSpeedIncreaseRate = 50.0f; // The rate at which blood drop speed increases over time
+    private float bloodDropStartSpeed = 500.0f; // Starting speed for blood drops
+    private float bloodDropMaxSpeed = 2000.0f; // Maximum speed for blood drops
+    private float bloodSpeedIncreaseRate = 100.0f; // The rate at which blood drop speed increases over time
     public float minigameTime;  // Total time before minigame ends
     public float minigameStartTime = 40f;  // Change this to set the minigameTime start value for the beginning of the minigame
 
@@ -47,6 +47,9 @@ public class BloodMinigameScript : MonoBehaviour
     public AudioClip collectBloodSFX;
     public AudioClip startSFX;
 
+
+    public AudioClip winSFX;
+    public AudioClip loseSFX;
     private void Start()
     {
         // StartCoroutine(StartMinigameRoundWithDelay());
@@ -100,8 +103,8 @@ public class BloodMinigameScript : MonoBehaviour
             if (collectedBloodDrops >= totalBloodDrops)
             {
                 score = 100;
-                scoreVisual.value = score;
             }
+            scoreVisual.value = score;
             EndGame();
         }
     }
@@ -190,7 +193,16 @@ public class BloodMinigameScript : MonoBehaviour
             Cursor.visible = true;
         //}
 
-        EndCanvas.gameObject.SetActive(true);
+        if(score > 0)
+        {
+            AudioPool.Instance.PlayClip2D(winSFX);
+        }
+        else
+        {
+            AudioPool.Instance.PlayClip2D(loseSFX);
+        }
+
+            EndCanvas.gameObject.SetActive(true);
     }
 
     private void CollectBloodDrop()

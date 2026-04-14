@@ -27,6 +27,9 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     public float timer = 0f;
     private bool waitingForNewTarget = false;
 
+    public AudioClip collectSFX;
+    public AudioSource reel;
+
     void Start()
     {
         initialPlayerPos = player.GetComponent<RectTransform>().position;
@@ -40,6 +43,7 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
     {
         if (startGame)
         {
+          
             mainScript.currentBoneGO.transform.GetChild(3).gameObject.SetActive(true);
             UserInterface.SetActive(true);
             // checks the players y pos against the bottom bounds and applies "gravity" to the player
@@ -131,6 +135,8 @@ public class BoneCuttingMiniGameScript : MonoBehaviour
 
     private void EndGame()
     {
+        reel.Stop();
+        AudioPool.Instance.PlayClip2D(collectSFX);
         if (mainScript.failedCutting)
             mainScript.scores[mainScript.currentBone - 1] = 100 - (mainScript.numberOfIncorrect * mainScript.pointsDamage) - mainScript.failedCuttingDamage;
         else
