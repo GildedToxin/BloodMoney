@@ -33,6 +33,7 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        // Player input to start and progress dialogue.
         if (Input.GetKeyDown(KeyCode.E) && canContinue)
         {
             canContinue = false;
@@ -40,6 +41,7 @@ public class DialogueManager : MonoBehaviour
             ActivateText();
         }
 
+        // Set current conversation using an Enum based on conditions
         if (testBoolCondition)
         {
             currentConversationType = conversationType.FirstDayConvo01;
@@ -49,6 +51,7 @@ public class DialogueManager : MonoBehaviour
             currentConversationType = conversationType.FirstDayConvo02;
         }
 
+        // Switch statement to set current conversation based on Enum value, mostly to prevent issues with setting more than one convo
         switch (currentConversationType)
         {
             case conversationType.FirstDayConvo01:
@@ -63,6 +66,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Logic for starting and progressing dialogue
     public void ActivateText() 
     {
         if (!conversationStarted)
@@ -86,6 +90,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // Stores each letter one at a time from the scriptable object and displays them in the dialogue box for a text scroll effect
     IEnumerator AnimateText()
     {
         string currentText = currentDialogue.lines[currentLineIndex].line;
@@ -109,6 +114,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
+    // All end of dialogue logic should go here
     public void EndDialogue()
     {
         conversationStarted = false;
@@ -119,6 +125,7 @@ public class DialogueManager : MonoBehaviour
 
 public enum conversationType
 {
+    None,
     FirstDayConvo01,
     FirstDayConvo02,
     SecondDayConvo01,

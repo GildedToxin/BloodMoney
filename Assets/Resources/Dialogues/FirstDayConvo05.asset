@@ -1,0 +1,40 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FirstDayConvo05
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FirstDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: After you use that key, you can come back to get another one from me.
+  - speakerName: Randy
+    line: I will only be giving you one room key at a time, in accordance with our
+      policy. I'm sick of people losing them, and you don't exactly look... well,
+      competent.
+  - speakerName: Randy
+    line: Anyway, after you've received a key, you can enter a guest room and harvest
+      materials from the guest. Then, bring the goods you harvested to the gift shop
+      to sell them.
+  - speakerName: Randy
+    line: Try not to drop them, or they'll become damaged that way, too. I trust
+      that even you can do something that simple without messing it up, yes?
+  - speakerName: Randy
+    line: If you can't carry everything you harvested, use the <b>housekeeping cart</b>
+      to transport more than one product at a time to the gift shop.
+  - speakerName: Randy
+    line: And if you haven't found it already, the gift shop is located to the right
+      as you enter the hotel.
+  - speakerName: Randy
+    line: Now then, enough chatter! Get to work, the clock is ticking.
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?
