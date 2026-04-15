@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FirstDayConvo03
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FirstDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Ah, I can't forget to mention-- check your toolbelt. You'll see that I've
+      been gracious enough to lend you one of the tools you will need to harvest
+      organs and materials from guests.
+  - speakerName: Randy
+    line: Since it's your first day, I've only given you one tool to get you started.
+      It's a <b>bone saw!</b> This tool allows you to harvest <b>rib bones</b>. Try
+      not to swing it around too much-- the walls are load-bearing.
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: SeventhDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: SeventhDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Ah, my top earner returns! Well, not that they have a choice, heh heh.
+  - speakerName: Randy
+    line: "Tonight we\u2019re aiming for <b>[$quota]</b>. Big number, I know-- but
+      I have full confidence in you. And by confidence, I mean legally binding expectations."
+  - speakerName: Randy
+    line: "Here\u2019s your first <b>room key</b> of the night. Just follow the routine
+      and keep things moving. Oh, and if you see the thermostat, bump it down a degree
+      or two."
+  - speakerName: Randy
+    line: "The place has been running warm lately, and I can\u2019t stand it. Makes
+      the bodies smell worse, too."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

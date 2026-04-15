@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FifthDayConvo02
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FifthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: The customers will appreciate a larger line-up of products for sale, and
+      I will appreciate getting more of their money. A beautiful, symbiotic relationship.
+  - speakerName: Randy
+    line: Here is a <b>room key</b>. If you need coffee to keep you going throughout
+      the night, you might find the coffee machine.
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: SixthDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: SixthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: There you are! Right on schedule. Contractually enforced punctuality--
+      my favorite kind!
+  - speakerName: Randy
+    line: Day six! It all feels routine by now, yes? You know, some contract workers
+      only work five days-- well, five nights. Not you, though.
+  - speakerName: Randy
+    line: "Anyway, your work has been meeting my expectations so far, so good job!
+      Although that\u2019s not saying much, because my expectations for you are quite
+      low."
+  - speakerName: Randy
+    line: But, just keep doing your best work, and you could have a longer future
+      here than I thought. Longer than most of our guests, anyway.
+  - speakerName: Randy
+    line: "Tonight, I need you to pull in <b>[$quota]</b>. The gift shop\u2019s been
+      seeing more... discerning customers lately, so don\u2019t just grab anything.
+      Quality over quantity-- though both are preferred."
+  - speakerName: Randy
+    line: "You have many tools at your disposal now, but I\u2019m sure you\u2019re
+      just <i>itching</i> for a new tool, yes? Well, itch no longer."
+  - speakerName: Randy
+    line: "This one\u2019s great for extracting the more... sought-after bits. The
+      kind customers whisper about. Here, take it-- it\u2019s a <b>scooper</b>. Like
+      an ice-cream scooper, but for scooping <b>eyeballs</b> instead of ice-cream."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

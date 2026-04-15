@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FourthDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FourthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Good evening! Or morning. Time gets a little blurry when you work nights
+      for long enough.
+  - speakerName: Randy
+    line: "Now then-- straight to business. Tonight\u2019s <b>quota is [$quota]</b>.
+      A nice, round number."
+  - speakerName: Randy
+    line: "Very achievable, if you remember: the higher the quality of the material,
+      the higher the price. So aim high-- or low, depending on where the part you\u2019re
+      harvesting is."
+  - speakerName: Randy
+    line: "I\u2019m sure you\u2019ve become well acquainted with your tools by now--
+      like an artist with their pencils and brushes, yes? Good, good."
+  - speakerName: Randy
+    line: "I think you\u2019re ready to add another tool to your toolbelt. The next
+      tool I have for you doesn\u2019t require as much precision as the others, but
+      it does require restraint."
+  - speakerName: Randy
+    line: "It\u2019s a <b>hammer</b>. It will allow you to crack a skull like the
+      shell of a hard-boiled egg and harvest <b>brains</b>. But don\u2019t mash too
+      much, or you\u2019ll mash the brain, too-- and when goods are <i>that</i> damaged,
+      they don\u2019t sell."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

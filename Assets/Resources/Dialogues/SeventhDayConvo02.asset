@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: SeventhDayConvo02
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: SeventhDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: "Also-- I\u2019m sure you\u2019ll be happy to hear that the mirror catcher
+      came this morning and was able to find all of the mirrors that had gone missing;
+      However, I\u2019ve decided not to rehang them."
+  - speakerName: Randy
+    line: Magic mirrors are jerks. <i>Every single time</i> I use them, they insult
+      me and make my face look way more unsymmetrical than it actually is.
+  - speakerName: Randy
+    line: "They do it on purpose to make me insecure. It works, too, and that\u2019s
+      the messed-up part. It <i>always</i> works. Like, my chin was over to the side,
+      and it looked ridiculous, and-- you know what?"
+  - speakerName: Randy
+    line: "I\u2019m ordering normal mirrors. Just get to work."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

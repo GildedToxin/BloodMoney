@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: TenthDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: TenthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Well, well, well... here we are. Your final shift.
+  - speakerName: Randy
+    line: "Ten days. They\u2019ve been very productive, very profitable nights. I
+      have to say, when you first walked in-- clueless, pen immediately signing a
+      contract you didn\u2019t read-- I had my doubts. Briefly."
+  - speakerName: Randy
+    line: "Well, not briefly. I had them this whole time. And it wasn\u2019t really
+      \u2018doubt\u2019,  it was full confidence that you would inevitably fail to
+      reach quota, and I would probably eat you. I had even picked out the spices,
+      and--"
+  - speakerName: Randy
+    line: "Anyway, that doesn\u2019t matter now. You proved me wrong, and here you
+      are-- alive and well! But don\u2019t get cocky, you still have one more quota
+      to hit."
+  - speakerName: Randy
+    line: The final <b>quota</b> to hit is <b>[$quota]</b>. If you manage to reach
+      it, you will have completed your contract. You will be free to... <i>depart</i>,
+      muahaha.
+  - speakerName: Randy
+    line: "Hm? What was that suspiciously evil laugh? <i>Did I</i>  laugh? I didn\u2019t
+      even notice. Anyway, work hard, and you have nothing to worry about, heh heh.
+      Here, take a <b>room key</b>."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?
