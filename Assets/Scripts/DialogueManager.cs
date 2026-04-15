@@ -154,6 +154,22 @@ public class DialogueManager : MonoBehaviour
                 currentDialogue = dialogueConversations[21];
                 pauseConvo = false;
                 break;
+            case conversationType.EighthDayConvo01:
+                currentDialogue = dialogueConversations[22];
+                pauseConvo = true;
+                break;
+            case conversationType.EighthDayConvo02:
+                currentDialogue = dialogueConversations[23];
+                pauseConvo = false;
+                break;
+            case conversationType.NinthDayConvo01:
+                currentDialogue = dialogueConversations[24];
+                pauseConvo = true;
+                break;
+            case conversationType.NinthDayConvo02:
+                currentDialogue = dialogueConversations[25];
+                pauseConvo = false;
+                break;
             default:
                 Debug.Log("Invalid conversation type!");
                 break;
@@ -304,6 +320,14 @@ public class DialogueManager : MonoBehaviour
                 extraActive = true;
                 infoPanels[13].SetActive(true);
                 break;
+            case conversationType.EighthDayConvo01:
+                extraActive = true;
+                infoPanels[14].SetActive(true);
+                break;
+            case conversationType.NinthDayConvo01:
+                extraActive = true;
+                infoPanels[15].SetActive(true);
+                break;
         }
     }
 
@@ -452,6 +476,9 @@ public class DialogueManager : MonoBehaviour
                 case 0:
                     currentConversationType = conversationType.EighthDayConvo01;
                     break;
+                case 1:
+                    currentConversationType = conversationType.EighthDayConvo02;
+                    break;
                 default:
                     Debug.Log("Ran out of conversations");
                     break;
@@ -464,6 +491,9 @@ public class DialogueManager : MonoBehaviour
             {
                 case 0:
                     currentConversationType = conversationType.NinthDayConvo01;
+                    break;
+                case 1:
+                    currentConversationType = conversationType.NinthDayConvo02;
                     break;
                 default:
                     Debug.Log("Ran out of conversations");
@@ -512,6 +542,8 @@ public enum conversationType
     SeventhDayConvo01,
     SeventhDayConvo02,
     EighthDayConvo01,
+    EighthDayConvo02,
     NinthDayConvo01,
+    NinthDayConvo02,
     TenthDayConvo01,
 }

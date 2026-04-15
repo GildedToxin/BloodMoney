@@ -12,8 +12,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
   m_Name: EighthDayConvo01
   m_EditorClassIdentifier: Assembly-CSharp::Dialogue
-  conversationName: 
-  lines: []
+  conversationName: EighthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Hello, my impressively mediocre employee! Busy night ahead! I can feel
+      it in the air... or maybe there's just something in the vents again.
+  - speakerName: Randy
+    line: "Either way, you\u2019re almost at the end of your contract. I\u2019m impressed--
+      you\u2019ve just barely reached expectations, adapted decently, and only tried
+      to escape... what, twice? That\u2019s above average!"
+  - speakerName: Randy
+    line: "Tonight, your <b>quota is [$quota]</b>. It\u2019s higher than before,
+      of course, but I\u2019m sure you can reach it if you stay focused."
+  - speakerName: Randy
+    line: "Anyway, you know the drill-- take this <b>room key</b> and \u2018lock
+      in\u2019, as the kids say. ...Are they still saying that? Whatever."
+  - speakerName: Randy
+    line: "I gave up trying to be \u2018hip\u2019 a century ago."
   repeatLine:
-    speakerName: 
-    line: 
+    speakerName: Randy
+    line: Don't you have something else better to do?
