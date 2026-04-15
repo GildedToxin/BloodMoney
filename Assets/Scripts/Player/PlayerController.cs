@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused) 
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused)
         {
             Time.timeScale = 0f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(true);
@@ -105,7 +105,7 @@ public class PlayerController : MonoBehaviour
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             UnityEngine.Cursor.visible = true;
             return;
-        }else if(Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused) 
+        }else if(Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused)
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
@@ -132,13 +132,13 @@ public class PlayerController : MonoBehaviour
 
         //bool for sprinting animation!!
         bool isSprinting = sprinting && grounded;
- 
+
         // player movement drag
         if (grounded)
         {
             // LinearDamping is the new term for Drag
             rb.linearDamping = groundDrag;
-        } 
+        }
         else
         {
             rb.linearDamping = 0;
@@ -207,7 +207,7 @@ public class PlayerController : MonoBehaviour
         {
             sprinting = false;
         }
- 
+
     }
 
     private void MovePlayer()
@@ -312,7 +312,7 @@ public class PlayerController : MonoBehaviour
             if (lookable != null)
             {
                 // If looking at a new object, turn off the last one and turn on the new one
-                if (currentLookAt != lookable) 
+                if (currentLookAt != lookable)
                 {
                     currentLookAt?.OnLookExit();
                     currentLookAt = lookable;

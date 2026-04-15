@@ -24,7 +24,7 @@ public class DialogueManager : MonoBehaviour
     private int currentLineIndex = 0;
     private int currentDisplayingText = 0;
     private bool DialogueActive = false;
-    private bool conversationStarted = false;
+    public bool conversationStarted = false;
     private bool repeatLine = false;
     private bool canContinue = true;
 
@@ -37,7 +37,7 @@ public class DialogueManager : MonoBehaviour
     void Update()
     {
         // Player input to start and progress dialogue.
-        if (Input.GetKeyDown(KeyCode.E) && canContinue)
+        if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt)
         {
             if (extraActive)
             {
@@ -245,6 +245,12 @@ public class DialogueManager : MonoBehaviour
         StartConversation();
         extraActive = false;
     }
+    IEnumerator WaitForInfoPanel()
+    {
+        yield return new WaitForSeconds(2f); // length of audio sting
+        StartConversation();
+        extraActive = false;
+    }
 
     // All end of dialogue logic should go here
     public void EndDialogue()
@@ -331,6 +337,7 @@ public class DialogueManager : MonoBehaviour
             case conversationType.EighthDayConvo01:
                 extraActive = true;
                 infoPanels[14].SetActive(true);
+                StartCoroutine(WaitForInfoPanel());
                 break;
             case conversationType.NinthDayConvo01:
                 extraActive = true;
