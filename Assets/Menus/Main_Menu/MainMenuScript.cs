@@ -55,7 +55,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void CreditsScene()
     {
-        Debug.Log("Credits");
+        SceneManager.LoadScene("Credits", LoadSceneMode.Additive);
     }
 
     public void ExitGame()

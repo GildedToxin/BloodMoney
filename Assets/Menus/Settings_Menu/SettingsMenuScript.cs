@@ -10,7 +10,7 @@ public class SettingsMenuScript : MonoBehaviour
 {
     public AudioMixer audioMixer;
     public TMP_Dropdown resolutionDropdown;
-    public GameObject PauseMenu;
+    public GameObject previousMenu;
 
     Resolution[] resolutions;
 
@@ -19,7 +19,7 @@ public class SettingsMenuScript : MonoBehaviour
     public AudioClip Click;
     void Start()
     {
-        PauseMenu.SetActive(false);
+        previousMenu.SetActive(false);
 
         resolutions = Screen.resolutions;
 
@@ -57,7 +57,7 @@ public class SettingsMenuScript : MonoBehaviour
     {
         this.gameObject.SetActive(false);
         audiopool.PlayClip2D(Click);
-        PauseMenu.SetActive(true);
+        previousMenu.SetActive(true);
     }
 
     public void fullScreen(bool isFullScreen)

@@ -12,6 +12,9 @@ public class PauseMenu : MonoBehaviour
     public AudioPool audiopool;
     public AudioClip buttonHover;
     public AudioClip Click;
+
+    public GameObject currentMenu;
+
     private void Start()
     {
         GameManager.Instance.pauseMenu = this;   
@@ -60,6 +63,12 @@ public class PauseMenu : MonoBehaviour
         GameManager.Instance.pauseMenu.gameObject.SetActive(false);
         GameManager.Instance.isPaused = false;
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void Back()
+    {
+        currentMenu.SetActive(true);
+        this.enabled = false;
     }
 
     public void SettingsMenu()
