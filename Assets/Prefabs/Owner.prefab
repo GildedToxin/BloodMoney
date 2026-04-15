@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::owner
   isLookedAt: 0
+  hasShownScreen: 0
 --- !u!1001 &5261372714106998905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -110,6 +111,10 @@ PrefabInstance:
       propertyPath: m_ConstrainProportionsScale
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: 4de426f2b987afc4bacb5d06afbe57a8, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 201150108010055079, guid: 4897f0e5faf6d6c4080826f22dfbcc83, type: 3}
     - target: {fileID: 919132149155446097, guid: 4de426f2b987afc4bacb5d06afbe57a8, type: 3}
       propertyPath: m_Name
       value: wolf
