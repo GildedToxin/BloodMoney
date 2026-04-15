@@ -6,13 +6,23 @@ using UnityEngine.UI;
 public class MainMenuScript : MonoBehaviour
 {
 
-    [SerializeField] CanvasGroup settingsMenu;
+    [SerializeField] GameObject settingsMenu;
     [SerializeField] CanvasGroup mainMenu;
     [SerializeField] CanvasGroup dayMenu;
 
     public Button playGame;
 
-
+    private void Update()
+    {
+        if (!settingsMenu.activeSelf && mainMenu.alpha != 1)
+        {
+            settingsMenu.SetActive(true);
+            mainMenu.alpha = 1;
+            mainMenu.interactable = true;
+            mainMenu.blocksRaycasts = true;
+            settingsMenu.SetActive(false);
+        }
+    }
 
     public void Start()
     {
@@ -36,9 +46,7 @@ public class MainMenuScript : MonoBehaviour
 
     public void SettingsMenu()
     {
-        settingsMenu.alpha = 1;
-        settingsMenu.interactable = true;
-        settingsMenu.blocksRaycasts = true;
+        settingsMenu.SetActive(true);
         mainMenu.alpha = 0;
         mainMenu.interactable = false;
         mainMenu.blocksRaycasts = false;
