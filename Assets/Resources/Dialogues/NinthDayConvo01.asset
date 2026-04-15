@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: NinthDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: NinthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: "Greetings, my useful little pawn. Excited for another night of illicit
+      black market commerce? That\u2019s the spirit!"
+  - speakerName: Randy
+    line: "Big night. Very big night. I\u2019ve got orders piling up, customers waiting,
+      and expectations rising."
+  - speakerName: Randy
+    line: "Tomorrow will be your last shift-- so work hard and make sure you reach
+      it. I\u2019d be <i>such a shame</i> to fail now when you\u2019re so close,
+      wouldn\u2019t it?"
+  - speakerName: Randy
+    line: But in case you do-- you still have your appendix, right? ...Just wondering.
+  - speakerName: Randy
+    line: "Moving on! You\u2019ll need to bring in <b>[$quota]</b> tonight. Also,
+      here is a <b>room key</b>."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

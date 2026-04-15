@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FirstDayConvo04
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FirstDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: There is no need for thanks-- just make good use of that tool, and don't
+      botch any harvesting.
+  - speakerName: Randy
+    line: Hm? Oh yes, it takes skill to harvest materials without <b>damaging the
+      goods</b>. Make sure you are <i>careful and precise</i> while extracting.
+  - speakerName: Randy
+    line: If the goods are not of <b>high quality</b>, the customers will not pay
+      a high price for them. Selling high quality products will make it easier to
+      reach quota.
+  - speakerName: Randy
+    line: Now, with all of that out of the way, here-- take this <b>room key</b>.
+      Use that to unlock the door to one of the guest rooms, so that you can enter
+      and begin harvesting.
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

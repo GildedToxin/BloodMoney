@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: SixthDayConvo03
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: SixthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: "Also, I've received word that some of the mirrors in the hotel keep reflecting
+      things that aren\u2019t there. It's nothing to be concerned about, unless--
+      huh...?"
+  - speakerName: Randy
+    line: "Wait... what did you say? You haven\u2019t seen a single mirror anywhere
+      in the hotel?"
+  - speakerName: Randy
+    line: "Well, that\u2019s unfortunate. They must have escaped again... what a
+      hassle. Don't worry, I'll call the catcher-- you just get on with your work."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

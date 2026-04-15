@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FifthDayConvo03
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FifthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: "Hm? No, I don\u2019t know where it is-- that\u2019s why I said you <i>might</i>
+      find it. It could be anywhere for all I know. You\u2019d think it would be
+      in the kitchen, but no, it\u2019s not. Perhaps we\u2019ve never had one..."
+  - speakerName: Randy
+    line: "Oh, one last thing-- if you see any of the luggage carts moving on their
+      own, just ignore them. Discipline doesn\u2019t work, and any attention just
+      seems to encourage them."
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?

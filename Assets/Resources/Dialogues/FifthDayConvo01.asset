@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb9d9fa0ccbe1b4cbcd2a1d889b806b, type: 3}
+  m_Name: FifthDayConvo01
+  m_EditorClassIdentifier: Assembly-CSharp::Dialogue
+  conversationName: FifthDayMainConversation
+  lines:
+  - speakerName: Randy
+    line: Ah! Just the increasingly densensitized employee I wanted to see.
+  - speakerName: Randy
+    line: "You are now halfway through your contract! That happened fast, didn\u2019t
+      it?"
+  - speakerName: Randy
+    line: "You know what they say, \u2018time flies when you\u2019re harvesting organs\u2019!
+      ... Or was it \u2018when you\u2019re having fun\u2019? Whatever, same thing."
+  - speakerName: Randy
+    line: "But enough chat, let\u2019s talk numbers!"
+  - speakerName: Randy
+    line: "Tonight\u2019s <b>quota is [$quota]</b>. Hit that, and I\u2019ll be very
+      happy. And when I\u2019m happy... everyone keeps their current arrangement.
+      Win-win!"
+  - speakerName: Randy
+    line: "Also, I\u2019ve got something for you-- a new tool. It\u2019s an <b>axe</b>!"
+  - speakerName: Randy
+    line: "Don\u2019t look so nervous, it\u2019s perfectly safe... probably. This
+      little beauty should help you collect <b>hands</b> and <b>feet</b>. Give it
+      a try tonight, hm?"
+  repeatLine:
+    speakerName: Randy
+    line: Don't you have something else better to do?
