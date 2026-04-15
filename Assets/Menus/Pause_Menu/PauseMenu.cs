@@ -31,6 +31,11 @@ public class PauseMenu : MonoBehaviour
 
     }
 
+    public void ControlsMenu()
+    {
+        SceneManager.LoadScene("Control_Info", LoadSceneMode.Additive);
+    }
+
     public void Pause()
     {
         Time.timeScale = 0f;
