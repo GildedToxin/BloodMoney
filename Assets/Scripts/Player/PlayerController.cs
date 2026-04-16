@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted)
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted && !FindAnyObjectByType<DialogueManager>().extraActive)
         {
             print(UnityEngine.Cursor.visible);
             Time.timeScale = 0f;
@@ -182,8 +182,6 @@ public class PlayerController : MonoBehaviour
 
     private void MyInput()
     {
-        if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0)
-            return;
         if(FindAnyObjectByType<DialogueManager>() != null && (FindAnyObjectByType<DialogueManager>().conversationStarted  || FindAnyObjectByType<DialogueManager>().extraActive))
             return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
@@ -217,13 +215,6 @@ public class PlayerController : MonoBehaviour
 
     private void MovePlayer()
     {
-        if (FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
-        {
-            print("returning");
-            return;
-        }
-        if (FindAnyObjectByType<DialogueManager>() != null && (FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive))
-            return;
 
         //finds the movement direction
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;

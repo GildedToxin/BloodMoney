@@ -208,6 +208,8 @@ public class GameManager : MonoBehaviour
     int lastMinute = -1;  
     public void UpdateClock()
     {
+        if(isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive)
+            return;
         elapsedTime += Time.deltaTime;
 
         float t = Mathf.Clamp01(elapsedTime / realDuration);
@@ -395,12 +397,21 @@ public class GameManager : MonoBehaviour
         bloodSplatterScore = remainingBloodSplatters / totalBloodSplatters * 100f;
         Debug.Log($"Blood Splatter Score: {bloodSplatterScore}%");
     }
+    public static void SetLayerRecursively(GameObject obj, int newLayer)
+    {
+        obj.layer = newLayer;
 
+        foreach (Transform child in obj.transform)
+        {
+            SetLayerRecursively(child.gameObject, newLayer);
+        }
+    }
     public void FirstDayTutorial()
     {
         // show UI message for first day tutorial
 
-        FindAnyObjectByType<owner>().transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Highlight");
+
+        SetLayerRecursively(FindAnyObjectByType<owner>().transform.GetChild(0).gameObject, LayerMask.NameToLayer("Highlight"));
         //currentDay++;
     }
 

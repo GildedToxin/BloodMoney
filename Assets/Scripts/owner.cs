@@ -12,7 +12,7 @@ public class owner : MonoBehaviour, IPlayerLookTarget
     {
         if(!GameManager.Instance.doesPlayerHaveKey && isLookedAt && Input.GetKeyDown(KeyCode.E))
         {
-            if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
+            /*if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 3)
             {
                 var fdm = FindAnyObjectByType<FirstDayManager>();
                 fdm.currentScreen++;
@@ -20,14 +20,15 @@ public class owner : MonoBehaviour, IPlayerLookTarget
                 fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
                 hasShownScreen = true;
                 StartCoroutine(fdm.WaitForNextScreen());
-            }
+            }*/
 
 
 
             FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
             GameManager.Instance.GivePlayerKey();
             GameManager.Instance.doesPlayerHaveKey = true;
-            transform.GetChild(0).gameObject.layer = LayerMask.NameToLayer("Default");
+            GameManager.SetLayerRecursively(transform.GetChild(0).gameObject, LayerMask.NameToLayer("Default"));
+         
         }
     }
     public void OnLookEnter()

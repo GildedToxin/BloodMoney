@@ -103,15 +103,7 @@ public class VendorStand : MonoBehaviour
 
         UpdateVenders();
 
-        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 15)
-        {
-            var fdm = FindAnyObjectByType<FirstDayManager>();
-            fdm.currentScreen++; //15
-            fdm.isShowingScreen = true;
-            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
-            hasShownScreen = true;
-            StartCoroutine(fdm.WaitForNextScreen());
-        }
+
     }
 
     public void RefreshCustomers()

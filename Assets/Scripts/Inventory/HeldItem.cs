@@ -40,15 +40,7 @@ public class HeldItem : MonoBehaviour
     }
     public void PickUpItem(GameObject item)
     {
-        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 11)
-        {
-            var fdm = FindAnyObjectByType<FirstDayManager>();
-            fdm.currentScreen++; // 12
-            fdm.isShowingScreen = true;
-            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
-            hasShownScreen = true;
-            StartCoroutine(fdm.WaitForNextScreen());
-        }
+
 
 
         //item.GetComponent<OrganManager>

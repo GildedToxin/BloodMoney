@@ -24,10 +24,7 @@ public class CameraMovement : MonoBehaviour
     }
     void Update()
     {
-        if (FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0) // Prevents player from moving during first day tutorial screens
-        {
-            return;
-        }
+
 
         if (cartScript != null && cartScript.isMoving)
             sensitivityY = 0;

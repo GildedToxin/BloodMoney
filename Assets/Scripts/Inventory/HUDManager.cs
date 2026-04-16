@@ -45,9 +45,7 @@ public class HUDManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            if (FindFirstObjectByType<FirstDayManager>() != null && FindFirstObjectByType<FirstDayManager>().isShowingScreen == true)
-                return;
-            if (FindAnyObjectByType<DialogueManager>().conversationStarted)
+            if (FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive)
                 return;
             //FindAnyObjectByType<InventoryController>().money.Value += 10;
             bookPanel.SetActive(!bookPanel.activeSelf);

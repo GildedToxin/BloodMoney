@@ -102,7 +102,7 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
 
         }
 
-        if (!GameManager.Instance.isInMiniGame && Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 && moveing && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (!GameManager.Instance.isInMiniGame && Camera.main.transform.eulerAngles.x >= 30 && Camera.main.transform.eulerAngles.x <= 80 && moveing && !Player.GetComponent<HeldItem>().hasItem)
         {
             FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to drop cart");
             FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
@@ -124,21 +124,14 @@ public class CartBehavior : MonoBehaviour, IPlayerLookTarget
         {
             //print(Camera.main.transform.eulerAngles.x);
         }
-        if (isLookedAt && canPickUp && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (isLookedAt && canPickUp && !Player.GetComponent<HeldItem>().hasItem)
         {
             FindFirstObjectByType<HUDManager>().UpdateCrossHairText("Press E to push cart");
             FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         }
-        if (isLookedAt && canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem && (FindFirstObjectByType<FirstDayManager>() == null || !FindFirstObjectByType<FirstDayManager>().isShowingScreen))
+        if (isLookedAt && canPickUp && Input.GetKeyDown(KeyCode.E) && !Player.GetComponent<HeldItem>().hasItem)
         {
-            if (GameManager.Instance.currentDay == 0 && FindAnyObjectByType<FirstDayManager>().currentScreen == 5)
-            {
-                var fdm = FindAnyObjectByType<FirstDayManager>();
-                fdm.currentScreen++;
-                fdm.isShowingScreen = true;
-                fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
-                StartCoroutine(fdm.WaitForNextScreen());
-            }
+   
             FollowPlayer(Player);
             canPickUp = false;
 

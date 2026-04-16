@@ -45,7 +45,7 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
-        if (FindAnyObjectByType<DialogueManager>().conversationStarted)
+        if (FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive)
             return;
 
         int newSelection = GetNumberKeyDown();

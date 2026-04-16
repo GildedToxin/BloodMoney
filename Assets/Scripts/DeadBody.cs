@@ -96,15 +96,7 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
     }
     public void OnTriggerEnter(Collider other)
     {
-        if (GameManager.Instance.currentDay == 0 && !hasShownScreen && FindAnyObjectByType<FirstDayManager>().currentScreen == 8)
-        {
-            var fdm = FindAnyObjectByType<FirstDayManager>();
-            fdm.currentScreen++;
-            fdm.isShowingScreen = true;
-            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
-            hasShownScreen = true;
-            StartCoroutine(fdm.WaitForNextScreen());
-        }
+        
     }
     public void Highlight(string organ)
     {
@@ -222,15 +214,6 @@ public class DeadBody : MonoBehaviour, IPlayerLookTarget
 
         }
 
-        if (GameManager.Instance.currentDay == 0 && !hasShownScreen2 && FindAnyObjectByType<FirstDayManager>().currentScreen == 10)
-        {
-            var fdm = FindAnyObjectByType<FirstDayManager>();
-            fdm.currentScreen++; // 11
-            fdm.isShowingScreen = true;
-            fdm.tutorialScreens[fdm.currentScreen].SetActive(true);
-            hasShownScreen2 = true;
-            StartCoroutine(fdm.WaitForNextScreen());
-        }
     }
     public void RemoveHighlight()
     {

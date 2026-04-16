@@ -33,6 +33,8 @@ public class DialogueManager : MonoBehaviour
     private bool pauseConvo = false;
     public bool extraActive = false;
 
+    public AudioClip chimeSFX;
+    public AudioClip infoSFX;
 
     void Update()
     {
@@ -290,86 +292,103 @@ public class DialogueManager : MonoBehaviour
             case conversationType.FirstDayConvo02:
                 extraActive = true;
                 infoPanels[0].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(5f));
                 break;
             case conversationType.FirstDayConvo03:
                 extraActive = true;
                 infoPanels[1].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.FirstDayConvo04:
                 extraActive = true;
                 infoPanels[2].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.SecondDayConvo01:
                 extraActive = true;
                 infoPanels[3].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.SecondDayConvo02:
                 extraActive = true;
                 infoPanels[4].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.ThirdDayConvo01:
                 extraActive = true;
                 infoPanels[5].SetActive(true);
+                    AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.ThirdDayConvo02:
                 extraActive = true;
                 infoPanels[6].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.FourthDayConvo01:
                 extraActive = true;
                 infoPanels[7].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.FourthDayConvo02:
                 extraActive = true;
                 infoPanels[8].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.FifthDayConvo01:
                 extraActive = true;
                 infoPanels[9].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.FifthDayConvo02:
                 extraActive = true;
                 infoPanels[10].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.SixthDayConvo01:
                 extraActive = true;
                 infoPanels[11].SetActive(true);
+                AudioPool.Instance.PlayClip2D(infoSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.SixthDayConvo02:
                 extraActive = true;
                 infoPanels[12].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.SeventhDayConvo01:
                 extraActive = true;
                 infoPanels[13].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
                 break;
             case conversationType.EighthDayConvo01:
                 extraActive = true;
                 infoPanels[14].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.NinthDayConvo01:
                 extraActive = true;
                 infoPanels[15].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
             case conversationType.TenthDayConvo01:
                 extraActive = true;
                 infoPanels[16].SetActive(true);
+                AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
                 break;
         }
