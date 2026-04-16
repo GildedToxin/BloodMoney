@@ -36,6 +36,8 @@ public class DialogueManager : MonoBehaviour
     public AudioClip chimeSFX;
     public AudioClip infoSFX;
 
+    public Coroutine textAnimation;
+
     void Update()
     {
         // Player input to start and progress dialogue.
@@ -59,9 +61,24 @@ public class DialogueManager : MonoBehaviour
                 }
             }
         }
+        else if(Input.GetKeyDown(KeyCode.E) && conversationStarted && !canContinue)
+        {
+                StopCoroutine(textAnimation);
+            string currentText = currentDialogue.lines[currentLineIndex].line;
+            string repeatedText = currentDialogue.repeatLine.line;
+            if (!repeatLine)
+            {
+                dialogueText.text = currentText;
+                canContinue = true;
+            }
+            else
+            {
+                dialogueText.text = repeatedText;
+            }
+        }
 
-        // Set current conversation using an Enum based on conditions
-        SetCurrentConversation();
+            // Set current conversation using an Enum based on conditions
+            SetCurrentConversation();
 
         // Switch statement to set current conversation based on Enum value, mostly to prevent issues with setting more than one convo
         switch (currentConversationType)
@@ -200,14 +217,14 @@ public class DialogueManager : MonoBehaviour
         {
             currentLineIndex = 0;
             conversationStarted = true;
-            StartCoroutine(AnimateText());
+            textAnimation =  StartCoroutine(AnimateText());
         }
         else
         {
             if (currentLineIndex < currentDialogue.lines.Length - 1)
             {
                 currentLineIndex++;
-                StartCoroutine(AnimateText());
+                textAnimation = StartCoroutine(AnimateText());
             }
             else if (currentLineIndex == currentDialogue.lines.Length - 1)
             {
