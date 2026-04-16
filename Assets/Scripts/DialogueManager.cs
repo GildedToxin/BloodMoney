@@ -31,13 +31,13 @@ public class DialogueManager : MonoBehaviour
     // if true during a conversation, after conversation ends it will briefly pause before setting next conversation
     // Pause is used for info panels, audio stings, etc. It will be progressed like normal dialogue input
     private bool pauseConvo = false;
-    private bool extraActive = false;
+    public bool extraActive = false;
 
 
     void Update()
     {
         // Player input to start and progress dialogue.
-        if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt)
+        if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt && !extraActive)
         {
             if (extraActive)
             {
@@ -248,7 +248,16 @@ public class DialogueManager : MonoBehaviour
     IEnumerator WaitForInfoPanel()
     {
         yield return new WaitForSeconds(2f); // length of audio sting
+        HidePanel();
         StartConversation();
+
+    }
+    public void HidePanel()
+    {
+        for (int i = 0; i < infoPanels.Count; i++)
+        {
+            infoPanels[i].SetActive(false);
+        }
         extraActive = false;
     }
 

@@ -34,7 +34,7 @@ public class owner : MonoBehaviour, IPlayerLookTarget
     {
         FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(true);
         if (!GameManager.Instance.doesPlayerHaveKey)
-            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Press E to collect room Key");
+            FindAnyObjectByType<HUDManager>().UpdateCrossHairText("Talk to Randy");
         else
             FindAnyObjectByType<HUDManager>().UpdateCrossHairText("You already have a Key");
 

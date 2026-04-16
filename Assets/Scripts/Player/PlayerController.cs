@@ -181,6 +181,8 @@ public class PlayerController : MonoBehaviour
     {
         if(FindAnyObjectByType<FirstDayManager>() != null && FindAnyObjectByType<FirstDayManager>().isShowingScreen && GameManager.Instance.currentDay == 0)
             return;
+        if(FindAnyObjectByType<DialogueManager>() != null && (FindAnyObjectByType<DialogueManager>().conversationStarted  || FindAnyObjectByType<DialogueManager>().extraActive))
+            return;
         float mouseX = Input.GetAxis("Mouse X") * sensitivityX;
         float mouseY = Input.GetAxis("Mouse Y") * sensitivityY;
 
@@ -217,6 +219,9 @@ public class PlayerController : MonoBehaviour
             print("returning");
             return;
         }
+        if (FindAnyObjectByType<DialogueManager>() != null && (FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive))
+            return;
+
         //finds the movement direction
         movementDirection = transform.forward * verticalInput + transform.right * horizontalInput;
 
