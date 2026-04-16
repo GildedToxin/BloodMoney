@@ -1552,8 +1552,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5959251985814672006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -1967,7 +1967,7 @@ RectTransform:
   m_Father: {fileID: 1530874135131454151}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -2602,7 +2602,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8193447976466069714}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 6660962006339771536}
+        m_TargetAssemblyTypeName: SettingsMenuScript, Assembly-CSharp
+        m_MethodName: backButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8654226137782045629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2778,7 +2790,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6436071846159350370
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2879,5 +2891,5 @@ MonoBehaviour:
   resolutionDropdown: {fileID: 3497019395537122894}
   previousMenu: {fileID: 0}
   audiopool: {fileID: 0}
-  buttonHover: {fileID: 0}
-  Click: {fileID: 0}
+  buttonHover: {fileID: 8300000, guid: 0588d0538521df74197d0bd79ecd80c7, type: 3}
+  Click: {fileID: 8300000, guid: 1e1e86a69852e7f4aa21f148ecdfdb57, type: 3}

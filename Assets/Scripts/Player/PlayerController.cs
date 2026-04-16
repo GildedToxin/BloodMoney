@@ -97,8 +97,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused)
+        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted)
         {
+            print(UnityEngine.Cursor.visible);
             Time.timeScale = 0f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(true);
             GameManager.Instance.isPaused = true;
@@ -112,6 +113,8 @@ public class PlayerController : MonoBehaviour
             GameManager.Instance.isPaused = false;
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             UnityEngine.Cursor.visible = false;
+            print(UnityEngine.Cursor.visible);
+            print(UnityEngine.Cursor.lockState);
             return;
         }
         if (GameManager.Instance.isInMiniGame)

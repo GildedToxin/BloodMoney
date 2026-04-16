@@ -47,6 +47,8 @@ public class HUDManager : MonoBehaviour
         {
             if (FindFirstObjectByType<FirstDayManager>() != null && FindFirstObjectByType<FirstDayManager>().isShowingScreen == true)
                 return;
+            if (FindAnyObjectByType<DialogueManager>().conversationStarted)
+                return;
             //FindAnyObjectByType<InventoryController>().money.Value += 10;
             bookPanel.SetActive(!bookPanel.activeSelf);
             bookClosed.SetActive(!bookClosed.activeSelf);

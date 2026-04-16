@@ -45,6 +45,9 @@ public class InventoryController : MonoBehaviour
 
     private void Update()
     {
+        if (FindAnyObjectByType<DialogueManager>().conversationStarted)
+            return;
+
         int newSelection = GetNumberKeyDown();
 
         if (DoesPlayerHaveItemInSlot(newSelection - 1))
