@@ -113,6 +113,9 @@ public class LimbCuttingScript : MonoBehaviour
         try
         {
             limbs.transform.GetChild(GameManager.Instance.Body.limbsHarvested).gameObject.SetActive(true);
+
+            if(GameManager.Instance.Body.handsHarvested > GameManager.Instance.Body.limbsHarvested)
+                limbs.transform.GetChild(GameManager.Instance.Body.limbsHarvested).GetChild(0).GetChild(0).gameObject.SetActive(false);
         }
         catch
         {
