@@ -208,7 +208,7 @@ public class GameManager : MonoBehaviour
     int lastMinute = -1;  
     public void UpdateClock()
     {
-        if(isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive)
+        if(SceneManager.GetActiveScene().name == "Hotel" && (isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive))
             return;
         elapsedTime += Time.deltaTime;
 

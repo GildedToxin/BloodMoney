@@ -14,14 +14,7 @@ public class MainMenuScript : MonoBehaviour
 
     private void Update()
     {
-        if (!settingsMenu.activeSelf && mainMenu.alpha != 1)
-        {
-            settingsMenu.SetActive(true);
-            mainMenu.alpha = 1;
-            mainMenu.interactable = true;
-            mainMenu.blocksRaycasts = true;
-            settingsMenu.SetActive(false);
-        }
+        
     }
 
     public void Start()
@@ -52,6 +45,14 @@ public class MainMenuScript : MonoBehaviour
         mainMenu.blocksRaycasts = false;
 
     }
+    public void RemoveSettingsMenu()
+    {
+        settingsMenu.SetActive(false);
+        mainMenu.alpha = 1;
+        mainMenu.interactable = true;
+        mainMenu.blocksRaycasts = true;
+
+    }
     public void SelectADay()
     {
             dayMenu.alpha = 1;
@@ -60,6 +61,8 @@ public class MainMenuScript : MonoBehaviour
             mainMenu.alpha = 0;
             mainMenu.interactable = false;
             mainMenu.blocksRaycasts = false;
+
+        print(mainMenu.alpha);
     }
     public void CreditsScene()
     {
