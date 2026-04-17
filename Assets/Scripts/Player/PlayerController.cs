@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data.SqlTypes;
 using System.Linq;
+using UnityEditor.SearchService;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Rendering.HighDefinition;
@@ -97,7 +98,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted && !FindAnyObjectByType<DialogueManager>().extraActive)
+        if(Input.GetKeyDown(KeyCode.Escape) && FindAnyObjectByType<SettingsMenuScript>() != null && FindAnyObjectByType<SettingsMenuScript>().gameObject.activeSelf)
+        {
+            FindAnyObjectByType<SettingsMenuScript>().backButton();
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted && !FindAnyObjectByType<DialogueManager>().extraActive)
         {
             print(UnityEngine.Cursor.visible);
             Time.timeScale = 0f;
@@ -106,7 +111,7 @@ public class PlayerController : MonoBehaviour
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             UnityEngine.Cursor.visible = true;
             return;
-        }else if(Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused)
+        } else if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused)
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
