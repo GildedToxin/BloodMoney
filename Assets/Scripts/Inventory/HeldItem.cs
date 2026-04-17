@@ -18,6 +18,8 @@ public class HeldItem : MonoBehaviour
     public bool canDropItem;
 
     public bool hasShownScreen = false;
+
+    public AudioClip pickupSFX;
     private void Update()
     {
       
@@ -40,7 +42,7 @@ public class HeldItem : MonoBehaviour
     }
     public void PickUpItem(GameObject item)
     {
-
+        
 
 
         //item.GetComponent<OrganManager>
@@ -52,6 +54,8 @@ public class HeldItem : MonoBehaviour
         currentItem.GetComponent<Rigidbody>().useGravity = false;
         GetComponent<InventoryController>().HideAllTools();
         currentItem.GetComponent<Rigidbody>().isKinematic = false;
+
+        AudioPool.Instance.PlayClip2D(pickupSFX);
 
     }
     IEnumerator ABC()

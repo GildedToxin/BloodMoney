@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
@@ -6,6 +7,8 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
     public EvelatorTeleporter elevatorScript;
 
     public bool isLookedAt = false;
+
+    public AudioClip buttonPressSFX;
 
     private void Update()
     {
@@ -25,6 +28,7 @@ public class ElevatorButtonScript : MonoBehaviour, IPlayerLookTarget
     }
     public void Interact()
     {
+        AudioPool.Instance.PlayClip2D(buttonPressSFX, volume: 0.7f);
         if (buttonFloor != 0)
         {
             elevatorScript.targetFloor = buttonFloor;

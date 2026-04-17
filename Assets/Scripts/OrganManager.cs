@@ -35,6 +35,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
 
     public Vector3 lockedPosition;
     public Quaternion lockedRotation;
+
+    public AudioClip breakSFX;
     void Start()
     {
         itemData = Resources.Load<Item>($"items/{organType.ToString()}");
@@ -80,6 +82,7 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
                 FindAnyObjectByType<VendorStand>().UpdateVenders();
             }
             Destroy(gameObject);
+            AudioPool.Instance.PlayClip2D(breakSFX, volume: 0.5f, pitch: 1.1f);
         }
 
     }

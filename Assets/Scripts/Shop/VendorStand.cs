@@ -10,6 +10,7 @@ public class VendorStand : MonoBehaviour
     public List<Customer> customers;
 
     public bool hasShownScreen;
+    public AudioClip sellSFX;
     void Start()
     {
 
@@ -93,16 +94,16 @@ public class VendorStand : MonoBehaviour
         }
         organsToSell.Remove(organ);
         Destroy(organ.gameObject);
-
+        
         //customers.Remove(customer);
         //customer.gameObject.SetActive(false);
         customer.RandomCustomer();
-
+        AudioPool.Instance.PlayClip2D(sellSFX, volume: 0.7f);
         FindAnyObjectByType<HUDManager>().UpdateCrossHairText("");
         FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
 
         UpdateVenders();
-
+        
 
     }
 

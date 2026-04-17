@@ -4,6 +4,7 @@ using UnityEngine.Rendering;
 public class MeatGrinder : MonoBehaviour, IPlayerLookTarget
 {
     public bool isLookedAt = false;
+    public AudioClip grinderSFX;
 
     private void Update()
     {
@@ -15,6 +16,7 @@ public class MeatGrinder : MonoBehaviour, IPlayerLookTarget
             FindAnyObjectByType<HUDManager>().meatGrinderUI.gameObject.SetActive(false);
             // add money
             FindAnyObjectByType<InventoryController>().AddMoney(item.GetComponent<OrganManager>().GetOrganPrice() / 2);
+            AudioPool.Instance.PlayClip2D(grinderSFX, volume: 0.4f);
 
         }
     }
