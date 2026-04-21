@@ -1,3 +1,4 @@
+using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
@@ -37,9 +38,12 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     public Quaternion lockedRotation;
 
     public AudioClip breakSFX;
+
+    public bool canTakeDamage = false;
     void Start()
     {
         itemData = Resources.Load<Item>($"items/{organType.ToString()}");
+        StartCoroutine(TakeDamage());
     }
     void Update()
     {
@@ -64,6 +68,9 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     }
     void OnCollisionEnter(Collision collision)
     {
+        if(canTakeDamage == false)
+            return;
+
         float impactSpeed = collision.relativeVelocity.magnitude;
 
         if(currentHealth <= 0)
@@ -110,6 +117,11 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
         FindFirstObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
     }
 
+    public IEnumerator TakeDamage()
+    {
+        yield return new WaitForSeconds(2f);
+        canTakeDamage = true;
+    }
 
 
     [ContextMenu("Get Organ Price")]
