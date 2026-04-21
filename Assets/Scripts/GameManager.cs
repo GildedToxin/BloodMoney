@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
     public bool doesPlayerHaveKey = false;
 
     public bool isPaused = false;
-    public PauseMenu pauseMenu; 
+    public PauseMenu pauseMenu;
     public static GameManager Instance
     {
         get

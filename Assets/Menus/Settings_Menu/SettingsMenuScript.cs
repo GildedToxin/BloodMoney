@@ -14,9 +14,14 @@ public class SettingsMenuScript : MonoBehaviour
 
     Resolution[] resolutions;
 
+    public Slider volumeSlider;
+    public Slider sensitivitySlider;
+
     public AudioPool audiopool;
     public AudioClip buttonHover;
     public AudioClip Click;
+
+    public PlayerController playerController;
     void Start()
     {
         previousMenu.SetActive(false);
@@ -46,11 +51,23 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void setVolume (float volume)
     {
+        volumeSlider.value = playerController.sensitivityX;
         if (volume == 0)
         {
             volume = 0.01f;
         }
         audioMixer.SetFloat("Volume", Mathf.Log10(volume / 100) * 20f);
+    }
+
+    public void setSensitivity(float sensitivity)
+    {
+        sensitivitySlider.value = playerController.sensitivityX;
+        if (sensitivity == 0)
+        {
+            sensitivity = 0.01f;
+        }
+        playerController.sensitivityX = sensitivity;
+        playerController.sensitivityY = sensitivity;
     }
 
     public void backButton ()

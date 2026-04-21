@@ -8,6 +8,7 @@ public class PauseMenu : MonoBehaviour
     [SerializeField] GameObject controlsMenu;
     [SerializeField] GameObject settingsMenu;
     [SerializeField] GameObject AreUSure;
+    [SerializeField] GameObject PlayerHUD;
 
     public AudioPool audiopool;
     public AudioClip buttonHover;
@@ -28,10 +29,11 @@ public class PauseMenu : MonoBehaviour
         audiopool.PlayClip2D(Click);
         Time.timeScale = 1f;
         GameManager.Instance.pauseMenu.gameObject.SetActive(false);
-            GameManager.Instance.isPaused = false;
-            UnityEngine.Cursor.lockState = CursorLockMode.Locked;
-            UnityEngine.Cursor.visible = false;
-            return;
+        GameManager.Instance.isPaused = false;
+        UnityEngine.Cursor.lockState = CursorLockMode.Locked;
+        UnityEngine.Cursor.visible = false;
+        PlayerHUD.SetActive(true);
+        return;
 
     }
 

@@ -81,6 +81,9 @@ public class PlayerController : MonoBehaviour
     public AudioSource audioSource;
     public List<AudioClip> walking;
 
+    public GameObject PlayerHUD;
+
+
     private void Start()
     {
         GameManager.Instance.Player = this;
@@ -106,6 +109,7 @@ public class PlayerController : MonoBehaviour
         {
             print(UnityEngine.Cursor.visible);
             Time.timeScale = 0f;
+            PlayerHUD.SetActive(false);
             GameManager.Instance.pauseMenu.gameObject.SetActive(true);
             GameManager.Instance.isPaused = true;
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
@@ -115,6 +119,7 @@ public class PlayerController : MonoBehaviour
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
+            PlayerHUD.SetActive(true);
             GameManager.Instance.isPaused = false;
             UnityEngine.Cursor.lockState = CursorLockMode.Locked;
             UnityEngine.Cursor.visible = false;

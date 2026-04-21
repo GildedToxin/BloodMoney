@@ -12543,6 +12543,7 @@ MonoBehaviour:
   controlsMenu: {fileID: 0}
   settingsMenu: {fileID: 662632253}
   AreUSure: {fileID: 465455263}
+  PlayerHUD: {fileID: 1873099431}
   audiopool: {fileID: 572353496}
   buttonHover: {fileID: 8300000, guid: 0588d0538521df74197d0bd79ecd80c7, type: 3}
   Click: {fileID: 8300000, guid: 1e1e86a69852e7f4aa21f148ecdfdb57, type: 3}
@@ -35073,6 +35074,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 153797956869431695, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+      propertyPath: PlayerHUD
+      value: 
+      objectReference: {fileID: 1873099431}
     - target: {fileID: 261752684191090665, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 9.12
@@ -41587,6 +41592,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 3732728289920297530, guid: d77ae25e383fde840b2e03bc58396ade, type: 3}
   m_PrefabInstance: {fileID: 1384407563}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1386642092 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8942179820524841676, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 2090294198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1001 &1387704979
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -50902,6 +50918,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 875843308}
   m_LocalEulerAnglesHint: {x: 0, y: -180, z: 0}
+--- !u!114 &1571979111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3182790726960201615, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 2090294198}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1577653075
 GameObject:
   m_ObjectHideFlags: 0
@@ -69044,6 +69071,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2700824240856020937, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
   m_PrefabInstance: {fileID: 1131366068}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1933036350 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 153797956869431695, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
+  m_PrefabInstance: {fileID: 1131366068}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1933036344}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a383d963c012e34099c5097299ea731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
 --- !u!1001 &1934072177
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74603,6 +74641,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3075009154041956477, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3075009154041956477, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6436071846159350370, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -74691,9 +74737,65 @@ PrefabInstance:
       propertyPath: previousMenu
       value: 
       objectReference: {fileID: 417178227}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 1571979111}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: playerController
+      value: 
+      objectReference: {fileID: 1933036350}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: sensitivitySlider
+      value: 
+      objectReference: {fileID: 1386642092}
+    - target: {fileID: 7263032818048513601, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7263032818048513601, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296578762496743829, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296578762496743829, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296578762496743829, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7806237462152883954, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8684149070554477734, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_Name
       value: Settings Menu (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8684149070554477734, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942179820524841676, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_Value
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8942179820524841676, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: m_MaxValue
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
