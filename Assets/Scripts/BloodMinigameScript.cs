@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.UI;
+using TMPro;
 
 
 public class BloodMinigameScript : MonoBehaviour
@@ -28,8 +29,8 @@ public class BloodMinigameScript : MonoBehaviour
     public float minigameStartTime = 40f;  // Change this to set the minigameTime start value for the beginning of the minigame
 
     // Blood drop spawn limits
-    private float collectedBloodDrops = 0; // How many blood drops the player has collected
-    private float totalBloodDrops = 10;  // Total blood drops the player needs to collect to get a max score
+    public float collectedBloodDrops = 0; // How many blood drops the player has collected
+    public float totalBloodDrops = 10;  // Total blood drops the player needs to collect to get a max score
     public float score;
     public bool startGameBool = false; // make true in inspector to test minigame
 
@@ -38,6 +39,7 @@ public class BloodMinigameScript : MonoBehaviour
 
     public Canvas StartCanvas;
     public Canvas EndCanvas;
+    public TextMeshProUGUI scoreText;
     public Camera cam;
 
 
@@ -104,7 +106,7 @@ public class BloodMinigameScript : MonoBehaviour
             {
                 score = 100;
             }
-            scoreVisual.value = score;
+            scoreText.text = ""+score+"%";
             EndGame();
         }
     }

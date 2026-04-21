@@ -44,6 +44,8 @@ public class OrganManager : MonoBehaviour, IPlayerLookTarget
     {
         itemData = Resources.Load<Item>($"items/{organType.ToString()}");
         StartCoroutine(TakeDamage());
+        toolTip.transform.GetChild(0).GetChild(1).GetComponent<Image>().fillAmount = (float)currentHealth / maxHealth;
+        qualityText.GetComponent<TextMeshProUGUI>().text = currentHealth.ToString();
     }
     void Update()
     {
