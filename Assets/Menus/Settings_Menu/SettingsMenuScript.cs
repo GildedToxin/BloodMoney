@@ -51,7 +51,7 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void setVolume (float volume)
     {
-        volumeSlider.value = playerController.sensitivityX;
+        volumeSlider.value = volume;
         if (volume == 0)
         {
             volume = 0.01f;
