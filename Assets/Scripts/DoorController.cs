@@ -7,6 +7,7 @@ public class DoorController : MonoBehaviour, IPlayerLookTarget
     public string RoomNumber;
     public GameObject pivot;
     public bool isLookedAt;
+    public AudioClip doorOpen;
 
     private void Update()
     {
@@ -24,6 +25,7 @@ public class DoorController : MonoBehaviour, IPlayerLookTarget
             GameManager.Instance.CurrentDoor.gameObject.transform.GetChild(0).GetChild(2).gameObject.SetActive(true);
             GameManager.Instance.CurrentDoor.transform.GetChild(0).GetChild(1).gameObject.layer = LayerMask.NameToLayer("Default");
 
+            AudioPool.Instance.PlayClip2D(doorOpen, volume: 0.7f);
             isOpened = true;
             GameManager.Instance.doesPlayerHaveKey = false;
             FindAnyObjectByType<HUDManager>().UpdateRoomNumber("");
