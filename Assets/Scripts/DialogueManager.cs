@@ -35,13 +35,14 @@ public class DialogueManager : MonoBehaviour
 
     public AudioClip chimeSFX;
     public AudioClip infoSFX;
+    private bool waitingToEndDialogue = false;
 
     public Coroutine textAnimation;
 
     void Update()
     {
         // Player input to start and progress dialogue.
-        if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt && !extraActive)
+        if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt && !extraActive && !waitingToEndDialogue)
         {
             if (extraActive)
             {
@@ -61,7 +62,7 @@ public class DialogueManager : MonoBehaviour
                 }
             }
         }
-        else if(Input.GetKeyDown(KeyCode.E) && conversationStarted && !canContinue)
+        else if(Input.GetKeyDown(KeyCode.E) && conversationStarted && !canContinue && !waitingToEndDialogue)
         {
                 StopCoroutine(textAnimation);
             string currentText = currentDialogue.lines[currentLineIndex].line;
@@ -255,6 +256,7 @@ public class DialogueManager : MonoBehaviour
                 dialogueText.text = repeatedText.Substring(0, i);
                 yield return new WaitForSeconds(textSpeed);
             }
+            StartCoroutine(WaitToEndDialogue(1f));
         }
     }
 
@@ -270,6 +272,12 @@ public class DialogueManager : MonoBehaviour
         HidePanel();
         StartConversation();
 
+    }
+    IEnumerator WaitToEndDialogue(float waitTime)
+    {
+        waitingToEndDialogue = true;
+        yield return new WaitForSeconds(waitTime);
+        EndDialogue();
     }
     public void HidePanel()
     {
@@ -293,6 +301,12 @@ public class DialogueManager : MonoBehaviour
         {
             InfoPanel();
         }
+        else if (!pauseConvo)
+        {
+            repeatLine = true;
+        }
+        
+        waitingToEndDialogue = false;
     }
 
     public void InfoPanel() // Per day info panels and extras between dialogue
