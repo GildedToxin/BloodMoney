@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
-        quota = new int[MAXDAY] { 250, 500, 1000, 1250, 1500, 1750, 2000, 2250, 2500, 3000 };
+        quota = new int[MAXDAY] { 250, 750, 1500, 2000, 2250, 2500, 2750, 3000, 3500, 4000 };
 
             SaveSystem.Load();
 
