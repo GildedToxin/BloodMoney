@@ -73,14 +73,14 @@ public class SettingsMenuScript : MonoBehaviour
     public void backButton ()
     {
         this.gameObject.SetActive(false);
-        audiopool.PlayClip2D(Click);
+        GameManager.Instance.PlayUIButtonPress();
         previousMenu.SetActive(true);
     }
 
     public void fullScreen(bool isFullScreen)
     {
         Screen.fullScreen = isFullScreen;
-        audiopool.PlayClip2D(Click);
+        GameManager.Instance.PlayUIButtonPress();
     }
 
     public void setResolution(int resolutionIndex)
@@ -91,6 +91,6 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void ButtonHover()
     {
-        audiopool.PlayClip2D(buttonHover);
+        GameManager.Instance.ButtonHover();
     }
 }

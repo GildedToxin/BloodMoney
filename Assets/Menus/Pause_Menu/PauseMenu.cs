@@ -83,6 +83,6 @@ public class PauseMenu : MonoBehaviour
 
     public void ButtonHover()
     {
-        audiopool.PlayClip2D(buttonHover);
+        GameManager.Instance.ButtonHover();
     }
 }

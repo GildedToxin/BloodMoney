@@ -40,6 +40,9 @@ public class GameManager : MonoBehaviour
 
     public bool isPaused = false;
     public PauseMenu pauseMenu;
+
+    public AudioClip buttonPress;
+    public AudioClip buttonHover;
     public static GameManager Instance
     {
         get
@@ -524,6 +527,15 @@ public class GameManager : MonoBehaviour
     {
         print("The player has beaten the game");
         SceneManager.LoadScene("MainMenu");
+    }
+
+    public void PlayUIButtonPress()
+    {
+        AudioPool.Instance.PlayClip2D(buttonPress, volume: 0.7f);
+    }
+    public void ButtonHover()
+    {
+        AudioPool.Instance.PlayClip2D(buttonHover, volume: 0.7f);
     }
     public void LoadSceneAndAssign()
     {

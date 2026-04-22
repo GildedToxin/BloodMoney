@@ -1,8 +1,5 @@
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class DaySelectManager : MonoBehaviour
 {
@@ -41,7 +38,7 @@ public class DaySelectManager : MonoBehaviour
     }
     public void StartGameOnDay(int day)
     {
-
+        GameManager.Instance.PlayUIButtonPress();
         GameManager.Instance.currentDay = day;
         SceneManager.LoadSceneAsync("Hotel");
 
@@ -50,6 +47,7 @@ public class DaySelectManager : MonoBehaviour
 
     public void ReturnToMenu()
     {
+        GameManager.Instance.PlayUIButtonPress();
         dayMenu.alpha = 0;
         dayMenu.interactable = false;
         dayMenu.blocksRaycasts = false;

@@ -71,16 +71,22 @@ public class EndGameCanvas : MonoBehaviour
     }
     public void Retry()
     {
-
+        GameManager.Instance.PlayUIButtonPress();
         GameManager.Instance.LoadSceneAndAssign();
     }
     public void Contiune()
     {
 
+        GameManager.Instance.PlayUIButtonPress();
         GameManager.Instance.LoadSceneAndAssign();
     }
     public void Finish()
     {
+        GameManager.Instance.PlayUIButtonPress();
         SceneManager.LoadScene("MainMenu");
+    }
+    public void Hover()
+    {
+               GameManager.Instance.ButtonHover();
     }
 }

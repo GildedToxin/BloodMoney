@@ -11,23 +11,18 @@ public class MainMenuScript : MonoBehaviour
     [SerializeField] CanvasGroup dayMenu;
 
     public Button playGame;
-
-    private void Update()
-    {
-        
-    }
-
     public void Start()
     {
         if (GameManager.Instance.highestReachedDay != 0)
         {
-            playGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Contiune");
+            playGame.transform.GetChild(0).GetComponent<TextMeshProUGUI>().SetText("Continue");
         }
     }
 
 
     public void PlayGame()
     {
+        GameManager.Instance.PlayUIButtonPress();
         GameManager.Instance.currentDay = GameManager.Instance.highestReachedDay;
         SceneManager.LoadSceneAsync("Hotel");
     }
@@ -36,9 +31,10 @@ public class MainMenuScript : MonoBehaviour
     {
         Debug.Log("Stats");
     }
-
+    
     public void SettingsMenu()
     {
+        GameManager.Instance.PlayUIButtonPress();
         settingsMenu.SetActive(true);
         mainMenu.alpha = 0;
         mainMenu.interactable = false;
@@ -47,6 +43,7 @@ public class MainMenuScript : MonoBehaviour
     }
     public void RemoveSettingsMenu()
     {
+        GameManager.Instance.PlayUIButtonPress();
         settingsMenu.SetActive(false);
         mainMenu.alpha = 1;
         mainMenu.interactable = true;
@@ -55,7 +52,8 @@ public class MainMenuScript : MonoBehaviour
     }
     public void SelectADay()
     {
-            dayMenu.alpha = 1;
+        GameManager.Instance.PlayUIButtonPress();
+        dayMenu.alpha = 1;
             dayMenu.interactable = true;
             dayMenu.blocksRaycasts = true;
             mainMenu.alpha = 0;
@@ -66,11 +64,13 @@ public class MainMenuScript : MonoBehaviour
     }
     public void CreditsScene()
     {
+        GameManager.Instance.PlayUIButtonPress();
         SceneManager.LoadScene("Credits", LoadSceneMode.Additive);
     }
 
     public void ExitGame()
     {
+        GameManager.Instance.PlayUIButtonPress();
         Application.Quit();
     }
 }
