@@ -36,6 +36,7 @@ public class DialogueManager : MonoBehaviour
     public AudioClip chimeSFX;
     public AudioClip infoSFX;
     public AudioClip audioSting;
+    public AudioClip popUpSFX;
     private bool waitingToEndDialogue = false;
 
     public Coroutine textAnimation;
@@ -219,6 +220,7 @@ public class DialogueManager : MonoBehaviour
         {
             currentLineIndex = 0;
             conversationStarted = true;
+            AudioPool.Instance.PlayClip2D(popUpSFX, 0.5f, 1.1f);
             textAnimation =  StartCoroutine(AnimateText());
         }
         else
@@ -226,6 +228,7 @@ public class DialogueManager : MonoBehaviour
             if (currentLineIndex < currentDialogue.lines.Length - 1)
             {
                 currentLineIndex++;
+                AudioPool.Instance.PlayClip2D(popUpSFX, 0.5f, 1.1f);
                 textAnimation = StartCoroutine(AnimateText());
             }
             else if (currentLineIndex == currentDialogue.lines.Length - 1)
