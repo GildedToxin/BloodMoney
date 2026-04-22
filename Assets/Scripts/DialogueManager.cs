@@ -35,6 +35,7 @@ public class DialogueManager : MonoBehaviour
 
     public AudioClip chimeSFX;
     public AudioClip infoSFX;
+    public AudioClip audioSting;
     private bool waitingToEndDialogue = false;
 
     public Coroutine textAnimation;
@@ -263,6 +264,7 @@ public class DialogueManager : MonoBehaviour
 
     IEnumerator WaitForAudioSting()
     {
+        AudioPool.Instance.PlayClip2D(audioSting);
         yield return new WaitForSeconds(2f); // length of audio sting
         StartConversation();
         extraActive = false;
