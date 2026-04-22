@@ -22,6 +22,8 @@ public class EvelatorTeleporter : MonoBehaviour
     public List<GameObject> listOfObjects = new List<GameObject>();
     public List<GameObject> listOfEvelatorTeleporters = new List<GameObject>();
 
+    public AudioClip elevatorOpenSFX;
+
     private bool isTeleporting = false;
 
     public bool hasShownScreen;
@@ -40,6 +42,8 @@ public class EvelatorTeleporter : MonoBehaviour
     {
         if (buttonPressed == true && targetFloor != currentFloor)
         {
+            if (doorsOpen == true)
+                AudioPool.Instance.PlayClip2D(elevatorOpenSFX, volume: 0.7f);
             doorsOpen = false;
             StartCoroutine(TeleportWithDelay(1f));
             buttonPressed = false;
