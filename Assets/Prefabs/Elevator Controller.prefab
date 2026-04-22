@@ -129,6 +129,8 @@ MonoBehaviour:
   buttonFloor: 1
   elevatorScript: {fileID: 8602693640103564851}
   isLookedAt: 0
+  buttonPressSFX: {fileID: 0}
+  elevatorCloseSFX: {fileID: 0}
 --- !u!1 &4013453055815384449
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +260,8 @@ MonoBehaviour:
   buttonFloor: 4
   elevatorScript: {fileID: 8602693640103564851}
   isLookedAt: 0
+  buttonPressSFX: {fileID: 0}
+  elevatorCloseSFX: {fileID: 0}
 --- !u!1 &5263182652355213024
 GameObject:
   m_ObjectHideFlags: 0
@@ -321,6 +325,7 @@ MonoBehaviour:
   - {fileID: 0}
   listOfObjects: []
   listOfEvelatorTeleporters: []
+  elevatorOpenSFX: {fileID: 8300000, guid: ec89dc225a231ad44b9c4c1ad6fc9652, type: 3}
   hasShownScreen: 0
   hasShownScreen2: 0
 --- !u!54 &4377353667229137997
@@ -479,6 +484,8 @@ MonoBehaviour:
   buttonFloor: 3
   elevatorScript: {fileID: 8602693640103564851}
   isLookedAt: 0
+  buttonPressSFX: {fileID: 0}
+  elevatorCloseSFX: {fileID: 0}
 --- !u!1 &8064738301083597422
 GameObject:
   m_ObjectHideFlags: 0
@@ -719,3 +726,5 @@ MonoBehaviour:
   buttonFloor: 2
   elevatorScript: {fileID: 8602693640103564851}
   isLookedAt: 0
+  buttonPressSFX: {fileID: 0}
+  elevatorCloseSFX: {fileID: 0}
