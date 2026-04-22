@@ -251,6 +251,7 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
+            waitingToEndDialogue = true;
             for (int i = 0; i < repeatedText.Length + 1; i++)
             {
                 dialogueText.text = repeatedText.Substring(0, i);
@@ -275,7 +276,6 @@ public class DialogueManager : MonoBehaviour
     }
     IEnumerator WaitToEndDialogue(float waitTime)
     {
-        waitingToEndDialogue = true;
         yield return new WaitForSeconds(waitTime);
         EndDialogue();
     }
