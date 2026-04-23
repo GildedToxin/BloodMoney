@@ -55,12 +55,12 @@ public class Customer : MonoBehaviour, IPlayerLookTarget
 
         var ran = Mathf.Clamp(System.Enum.GetValues(typeof(OrganType)).Length, 0, GameManager.Instance.currentDay+1);
         desiredOrgan = (OrganType)Random.Range(0, ran);
-        currentText = FindAnyObjectByType<HUDManager>().customerRequestUI.GetText(desiredOrgan);
+        currentText = FindAnyObjectByType<CustomerRequestUI>(FindObjectsInactive.Include).GetText(desiredOrgan);
 
         StartCoroutine(PlayParticles());
         isServed = false;
 
-        FindAnyObjectByType<HUDManager>().customerRequestUI.gameObject.SetActive(false);
+        FindAnyObjectByType<CustomerRequestUI>(FindObjectsInactive.Include).gameObject.SetActive(false);
         //OnLookEnter();
 
         FindAnyObjectByType<VendorStand>().UpdateVenders();

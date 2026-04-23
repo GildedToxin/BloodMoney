@@ -101,11 +101,11 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape) && FindAnyObjectByType<SettingsMenuScript>() != null && FindAnyObjectByType<SettingsMenuScript>().gameObject.activeSelf)
+        if(Input.GetKeyDown(KeyCode.Escape) && FindAnyObjectByType<SettingsMenuScript>() != null && FindAnyObjectByType<SettingsMenuScript>().gameObject.activeSelf && !FindAnyObjectByType<Intro>().intro)
         {
             FindAnyObjectByType<SettingsMenuScript>().backButton();
         }
-        else if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted && !FindAnyObjectByType<DialogueManager>().extraActive)
+        else if (Input.GetKeyDown(KeyCode.Escape) && !GameManager.Instance.isPaused && !FindAnyObjectByType<DialogueManager>().conversationStarted && !FindAnyObjectByType<DialogueManager>().extraActive && !FindAnyObjectByType<Intro>().intro)
         {
             print(UnityEngine.Cursor.visible);
             Time.timeScale = 0f;
@@ -115,7 +115,7 @@ public class PlayerController : MonoBehaviour
             UnityEngine.Cursor.lockState = CursorLockMode.Confined;
             UnityEngine.Cursor.visible = true;
             return;
-        } else if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused)
+        } else if (Input.GetKeyDown(KeyCode.Escape) && GameManager.Instance.isPaused && !FindAnyObjectByType<Intro>().intro)
         {
             Time.timeScale = 1f;
             GameManager.Instance.pauseMenu.gameObject.SetActive(false);
@@ -127,7 +127,7 @@ public class PlayerController : MonoBehaviour
             print(UnityEngine.Cursor.lockState);
             return;
         }
-        if (GameManager.Instance.isInMiniGame)
+        if (GameManager.Instance.isInMiniGame || FindAnyObjectByType<Intro>().intro)
         {
             return;
         }

@@ -83,7 +83,10 @@ public class EndGameCanvas : MonoBehaviour
     public void Finish()
     {
         GameManager.Instance.PlayUIButtonPress();
-        SceneManager.LoadScene("MainMenu");
+        FindAnyObjectByType<OutroSequence>().StartOutro();
+        FindAnyObjectByType<HUDManager>().gameObject.SetActive(false);
+        this.gameObject.SetActive(false);
+        //SceneManager.LoadScene("MainMenu");
     }
     public void Hover()
     {

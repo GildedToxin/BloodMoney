@@ -106,7 +106,7 @@ public class GameManager : MonoBehaviour
 
             moneyMadeToday = 0;
             FindAnyObjectByType<InventoryController>().money.Value = 0;
-            hudManager = FindAnyObjectByType<HUDManager>();
+            hudManager = FindAnyObjectByType<HUDManager>(FindObjectsInactive.Include);
             cam = Camera.main;
 
 
@@ -211,7 +211,7 @@ public class GameManager : MonoBehaviour
     int lastMinute = -1;  
     public void UpdateClock()
     {
-        if(SceneManager.GetActiveScene().name == "Hotel" && (isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive))
+        if(SceneManager.GetActiveScene().name == "Hotel" && (isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive || FindAnyObjectByType<Intro>().intro))
             return;
         elapsedTime += Time.deltaTime;
 
