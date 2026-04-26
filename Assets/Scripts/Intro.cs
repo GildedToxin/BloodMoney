@@ -31,12 +31,13 @@ public class Intro : MonoBehaviour
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(true);
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             child.gameObject.SetActive(false);
         }
         intro = false;
-        //logo.SetActive(true);
-        //SceneManager.LoadScene("MainMenu");
+        logo.SetActive(true);
+        yield return new WaitForSeconds(1.5f);
+        logo.SetActive(false);
         FindAnyObjectByType<HUDManager>(FindObjectsInactive.Include).gameObject.SetActive(true);
         AudioListener.volume = 1f;
     }
