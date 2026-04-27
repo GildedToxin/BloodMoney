@@ -26,6 +26,7 @@ public class DialogueManager : MonoBehaviour
     private bool DialogueActive = false;
     public bool conversationStarted = false;
     private bool repeatLine = false;
+    [SerializeField] private bool altRepeatLine = false;
     private bool canContinue = true;
 
     // if true during a conversation, after conversation ends it will briefly pause before setting next conversation
@@ -69,6 +70,7 @@ public class DialogueManager : MonoBehaviour
                 StopCoroutine(textAnimation);
             string currentText = currentDialogue.lines[currentLineIndex].line;
             string repeatedText = currentDialogue.repeatLine.line;
+            string altRepeatedText = currentDialogue.altRepeatLine.line;
             if (!repeatLine)
             {
                 dialogueText.text = currentText;
@@ -76,7 +78,10 @@ public class DialogueManager : MonoBehaviour
             }
             else
             {
-                dialogueText.text = repeatedText;
+                if (!altRepeatLine)
+                    dialogueText.text = repeatedText;
+                else if (altRepeatLine)
+                    dialogueText.text = altRepeatedText;
             }
         }
 
@@ -244,6 +249,7 @@ public class DialogueManager : MonoBehaviour
     {
         string currentText = currentDialogue.lines[currentLineIndex].line;
         string repeatedText = currentDialogue.repeatLine.line;
+        string altRepeatedText = currentDialogue.altRepeatLine.line;
         if (!repeatLine)
         {
             for (int i = 0; i < currentText.Length + 1; i++)
@@ -255,13 +261,26 @@ public class DialogueManager : MonoBehaviour
         }
         else
         {
-            waitingToEndDialogue = true;
-            for (int i = 0; i < repeatedText.Length + 1; i++)
+            if (!altRepeatLine)
             {
-                dialogueText.text = repeatedText.Substring(0, i);
-                yield return new WaitForSeconds(textSpeed);
+                waitingToEndDialogue = true;
+                for (int i = 0; i < repeatedText.Length + 1; i++)
+                {
+                    dialogueText.text = repeatedText.Substring(0, i);
+                    yield return new WaitForSeconds(textSpeed);
+                }
+                StartCoroutine(WaitToEndDialogue(1f));
             }
-            StartCoroutine(WaitToEndDialogue(1f));
+            else if (altRepeatLine)
+            {
+                waitingToEndDialogue = true;
+                for (int i = 0; i < altRepeatedText.Length + 1; i++)
+                {
+                    dialogueText.text = altRepeatedText.Substring(0, i);
+                    yield return new WaitForSeconds(textSpeed);
+                }
+                StartCoroutine(WaitToEndDialogue(1f));
+            }
         }
     }
 
