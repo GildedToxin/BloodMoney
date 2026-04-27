@@ -29,8 +29,8 @@ public class SettingsMenuScript : MonoBehaviour
     void Start()
     {
         volumeSlider.value = PlayerPrefs.GetFloat("Volume", 100);
-        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 20);
-        currentResolutionIndex = PlayerPrefs.GetInt("Resolution", 0);
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 10);
+        currentResolutionIndex = PlayerPrefs.GetInt("Resolution", 0);   
 
 
         previousMenu.SetActive(false);
@@ -71,7 +71,6 @@ public class SettingsMenuScript : MonoBehaviour
 
     public void setSensitivity(float sensitivity)
     {
-        sensitivitySlider.value = playerController.sensitivityX;
         if (sensitivity == 0)
         {
             sensitivity = 0.01f;
@@ -104,6 +103,14 @@ public class SettingsMenuScript : MonoBehaviour
     public void ButtonHover()
     {
         GameManager.Instance.ButtonHover();
+    }
+
+    public void Reset()
+    {
+        PlayerPrefs.DeleteAll();
+        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 100);
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 10);
+        currentResolutionIndex = PlayerPrefs.GetInt("Resolution", 0);
     }
 
     private void onVolumeChange(float volume)
