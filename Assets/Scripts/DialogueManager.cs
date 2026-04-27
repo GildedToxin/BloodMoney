@@ -26,7 +26,7 @@ public class DialogueManager : MonoBehaviour
     private bool DialogueActive = false;
     public bool conversationStarted = false;
     private bool repeatLine = false;
-    [SerializeField] private bool altRepeatLine = false;
+    private bool altRepeatLine = false;
     private bool canContinue = true;
 
     // if true during a conversation, after conversation ends it will briefly pause before setting next conversation
@@ -44,6 +44,13 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (!GameManager.Instance.doesPlayerHaveKey)
+        {
+            altRepeatLine = true;
+        }
+        else
+            altRepeatLine = false;
+
         // Player input to start and progress dialogue.
         if (Input.GetKeyDown(KeyCode.E) && canContinue && FindAnyObjectByType<owner>().isLookedAt && !extraActive && !waitingToEndDialogue)
         {
