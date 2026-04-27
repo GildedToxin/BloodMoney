@@ -16,14 +16,23 @@ public class SettingsMenuScript : MonoBehaviour
 
     public Slider volumeSlider;
     public Slider sensitivitySlider;
+    public Button fullScreenButton;
 
     public AudioPool audiopool;
     public AudioClip buttonHover;
     public AudioClip Click;
 
     public PlayerController playerController;
+
+    private int currentResolutionIndex;
+
     void Start()
     {
+        volumeSlider.value = PlayerPrefs.GetFloat("Volume", 100);
+        sensitivitySlider.value = PlayerPrefs.GetFloat("Sensitivity", 20);
+        currentResolutionIndex = PlayerPrefs.GetInt("Resolution", 0);
+
+
         previousMenu.SetActive(false);
 
         resolutions = Screen.resolutions;
@@ -32,7 +41,7 @@ public class SettingsMenuScript : MonoBehaviour
 
         List<string> options = new List<string>();
 
-        int currentResolutionIndex = 0;
+        currentResolutionIndex = 0;
         for (int i = 0; i < resolutions.Length; i++)
         {
             string option = resolutions[i].width + "x" + resolutions[i].height;
@@ -56,6 +65,7 @@ public class SettingsMenuScript : MonoBehaviour
         {
             volume = 0.01f;
         }
+        volumeSlider.onValueChanged.AddListener(onVolumeChange);
         audioMixer.SetFloat("Volume", Mathf.Log10(volume / 100) * 20f);
     }
 
@@ -66,6 +76,7 @@ public class SettingsMenuScript : MonoBehaviour
         {
             sensitivity = 0.01f;
         }
+        sensitivitySlider.onValueChanged.AddListener(onSensitivityChange);
         playerController.sensitivityX = sensitivity;
         playerController.sensitivityY = sensitivity;
     }
@@ -86,11 +97,27 @@ public class SettingsMenuScript : MonoBehaviour
     public void setResolution(int resolutionIndex)
     {
         Resolution resolution = resolutions[resolutionIndex];
+        onResolutionChange(resolutionIndex);
         Screen.SetResolution(resolution.width, resolution.height, Screen.fullScreen);
     }
 
     public void ButtonHover()
     {
         GameManager.Instance.ButtonHover();
+    }
+
+    private void onVolumeChange(float volume)
+    {
+        PlayerPrefs.SetFloat("Volume", volume);
+    }
+
+    private void onSensitivityChange(float sensitivity)
+    {
+        PlayerPrefs.SetFloat("Sensitivity", sensitivity);
+    }
+
+    private void onResolutionChange(int currentResolutionIndex)
+    {
+        PlayerPrefs.SetInt("Resolution", currentResolutionIndex);
     }
 }

@@ -40369,6 +40369,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 00589e0d016576d4abc9b7e1e91bf280, type: 3}
   m_PrefabInstance: {fileID: 1070569860}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &891311506 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3182790726960201615, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 1177845450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &892288826
 GameObject:
   m_ObjectHideFlags: 0
@@ -51167,6 +51178,14 @@ PrefabInstance:
       propertyPath: previousMenu
       value: 
       objectReference: {fileID: 1321547794}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: volumeSlider
+      value: 
+      objectReference: {fileID: 891311506}
+    - target: {fileID: 6660962006339771536, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+      propertyPath: sensitivitySlider
+      value: 
+      objectReference: {fileID: 1386434545}
     - target: {fileID: 7263032818048513601, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
       propertyPath: m_AnchorMax.x
       value: 1
@@ -57790,6 +57809,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8909a0e0cc1fc2648b63562170f987a7, type: 3}
+--- !u!114 &1386434545 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8942179820524841676, guid: f307bd01483227e4d8caf2c77b97c972, type: 3}
+  m_PrefabInstance: {fileID: 1177845450}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67db9e8f0e2ae9c40bc1e2b64352a6b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: UnityEngine.UI::UnityEngine.UI.Slider
 --- !u!1 &1389361616
 GameObject:
   m_ObjectHideFlags: 0
