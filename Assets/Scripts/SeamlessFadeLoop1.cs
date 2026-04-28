@@ -15,7 +15,7 @@ public class SeamlessFadeLoop1 : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        StartCoroutine(LoopRoutine());
+        //StartCoroutine(LoopRoutine());
     }
     public void StartMiniGameMusic()
     {
@@ -24,6 +24,7 @@ public class SeamlessFadeLoop1 : MonoBehaviour
     public void EndMiniGameMusic()
     {
         StopCoroutine(musicCoroutine);
+        StartCoroutine(Fade(MaxVolume, 0f, fadeOutDuration));
     }
     IEnumerator LoopRoutine()
     {

@@ -301,6 +301,24 @@ public class DialogueManager : MonoBehaviour
     IEnumerator WaitForInfoPanel(float waitTime)
     {
         yield return new WaitForSeconds(waitTime); // length of audio sting
+
+        if(waitTime == 2.1f)//Im so sorry for this - I swear I can code better than this 
+        {
+            infoPanels[1].SetActive(false);
+            infoPanels[17].SetActive(true);
+            AudioPool.Instance.PlayClip2D(infoSFX);
+            yield return new WaitForSeconds(5);
+
+            infoPanels[17].SetActive(false);
+            infoPanels[18].SetActive(true);
+            AudioPool.Instance.PlayClip2D(infoSFX);
+            yield return new WaitForSeconds(5);
+
+            infoPanels[18].SetActive(false);
+            infoPanels[19].SetActive(true);
+            AudioPool.Instance.PlayClip2D(infoSFX);
+            yield return new WaitForSeconds(5);
+        }
         HidePanel();
         StartConversation();
 
@@ -361,7 +379,7 @@ public class DialogueManager : MonoBehaviour
                 extraActive = true;
                 infoPanels[1].SetActive(true);
                 AudioPool.Instance.PlayClip2D(infoSFX);
-                StartCoroutine(WaitForInfoPanel(4f));
+                StartCoroutine(WaitForInfoPanel(2.1f));
                 break;
             case conversationType.FirstDayConvo04:
                 extraActive = true;

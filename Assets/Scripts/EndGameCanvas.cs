@@ -52,7 +52,7 @@ public class EndGameCanvas : MonoBehaviour
         }
 
 
-
+        GameManager.Instance.clockStop = true;
         dayText.GetComponent<TMPro.TextMeshProUGUI>().text = "" + (GameManager.Instance.currentDay + 1);
         quotaText.GetComponent<TMPro.TextMeshProUGUI>().text = "" + GameManager.Instance.quota[GameManager.Instance.currentDay];
         moneyMadeText.GetComponent<TMPro.TextMeshProUGUI>().text = "" + GameManager.Instance.moneyMadeToday;
@@ -67,17 +67,20 @@ public class EndGameCanvas : MonoBehaviour
     }
     public void SaveAndQuit()
     {
+        GameManager.Instance.clockStop = false;
         SceneManager.LoadScene("MainMenu");
     }
     public void Retry()
     {
         GameManager.Instance.PlayUIButtonPress();
+        GameManager.Instance.clockStop = false;
         GameManager.Instance.LoadSceneAndAssign();
     }
     public void Contiune()
     {
 
         GameManager.Instance.PlayUIButtonPress();
+        GameManager.Instance.clockStop = false;
         GameManager.Instance.LoadSceneAndAssign();
     }
     public void Finish()

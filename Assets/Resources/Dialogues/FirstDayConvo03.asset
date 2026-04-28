@@ -15,9 +15,9 @@ MonoBehaviour:
   conversationName: FirstDayMainConversation
   lines:
   - speakerName: Randy
-    line: Ah, I can't forget to mention-- check your toolbelt. You'll see that I've
-      been gracious enough to lend you one of the tools you will need to harvest
-      organs and materials from guests.
+    line: "Ah, I can\u2019t forget to mention-- check your <b>toolbelt</b>. You\u2019ll
+      see that I\u2019ve been gracious enough to lend you one of the <b>tools</b>
+      that you will need <b>to harvest organs and materials from guests.</b>"
   - speakerName: Randy
     line: Since it's your first day, I've only given you one tool to get you started.
       It's a <b>bone saw!</b> This tool allows you to harvest <b>rib bones</b>. Try
@@ -25,3 +25,6 @@ MonoBehaviour:
   repeatLine:
     speakerName: Randy
     line: Don't you have something else better to do?
+  altRepeatLine:
+    speakerName: 
+    line: 

@@ -57,6 +57,8 @@ public class GameManager : MonoBehaviour
     public int moneyMadeToday;
     public PlayerController Player { get; set; } // Reference to the player character set in the PlayerController script
 
+    public bool clockStop;
+
 
 
     public Dictionary<string, bool> HasShownTutorial = new Dictionary<string, bool>()
@@ -84,7 +86,7 @@ public class GameManager : MonoBehaviour
         }
         cam = Camera.main;
         hudManager = FindAnyObjectByType<HUDManager>();
-        quota = new int[MAXDAY] { 250, 750, 1500, 2000, 2250, 2500, 2750, 3000, 3500, 4000 };
+        quota = new int[MAXDAY] { 250, 750, 1500, 2149, 2250, 2500, 2750, 3000, 3500, 4000 };
 
             SaveSystem.Load();
 
@@ -213,6 +215,8 @@ public class GameManager : MonoBehaviour
     {
         if(SceneManager.GetActiveScene().name == "Hotel" && (isPaused || FindAnyObjectByType<DialogueManager>().conversationStarted || FindAnyObjectByType<DialogueManager>().extraActive || FindAnyObjectByType<Intro>().intro))
             return;
+
+        if (clockStop) return;
         elapsedTime += Time.deltaTime;
 
         float t = Mathf.Clamp01(elapsedTime / realDuration);

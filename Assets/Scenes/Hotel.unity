@@ -6074,10 +6074,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1148438400020827744, guid: f430ca79226181842b5a8c4bbab003b3, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8292319296067628971, guid: f430ca79226181842b5a8c4bbab003b3, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -17990,10 +17986,10 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 24300002, guid: b09975108bd1b4c47b5c65d12d47bada, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 8300000, guid: d11049ddda9cb844dbc917f3e3e3b262, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 1
+  Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -18103,7 +18099,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SeamlessFadeLoop1
   fadeInDuration: 2
-  fadeOutDuration: 2
+  fadeOutDuration: 0.75
   MaxVolume: 0.75
 --- !u!1001 &552098326
 PrefabInstance:
@@ -37313,7 +37309,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 700656557543491913, guid: e00f2c58f0baddf45ba8f6ba7de61ee7, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -73957,7 +73954,7 @@ PrefabInstance:
       objectReference: {fileID: 417178228}
     - target: {fileID: 2581367086287196747, guid: 267fa27f8bc23fd4281d406bec51d240, type: 3}
       propertyPath: currentDay
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 2581367086287196747, guid: 267fa27f8bc23fd4281d406bec51d240, type: 3}
       propertyPath: testMiniGame
