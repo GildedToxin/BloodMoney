@@ -357,6 +357,7 @@ public class GameManager : MonoBehaviour
                 FindAnyObjectByType<BloodMinigameScript>().UpdateDeadBodyModel(HandsHarvested: Body.handsHarvested, LimbsHavested: Body.limbsHarvested, Hands: Body.IsFingersHarvested, 
                     Limbs: Body.IsLimbsHarvested, Skull: Body.IsBrainHarvested, Ribs: Body.IsBonesHarvested);
             }
+            FindAnyObjectByType<SeamlessFadeLoop1>().StartMiniGameMusic();
 
         }
         catch (Exception e)
@@ -374,8 +375,9 @@ public class GameManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         isInMiniGame = false;
+        FindAnyObjectByType<SeamlessFadeLoop1>().EndMiniGameMusic();
         //Body.SpawnOrgan(sceneName);
-        
+
     }
 
 
