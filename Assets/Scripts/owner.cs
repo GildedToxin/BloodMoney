@@ -25,8 +25,6 @@ public class owner : MonoBehaviour, IPlayerLookTarget
 
 
             FindAnyObjectByType<HUDManager>().CrossHairText.transform.parent.parent.gameObject.SetActive(false);
-            GameManager.Instance.GivePlayerKey();
-            GameManager.Instance.doesPlayerHaveKey = true;
             GameManager.SetLayerRecursively(transform.GetChild(0).gameObject, LayerMask.NameToLayer("Default"));
          
         }

@@ -26,7 +26,8 @@ public class DialogueManager : MonoBehaviour
     private bool DialogueActive = false;
     public bool conversationStarted = false;
     private bool repeatLine = false;
-    private bool altRepeatLine = false;
+    [SerializeField] private bool altRepeatLine = false;
+    private bool canReceiveKey = false;
     private bool canContinue = true;
 
     // if true during a conversation, after conversation ends it will briefly pause before setting next conversation
@@ -44,6 +45,13 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (canReceiveKey && !GameManager.Instance.doesPlayerHaveKey)
+        {
+            GameManager.Instance.GivePlayerKey();
+            GameManager.Instance.doesPlayerHaveKey = true;
+            canReceiveKey = false;
+        }
+
         if (!GameManager.Instance.doesPlayerHaveKey)
         {
             altRepeatLine = true;
@@ -286,6 +294,7 @@ public class DialogueManager : MonoBehaviour
                     dialogueText.text = altRepeatedText.Substring(0, i);
                     yield return new WaitForSeconds(textSpeed);
                 }
+                canReceiveKey = true;
                 StartCoroutine(WaitToEndDialogue(1f));
             }
         }
@@ -386,6 +395,7 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[2].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.SecondDayConvo01:
                 extraActive = true;
@@ -398,6 +408,7 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[4].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.ThirdDayConvo01:
                 extraActive = true;
@@ -410,6 +421,7 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[6].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.FourthDayConvo01:
                 extraActive = true;
@@ -422,6 +434,7 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[8].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.FifthDayConvo01:
                 extraActive = true;
@@ -434,6 +447,7 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[10].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.SixthDayConvo01:
                 extraActive = true;
@@ -446,30 +460,35 @@ public class DialogueManager : MonoBehaviour
                 infoPanels[12].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.SeventhDayConvo01:
                 extraActive = true;
                 infoPanels[13].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(4f));
+                canReceiveKey = true;
                 break;
             case conversationType.EighthDayConvo01:
                 extraActive = true;
                 infoPanels[14].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.NinthDayConvo01:
                 extraActive = true;
                 infoPanels[15].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
             case conversationType.TenthDayConvo01:
                 extraActive = true;
                 infoPanels[16].SetActive(true);
                 AudioPool.Instance.PlayClip2D(chimeSFX);
                 StartCoroutine(WaitForInfoPanel(2f));
+                canReceiveKey = true;
                 break;
         }
     }
