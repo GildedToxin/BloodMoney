@@ -11,6 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText;
     public TextMeshProUGUI speakerNameText;
     public List<GameObject> infoPanels = new List<GameObject>();
+    public GameObject eToContinueText;
 
     [Header("Text Settings")]
     [SerializeField] private float textSpeed = 0.03f;
@@ -45,6 +46,11 @@ public class DialogueManager : MonoBehaviour
 
     void Update()
     {
+        if (canContinue)
+            eToContinueText.SetActive(true);
+        else
+            eToContinueText.SetActive(false);
+            
         if (canReceiveKey && !GameManager.Instance.doesPlayerHaveKey)
         {
             GameManager.Instance.GivePlayerKey();
