@@ -11,4 +11,12 @@ public class Controles : MonoBehaviour
     {
         GameManager.Instance.ButtonHover();
     }
+
+    public void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.UnloadSceneAsync("Control_Info");
+        }
+    }
 }
