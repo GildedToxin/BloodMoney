@@ -74,6 +74,7 @@ public class EndGameCanvas : MonoBehaviour
     {
         GameManager.Instance.PlayUIButtonPress();
         GameManager.Instance.clockStop = false;
+        print(GameManager.Instance.clockStop);
         GameManager.Instance.LoadSceneAndAssign();
     }
     public void Contiune()

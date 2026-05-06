@@ -86,6 +86,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        GameManager.Instance.clockStop = false;
         GameManager.Instance.Player = this;
         interact = gameObject.GetComponent<Interact>();
         rb = GetComponent<Rigidbody>();
